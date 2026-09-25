@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>نقاط البيع أليجريا | صالة تيك أواي دليفري</title>
+  <meta name="description" content="نظام نقاط البيع لأليجريا: شاشة بيع بلمسة واحدة، أقسام أصناف، فاتورة ذهبية حيّة، خريطة طاولات وخيارات دفع متعددة."/>
+  <meta name="keywords" content="أليجريا, ERP, نقاط البيع, POS, كاشير, فاتورة, صالة, تيك أواي, دليفري"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="نقاط البيع | أليجريا ERP"/>
+  <meta property="og:description" content="نظام نقاط البيع لأليجريا مع الفاتورة الذهبية وخريطة الطاولات."/>
+  <meta name="robots" content="index, follow"/>
+
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "erp", page: "pos" };
+  </script>
+
+  <style>
+    .pos-main {
+      padding: .5rem clamp(.5rem, 1.4vw, 1.25rem) .6rem;
+    }
+    .pos-bar {
+      border: 1px solid var(--al-line);
+      border-radius: var(--al-radius);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--al-gold) 9%, var(--al-surface)), var(--al-surface) 62%);
+      box-shadow: var(--al-shadow-sm);
+    }
+    .pos-shell {
+      display: grid;
+      grid-template-columns: 15rem minmax(0, 1fr) 23rem;
+      gap: .6rem;
+      min-height: 30rem;
+    }
+    .pos-pane {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      border: 1px solid var(--al-line);
+      border-radius: var(--al-radius);
+      background: var(--al-surface);
+      box-shadow: var(--al-shadow-sm);
+      overflow: hidden;
+    }
+    .pos-pane-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .6rem .8rem;
+      border-bottom: 1px solid var(--al-line);
+      background: var(--al-surface-2);
+      flex: none;
+    }
+    .pos-scroll {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      min-height: 0;
+      flex: 1 1 auto;
+    }
+    .pos-scroll::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    .pos-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .pos-scroll::-webkit-scrollbar-thumb {
+      background: color-mix(in srgb, var(--al-gold) 42%, transparent);
+      border-radius: 99px;
+    }
+    .pos-cat {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .55rem .7rem;
+      border: 1px solid transparent;
+      border-radius: var(--al-radius-sm);
+      background: transparent;
+      color: var(--al-ink-soft);
+      font-weight: 700;
+      font-size: .84rem;
+      text-align: start;
+      transition: background-color .16s ease, color .16s ease, border-color .16s ease;
+    }
+    .pos-cat:hover {
+      background: var(--al-surface-2);
+      color: var(--al-ink);
+    }
+    .pos-cat.active {
+      background: color-mix(in srgb, var(--al-gold) 16%, transparent);
+      border-color: color-mix(in srgb, var(--al-gold) 46%, transparent);
+      color: var(--al-gold-strong);
+    }
+    .pos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
+      gap: .6rem;
+      padding: .6rem;
+    }
+    .pos-dish {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--al-line);
+      border-radius: var(--al-radius);
+      background: var(--al-surface-2);
+      overflow: hidden;
+      height: 100%;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+    .pos-dish:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--al-gold) 52%, transparent);
+      box-shadow: var(--al-shadow);
+    }
+    .pos-dish-media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--al-bg-alt);
+      overflow: hidden;
+    }
+    .pos-dish-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pos-dish-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 42%, color-mix(in srgb, var(--al-bg) 82%, transparent));
+    }
+    .pos-dish-code {
+      position: absolute;
+      inset-block-start: .4rem;
+      inset-inline-start: .4rem;
+      z-index: 1;
+      padding: .1rem .45rem;
+      border-radius: 99px;
+      background: color-mix(in srgb, var(--al-bg) 72%, transparent);
+      backdrop-filter: blur(6px);
+      font-size: .64rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      color: var(--al-gold);
+    }
+    .pos-dish-time {
+      position: absolute;
+      inset-block-end: .35rem;
+      inset-inline-end: .5rem;
+      z-index: 1;
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--al-ink);
+    }
+    .pos-dish-body {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      padding: .6rem .7rem .7rem;
+      flex: 1 1 auto;
+    }
+    .pos-dish-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      margin-top: auto;
+      padding-top: .5rem;
+      border-top: 1px dashed var(--al-line-strong);
+    }
+    .pos-add {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--al-grad-gold);
+      color: #10182b;
+      font-size: .85rem;
+      flex: none;
+      cursor: pointer;
+      transition: transform .14s ease, filter .14s ease;
+    }
+    .pos-add:hover {
+      filter: brightness(1.07);
+    }
+    .pos-add:active {
+      transform: scale(.9);
+    }
+    .pos-add.done {
+      background: var(--al-green);
+      color: #06231a;
+    }
+    .pos-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .5rem;
+      align-items: center;
+      padding: .55rem .65rem;
+      border: 1px solid var(--al-line);
+      border-radius: var(--al-radius-sm);
+      background: var(--al-surface-2);
+    }
+    .pos-qty {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      border: 1px solid var(--al-line-strong);
+      border-radius: 99px;
+      background: var(--al-surface);
+      padding: .1rem;
+    }
+    .pos-qty button {
+      width: 22px;
+      height: 22px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--al-ink-soft);
+      font-size: .68rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pos-qty button:hover {
+      background: var(--al-gold-soft);
+      color: var(--al-gold-strong);
+    }
+    .pos-dash {
+      height: 0;
+      border-top: 2px dashed color-mix(in srgb, var(--al-gold) 44%, transparent);
+      margin: .55rem 0;
+    }
+    .pos-total {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .55rem .7rem;
+      border-radius: var(--al-radius-sm);
+      background: var(--al-grad-gold-soft);
+      border: 1px solid color-mix(in srgb, var(--al-gold) 40%, transparent);
+    }
+    .pos-pay {
+      border: 0;
+      border-radius: var(--al-radius);
+      background: var(--al-grad-gold);
+      color: #10182b;
+      font-weight: 900;
+      padding: .7rem 1rem;
+      width: 100%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .45rem;
+    }
+    .pos-pay:hover {
+      filter: brightness(1.07);
+    }
+    .pos-toast {
+      position: fixed;
+      inset-block-end: 1.25rem;
+      inset-inline-start: 50%;
+      transform: translate(50%, 150%);
+      z-index: 1090;
+      max-width: min(92vw, 30rem);
+      padding: .6rem 1rem;
+      border-radius: 99px;
+      border: 1px solid color-mix(in srgb, var(--al-gold) 46%, transparent);
+      background: var(--al-surface);
+      color: var(--al-ink);
+      box-shadow: var(--al-shadow-lg);
+      font-size: .84rem;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .22s ease, opacity .22s ease;
+    }
+    .pos-toast.show {
+      transform: translate(50%, 0);
+      opacity: 1;
+    }
+    .pos-map {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+      gap: .5rem;
+    }
+    .pos-empty {
+      display: grid;
+      place-items: center;
+      gap: .5rem;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--al-ink-faint);
+    }
+    @media (min-width: 1400px) {
+      body.erp-layout main.pos-main {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      body.erp-layout .pos-shell {
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+    }
+    @media (min-width: 1200px) and (max-width: 1399.98px) {
+      .pos-shell {
+        grid-template-columns: 12.5rem minmax(0, 1fr);
+      }
+      .pos-pane-invoice {
+        grid-column: 1 / -1;
+      }
+      .pos-pane-invoice .pos-scroll {
+        max-height: 22rem;
+      }
+    }
+    @media (max-width: 1199.98px) {
+      .pos-shell {
+        grid-template-columns: 11.5rem minmax(0, 1fr);
+      }
+      .pos-pane-invoice {
+        grid-column: 1 / -1;
+      }
+      .pos-pane-invoice .pos-scroll {
+        max-height: 24rem;
+      }
+      .pos-pane-cats {
+        max-height: 34rem;
+      }
+    }
+    @media (max-width: 767.98px) {
+      .pos-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .pos-pane-cats {
+        max-height: none;
+      }
+      .pos-pane-cats .pos-scroll {
+        max-height: 15rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pos-dish,
+      .pos-toast,
+      .pos-add {
+        transition: none;
+      }
+      .pos-dish:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="alegria-header"></div>
+
+  <main class="pos-main">
+
+    <header class="pos-bar mb-2 px-3 py-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <span class="stat-icon" style="width:38px;height:38px;font-size:1rem;"><i class="fa-solid fa-cash-register text-gold-strong"></i></span>
+        <div class="lh-sm">
+          <span class="fw-black d-block text-gold-strong" style="font-size:.95rem;">نقطة البيع الذهبية</span>
+          <small class="text-softest" style="font-size:.7rem;">أليجريا كافيه ومطعم • الأحد 25 سبتمبر 2026</small>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-1 flex-wrap">
+        <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-crown"></i>صالة ومطعم</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-circle text-green"></i>تيك أواي</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-motorcycle"></i>دليفري</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-users"></i>18 طاولة حية</span>
+      </div>
+      <div class="d-flex align-items-center gap-1 flex-wrap">
+        <div class="position-relative">
+          <input id="menuSearch" class="form-control form-control-sm rounded-pill ps-4" style="width:min(46vw,15rem);" placeholder="ابحث بالاسم أو الكود..." type="search" autocomplete="off"/>
+          <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y text-softest ms-2"></i>
+        </div>
+        <button id="toggleFloorMap" class="btn btn-ghost btn-sm" type="button" aria-expanded="false" aria-controls="floorMap">
+          <i class="fa-solid fa-table-cells-large text-gold me-1"></i>الخريطة الحية
+        </button>
+        <span class="badge-pill-custom badge-soft tabular"><span id="menuCount">0</span> صنف</span>
+      </div>
+    </header>
+
+    <div id="floorMap" class="pos-bar mb-2 px-3 py-2 d-none">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+        <span class="fw-bold small text-gold-strong"><i class="fa-solid fa-map-location-dot me-1"></i>الخريطة الحية — الطاولات والجلسات</span>
+        <div class="d-flex align-items-center gap-2 flex-wrap small text-softest">
+          <span><span class="dot dot-green me-1"></span>شاغرة</span>
+          <span><span class="dot dot-gold me-1"></span>مشغولة</span>
+          <span><span class="dot" style="background:var(--al-gold-strong);"></span>VIP</span>
+          <span>اضغط لربط الفاتورة بالطاولة</span>
+        </div>
+      </div>
+      <div class="pos-map" id="floorTables"></div>
+    </div>
+
+    <div class="pos-shell">
+
+      <aside class="pos-pane pos-pane-cats">
+        <div class="pos-pane-head">
+          <span class="fw-bold small text-gold-strong"><i class="fa-solid fa-bars-staggered me-1"></i>أقسام القائمة</span>
+          <span class="badge-pill-custom badge-soft tabular" id="catCount">0</span>
+        </div>
+        <div class="pos-scroll p-2">
+          <nav class="d-flex flex-column gap-1" id="categories" aria-label="أقسام القائمة"></nav>
+        </div>
+        <div class="p-2 border-top border-secondary-subtle">
+          <div class="d-flex align-items-center gap-2 p-2 rounded-3" style="background:var(--al-surface-2);">
+            <span class="dot dot-gold"></span>
+            <div class="small lh-sm">
+              <div class="fw-bold text-gold-strong">قائمة الليلة الذهبية</div>
+              <div class="text-softest" style="font-size:.7rem;">آخر تحديث 08:15 مساءً</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="pos-pane">
+        <div class="pos-pane-head">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-fire"></i>الأكثر طلباً</span>
+            <small class="text-softest d-none d-md-inline">اضغط على ⊕ لإضافة الصنف للفاتورة</small>
+          </div>
+          <span class="small text-softest" id="filterNote"></span>
+        </div>
+        <div class="pos-scroll" id="menuItems"></div>
+      </section>
+
+      <aside class="pos-pane pos-pane-invoice">
+        <div class="pos-pane-head">
+          <div class="d-flex align-items-center gap-2">
+            <span class="dot dot-gold"></span>
+            <div class="lh-sm">
+              <div class="d-flex align-items-center gap-2">
+                <span class="fw-black small text-gold-strong">الفاتورة الذهبية</span>
+                <span class="badge-pill-custom badge-gold tabular" id="invoiceNo">#A-4481</span>
+              </div>
+              <small class="text-softest d-block" style="font-size:.68rem;" id="invoiceMeta">صالة داخلية • 12 أيلول</small>
+            </div>
+          </div>
+          <button class="btn btn-ghost btn-sm icon-btn" id="printInvoice" type="button" title="طباعة الفاتورة" aria-label="طباعة الفاتورة"><i class="fa-solid fa-print text-gold"></i></button>
+        </div>
+
+        <div class="pos-scroll p-2 d-flex flex-column gap-2" id="ticketItems"></div>
+
+        <div class="px-3 pb-2 pt-1" style="border-top:1px solid var(--al-line);">
+          <div class="pos-dash"></div>
+          <div class="d-flex flex-column gap-1" style="font-size:.8rem;">
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="text-softest">الإجمالي</span><span class="tabular fw-semibold" id="sumSubtotal">0 ج.م</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="text-softest">الخصم</span><span class="tabular text-green" id="sumDiscount">0 ج.م</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="text-softest">ضريبة القيمة المضافة 14%</span><span class="tabular" id="sumTax">0 ج.م</span>
+            </div>
+          </div>
+          <div class="pos-total mt-2">
+            <span class="fw-black small">المستحق الدفع</span>
+            <span class="fw-black tabular" id="sumTotal" style="font-size:1.15rem;">0 ج.م</span>
+          </div>
+        </div>
+
+        <div class="p-2 pt-0 d-flex flex-column gap-2">
+          <div class="d-flex align-items-center gap-2">
+            <select class="form-select form-select-sm" id="payMethod" aria-label="طريقة الدفع">
+              <option>كاش نقداً</option>
+              <option>فيزا / نقطة بيع</option>
+              <option>إنستاباي / فودافون كاش</option>
+              <option>محفظة إلكترونية</option>
+            </select>
+            <button class="btn btn-ghost btn-sm icon-btn" id="splitPay" type="button" title="تقسيم الفاتورة على عدة طرق دفع" aria-label="تقسيم الفاتورة"><i class="fa-solid fa-circle-half-stroke text-gold"></i></button>
+          </div>
+          <button class="pos-pay" id="checkout" type="button">
+            <i class="fa-solid fa-crown"></i>دفع وإغلاق الفاتورة
+          </button>
+          <div class="d-flex align-items-center justify-content-between px-1">
+            <small class="text-softest" style="font-size:.7rem;">عدد الأصناف</small>
+            <small class="text-softest tabular" style="font-size:.7rem;" id="cartMeta">0 صنف • 0 قطعة</small>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <div class="pos-toast" id="posToast" role="status" aria-live="polite"></div>
+
+  <div id="alegria-footer"></div>
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var TAX_RATE = 0.14;
+      var DISCOUNT = 180;
+
+      var CATS = [
+        { key: 'grill',   label: 'المشاوي والصواني',      icon: 'fa-fire-burner' },
+        { key: 'starter', label: 'المقبلات والسَلطات',    icon: 'fa-bowl-food' },
+        { key: 'main',    label: 'الوجبات الرئيسية',      icon: 'fa-plate-wheat' },
+        { key: 'pasta',   label: 'الباستا والمعجنات',     icon: 'fa-martini-glass-citrus' },
+        { key: 'dessert', label: 'الحلويات',             icon: 'fa-ice-cream' },
+        { key: 'drink',   label: 'المشروبات',            icon: 'fa-mug-hot' }
+      ];
+
+      var DISHES = [
+        { code: 'A101', cat: 'grill', tag: 'صواني أليجريا', name: 'صينية أليجريا الفاخرة', desc: 'حمام وتيس بلدي وكبّة وقرمش بسمتي', price: 1450, mins: 25, img: 'images/landing/02-royal-platter.jpg' },
+        { code: 'A102', cat: 'grill', tag: 'مشاوي ملكية', name: 'مشكل كباب وكفتة ضاني بلدي', desc: 'فحم حي وخبز تنور وعيش شامي', price: 590, mins: 18, img: 'images/landing/03-fattah-lamb.jpg' },
+        { code: 'A103', cat: 'grill', tag: 'صواني أليجريا', name: 'فتة موزة ضاني فاخرة', desc: 'عيش شامي محمص وصلصة طحينة ملكية', price: 360, mins: 16, img: 'images/landing/04-tajin-akawi.jpg' },
+        { code: 'A104', cat: 'grill', tag: 'مشاوي ملكية', name: 'ريش بتلو متبلة على الفحم', desc: 'ثوم مقلي وبقدونس وبصل كراميل', price: 480, mins: 22, img: 'images/landing/01-hero-banquet.jpg' },
+        { code: 'A105', cat: 'grill', tag: 'طواجن', name: 'طاجن عكاوي بالبصل القاورمة', desc: 'لحم عكاوي ببطء مع بصل قاورمة', price: 320, mins: 20, img: 'images/landing/04-tajin-akawi.jpg' },
+
+        { code: 'B201', cat: 'starter', tag: 'مقبلات باردة', name: 'مشكل مقبلات باردة فاخر', desc: 'حمص ومتبل وبابا غنوج وتبولة', price: 185, mins: 0, img: 'images/landing/01-hero-banquet.jpg' },
+        { code: 'B202', cat: 'starter', tag: 'شوربات ملكية', name: 'شوربة عدس شامي', desc: 'زيت زيتون بكر وعصير ليمون', price: 75, mins: 0, img: 'images/landing/10-main-hall.jpg' },
+        { code: 'B203', cat: 'starter', tag: 'مقبلات ساخنة', name: 'ورق عنب باللبن', desc: 'ورق عنب محشو بالأرز واللبن', price: 165, mins: 0, img: 'images/landing/10-main-hall.jpg' },
+
+        { code: 'C301', cat: 'main', tag: 'المأكولات الشامية', name: 'شيخ المحشي بلدي', desc: 'كوسة وباذنجان وفلفل ومحشي ورق عنب', price: 295, mins: 12, img: 'images/landing/02-royal-platter.jpg' },
+        { code: 'C302', cat: 'main', tag: 'مقلولات', name: 'مقلوبة باللحمة والمكسرات', desc: 'رز بسمتي بالبهارات مع لحمة ومكسرات', price: 290, mins: 15, img: 'images/landing/03-fattah-lamb.jpg' },
+        { code: 'C303', cat: 'main', tag: 'أرز', name: 'كبسة أليجريا الملكية', desc: 'لحم ضاني وأرز بسمتي بالزعفران', price: 385, mins: 30, img: 'images/landing/02-royal-platter.jpg' },
+
+        { code: 'D401', cat: 'pasta', tag: 'باستا', name: 'كوردون بلو مع بينك صوص', desc: 'بينك صوص وكريمة فنية وجبنة شيدر', price: 260, mins: 14, img: 'images/landing/05-cordon-bleu.jpg' },
+        { code: 'D402', cat: 'pasta', tag: 'معجنات', name: 'لازانيا باللحم المفروم', desc: 'طبقات عجين مع لحم مفروم وصوص طماطم', price: 245, mins: 16, img: 'images/landing/05-cordon-bleu.jpg' },
+
+        { code: 'E501', cat: 'dessert', tag: 'حلويات أليجريا', name: 'أم علي بالقشطة والصنوبر', desc: 'تُقدم ساخنة مع قشطة ريفية بلدية', price: 95, mins: 8, img: 'images/landing/06-um-ali.jpg' },
+        { code: 'E502', cat: 'dessert', tag: 'حلويات أليجريا', name: 'عريكة أليجريا بالعسل', desc: 'سمن بلدي طبيعي وعسل نحل حر', price: 110, mins: 10, img: 'images/landing/06-um-ali.jpg' },
+
+        { code: 'F601', cat: 'drink', tag: 'مشروبات ساخنة', name: 'قهوة تركي على الرمل', desc: 'بن محمّص تركي مع ماء الورد', price: 60, mins: 0, img: 'images/landing/07-turkish-coffee.jpg' },
+        { code: 'F602', cat: 'drink', tag: 'مشروبات ساخنة', name: 'شاي أليجريا بالنعناع', desc: 'شاي أحمر بالنعناع الطازج', price: 45, mins: 0, img: 'images/landing/07-turkish-coffee.jpg' },
+        { code: 'F603', cat: 'drink', tag: 'عصائر طازجة', name: 'ليمون بالنعناع', desc: 'ليمون طازج ونعناع وسكر', price: 70, mins: 0, img: 'images/landing/08-terrace-fountain.jpg' }
+      ];
+
+      var TABLES = [
+        { id: 'VIP-1',  seats: 2, state: 'vip',   note: 'مقعدان ملكيان' },
+        { id: 'VIP-4',  seats: 8, state: 'open',  note: 'مشرف كمال' },
+        { id: 'T-12',   seats: 4, state: 'open',  note: 'محاسب هيثم' },
+        { id: 'T-08',   seats: 2, state: 'empty', note: 'طاولة شاغرة' },
+        { id: 'T-05',   seats: 4, state: 'empty', note: 'تراس شمالي' },
+        { id: 'T-16',   seats: 6, state: 'open',  note: 'ركن المقهى' },
+        { id: 'T-02',   seats: 2, state: 'empty', note: 'نافذة البرج' },
+        { id: 'TAKEAWAY', seats: 0, state: 'open', note: 'تيك أواي من الصالة' },
+        { id: 'DELIVERY', seats: 0, state: 'open', note: 'أوردرات خارجية' }
+      ];
+
+      var state = { cat: 'all', q: '', table: '', cart: {} };
+
+      var $cats = document.getElementById('categories');
+      var $menu = document.getElementById('menuItems');
+      var $ticket = document.getElementById('ticketItems');
+      var $toast = document.getElementById('posToast');
+      var $search = document.getElementById('menuSearch');
+
+      function money(n) {
+        return n.toLocaleString('en-US') + ' ج.م';
+      }
+
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+
+      var toastTimer;
+      function toast(msg) {
+        $toast.textContent = msg;
+        $toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { $toast.classList.remove('show'); }, 1900);
+      }
+      if (window.Al) { window.Al.toast = toast; }
+
+      function catCount(key) {
+        return DISHES.filter(function (d) { return d.cat === key; }).length;
+      }
+
+      function renderCats() {
+        var total = DISHES.length;
+        var html = '<button type="button" class="pos-cat' + (state.cat === 'all' ? ' active' : '') + '" data-cat="all">' +
+          '<span><i class="fa-solid fa-crown me-1"></i>كل الأصناف</span>' +
+          '<span class="badge-pill-custom badge-gold tabular">' + total + '</span></button>';
+        CATS.forEach(function (c) {
+          var n = catCount(c.key);
+          html += '<button type="button" class="pos-cat' + (state.cat === c.key ? ' active' : '') + '" data-cat="' + c.key + '">' +
+            '<span><i class="fa-solid ' + c.icon + ' me-1"></i>' + c.label + '</span>' +
+            '<span class="badge-pill-custom badge-soft tabular">' + n + '</span></button>';
+        });
+        $cats.innerHTML = html;
+        document.getElementById('catCount').textContent = CATS.length;
+      }
+
+      function match(d) {
+        if (state.cat !== 'all' && d.cat !== state.cat) { return false; }
+        if (!state.q) { return true; }
+        var hay = (d.name + ' ' + d.desc + ' ' + d.tag + ' ' + d.code).toLowerCase();
+        return hay.indexOf(state.q) !== -1;
+      }
+
+      function renderMenu() {
+        var list = DISHES.filter(match);
+        document.getElementById('menuCount').textContent = list.length;
+
+        var note = [];
+        var active = state.cat === 'all' ? 'كل الأصناف' : (CATS.filter(function (c) { return c.key === state.cat; })[0] || {}).label;
+        note.push(active);
+        if (state.q) { note.push('بحث: ' + state.q); }
+        document.getElementById('filterNote').textContent = note.join(' • ');
+
+        if (!list.length) {
+          $menu.innerHTML = '<div class="pos-empty">' +
+            '<i class="fa-solid fa-magnifying-glass" style="font-size:1.6rem;"></i>' +
+            '<div class="fw-bold">لا توجد أصناف مطابقة</div>' +
+            '<small>جرّب قسماً آخر أو كلمة بحث مختلفة</small></div>';
+          return;
+        }
+
+        $menu.innerHTML = '<div class="pos-grid">' + list.map(function (d) {
+          var time = d.mins > 0 ? '<i class="fa-solid fa-clock me-1"></i>' + d.mins + ' د' : '<i class="fa-solid fa-bolt me-1"></i>فوري';
+          return '<article class="pos-dish" data-code="' + d.code + '">' +
+            '<div class="pos-dish-media">' +
+              '<img src="' + d.img + '" alt="' + esc(d.name) + '" loading="lazy"/>' +
+              '<span class="pos-dish-code">' + d.code + '</span>' +
+              '<span class="pos-dish-time">' + time + '</span>' +
+            '</div>' +
+            '<div class="pos-dish-body">' +
+              '<span class="badge-pill-custom ' + (d.tag.indexOf('أليجريا') !== -1 ? 'badge-gold' : 'badge-soft') + '" style="align-self:flex-start;">' + esc(d.tag) + '</span>' +
+              '<h3 class="small fw-bold m-0 lh-sm">' + esc(d.name) + '</h3>' +
+              '<small class="text-softest d-block lh-xs">' + esc(d.desc) + '</small>' +
+              '<div class="pos-dish-foot">' +
+                '<span class="text-gold-strong fw-bold tabular">' + money(d.price) + '</span>' +
+                '<button type="button" class="pos-add" data-add="' + d.code + '" aria-label="إضافة ' + esc(d.name) + ' للفاتورة"><i class="fa-solid fa-plus"></i></button>' +
+              '</div>' +
+            '</div></article>';
+        }).join('') + '</div>';
+      }
+
+      function cartLines() {
+        return Object.keys(state.cart).map(function (code) {
+          var dish = DISHES.filter(function (d) { return d.code === code; })[0];
+          return { dish: dish, qty: state.cart[code] };
+        }).filter(function (r) { return r.dish; });
+      }
+
+      function renderTicket() {
+        var lines = cartLines();
+
+        if (!lines.length) {
+          $ticket.innerHTML = '<div class="pos-empty">' +
+            '<i class="fa-solid fa-receipt" style="font-size:1.6rem;"></i>' +
+            '<div class="fw-bold">الفاتورة فارغة</div>' +
+            '<small>اختر الأصناف من القائمة لإضافتها</small></div>';
+        } else {
+          $ticket.innerHTML = lines.map(function (r) {
+            return '<div class="pos-line" data-line="' + r.dish.code + '">' +
+              '<div class="lh-sm">' +
+                '<div class="small fw-bold">' + esc(r.dish.name) + '</div>' +
+                '<small class="text-softest tabular">' + money(r.dish.price) + ' للقطعة</small>' +
+              '</div>' +
+              '<div class="d-flex align-items-center gap-2">' +
+                '<span class="pos-qty">' +
+                  '<button type="button" data-dec="' + r.dish.code + '" aria-label="إنقاص"><i class="fa-solid fa-minus"></i></button>' +
+                  '<span class="small fw-black tabular" style="min-width:1.3rem;text-align:center;">' + r.qty + '</span>' +
+                  '<button type="button" data-inc="' + r.dish.code + '" aria-label="زيادة"><i class="fa-solid fa-plus"></i></button>' +
+                '</span>' +
+                '<strong class="tabular text-gold-strong small" style="min-width:4.6rem;text-align:end;">' + money(r.dish.price * r.qty) + '</strong>' +
+              '</div></div>';
+          }).join('');
+        }
+
+        var subtotal = lines.reduce(function (s, r) { return s + r.dish.price * r.qty; }, 0);
+        var count = lines.reduce(function (s, r) { return s + r.qty; }, 0);
+        var discount = subtotal >= 500 ? DISCOUNT : 0;
+        var taxable = Math.max(0, subtotal - discount);
+        var tax = Math.round(taxable * TAX_RATE * 100) / 100;
+        var total = taxable + tax;
+
+        document.getElementById('sumSubtotal').textContent = money(subtotal);
+        document.getElementById('sumDiscount').textContent = discount ? '− ' + money(discount) : money(0);
+        document.getElementById('sumTax').textContent = '+ ' + money(tax);
+        document.getElementById('sumTotal').textContent = money(total);
+        document.getElementById('cartMeta').textContent = lines.length + ' صنف • ' + count + ' قطعة';
+        document.getElementById('checkout').disabled = !lines.length;
+        document.getElementById('checkout').style.opacity = lines.length ? '1' : '.5';
+        document.getElementById('printInvoice').disabled = !lines.length;
+        return { subtotal: subtotal, discount: discount, tax: tax, total: total, count: count };
+      }
+
+      function renderTables() {
+        document.getElementById('floorTables').innerHTML = TABLES.map(function (t) {
+          var cls = t.state === 'vip' ? 'vip' : t.state;
+          return '<button type="button" class="floor-table ' + cls + (state.table === t.id ? ' active' : '') + '" data-table="' + t.id + '">' +
+            '<span class="d-block fw-black">' + t.id + '</span>' +
+            '<span class="d-block text-softest" style="font-size:.66rem;">' + esc(t.note) + '</span>' +
+            (t.seats ? '<span class="d-block text-softest" style="font-size:.64rem;">' + t.seats + ' مقاعد</span>' : '') +
+            '</button>';
+        }).join('');
+      }
+
+      function addToCart(code) {
+        state.cart[code] = (state.cart[code] || 0) + 1;
+        var dish = DISHES.filter(function (d) { return d.code === code; })[0];
+        renderTicket();
+        toast('أُضيف «' + dish.name + '» إلى الفاتورة');
+        var btn = document.querySelector('[data-add="' + code + '"]');
+        if (btn) {
+          btn.classList.add('done');
+          btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+          setTimeout(function () {
+            btn.classList.remove('done');
+            btn.innerHTML = '<i class="fa-solid fa-plus"></i>';
+          }, 700);
+        }
+      }
+
+      function changeQty(code, delta) {
+        if (!(code in state.cart)) { return; }
+        state.cart[code] += delta;
+        if (state.cart[code] <= 0) { delete state.cart[code]; }
+        renderTicket();
+      }
+
+      $cats.addEventListener('click', function (e) {
+        var btn = e.target.closest('.pos-cat');
+        if (!btn) { return; }
+        state.cat = btn.getAttribute('data-cat');
+        renderCats();
+        renderMenu();
+      });
+
+      $menu.addEventListener('click', function (e) {
+        var add = e.target.closest('[data-add]');
+        if (add) { addToCart(add.getAttribute('data-add')); }
+      });
+
+      $ticket.addEventListener('click', function (e) {
+        var inc = e.target.closest('[data-inc]');
+        if (inc) { changeQty(inc.getAttribute('data-inc'), 1); return; }
+        var dec = e.target.closest('[data-dec]');
+        if (dec) { changeQty(dec.getAttribute('data-dec'), -1); }
+      });
+
+      $search.addEventListener('input', function () {
+        state.q = $search.value.trim().toLowerCase();
+        renderMenu();
+      });
+
+      document.getElementById('toggleFloorMap').addEventListener('click', function () {
+        var map = document.getElementById('floorMap');
+        var open = map.classList.toggle('d-none') === false;
+        this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+
+      document.getElementById('floorTables').addEventListener('click', function (e) {
+        var btn = e.target.closest('.floor-table');
+        if (!btn) { return; }
+        state.table = btn.getAttribute('data-table');
+        renderTables();
+        var t = TABLES.filter(function (x) { return x.id === state.table; })[0];
+        document.getElementById('invoiceMeta').textContent = state.table + ' • ' + t.note;
+        toast('تم ربط الفاتورة بـ ' + state.table);
+      });
+
+      document.getElementById('printInvoice').addEventListener('click', function () {
+        toast('جاري تحضير الفاتورة للطباعة والإرسال');
+      });
+
+      document.getElementById('splitPay').addEventListener('click', function () {
+        toast('تقسيط الفاتورة على عدة طرق دفع');
+      });
+
+      document.getElementById('checkout').addEventListener('click', function () {
+        var s = renderTicket();
+        if (!s.count) { toast('الفاتورة فارغة'); return; }
+        var method = document.getElementById('payMethod').value;
+        var msg = 'المبلغ المستحق ' + money(s.total) + ' — ' + method + (state.table ? ' — ' + state.table : '');
+        if (window.Al && window.Al.confirm) {
+          window.Al.confirm('تأكيد الدفع وإغلاق الفاتورة', msg, function () {
+            state.cart = {};
+            renderTicket();
+            toast('تم إغلاق الفاتورة بنجاح — ' + method);
+          });
+        } else {
+          state.cart = {};
+          renderTicket();
+          toast('تم إغلاق الفاتورة بنجاح');
+        }
+      });
+
+      renderCats();
+      renderMenu();
+      renderTables();
+      renderTicket();
+    })();
+  </script>
+</body>
+</html>

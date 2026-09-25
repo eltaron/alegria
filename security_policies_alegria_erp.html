@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>سياسات الأمان والتدقيق | أليجريا ERP</title>
+  <meta name="description" content="سياسات الأمان والتدقيق، فرض المصادقة الثنائية 2FA، رخصة المنظومة المؤسسية، وسجل الرقابة الأمني اللحظي لنظام أليجريا Haute ERP."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, نقاط البيع, سياسات الأمان, التدقيق, المصادقة الثنائية"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="سياسات الأمان والتدقيق | أليجريا ERP"/>
+  <meta property="og:description" content="سياسات الأمان والتدقيق، فرض المصادقة الثنائية 2FA، رخصة المنظومة المؤسسية، وسجل الرقابة الأمني اللحظي لنظام أليجريا Haute ERP."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="سياسات الأمان والتدقيق | أليجريا ERP"/>
+  <meta name="twitter:description" content="سياسات الأمان والتدقيق، فرض المصادقة الثنائية 2FA، رخصة المنظومة المؤسسية، وسجل الرقابة الأمني اللحظي لنظام أليجريا Haute ERP."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .filter-tab { white-space: nowrap; font-weight: 700; }
+    .role-chip { margin-inline-end: .25rem; }
+    @keyframes alPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .45; }
+    }
+    .pulse-dot { animation: alPulse 1.6s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. TOP META ACTION HEADER (breadcrumb + badges + cross-links)
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3 flex-wrap">
+        <div class="d-flex flex-column gap-2" style="max-width:50rem;">
+          <nav aria-label="breadcrumb" class="breadcrumb-custom small">
+            <span><i class="fa-solid fa-shield-halved text-gold me-1"></i>لوحة الإدارة</span>
+            <i class="fa-solid fa-angle-left mx-1"></i>
+            <span class="text-gold-strong fw-bold">سياسات الأمان والتدقيق</span>
+          </nav>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> مستوى الحماية: عالي جداً (AES-256)</span>
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-cloud"></i> النسخ السحابي: <strong>منذ 18 دقيقة</strong></span>
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-circle-check text-gold"></i> Enterprise v2.4</span>
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> 2FA مفعل إجبارياً</span>
+          </div>
+          <h1 class="h2 fw-black m-0">سياسات الأمان والتدقيق</h1>
+          <p class="mb-0">التحكم في سياسات المصادقة الثنائية، أقفال الجلسات والمحطات، توزيع الأدوار والصلاحيات، ورخصة المنظومة المؤسسية مع سجل التدقيق الأمني الجنائي اللحظي لكافيه أليجريا.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <a href="roles_permissions_alegria_erp.html" class="btn btn-ghost"><i class="fa-solid fa-user-gear text-gold me-1"></i> المستخدمون</a>
+          <a href="roles_matrix_alegria_erp.html" class="btn btn-ghost"><i class="fa-solid fa-shield-halved text-green me-1"></i> المصفوفة</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. 2FA ENFORCEMENT HIGHLIGHT PANEL
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4" id="faEnforcement">
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4">
+        <div class="d-flex align-items-start gap-3">
+          <span class="stat-icon green" style="width:52px;height:52px;font-size:1.25rem;"><i class="fa-solid fa-mobile-screen-button"></i></span>
+          <div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <h2 class="h5 fw-black m-0">فرض المصادقة الثنائية (2FA)</h2>
+              <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مفعلة إجبارياً</span>
+              <span class="badge-pill-custom badge-gold tabular">80% تشغيل</span>
+            </div>
+            <p class="text-soft small mb-0 mt-1">المصادقة الثنائية مفعلة لجميع الحسابات • إلزامي للمدراء، الكاشير، وشؤون المشتريات</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <div class="stat-card p-3" style="min-width:160px;">
+            <span class="stat-label d-block">الحسابات المحمية</span>
+            <div class="stat-value mt-1">24 <small class="fs-6 text-soft">من 30 رخصة</small></div>
+          </div>
+          <div class="stat-card p-3" style="min-width:160px;">
+            <span class="stat-label d-block">اختراقات نشطة</span>
+            <div class="stat-value mt-1 text-green">0</div>
+            <small class="text-rose d-block mt-1">محاولة دخول خاطئة (تم حظرها)</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. LICENSE CARD + SECURITY POLICIES ENGINE
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+
+      <!-- System License & Enterprise Identity Card -->
+      <div class="col-xl-6">
+        <div class="panel-card p-3 h-100" id="licenseCard">
+          <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+            <div>
+              <div class="text-gold fw-bold small">رخصة المنظومة المؤسسية</div>
+              <h4 class="h5 fw-black m-0">Alegria Haute ERP</h4>
+            </div>
+            <img alt="Alegria Luxury Seal" class="rounded-2 object-fit-contain" style="width:56px;height:56px;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDANgGkvcDic_25tEtSCixt_tCHi61jQsIQ_MtJGNNbDFp8fXjPDKW6xRy1Z6n5Wa9Xyl3NDmCakpsJPb2wt0zplQ26PTGXyX_w5rftoQBDoTFIRewoJta12_QgSbZd98ESXJ9q0r7PC8OMRHDbOvE3DSwg8_6mgU-32AZ7xZADoYctEcjmGBXYSoPmqTdTtqnUYLk2iSSUEMvA83jnQysIJBoSBoLncr_l-cusOERyMyHKfuNvas7Eh8HUf9jGcsLYprA"/>
+          </div>
+          <div class="d-flex flex-column gap-2 small font-mono bg-al-2 border rounded-3 p-3">
+            <div class="d-flex justify-content-between gap-2"><span class="text-soft">رقم العقد والترخيص:</span><strong class="text-gold-strong">ALG-ENT-2024-KSA-991</strong></div>
+            <div class="d-flex justify-content-between gap-2"><span class="text-soft">خادم التشفير وقاعدة البيانات:</span><strong class="text-green">Dedicated Oracle RDS (Riyadh)</strong></div>
+            <div class="d-flex justify-content-between gap-2"><span class="text-soft">حجم قاعدة البيانات الحالية:</span><strong class="text-gold-strong">1.42 GB</strong></div>
+            <div class="d-flex justify-content-between gap-2"><span class="text-soft">تاريخ التجديد السنوي:</span><strong>31 ديسمبر 2025</strong></div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between gap-2 mt-3 flex-wrap">
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مربوط مع هيئة الزكاة والضريبة والجمارك (ZATCA Phase 2)</span>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnArchive"><i class="fa-solid fa-box-archive text-gold me-1"></i> أرشفة السجلات</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security Policies & Enforcement Engine -->
+      <div class="col-xl-6">
+        <div class="panel-card p-3 h-100" id="policiesCard">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h4 class="h6 fw-black m-0 d-flex align-items-center gap-2"><i class="fa-solid fa-gavel text-gold"></i> سياسات الأمان الإجبارية</h4>
+            <span class="badge-pill-custom badge-green">مفعلة</span>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <!-- Policy 1 -->
+            <div class="bg-al-2 border rounded-3 p-3">
+              <div class="d-flex align-items-center justify-content-between gap-2">
+                <span class="small fw-bold">فرض المصادقة الثنائية (2FA)</span>
+                <div class="form-check form-switch m-0">
+                  <input class="form-check-input policy-switch" type="checkbox" role="switch" id="pol2fa" checked/>
+                  <label class="visually-hidden" for="pol2fa">فرض المصادقة الثنائية</label>
+                </div>
+              </div>
+              <p class="small text-soft mb-0 mt-1">إلزامي للمدراء، الكاشير، وشؤون المشتريات</p>
+            </div>
+            <!-- Policy 2 -->
+            <div class="bg-al-2 border rounded-3 p-3">
+              <div class="d-flex align-items-center justify-content-between gap-2">
+                <span class="small fw-bold">حظر الحساب بعد محاولات خاطئة</span>
+                <div class="form-check form-switch m-0">
+                  <input class="form-check-input policy-switch" type="checkbox" role="switch" id="polLockout" checked/>
+                  <label class="visually-hidden" for="polLockout">حظر الحساب بعد محاولات خاطئة</label>
+                </div>
+              </div>
+              <p class="small text-soft mb-0 mt-1">قفل تلقائي فوري بعد 3 محاولات مرور خاطئة</p>
+            </div>
+            <!-- Policy 3 -->
+            <div class="bg-al-2 border rounded-3 p-3">
+              <div class="d-flex align-items-center justify-content-between gap-2">
+                <span class="small fw-bold">تسجيل الخروج التلقائي عند الخمول</span>
+                <div class="form-check form-switch m-0">
+                  <input class="form-check-input policy-switch" type="checkbox" role="switch" id="polTimeout" checked/>
+                  <label class="visually-hidden" for="polTimeout">تسجيل الخروج التلقائي عند الخمول</label>
+                </div>
+              </div>
+              <p class="small text-soft mb-0 mt-1">15 دقيقة لمحطات POS و 30 دقيقة للإدارة</p>
+            </div>
+            <!-- Policy 4 -->
+            <div class="bg-al-2 border rounded-3 p-3">
+              <div class="d-flex align-items-center justify-content-between gap-2">
+                <span class="small fw-bold">ربط الجلسة بعنوان IP الفرع</span>
+                <div class="form-check form-switch m-0">
+                  <input class="form-check-input policy-switch" type="checkbox" role="switch" id="polIpBind" checked/>
+                  <label class="visually-hidden" for="polIpBind">ربط الجلسة بعنوان IP الفرع</label>
+                </div>
+              </div>
+              <p class="small text-soft mb-0 mt-1">منع دخول الكاشير من خارج الشبكة الداخلية</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. ROLES SUMMARY + PERMISSION COUNTER + AUDIT STREAM
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+
+      <!-- Roles Summary + Permission Counter -->
+      <div class="col-xl-7">
+        <div class="panel-card p-3 h-100" id="roleSummary">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h4 class="h6 fw-black m-0 d-flex align-items-center gap-2"><i class="fa-solid fa-chart-pie text-gold"></i> توزيع الأدوار والصلاحيات</h4>
+            <span class="badge-pill-custom badge-gold tabular">7 أدوار معتمدة</span>
+          </div>
+          <div class="d-flex justify-content-between small text-soft mb-1"><span>استهلاك تراخيص المستخدمين</span><span class="text-gold-strong fw-bold tabular">24 / 30 رخصة</span></div>
+          <div class="progress mb-3" style="height:8px;"><div class="progress-bar progress-gold" style="width:80%"></div></div>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> Super Admin</span>
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-building"></i> مدير الفرع</span>
+            <span class="badge-pill-custom badge-amber"><i class="fa-solid fa-utensils"></i> شيف تنفيذي</span>
+            <span class="badge-pill-custom badge-green"><i class="fa-solid fa-cash-register"></i> كاشير</span>
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-bell-concierge"></i> كابتن صالة</span>
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-boxes-stacked"></i> مشتريات</span>
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-kitchen-set"></i> طاهي مطبخ</span>
+          </div>
+          <div class="small fw-bold text-soft mb-2">ملخص عدّاد الصلاحيات الحساسة (4 مهام):</div>
+          <table class="table table-alegria table-sm align-middle m-0 small">
+            <thead>
+              <tr><th>الدور الوظيفي</th><th class="text-center text-gold">مفوض</th><th class="text-center text-amber">PIN</th><th class="text-center text-rose">محظور</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge-pill-custom badge-gold">Super Admin</span></td>
+                <td class="text-center fw-bold text-gold tabular">4</td><td class="text-center tabular">0</td><td class="text-center tabular">0</td>
+              </tr>
+              <tr>
+                <td><span class="badge-pill-custom badge-neutral">مدير الفرع</span></td>
+                <td class="text-center fw-bold text-gold tabular">3</td><td class="text-center tabular">0</td><td class="text-center fw-bold text-rose tabular">1</td>
+              </tr>
+              <tr>
+                <td><span class="badge-pill-custom badge-green">كاشير رئيسي</span></td>
+                <td class="text-center tabular">0</td><td class="text-center fw-bold text-amber tabular">2</td><td class="text-center fw-bold text-rose tabular">2</td>
+              </tr>
+              <tr>
+                <td><span class="badge-pill-custom badge-neutral">كابتن صالة</span></td>
+                <td class="text-center tabular">0</td><td class="text-center fw-bold text-amber tabular">1</td><td class="text-center fw-bold text-rose tabular">3</td>
+              </tr>
+              <tr>
+                <td><span class="badge-pill-custom badge-neutral">طاهي المطبخ</span></td>
+                <td class="text-center fw-bold text-gold tabular">1</td><td class="text-center tabular">0</td><td class="text-center fw-bold text-rose tabular">3</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-between small text-soft mb-1 mt-3"><span><span class="dot dot-gold me-1"></span>مفوض مباشرة</span><span class="text-gold-strong fw-bold tabular">40%</span></div>
+          <div class="progress mb-2" style="height:6px;"><div class="progress-bar progress-gold" style="width:40%"></div></div>
+          <div class="d-flex justify-content-between small text-soft mb-1"><span><span class="dot me-1" style="background:var(--al-amber);box-shadow:none;"></span>بموافقة مدير (PIN)</span><span class="text-amber fw-bold tabular">15%</span></div>
+          <div class="progress mb-2" style="height:6px;"><div class="progress-bar bg-warning" style="width:15%"></div></div>
+          <div class="d-flex justify-content-between small text-soft mb-1"><span><span class="dot dot-rose me-1"></span>محظور ومقفل</span><span class="text-rose fw-bold tabular">45%</span></div>
+          <div class="progress" style="height:6px;"><div class="progress-bar bg-danger" style="width:45%"></div></div>
+        </div>
+      </div>
+
+      <!-- Live Security Audit Stream (Real-Time Feed) -->
+      <div class="col-xl-5">
+        <div class="panel-card p-3 h-100" id="auditStream">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h4 class="h6 fw-black m-0 d-flex align-items-center gap-2"><span class="dot dot-gold pulse-dot"></span> سجل التدقيق الأمني اللحظي</h4>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnAuditLog"><i class="fa-solid fa-clock-rotate-left text-gold me-1"></i> عرض السجل الكامل</button>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <!-- Event 1 -->
+            <div class="bg-al-2 border rounded-3 p-2">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="badge-pill-custom badge-gold">تطبيق خصم ضيافة</span>
+                <span class="font-mono small text-soft tabular">21:14</span>
+              </div>
+              <div class="small">اعتماد خصم 10% على طاولة VIP-4 بواسطة <strong class="text-gold">حسام رضوان</strong>.</div>
+              <div class="font-mono text-faint" style="font-size:.72rem;">جهاز النادل المحمول • IP: 192.168.1.104</div>
+            </div>
+            <!-- Event 2 -->
+            <div class="bg-al-2 border rounded-3 p-2">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-cash-register text-green me-1"></i>فتح درج نقدية يدوي</span>
+                <span class="font-mono small text-soft tabular">20:45</span>
+              </div>
+              <div class="small">فتح درج الصالة 1 لتسوية سلفة خضار طارئة بواسطة <strong class="text-green">كريم عادل</strong>.</div>
+              <div class="font-mono text-faint" style="font-size:.72rem;">POS-Main • مستند صرف رقم #VCH-481</div>
+            </div>
+            <!-- Event 3 -->
+            <div class="bg-al-2 border rounded-3 p-2">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-utensils text-amber me-1"></i>تعديل تكلفة وصفة</span>
+                <span class="font-mono small text-soft tabular">18:30</span>
+              </div>
+              <div class="small">تحديث سعر تكلفة اللحم الضاني الأسترالي بواسطة <strong class="text-gold">شيف ماركوس</strong>.</div>
+              <div class="font-mono text-faint" style="font-size:.72rem;">وحدة Recipe Engineering • السعر الجديد: 84.5 ر.س/كغ</div>
+            </div>
+            <!-- Event 4 -->
+            <div class="bg-al-2 border rounded-3 p-2">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="badge-pill-custom badge-rose"><i class="fa-solid fa-key me-1"></i>جلسة إدارة جديدة</span>
+                <span class="font-mono small text-soft tabular">17:00</span>
+              </div>
+              <div class="small">تسجيل دخول موثق برمز 2FA لـ <strong class="text-gold">فهد السليمان</strong> (Super Admin).</div>
+              <div class="font-mono text-faint" style="font-size:.72rem;">Safari 17.4 • مرمز عبر شبكة الإدارة الآمنة</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. SECURITY MATRIX FOOTER & OPERATIONAL CHECKLIST
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mt-3">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+        <div class="d-flex align-items-center gap-3 flex-wrap" style="max-width:46rem;">
+          <span class="stat-icon green"><i class="fa-solid fa-lock"></i></span>
+          <div>
+            <div class="fw-bold">منظومة الحماية الشاملة Alegria Vault Shield</div>
+            <div class="text-soft small">كافة العمليات الحساسة ومسارات الكاشير مشفرة بمفتاح فريد متوافق مع معايير PCI-DSS للمدفوعات.</div>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-ghost" id="btnApiKeys"><i class="fa-solid fa-key text-gold me-1"></i> سجل مفاتيح API والربط الخارجي</button>
+          <button type="button" class="btn btn-ghost" id="btnPdfReport"><i class="fa-solid fa-file-pdf text-rose me-1"></i> تصدير تقرير أمني PDF</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "erp", page: "security" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function ($) {
+      'use strict';
+
+      $(function () {
+        // ---- Security policy toggles ----
+        $('.policy-switch').on('change', function () {
+          var label = $(this).closest('.bg-al-2').find('.fw-bold').first().text();
+          window.Al.toast('تم تحديث السياسة: ' + label, 'success');
+        });
+
+        // ---- License / audit / vault helpers ----
+        $('#btnArchive').on('click', function () {
+          window.Al.toast('تمت أرشفة السجلات المؤسسية', 'success');
+        });
+        $('#btnAuditLog').on('click', function () {
+          window.Al.toast('تم فتح سجل التدقيق الكامل', 'info');
+        });
+        $('#btnApiKeys').on('click', function () {
+          window.Al.toast('تم فتح سجل مفاتيح API والربط الخارجي', 'info');
+        });
+        $('#btnPdfReport').on('click', function () {
+          window.Al.toast('تم تجهيز التقرير الأمني PDF للتصدير', 'success');
+        });
+      });
+    })(jQuery);
+  </script>
+</body>
+</html>

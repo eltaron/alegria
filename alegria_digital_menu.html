@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="shell-type" content="web_standard"/>
+  <title>المنيو الرقمي | أليجريا كافيه ومطعم</title>
+  <meta name="description" content="تصفح أقسام قائمة أليجريا: صواني الملوك، المشاوي على الفحم، الطواجن، المنيو الهندي والغربي، البيتزا، المقبلات والحلويات."/>
+  <meta name="keywords" content="أليجريا, كافيه, مطعم, منيو رقمي, أقسام القائمة, طلب أونلاين, رياض"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#f6f1e7"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="أقسام القائمة | أليجريا كافيه ومطعم"/>
+  <meta property="og:description" content="تصفح أقسام قائمة أليجريا ورحلة استثنائية في عالم النكهات والضيافة."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body class="bg-al">
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main>
+
+    <!-- ============================================================
+         PAGE HERO (عنوان القائمة + شارات الجودة)
+         ============================================================ -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="text-center mx-auto" style="max-width:880px;">
+          <div class="d-inline-flex align-items-center gap-2 rounded-pill px-4 py-2 bg-white shadow-sm border mb-3">
+            <span class="dot dot-gold"></span>
+            <span class="text-gold small fw-bold text-uppercase" style="letter-spacing:.08em;">المذاق الملكي الأصيل • ALEGRIA HAUTE CUISINE</span>
+          </div>
+          <h1 class="fw-black mb-0">قائمة طعام أليجريا الفاخرة</h1>
+          <div class="text-gold fs-4 fw-bold mt-2">رحلة استثنائية في عالم النكهات والضيافة</div>
+          <p class="text-soft lead mt-3 mb-0 mx-auto" style="max-width:660px;">
+            من صواني المشاوي الملكية وطواجن الفخار المعتقة، إلى أشهى أطباق المطبخ الغربي وحلويات القشطة البلدية المحضرة بشغف وحرفية عالية.
+          </p>
+          <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mt-4">
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-cow me-1"></i> لحوم بلدية ١٠٠٪</span>
+            <span class="badge-pill-custom badge-amber"><i class="fa-solid fa-fire me-1"></i> طهي فحم وحطب</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURED SIGNATURE PANEL (صينية أليجريا الملكية)
+         ============================================================ -->
+    <section class="section pt-3">
+      <div class="container">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-7">
+            <div class="hero-visual h-100 position-relative" style="min-height:520px;">
+              <img src="images/landing/02-royal-platter.jpg"
+                   alt="صينية أليجريا الملكية" class="w-100 h-100 object-fit-cover d-block"
+                   style="position:absolute;inset:0;height:100%;"/>
+              <div class="position-absolute top-0 start-0 d-flex flex-wrap gap-2 p-3">
+                <span class="badge-pill-custom badge-gold">طبق الشيف الملكي</span>
+                <span class="badge-pill-custom badge-neutral">يكفي ٤ أفراد</span>
+              </div>
+              <span class="hero-seal" aria-hidden="true"><i class="fa-solid fa-crown"></i></span>
+              <div class="hero-visual-tag">
+                <div class="d-flex align-items-center gap-3 min-w-0">
+                  <span class="icon-disc icon-disc--xs flex-none"><i class="fa-solid fa-utensils"></i></span>
+                  <div class="lh-sm min-w-0">
+                    <span class="fw-black d-block text-truncate">صينية أليجريا الملكية</span>
+                    <small class="text-soft d-block text-truncate">طبق الشيف الملكي • يكفي ٤ أفراد</small>
+                  </div>
+                </div>
+                <span class="badge-pill-custom badge-gold flex-none text-nowrap">
+                  <span class="fs-6 fw-black" style="color:var(--al-gold-strong);">١,٤٥٠</span>
+                  <small class="fw-bold">ج.م</small>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 d-flex">
+            <div class="panel-card p-4 h-100 d-flex flex-column justify-content-center w-100 text-center">
+              <span class="eyebrow center mb-1"><i class="fa-solid fa-crown"></i> توقيع أليجريا الحصري</span>
+              <h2 class="section-title center display-6 mt-2 mb-3 justify-content-center">بداية رحلتك مع تاج المائدة</h2>
+              <p class="text-soft mb-3 mx-auto" style="max-width:420px;">صواني الملوك محضرة بالطلب من أجود الذبائح البلدية والأرز البسمتي الفاخر المعتق، تُقدم لتكون نجمة سفرتك واختيار العائلات الأولى.</p>
+              <div class="bg-al-2 border rounded-4 p-3 mb-4">
+                <span class="eyebrow center mb-2" style="font-size:.64rem;">مكوّنات الصينية</span>
+                <p class="text-soft small mb-0 mx-auto" style="max-width:400px;">تيس بلدي مندي مدخن + ٤ فرد حمام محشي فريك بالسمن البلدي + كفتة مشوية على الفحم + ممبار ذهبي + أرز بسمتي بالخلطة والمكسرات المحمصة.</p>
+              </div>
+              <div class="d-flex flex-wrap gap-3 align-items-center justify-content-center">
+                <a href="menu_royal_platters_alegria.html" class="btn btn-gold rounded-pill px-4">
+                  <i class="fa-solid fa-utensils me-1"></i> تصفح القسم
+                </a>
+                <span class="text-soft small fw-semibold"><i class="fa-solid fa-stopwatch text-gold me-1"></i> ٤٥ دقيقة تحضير</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CATEGORY HUB GRID (ثمانية أقسام)
+         ============================================================ -->
+    <section class="section bg-al-2 border-top">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="eyebrow center mb-1"><i class="fa-solid fa-chess-knight"></i> أقسام القائمة</span>
+          <h2 class="section-title center display-6 mt-2 justify-content-center">اختر قسمك المفضل</h2>
+          <p class="text-soft mx-auto mb-0" style="max-width:640px;">ثمانية أقسام متكاملة تغطي كل أذواقكم، بالأعداد والأسعار الحقيقية من مطبخ أليجريا.</p>
+        </div>
+
+        <div class="row g-4">
+
+          <!-- صواني أليجريا الملكية -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-gold"><i class="fa-solid fa-crown"></i></span>
+              <h3 class="h5 fw-black mb-2">صواني أليجريا الملكية</h3>
+              <p class="text-soft small mb-3 flex-grow-1">محضرة بالطلب من أجود الذبائح البلدية والأرز البسمتي الفاخر المعتق.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٢ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ٧٩٠ – ١,٤٥٠ ج.م</span>
+              </div>
+              <a href="menu_royal_platters_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+          <!-- المشاوي على الفحم -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-amber"><i class="fa-solid fa-fire"></i></span>
+              <h3 class="h5 fw-black mb-2">المشاوي على الفحم</h3>
+              <p class="text-soft small mb-3 flex-grow-1">تُشوى على خشب السنديان والفحم الطبيعي وتُقدم مع الأرز والخبز الساخن والسلطات.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٦ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ٢٤٠ – ٤٨٠ ج.م</span>
+              </div>
+              <a href="menu_grills_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+          <!-- الطواجن والمنيو الشرقي -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-green"><i class="fa-solid fa-mug-hot"></i></span>
+              <h3 class="h5 fw-black mb-2">الطواجن والمنيو الشرقي</h3>
+              <p class="text-soft small mb-3 flex-grow-1">أصالة الطهي البطيء في طواجن الفخار المسامية بالسمن البلدي الفلاحي.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٨ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ٢٦٠ – ٤٩٠ ج.م</span>
+              </div>
+              <a href="menu_tajines_oriental_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+          <!-- المنيو الهندي والمندي -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-rose"><i class="fa-solid fa-bowl-rice"></i></span>
+              <h3 class="h5 fw-black mb-2">المنيو الهندي والمندي</h3>
+              <p class="text-soft small mb-3 flex-grow-1">نكهات الزعفران النقي وحبوب الهيل مع تسوية الحفرة العربية البطيئة.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٤ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ٢١٠ – ١,٢٠٠ ج.م</span>
+              </div>
+              <a href="menu_mandi_indian_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+          <!-- المنيو الغربي والباستا -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-gold"><i class="fa-solid fa-utensils"></i></span>
+              <h3 class="h5 fw-black mb-2">المنيو الغربي والباستا</h3>
+              <p class="text-soft small mb-3 flex-grow-1">قطع الستيك المعتقة والباستا الطازجة بلمسات شيفات أليجريا العالمية.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٦ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ٢٢٠ – ٤٦٠ ج.م</span>
+              </div>
+              <a href="menu_western_pasta_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+          <!-- البيتزا والفطير المشلتت -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-green"><i class="fa-solid fa-pizza-slice"></i></span>
+              <h3 class="h5 fw-black mb-2">البيتزا والفطير المشلتت</h3>
+              <p class="text-soft small mb-3 flex-grow-1">عجين متخمر ٤٨ ساعة ومخبوز في أفران الحجر الإيطالية والسمن الفلاحي الأصلي.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٤ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ١٧٠ – ٢٥٠ ج.م</span>
+              </div>
+              <a href="menu_feteer_pizza_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+          <!-- المقبلات والشوربات -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-amber"><i class="fa-solid fa-bowl-food"></i></span>
+              <h3 class="h5 fw-black mb-2">المقبلات والشوربات</h3>
+              <p class="text-soft small mb-3 flex-grow-1">بداية المائدة الفاخرة بأطباق المازة الطازجة والشوربات الدسمة.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٦ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ٦٥ – ١٨٠ ج.م</span>
+              </div>
+              <a href="menu_appetizers_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+          <!-- الحلويات والمشروبات -->
+          <div class="col-md-6 col-xl-3 reveal">
+            <div class="panel-card p-4 h-100 d-flex flex-column text-center cat-card">
+              <span class="cat-ico tone-rose"><i class="fa-solid fa-mug-saucer"></i></span>
+              <h3 class="h5 fw-black mb-2">الحلويات والمشروبات</h3>
+              <p class="text-soft small mb-3 flex-grow-1">مستوحاة من كرم الضيافة العربي مع ورق الذهب والقهوة التركية على الرمل.</p>
+              <div class="d-flex justify-content-center gap-3 text-soft small fw-semibold mb-3 flex-wrap">
+                <span><i class="fa-solid fa-utensils text-gold me-1"></i> ٤ أطباق</span>
+                <span><i class="fa-solid fa-coins text-gold me-1"></i> ٥٥ – ١٦٥ ج.م</span>
+              </div>
+              <a href="menu_desserts_beverages_alegria.html" class="cat-link">تصفح القسم <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOW TO ORDER (كيفية الطلب)
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="text-gold small fw-bold text-uppercase" style="letter-spacing:.1em;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;"><i class="fa-solid fa-circle-info me-1"></i> خطوات بسيطة</span>
+          <h2 class="section-title center display-6 mt-2 justify-content-center">كيفية الطلب</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="panel-card p-4 h-100 text-center">
+              <span class="d-inline-flex align-items-center justify-content-center rounded-circle fs-4 fw-black mb-3"
+                    style="width:56px;height:56px;background:var(--al-gold);color:#fff;">١</span>
+              <h4 class="fs-5 fw-bold mb-2">اختر القسم وطبقك المفضل</h4>
+              <p class="text-soft small mb-0">تصفح الأقسام الثمانية واختر الأطباق التي تشتهيها من قائمة أليجريا.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel-card p-4 h-100 text-center">
+              <span class="d-inline-flex align-items-center justify-content-center rounded-circle fs-4 fw-black mb-3"
+                    style="width:56px;height:56px;background:var(--al-gold);color:#fff;">٢</span>
+              <h4 class="fs-5 fw-bold mb-2">اضغط "أضف للطلب"</h4>
+              <p class="text-soft small mb-0">أضف الأطباق إلى شريط السلة العائم وسيتم تجميعها تلقائياً في طلبك.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel-card p-4 h-100 text-center">
+              <span class="d-inline-flex align-items-center justify-content-center rounded-circle fs-4 fw-black mb-3"
+                    style="width:56px;height:56px;background:var(--al-gold);color:#fff;">٣</span>
+              <h4 class="fs-5 fw-bold mb-2">اكمل طلبك من السلة أو واتساب</h4>
+              <p class="text-soft small mb-0">افتح السلة واتبع خطوات الإتمام، أو أرسل طلبك مباشرة عبر واتساب.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FLOATING CART BAR (شريط السلة العائم)
+         ============================================================ -->
+    <div id="floatingCart" class="d-none"><a class="fc-wrap" href="cart_checkout_alegria.html"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCountBadge">0</span> صنف • <span id="cartTotalPrice">0</span> ج.م</a><button type="button" class="fc-clear" id="clearOrderBtn" title="تفريغ السلة"><i class="fa-solid fa-trash"></i></button></div>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA={assets:"assets",section:"front",page:"menu"};
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script>
+    $(function () {
+      function renderCart() {
+        var count = window.Cart.count();
+        var total = window.Cart.total();
+        $('#cartCountBadge').text(count);
+        $('#cartTotalPrice').text(total.toLocaleString('ar-EG'));
+        $('#floatingCart').toggleClass('d-none', count <= 0);
+      }
+
+      $(document).on('alegria:cart', renderCart);
+
+      $('#clearOrderBtn').on('click', function () {
+        window.Cart.clear();
+        window.Al.toast('تم تفريغ سلة الطلبات', 'info');
+      });
+
+      renderCart();
+    });
+  </script>
+</body>
+</html>

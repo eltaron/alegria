@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>تسجيل الدخول | أليجريا للإدارة</title>
+  <meta name="description" content="بوابة تسجيل الدخول الموحدة لنظام أليجريا الإداري والتشغيلي - الإدارة العامة ونقاط البيع."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.png"/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main>
+    <section class="container py-4 py-lg-5 position-relative">
+      <!-- Ambient glows -->
+      <div class="position-absolute rounded-circle opacity-25 d-none d-lg-block" style="width:520px;height:520px;background:var(--al-gold);filter:blur(130px);top:-140px;inset-inline-start:45%;"></div>
+      <div class="position-absolute rounded-circle opacity-10 d-none d-lg-block" style="width:380px;height:380px;background:var(--al-teal);filter:blur(120px);bottom:-160px;inset-inline-start:8%;"></div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-9 reveal rise">
+
+          <!-- ============================================================
+               SPLIT AUTH PANEL: brand/welcome (right) + login form (left)
+               ============================================================ -->
+          <div class="row g-0 panel-card overflow-hidden rounded-4 shadow-lg">
+
+            <!-- ============ BRAND / WELCOME PANEL ============ -->
+            <div class="col-lg-5 d-none d-lg-flex flex-column justify-content-between p-4 p-xl-5 text-white position-relative"
+                 style="background:
+                   radial-gradient(420px 260px at 85% 0%, rgba(217,119,7,.25), transparent 60%),
+                   linear-gradient(165deg, rgba(11,19,38,.94) 0%, rgba(14,23,48,.82) 100%),
+                   url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFdBReLicy6qU5riQV2V6vQhfIeXFhL5I-JeDJbIaGz5ri2I5HfWbKyZbGon5cT1AVEJ7-YuSBSpYOA8EvyfMx1gn-Oy7IHt0Zhg_zxsyrIRvLSKRoZWla8f6v_VX3LZQQDVNDR1chcGMM8t_Z7tr0bIH0c6pPuHTvrTEr_oaD64yak2svGsG0N1OduttXMgCxABvxOJj2euBIeRBNeqzxkS0TjFxyx6f19YIAF4aBHA2yVQ2TmH0V2w') center/cover no-repeat;">
+
+              <!-- Top: version badge -->
+              <div class="d-flex justify-content-between align-items-center gap-2 mb-4">
+                <span class="badge-pill-custom align-self-start"
+                      style="background:rgba(23,31,51,.85);border:1px solid var(--al-line);color:#aeb9d6;text-transform:none;letter-spacing:.05em;">
+                  <span class="dot dot-green me-2"></span>
+                  Alegria Cloud Core v2.4.0
+                </span>
+              </div>
+
+              <!-- Middle: hero copy + quote + status cards -->
+              <div class="my-auto py-3">
+                <h2 class="h4 fw-bold mb-1" style="color:#fff;">بوابة الإدارة والتشغيل الموحدة</h2>
+                <p class="mb-4" style="color:rgba(234,240,255,.72);">Alegria Haute ERP Enterprise Platform</p>
+
+                <div class="rounded-4 p-3 mb-3" style="background:rgba(23,31,51,.55);border:1px solid var(--al-line);backdrop-filter:blur(3px);">
+                  <i class="fa-solid fa-quote-right text-gold fs-5 mb-2"></i>
+                  <p class="mb-0 fst-italic" style="color:rgba(234,240,255,.88);">
+                    «إدارة متكاملة ترتقي بتجربة الضيافة والمذاق الأصيل إلى آفاق استثنائية، تجمع بين سلاسة العمليات الفندقية وهيبة الخدمة الملكية.»
+                  </p>
+                </div>
+
+                <div class="row g-2">
+                  <div class="col-6">
+                    <div class="rounded-3 p-3 h-100" style="background:rgba(19,27,46,.85);border:1px solid var(--al-line);">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="small" style="color:rgba(234,240,255,.6);">حالة الفروع</span>
+                        <i class="fa-solid fa-diagram-project text-green"></i>
+                      </div>
+                      <div class="fw-bold small" style="color:var(--al-green);">الرياض • التجمع</div>
+                      <div class="small" style="color:rgba(234,240,255,.6);">متصل لحظياً وبكفاءة 99.98%</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="rounded-3 p-3 h-100" style="background:rgba(19,27,46,.85);border:1px solid var(--al-line);">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="small" style="color:rgba(234,240,255,.6);">الفوترة والأمان</span>
+                        <i class="fa-solid fa-badge-check text-gold"></i>
+                      </div>
+                      <div class="fw-bold small" style="color:var(--al-gold);">ZATCA المرحلة 2</div>
+                      <div class="small" style="color:rgba(234,240,255,.6);">تشفير متقدم E2EE 256</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom: shields -->
+              <div class="d-flex align-items-center justify-content-between pt-3 small" style="color:rgba(234,240,255,.55);">
+                <span><i class="fa-solid fa-shield-halved text-gold me-1"></i> Alegria Vault Shield Active</span>
+                <span style="letter-spacing:.04em;">Node: KSA-RYD-EDGE</span>
+              </div>
+            </div>
+
+            <!-- ============ LOGIN FORM PANEL ============ -->
+            <div class="col-lg-7 p-4 p-xl-5" style="background:var(--al-surface);">
+              <span class="eyebrow mb-2"><i class="fa-solid fa-circle-nodes"></i> بوابة موحدة</span>
+
+              <!-- Brand identifier + support -->
+              <div class="d-flex align-items-center justify-content-between gap-2 mb-4">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="brand-badge" style="width:44px;height:44px;font-size:1.2rem;"><i class="fa-solid fa-utensils"></i></span>
+                  <div class="lh-sm">
+                    <div class="fw-bold">أليجريا كافيه ومطعم</div>
+                    <small class="text-soft">Alegria Haute ERP Enterprise Suite</small>
+                  </div>
+                </div>
+                <a href="#" title="الدعم الفني VIP 24/7" class="btn btn-ghost btn-sm text-nowrap py-1 px-2">
+                  <i class="fa-solid fa-headset text-gold"></i>
+                  <span class="d-none d-sm-inline"> الدعم الفني VIP 24/7</span>
+                </a>
+              </div>
+
+              <!-- Form context header -->
+              <h1 class="h3 fw-bold mb-1">تسجيل الدخول للمنظومة</h1>
+              <p class="text-soft mb-4">يرجى تحديد نمط المصادقة لإدارة العمليات أو محطات نقاط البيع والمطبخ.</p>
+
+              <!-- Authentication tabs -->
+              <div class="d-flex bg-al-2 border rounded-4 p-1 mb-4" role="group" aria-label="نمط المصادقة">
+                <button type="button" id="tab-pin-btn" class="btn btn-ghost btn-sm flex-fill py-2 fw-semibold">
+                  <i class="fa-solid fa-dialpad text-gold me-1"></i><span> محطات العمل ونقاط البيع (PIN)</span>
+                </button>
+                <button type="button" id="tab-mgmt-btn" class="btn btn-gold btn-sm flex-fill py-2 fw-semibold active">
+                  <i class="fa-solid fa-user-shield me-1"></i> الإدارة العامة والسحابية (HQ)
+                </button>
+              </div>
+
+              <form id="login-form" novalidate autocomplete="off">
+
+                <!-- ============ MODE: HQ management login (default) ============ -->
+                <div id="view-mgmt">
+                  <div class="mb-3">
+                    <label class="form-label-custom" for="login-user">المعرّف الموحد (البريد الإلكتروني المعتمد / كود الموظف)</label>
+                    <div class="input-icon">
+                      <i class="fa-solid fa-id-badge"></i>
+                      <input type="text" class="form-control" id="login-user" dir="ltr" placeholder="fahad.alharbi@alegriagroup.com"/>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <label class="form-label-custom mb-0" for="login-pass">كلمة المرور المشفرة</label>
+                      <a href="#" id="forgot-pass" class="small text-gold fw-semibold">استعادة الرمز السري؟</a>
+                    </div>
+                    <div class="position-relative">
+                      <i class="fa-solid fa-lock position-absolute top-50 translate-middle-y text-faint" style="inset-inline-start:1rem;"></i>
+                      <input type="password" class="form-control" id="login-pass" dir="ltr" placeholder="••••••••••••••••"
+                             style="padding-inline-start:2.4rem;padding-inline-end:3.2rem;"/>
+                      <button type="button" id="toggle-pass" aria-label="إظهار كلمة المرور"
+                              class="btn btn-link text-faint p-0 position-absolute top-50 translate-middle-y"
+                              style="inset-inline-end:.8rem;">
+                        <i class="fa-solid fa-eye fs-6"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-between gap-2 bg-al-2 border rounded-4 px-3 py-2 mb-3">
+                    <div class="form-check form-switch mb-0">
+                      <input class="form-check-input cursor-pointer" type="checkbox" id="remember-device" role="switch" checked/>
+                      <label class="form-check-label small text-soft select-none" for="remember-device">توثيق واعتماد هذا الجهاز لمدة 30 يوماً</label>
+                    </div>
+                    <span class="text-green fw-bold small" style="display:inline-flex;align-items:center;gap:.3rem;white-space:nowrap;">
+                      <i class="fa-solid fa-mobile-screen-button"></i> 2FA مفعل
+                    </span>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label-custom" for="branch-scope">نطاق الإشراف والتحكم</label>
+                    <select class="form-select" id="branch-scope">
+                      <option value="all">جميع الفروع الموحدة (مقر الإدارة العامة - الرياض والقاهرة)</option>
+                      <option value="ryd">فرع الرياض - السليمانية ولاكشري لاونج</option>
+                      <option value="cairo">فرع التجمع الخامس - ووترواي لاونج</option>
+                    </select>
+                  </div>
+
+                  <!-- Demo credentials -->
+                  <div class="bg-al-2 border rounded-4 p-3 mb-3 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                    <div class="small">
+                      <div class="fw-bold mb-1"><i class="fa-solid fa-key text-gold me-1"></i> بيانات تجريبية للدخول السريع</div>
+                      <div class="d-flex flex-wrap gap-3 font-mono text-soft">
+                        <span><span class="text-faint">المستخدم:</span> admin</span>
+                        <span><span class="text-faint">كلمة المرور:</span> Alegria@2025</span>
+                      </div>
+                    </div>
+                    <button type="button" id="fill-demo" class="btn btn-outline-gold btn-sm text-nowrap">
+                      <i class="fa-solid fa-fill-drip me-1"></i> تعبئة تلقائية
+                    </button>
+                  </div>
+                </div>
+
+                <!-- ============ MODE: PIN / terminal auth (hidden by default) ============ -->
+                <div id="view-pin" class="d-none">
+                  <div class="mb-3">
+                    <label class="form-label-custom" for="terminal-id">معرف المحطة أو كود الموظف</label>
+                    <div class="input-icon">
+                      <i class="fa-solid fa-id-card"></i>
+                      <input type="text" class="form-control" id="terminal-id" dir="ltr" readonly value="ALG-POS-RYD-04 (كاشير الصالة المركزية)"/>
+                    </div>
+                  </div>
+
+                  <div class="text-center mb-3">
+                    <div class="small text-soft mb-2">أدخل رمز الدخول السريع (PIN)</div>
+                    <div class="d-flex justify-content-center gap-2 mb-3">
+                      <span class="d-inline-block rounded-circle" id="pin-dot-1" style="width:14px;height:14px;background:var(--al-ink-faint);"></span>
+                      <span class="d-inline-block rounded-circle" id="pin-dot-2" style="width:14px;height:14px;background:var(--al-ink-faint);"></span>
+                      <span class="d-inline-block rounded-circle" id="pin-dot-3" style="width:14px;height:14px;background:var(--al-ink-faint);"></span>
+                      <span class="d-inline-block rounded-circle" id="pin-dot-4" style="width:14px;height:14px;background:var(--al-ink-faint);"></span>
+                      <span class="d-inline-block rounded-circle" id="pin-dot-5" style="width:14px;height:14px;background:var(--al-ink-faint);"></span>
+                      <span class="d-inline-block rounded-circle" id="pin-dot-6" style="width:14px;height:14px;background:var(--al-ink-faint);"></span>
+                    </div>
+                  </div>
+
+                  <!-- Tactile numeric keypad -->
+                  <div class="row g-2 justify-content-center" style="max-width:300px;margin-inline:auto;">
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('1')">1</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('2')">2</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('3')">3</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('4')">4</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('5')">5</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('6')">6</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('7')">7</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('8')">8</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('9')">9</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 fw-semibold text-rose" onclick="clearPin()">مسح</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2 font-mono fw-bold" onclick="appendPin('0')">0</button></div>
+                    <div class="col-4"><button type="button" class="btn btn-ghost w-100 py-2" onclick="backspacePin()" aria-label="مسح آخر رقم"><i class="fa-solid fa-delete-left"></i></button></div>
+                  </div>
+
+                  <!-- Quick access actions -->
+                  <div class="row g-2 mt-3">
+                    <div class="col-6">
+                      <button type="button" class="btn btn-ghost btn-sm w-100">
+                        <i class="fa-solid fa-credit-card text-gold me-1"></i> تمرير بطاقة RFID الذكية
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      <button type="button" class="btn btn-ghost btn-sm w-100">
+                        <i class="fa-solid fa-fingerprint text-green me-1"></i> بصمة الوجه (FaceID)
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Primary CTA -->
+                <button type="submit" id="submit-auth-btn" class="btn btn-gold btn-lg w-100 rounded-3 d-flex align-items-center justify-content-center gap-2 mt-4">
+                  <i class="fa-solid fa-lock-open"></i>
+                  <span>تسجيل الدخول إلى لوحة التحكم</span>
+                  <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+<!-- Compliance & security assurance strip -->
+              <div class="d-flex flex-wrap justify-content-center gap-2 mt-3 small text-soft">
+                <span><i class="fa-solid fa-file-invoice text-green me-1"></i> امتثال كامل لهيئة الزكاة والضريبة والجمارك (ZATCA)</span>
+                <span class="text-faint">•</span>
+                <span><i class="fa-solid fa-lock text-gold me-1"></i> معيار أمان بيانات بطاقات الدفع PCI-DSS</span>
+              </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "../assets", section: "login", page: "login" };
+  </script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/sweetalert2.all.min.js"></script>
+  <script src="../assets/js/dataTables.min.js"></script>
+  <script src="../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../assets/js/layout.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // ================= Login page logic =================
+    $(function () {
+      var ERP_URL = '../erp/alegria_erp_1/code.html';
+      var pin = '';
+      var mode = 'mgmt'; // 'mgmt' | 'pin'
+
+      // ---- Tab switcher ----
+      function setMode(m) {
+        mode = m;
+        $('#view-pin').toggleClass('d-none', m !== 'pin');
+        $('#view-mgmt').toggleClass('d-none', m !== 'mgmt');
+        var pinOn = (m === 'pin');
+        $('#tab-pin-btn, #tab-mgmt-btn').each(function () {
+          var isPin = (this.id === 'tab-pin-btn');
+          var on = (isPin === pinOn);
+          $(this).toggleClass('btn-gold', on).toggleClass('btn-ghost', !on);
+        });
+      }
+      $('#tab-pin-btn').on('click', function () { setMode('pin'); });
+      $('#tab-mgmt-btn').on('click', function () { setMode('mgmt'); });
+
+      // ---- Password visibility toggle ----
+      $('#toggle-pass').on('click', function () {
+        var $input = $('#login-pass');
+        var show = ($input.attr('type') === 'password');
+        $input.attr('type', show ? 'text' : 'password');
+        $(this).find('i').attr('class', 'fa-solid ' + (show ? 'fa-eye-slash' : 'fa-eye') + ' fs-6');
+      });
+
+      // ---- Forgot password ----
+      $('#forgot-pass').on('click', function (e) {
+        e.preventDefault();
+        window.Al.info('استعادة كلمة المرور', 'خضعت لعملية إرسال رابط الاستعادة إلى بريدك الإلكتروني الموثق. يرجى متابعة صندوق الوارد، وإذا لم يصلك الرابط تواصل مع الدعم الفني VIP.');
+      });
+
+      // ---- Demo credentials fill ----
+      $('#fill-demo').on('click', function () {
+        $('#login-user').val('fahad.alharbi@alegriagroup.com');
+        $('#login-pass').val('Alegria@2025');
+        window.Al.toast('تم تعبئة بيانات الدخول التجريبية', 'info');
+      });
+
+      // ---- PIN input ----
+      window.appendPin = function (d) {
+        if (pin.length < 6) {
+          pin += d;
+          updatePinDisplay();
+          if (pin.length === 6) setTimeout(function () { handleLogin(); }, 250);
+        }
+      };
+      window.clearPin = function () { pin = ''; updatePinDisplay(); };
+      window.backspacePin = function () { if (pin.length > 0) { pin = pin.slice(0, -1); updatePinDisplay(); } };
+      function updatePinDisplay() {
+        for (var i = 1; i <= 6; i++) {
+          var el = document.getElementById('pin-dot-' + i);
+          if (!el) continue;
+          el.style.background = (i <= pin.length) ? 'var(--al-gold)' : 'var(--al-ink-faint)';
+          el.style.boxShadow = (i <= pin.length) ? '0 0 10px rgba(255,183,125,.55)' : 'none';
+        }
+      }
+
+      // ---- Login submit handler ----
+      function handleLogin(e) {
+        if (e) e.preventDefault();
+
+        if (mode === 'pin') {
+          if (pin.length < 6) {
+            window.Al.warn('تنبيه', 'يرجى إدخال رمز PIN مكوّن من 6 أرقام للتحقق.');
+            return false;
+          }
+        } else {
+          var u = $.trim($('#login-user').val());
+          var p = $('#login-pass').val();
+          if (!u || !p) {
+            window.Al.warn('تنبيه', 'يرجى إدخال المعرّف الموحد وكلمة المرور للاستمرار.');
+            return false;
+          }
+        }
+
+        var btn = document.getElementById('submit-auth-btn');
+        btn.disabled = true;
+        window.Al.toast('تم تسجيل الدخول', 'success');
+        setTimeout(function () {
+          window.location.href = ERP_URL;
+        }, 900);
+        return false;
+      }
+      window.handleLogin = handleLogin;
+      $('#login-form').on('submit', handleLogin);
+    });
+  </script>
+</body>
+</html>

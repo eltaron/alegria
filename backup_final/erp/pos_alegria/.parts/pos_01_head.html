@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <meta content="web_dashboard" name="shell-type"/>
+  <meta content="html-web-plugin" name="generator"/>
+  <meta name="shell" content="erp-pos"/>
+  <title>نقاط البيع أليجريا | صالة تيك أواي دليفري</title>
+  <meta name="description" content="نقاط البيع الفاخرة لأليجريا: شاشة طلب مباشر، خريطة حية للطاولات، وفاتورة ذهبية مميزة لنظام أليجريا للإدارة."/>
+  <meta name="keywords" content="أليجريا, ERP, نقاط البيع, POS, كاشير, فاتورة, مطعم فاخر, أليجريا كافيه"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="نقاط البيع | أليجريا ERP"/>
+  <meta property="og:description" content="نظام نقاط البيع الفاخر لأليجريا مع الفاتورة الذهبية المميزة."/>
+  <meta name="robots" content="index, follow"/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ Footer + Header Shell (حقن عبر layout.js تلقائياً) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container-fluid py-2">
+
+    <!-- ================================================================
+         شريط الأوامر العلوي — إصدار أليجريا الذهبي (مضغوط، يمنع فيض الشاشة)
+         ================================================================ -->
+    <header class="panel-card p-2 mb-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <span class="dot dot-gold me-1"></span>
+        <div class="lh-sm">
+          <span class="fw-black small d-block text-gold-strong">نقاط البيع الذهبية</span>
+          <small class="text-softest" style="font-size:.68rem;">أليجريا كافيه ومطعم • الأحد 25 سبتمبر 2026</small>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-1 flex-wrap">
+        <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-crown me-1"></i>صالة ومطعم</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-circle text-green me-1"></i>لتيك أواي</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-motorcycle me-1"></i>للدليفري</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-users me-1"></i>18 طاولة حية</span>
+      </div>
+      <div class="d-flex align-items-center gap-1">
+        <div class="position-relative">
+          <input id="menuSearchInput" class="form-control form-control-sm bg-al-2 border rounded-pill ps-4" style="width:200px;" placeholder="ابحث في الأصناف والكود..." type="search"/>
+          <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-2 text-softest" style="transform:translateY(-50%);"></i>
+        </div>
+        <button id="toggleFloorMapBtn" class="btn btn-ghost btn-sm sw-action" data-title="فتح/إغلاق خريطة الطاولات"><i class="fa-solid fa-table-cells-large text-gold me-1"></i>الخريطة الحية</button>
+        <span class="badge-pill-custom badge-soft tabular" id="menuResultCount">48 صنف</span>
+      </div>
+    </header>
+
+    <!-- ================================================================
+         درج الخريطة الحية (ينزلق من رزمة الأوامر، لا يفيض الشاشة)
+         ================================================================ -->
+    <div id="floorMapDrawer" class="d-none panel-card p-2 mb-2">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+        <span class="fw-bold small text-gold-strong"><i class="fa-solid fa-map-location-dot me-1"></i>الخريطة الحية — الطاولات والجلسات</span>
+        <span class="text-softest" style="font-size:.7rem;">اضغط على أي طاولة لاختيارها</span>
+      </div>
+      <div class="d-flex flex-wrap gap-1" id="floorTablesContainer">
+        <button class="floor-table sw-action" data-table="VIP-1" data-title="طاولة VIP-1 — مقعدان ملكيان"><span class="dot dot-gold"></span>VIP-1</button>
+        <button class="floor-table sw-action live" data-table="VIP-4" data-title="طاولة VIP-4 — 8 ضيوف، مشرف كمال"><span class="dot dot-gold"></span>VIP-4</button>
+        <button class="floor-table sw-action live" data-table="T-12" data-title="طاولة T-12 — 4 ضيوف، محاسب هيثم"><span class="dot dot-gold"></span>T-12</button>
+        <button class="floor-table sw-action" data-table="T-08" data-title="طاولة T-08 — 2 ضيف"><span class="dot dot-gold"></span>T-08</button>
+        <button class="floor-table sw-action" data-table="T-05" data-title="طاولة T-05 — تراس شمالي"><span class="dot dot-gold"></span>T-05</button>
+        <button class="floor-table sw-action live" data-table="T-16" data-title="طاولة T-16 — ركن المقهى"><span class="dot dot-gold"></span>T-16</button>
+        <button class="floor-table sw-action" data-table="T-02" data-title="طاولة T-02 — نافذة البرج"><span class="dot dot-gold"></span>T-02</button>
+        <button class="floor-table sw-action" data-table="TAKEAWAY" data-title="تيك أواي التقط من الصالة"><span class="dot dot-gold"></span>تيك أواي</button>
+        <button class="floor-table sw-action" data-table="DELIVERY" data-title="دليفري — أوردرات خارجية"><span class="dot dot-gold"></span>دليفري</button>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         الأعمدة الثلاثة — قيود ارتفاع صارمة لمنع الفيض
+         ================================================================ -->
+    <div class="row g-2 flex-fill" style="height:calc(100vh - 118px);min-height:0;">

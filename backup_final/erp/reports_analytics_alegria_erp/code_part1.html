@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>التقارير والتحليلات التنفيذية | أليجريا ERP</title>
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap5.min.css"/>
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يحقنه layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. EXECUTIVE REPORTS: TOP BAR (FILTERS + EXPORT)
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3 flex-wrap">
+        <div>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-brain text-gold me-1"></i>ذكاء الأعمال والتقارير الفورية (BI)</span>
+            <small class="text-soft"><i class="fa-solid fa-rotate-right me-1"></i>آخر تحديث: منذ دقيقتين (22:45)</small>
+          </div>
+          <h1 class="h4 fw-black m-0 mt-1">التقارير والتحليلات المتقدمة والذكاء التشغيلي</h1>
+          <p class="text-soft small mb-0 mt-1">تحليلات شاملة للمبيعات اليومية، هوامش الربحية، تكلفة الأغذية (Food Cost)، مع رصد ساعات الذروة وكفاءة طاقم الخدمة والمطبخ.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <div class="bg-al-2 border rounded-3 p-1 d-flex align-items-center gap-1" id="date-pills">
+            <button type="button" class="btn btn-ghost btn-sm px-3 rounded-pill" onclick="selectDate(this)">اليوم</button>
+            <button type="button" class="btn btn-ghost btn-sm px-3 rounded-pill" onclick="selectDate(this)">آخر 7 أيام</button>
+            <button type="button" class="btn btn-gold btn-sm px-3 rounded-pill active" onclick="selectDate(this)">شهر أكتوبر 2024</button>
+            <button type="button" class="btn btn-ghost btn-sm px-3 rounded-pill" onclick="selectDate(this)">الربع الحالي</button>
+            <button type="button" class="btn btn-ghost btn-sm px-3 rounded-pill sw-custom-range"><i class="fa-regular fa-calendar me-1"></i>مخصص</button>
+          </div>
+          <div class="dropdown">
+            <button type="button" class="btn btn-ghost btn-sm dropdown-toggle d-inline-flex align-items-center gap-2" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-shop text-gold"></i>
+              <span class="text-start lh-sm text-end">
+                <small class="text-soft d-block">الفرع المحدد</small>
+                <strong class="small">الفرع الرئيسي - التجمع الخامس</strong>
+              </span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-item-text small">الفرع الرئيسي - التجمع الخامس</span></li>
+              <li><span class="dropdown-item-text small text-soft">فرع الرحاب - قيد الإعداد</span></li>
+              <li><span class="dropdown-item-text small text-soft">فرع مدينتي - قيد الإعداد</span></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm sw-compare"><i class="fa-solid fa-right-left text-green me-1"></i>مقارنة بفترة سابقة</button>
+          <button type="button" class="btn btn-gold btn-sm sw-export"><i class="fa-solid fa-upload me-1"></i>تصدير تقرير شامل (PDF/Excel)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. TOP EXECUTIVE KPI SUMMARY (5 CARDS)
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <!-- KPI Card 1: Net Revenue (Wide) -->
+      <div class="col-lg-12">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">إجمالي الإيرادات الصافية</span>
+              <div class="stat-value mt-1">842,500 <small class="fs-6 text-soft">ج.م</small></div>
+            </div>
+            <span class="stat-icon amber"><i class="fa-solid fa-money-bill-trend-up"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft">مقارنة بسبتمبر (مستهدف 800k)</small>
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-arrow-up me-1"></i>+14.2%</span>
+          </div>
+          <div class="progress mt-3" style="height:5px;"><div class="progress-bar" style="width:105.3%;background:var(--al-gold)"></div></div>
+        </div>
+      </div>
+      <!-- KPI Card 2: Operating Profit -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">صافي الأرباح التشغيلية</span>
+              <div class="stat-value text-green mt-1">249,380 <small class="fs-6 text-soft">ج.م</small></div>
+            </div>
+            <span class="stat-icon green"><i class="fa-solid fa-wallet"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft">هامش ربح: <span class="text-gold-strong fw-bold">29.6%</span></small>
+            <span class="badge-pill-custom badge-green">أداء استثنائي</span>
+          </div>
+          <div class="progress mt-3" style="height:5px;"><div class="progress-bar bg-success" style="width:88%"></div></div>
+        </div>
+      </div>
+      <!-- KPI Card 3: Food Cost -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">متوسط تكلفة الأغذية (Food Cost)</span>
+              <div class="stat-value mt-1">31.4% <small class="fs-6 text-soft">ضمن النطاق المثالي</small></div>
+            </div>
+            <span class="stat-icon rose"><i class="fa-solid fa-bowl-food"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft">المستهدف الأقصى: <span class="text-gold-strong fw-bold">&lt; 32.0%</span></small>
+            <span class="badge-pill-custom badge-green"><i class="fa-solid fa-check me-1"></i>-0.6% توفير</span>
+          </div>
+          <div class="progress mt-3" style="height:5px;"><div class="progress-bar" style="width:65%;background:var(--al-gold)"></div></div>
+        </div>
+      </div>
+      <!-- KPI Card 4: Orders & AOV -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">الطلبات وقيمة الشيك (AOV)</span>
+              <div class="stat-value mt-1">349.50 <small class="fs-6 text-soft">ج.م / طلب</small></div>
+            </div>
+            <span class="stat-icon amber"><i class="fa-solid fa-receipt"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft">2,410 فاتورة مغلقة</small>
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-arrow-up me-1"></i>+8.5%</span>
+          </div>
+          <div class="progress mt-3" style="height:5px;"><div class="progress-bar" style="width:74%;background:var(--al-gold-strong)"></div></div>
+        </div>
+      </div>
+      <!-- KPI Card 5: Table Turnover & Occupancy -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">معدل دوران الطاولات والإشغال</span>
+              <div class="stat-value mt-1">42 <small class="fs-6 text-soft">دقيقة / جلسة</small></div>
+            </div>
+            <span class="stat-icon green"><i class="fa-solid fa-clock"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft">إشغال الصالة: <span class="text-gold-strong fw-bold">82%</span></small>
+            <span class="badge-pill-custom badge-neutral">34 طاولة</span>
+          </div>
+          <div class="progress mt-3" style="height:5px;"><div class="progress-bar bg-success" style="width:82%"></div></div>
+        </div>
+      </div>
+    </section>

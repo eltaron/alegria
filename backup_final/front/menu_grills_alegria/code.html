@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="shell-type" content="web_standard"/>
+  <title>المشاوي على الفحم | أليجريا كافيه ومطعم</title>
+  <meta name="description" content="مشاوي أليجريا على الفحم الحجري: كباب ضاني، ريش، كفتة، طرب وفراخ مشوية على الحطب والفحم الطبيعي."/>
+  <meta name="keywords" content="أليجريا, كافيه, مطعم, مشاوي, فحم, كباب, ريش ضاني, كفتة"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#f6f1e7"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="المشاوي على الفحم | أليجريا كافيه ومطعم"/>
+  <meta property="og:description" content="مشاوي أليجريا على الفحم الحجري: كباب ضاني، ريش، كفتة، طرب وفراخ مشوية على الحطب والفحم الطبيعي."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="المشاوي على الفحم | أليجريا كافيه ومطعم"/>
+  <meta name="twitter:description" content="مشاوي أليجريا على الفحم الحجري: كباب ضاني، ريش، كفتة، طرب وفراخ مشوية على الحطب والفحم الطبيعي."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body class="bg-al">
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============ BREADCRUMB ============ -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="../alegria_landing_page/code.html">الرئيسية</a></li>
+        <li class="breadcrumb-item"><a href="../alegria_digital_menu/code.html">المنيو</a></li>
+        <li class="breadcrumb-item active" aria-current="page">المشاوي على الفحم</li>
+      </ol>
+    </nav>
+
+    <!-- ============ SECTION HEADER (من المصدر) ============ -->
+    <section class="mb-4">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <span class="d-inline-flex align-items-center justify-content-center rounded-circle"
+              style="width:52px;height:52px;flex-shrink:0;background:var(--al-amber-soft);color:var(--al-amber);">
+          <i class="fa-solid fa-fire-burner fs-5"></i>
+        </span>
+        <div>
+          <h2 class="section-title display-6 mb-1">المشاوي على الفحم الحجري</h2>
+          <p class="text-soft mb-0">تُشوى على خشب السنديان والفحم الطبيعي وتُقدم مع الأرز والخبز الساخن والسلطات</p>
+        </div>
+      </div>
+
+      <!-- ============ CATEGORY CHIPS ============ -->
+      <nav class="d-flex flex-wrap gap-2 justify-content-center">
+        <a class="btn btn-ghost rounded-pill px-3" href="../menu_royal_platters_alegria/code.html">صواني أليجريا الملكية</a>
+        <a class="btn btn-gold rounded-pill px-3" href="../menu_grills_alegria/code.html">المشاوي على الفحم</a>
+        <a class="btn btn-ghost rounded-pill px-3" href="../menu_tajines_oriental_alegria/code.html">الطواجن والمنيو الشرقي</a>
+        <a class="btn btn-ghost rounded-pill px-3" href="../menu_mandi_indian_alegria/code.html">المنيو الهندي والمندي</a>
+        <a class="btn btn-ghost rounded-pill px-3" href="../menu_western_pasta_alegria/code.html">المنيو الغربي والباستا</a>
+        <a class="btn btn-ghost rounded-pill px-3" href="../menu_feteer_pizza_alegria/code.html">البيتزا والفطير المشلتت</a>
+        <a class="btn btn-ghost rounded-pill px-3" href="../menu_appetizers_alegria/code.html">المقبلات والشوربات</a>
+        <a class="btn btn-ghost rounded-pill px-3" href="../menu_desserts_beverages_alegria/code.html">الحلويات والمشروبات</a>
+      </nav>
+
+      <!-- ============ LOCAL SEARCH ============ -->
+      <div class="input-icon mx-auto mt-4" style="max-width:480px;">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="menuSearchInput" type="text" class="form-control rounded-pill"
+               placeholder="ابحث في المشاوي على الفحم..."/>
+      </div>
+    </section>
+
+    <!-- ============ DISH CARDS (من المصدر - قسم المشاوي) ============ -->
+    <section class="section">
+      <div class="row g-4">
+        <!-- كباب ضاني بلدي -->
+        <div class="col-md-6 col-lg-4" data-cat="grills" data-name="كباب ضاني بلدي">
+          <div class="dish-card p-4 d-flex flex-column h-100">
+            <div class="menu-media">
+              <i class="fa-solid fa-fire-burner"></i>
+              <img loading="lazy" src="../../assets/menu-images/grills-kebab-lamb.jpg" alt="كباب ضاني بلدي" onerror="this.parentElement.classList.add('no-img')"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div class="flex-grow-1">
+                <h4 class="fs-5 fw-bold mb-1">كباب ضاني بلدي</h4>
+                <p class="text-soft small mb-0">قطع لحم ضاني متبلة ببهارات أليجريا الخاصة مشوية بدقة فائقة.</p>
+              </div>
+              <span class="fs-4 fw-black text-gold-strong text-nowrap">٤٢٠ <small class="text-faint fs-6 fw-normal">ج.م</small></span>
+            </div>
+            <div class="mt-3 pt-2 d-flex justify-content-between align-items-center border-top">
+              <span class="text-faint small">٣٥٠ جرام تقريباً</span>
+              <button type="button" class="btn btn-gold btn-sm rounded-pill add-dish" data-name="كباب ضاني بلدي" data-price="420">
+                <i class="fa-solid fa-plus me-1"></i> أضف
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ريش ضاني مشوية -->
+        <div class="col-md-6 col-lg-4" data-cat="grills" data-name="ريش ضاني مشوية">
+          <div class="dish-card p-4 d-flex flex-column h-100">
+            <div class="menu-media">
+              <i class="fa-solid fa-fire-burner"></i>
+              <img loading="lazy" src="../../assets/menu-images/grills-reef-lamb.jpg" alt="ريش ضاني مشوية" onerror="this.parentElement.classList.add('no-img')"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div class="flex-grow-1">
+                <span class="badge-pill-custom badge-amber">الأكثر طلباً</span>
+                <h4 class="fs-5 fw-bold mt-2 mb-1">ريش ضاني مشوية</h4>
+                <p class="text-soft small mb-0">ريش ضاني طرية متبلة بماء البصل والأعشاب البرية ونكهة الفحم.</p>
+              </div>
+              <span class="fs-4 fw-black text-gold-strong text-nowrap">٤٨٠ <small class="text-faint fs-6 fw-normal">ج.م</small></span>
+            </div>
+            <div class="mt-3 pt-2 d-flex justify-content-between align-items-center border-top">
+              <span class="text-faint small">٤ قطع ريش فاخرة</span>
+              <button type="button" class="btn btn-gold btn-sm rounded-pill add-dish" data-name="ريش ضاني مشوية" data-price="480">
+                <i class="fa-solid fa-plus me-1"></i> أضف
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- كفتة ضاني مخصوص -->
+        <div class="col-md-6 col-lg-4" data-cat="grills" data-name="كفتة ضاني مخصوص">
+          <div class="dish-card p-4 d-flex flex-column h-100">
+            <div class="menu-media">
+              <i class="fa-solid fa-fire-burner"></i>
+              <img loading="lazy" src="../../assets/menu-images/grills-kofta.jpg" alt="كفتة ضاني مخصوص" onerror="this.parentElement.classList.add('no-img')"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div class="flex-grow-1">
+                <h4 class="fs-5 fw-bold mb-1">كفتة ضاني مخصوص</h4>
+                <p class="text-soft small mb-0">كفتة لحم ضاني مفرومة مع لية خروف بلدي وتوابل عربية متوازنة.</p>
+              </div>
+              <span class="fs-4 fw-black text-gold-strong text-nowrap">٣٢٠ <small class="text-faint fs-6 fw-normal">ج.م</small></span>
+            </div>
+            <div class="mt-3 pt-2 d-flex justify-content-between align-items-center border-top">
+              <span class="text-faint small">مع بقدونس وسماق</span>
+              <button type="button" class="btn btn-gold btn-sm rounded-pill add-dish" data-name="كفتة ضاني مخصوص" data-price="320">
+                <i class="fa-solid fa-plus me-1"></i> أضف
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- طرب ضاني على الفحم -->
+        <div class="col-md-6 col-lg-4" data-cat="grills" data-name="طرب ضاني على الفحم">
+          <div class="dish-card p-4 d-flex flex-column h-100">
+            <div class="menu-media">
+              <i class="fa-solid fa-fire-burner"></i>
+              <img loading="lazy" src="../../assets/menu-images/grills-tarab.jpg" alt="طرب ضاني على الفحم" onerror="this.parentElement.classList.add('no-img')"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div class="flex-grow-1">
+                <h4 class="fs-5 fw-bold mb-1">طرب ضاني على الفحم</h4>
+                <p class="text-soft small mb-0">كفتة بلدي ملفوفة بمنديل الخروف المقرمش والمشوي ببطء.</p>
+              </div>
+              <span class="fs-4 fw-black text-gold-strong text-nowrap">٣٥٠ <small class="text-faint fs-6 fw-normal">ج.م</small></span>
+            </div>
+            <div class="mt-3 pt-2 d-flex justify-content-between align-items-center border-top">
+              <span class="text-faint small">نكهة زمان الأصيلة</span>
+              <button type="button" class="btn btn-gold btn-sm rounded-pill add-dish" data-name="طرب ضاني على الفحم" data-price="350">
+                <i class="fa-solid fa-plus me-1"></i> أضف
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- كباب بتلو مشوي -->
+        <div class="col-md-6 col-lg-4" data-cat="grills" data-name="كباب بتلو مشوي">
+          <div class="dish-card p-4 d-flex flex-column h-100">
+            <div class="menu-media">
+              <i class="fa-solid fa-fire-burner"></i>
+              <img loading="lazy" src="../../assets/menu-images/grills-kebab-veal.jpg" alt="كباب بتلو مشوي" onerror="this.parentElement.classList.add('no-img')"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div class="flex-grow-1">
+                <h4 class="fs-5 fw-bold mb-1">كباب بتلو مشوي</h4>
+                <p class="text-soft small mb-0">مكعبات بتلو طري مع فلفل رومي وبصل مشوي بصلصة التعتيق.</p>
+              </div>
+              <span class="fs-4 fw-black text-gold-strong text-nowrap">٤٤٠ <small class="text-faint fs-6 fw-normal">ج.م</small></span>
+            </div>
+            <div class="mt-3 pt-2 d-flex justify-content-between align-items-center border-top">
+              <span class="text-faint small">قليل الدهون</span>
+              <button type="button" class="btn btn-gold btn-sm rounded-pill add-dish" data-name="كباب بتلو مشوي" data-price="440">
+                <i class="fa-solid fa-plus me-1"></i> أضف
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- فراخ مشوية على الفحم -->
+        <div class="col-md-6 col-lg-4" data-cat="grills" data-name="فراخ مشوية على الفحم">
+          <div class="dish-card p-4 d-flex flex-column h-100">
+            <div class="menu-media">
+              <i class="fa-solid fa-fire-burner"></i>
+              <img loading="lazy" src="../../assets/menu-images/grills-chicken.jpg" alt="فراخ مشوية على الفحم" onerror="this.parentElement.classList.add('no-img')"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div class="flex-grow-1">
+                <h4 class="fs-5 fw-bold mb-1">فراخ مشوية على الفحم</h4>
+                <p class="text-soft small mb-0">دجاجة كاملة متبلة بالليمون والزعتر ومشوحة على الحطب الذهبي.</p>
+              </div>
+              <span class="fs-4 fw-black text-gold-strong text-nowrap">٢٤٠ <small class="text-faint fs-6 fw-normal">ج.م</small></span>
+            </div>
+            <div class="mt-3 pt-2 d-flex justify-content-between align-items-center border-top">
+              <span class="text-faint small">تقدم مع الثومية والخبز</span>
+              <button type="button" class="btn btn-gold btn-sm rounded-pill add-dish" data-name="فراخ مشوية على الفحم" data-price="240">
+                <i class="fa-solid fa-plus me-1"></i> أضف
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FLOATING CART BAR ============ -->
+    <div id="floatingCart" class="d-none">
+      <a class="fc-wrap" href="../cart_checkout_alegria/code.html"><i class="fa-solid fa-cart-shopping"></i> <span id="cartCountBadge">0</span> صنف • <span id="cartTotalPrice">0</span> ج.م</a>
+      <button type="button" class="fc-clear" id="clearOrderBtn" title="تفريغ السلة"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- Scripts -->
+  <script>window.ALEGRIA={assets:"../../assets",section:"front",page:"menu"};</script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/sweetalert2.all.min.js"></script>
+  <script src="../../assets/js/dataTables.min.js"></script>
+  <script src="../../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../../assets/js/layout.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/cart.js"></script>
+  <script>
+  $(function(){
+    function renderCart(){ var n=window.Cart.count(), t=window.Cart.total(); $('#floatingCart').toggleClass('d-none', n===0); $('#cartCountBadge').text(n); $('#cartTotalPrice').text(t.toLocaleString('ar-EG')); }
+    renderCart();
+    $(document).on('click','.add-dish',function(){ window.Cart.add($(this).data('name'), parseFloat($(this).data('price'))||0); window.Al.toast('تمت الإضافة إلى السلة','success'); });
+    $(document).on('alegria:cart', renderCart);
+    $('#clearOrderBtn').on('click', function(){ window.Cart.clear(); window.Al.toast('تم تفريغ السلة','info'); });
+    $('#menuSearchInput').on('input', function(){ var q=($.trim(this.value)||'').toLowerCase(); $('.dish-card').each(function(){ $(this).toggle(!q || $(this).text().toLowerCase().indexOf(q)!==-1); }); });
+  });
+  </script>
+</body>
+</html>

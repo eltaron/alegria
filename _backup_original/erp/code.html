@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-high":"#222a3d","surface-dim":"#0b1326","on-error":"#690005","secondary":"#4edea3","error-container":"#93000a","primary-fixed-dim":"#ffb77d","on-tertiary-fixed":"#40000d","on-secondary-container":"#00311f","background":"#0b1326","on-primary-fixed":"#2f1500","on-primary-container":"#432100","surface-container-highest":"#2d3449","tertiary-fixed-dim":"#ffb2b7","surface-tint":"#ffb77d","surface-container":"#171f33","surface-container-lowest":"#060e20","on-error-container":"#ffdad6","on-tertiary":"#67001b","secondary-fixed-dim":"#4edea3","on-secondary":"#003824","on-background":"#dae2fd","surface-container-low":"#131b2e","primary-container":"#d97707","surface-bright":"#31394d","inverse-on-surface":"#283044","on-surface-variant":"#dbc2b0","on-primary-fixed-variant":"#6e3900","on-tertiary-container":"#5b0017","on-primary":"#4d2600","inverse-primary":"#904d00","secondary-container":"#00a572","tertiary-fixed":"#ffdadb","on-tertiary-fixed-variant":"#92002a","inverse-surface":"#dae2fd","surface-variant":"#2d3449","tertiary":"#ffb2b7","primary-fixed":"#ffdcc3","on-secondary-fixed":"#002113","error":"#ffb4ab","tertiary-container":"#ff516a","outline-variant":"#554336","outline":"#a38c7c","secondary-fixed":"#6ffbbe","on-surface":"#dae2fd","on-secondary-fixed-variant":"#005236","primary":"#ffb77d","surface":"#0b1326"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-lg":"1rem","space-sm":"0.5rem","space-xs":"0.25rem","margin-lg":"2rem","space-md":"0.75rem","space-xl":"1.5rem","space-2xl":"2.5rem","margin":"1rem","gutter-lg":"1.5rem","gutter":"1rem"},"fontFamily":{"label-compact":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-numeric":["JetBrains Mono"],"body-md":["Plus Jakarta Sans"]},"fontSize":{"label-compact":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"headline-xl-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}],"display-lg":["3rem",{"lineHeight":"3.5rem","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"label-numeric":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.02em","fontWeight":"500"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed right-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col h-full"><div class="p-space-lg flex items-center justify-between gap-space-sm bg-surface-container-lowest/60"><div class="flex items-center gap-space-sm"><img alt="logo.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wx0ZfsNijxRnPn-H6a3S2NxbcdoEETcHIAMY9aSUOFi3Um6r8cAfgbnfSuEL7sU3oruvO9TdZgTsClHhjP71pSeOdefJsmaEgLQxHdxEiiti-xMIdyuEA0zpwhuGi6iTNRo-0fr0AhYCwAGB4dJhA9iKJvhfEMdd6Rx48kxnKx96pFiyQK33LDacpvHnxZp_E4jqs3CDOEar0smBnJBPam2ZjQ_3ZTRhhGhkqjOlWHinwewXaK4DUze7iz8Dm2xypb2EPLaozB3i0"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary tracking-wide">أليجريا كافيه</span><span class="font-body-sm text-body-sm text-on-surface-variant">إدارة المطاعم الفاخرة</span></div></div></div><div class="px-space-md py-space-sm"><div class="bg-surface-container px-space-md py-space-sm rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-compact text-label-compact text-secondary">الفرع الرئيسي - مفتوح الآن</span></div><span class="font-label-numeric text-label-numeric text-on-surface-variant">وردية المساء</span></div></div><nav class="flex-1 overflow-y-auto px-space-sm py-space-xs space-y-1" data-active-classes="bg-primary-container text-on-primary font-headline-md"><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg transition-colors bg-primary-container text-on-primary font-headline-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-body-md text-body-md">لوحة التحكم</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="pos-terminal" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span class="font-body-md text-body-md">نقطة البيع (POS)</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="menu-catalog" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span class="font-body-md text-body-md">المنيو والمنتجات</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="inventory-stock" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-body-md text-body-md">المخزون والمواد الخام</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="recipes-costing" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-md text-body-md">الوصفات والتكاليف</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="purchases-suppliers" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-body-md text-body-md">المشتريات والموردين</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="finance-treasury" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-body-md text-body-md">الخزينة والماليات</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reports-analytics" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-md text-body-md">التقارير والتحليلات</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="staff-permissions" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span class="font-body-md text-body-md">المستخدمين والصلاحيات</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="system-settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-md text-body-md">الإعدادات</span></a></nav><div class="p-space-md bg-surface-container-lowest/50"><div class="flex items-center justify-between text-on-surface-variant"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary">support_agent</span><span class="font-body-sm text-body-sm">الدعم الفني VIP</span></div><span class="font-label-numeric text-label-numeric text-primary">24/7</span></div></div></div></aside><div class="pr-72"><header class="fixed top-0 right-72 left-0 h-16 bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-gutter shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-primary">schedule</span><span class="font-body-sm text-body-sm text-on-surface-variant">الوردية:</span><span class="font-headline-md text-body-md text-on-surface">وردية العشاء (2)</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-secondary">table_restaurant</span><span class="font-body-sm text-body-sm text-on-surface-variant">إشغال الصالة:</span><span class="font-label-numeric text-label-numeric text-secondary">82% (28/34 طاولة)</span></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-primary">point_of_sale</span><span class="font-body-sm text-body-sm text-on-surface-variant">درج النقدية:</span><span class="font-label-numeric text-label-numeric text-primary">4,850 ر.س</span></div></div><div class="flex items-center gap-space-md"><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">calendar_today</span><span class="font-label-numeric text-label-numeric text-on-surface">اليوم، 24 أكتوبر 2024</span></div><div class="relative flex items-center justify-center p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container"></span></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex flex-col text-left"><span class="font-headline-md text-body-sm text-on-surface">فهد السليمان</span><span class="font-label-compact text-label-compact text-on-surface-variant">مدير الصالة العام</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="p-space-lg space-y-space-lg">
+<!-- Executive Greeting & Real-Time Operational Bar -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">restaurant</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<h1 class="font-headline-md text-headline-md text-on-surface">مرحباً، م. أحمد</h1>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(مدير المطعم والتنفيذي)</span>
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-compact text-label-compact mr-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              الوردية المسائية نشطة
+            </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">history_toggle_off</span>
+              بدأت الوردية: 04:00 م
+            </span>
+<span class="text-outline-variant">•</span>
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">person</span>
+              الكاشير المسؤول: كريم عادل
+            </span>
+<span class="text-outline-variant">•</span>
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">payments</span>
+              عهدة الصندوق الحالية: <strong class="text-on-surface font-label-numeric text-label-numeric">18,450 ج.م</strong>
+</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="bg-surface-container px-1 py-1 rounded-lg flex items-center gap-1">
+<button class="px-space-md py-1 rounded-lg bg-primary-container text-on-primary font-body-sm text-body-sm transition-all shadow-sm">اليوم</button>
+<button class="px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-body-sm text-body-sm transition-all">أمس</button>
+<button class="px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-body-sm text-body-sm transition-all">آخر 7 أيام</button>
+<button class="px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-body-sm text-body-sm transition-all">هذا الشهر</button>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-label-compact text-label-compact">
+<span class="material-symbols-outlined text-[16px] text-secondary animate-spin">sync</span>
+<span>تحديث تلقائي حي (كل 30 ث)</span>
+</div>
+</div>
+</div>
+<!-- 4 Primary KPI Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1: Total Revenue -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">إجمالي مبيعات اليوم</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-headline-xl text-primary font-label-numeric">54,820</span>
+<span class="font-body-sm text-body-sm text-primary/80">ج.م</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-compact text-label-compact flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">arrow_upward</span>
+            +14.2%
+          </span>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<span>مقارنة بأمس:</span>
+<span class="font-label-numeric text-label-numeric text-on-surface">47,990 ج.م</span>
+</div>
+<svg class="w-20 h-6 text-secondary" fill="none" viewbox="0 0 100 30">
+<path d="M0 25 Q 20 22, 35 15 T 70 8 T 100 2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Card 2: Estimated Net Profit -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">صافي الأرباح التقديرية</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-headline-xl text-secondary font-label-numeric">21,380</span>
+<span class="font-body-sm text-body-sm text-secondary/80">ج.م</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-compact text-label-compact">
+            هامش 39%
+          </span>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<span>تكلفة الأغذية (Food Cost):</span>
+<span class="font-label-numeric text-label-numeric text-on-surface">31.4%</span>
+</div>
+<svg class="w-20 h-6 text-primary" fill="none" viewbox="0 0 100 30">
+<path d="M0 22 Q 25 24, 45 16 T 80 12 T 100 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Card 3: Orders Count & Breakdown -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">إجمالي عدد الفواتير والطلبات</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-headline-xl text-on-surface font-label-numeric">148</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">طلب نشط</span>
+</div>
+</div>
+<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</span>
+</div>
+<div class="mt-3 grid grid-cols-3 gap-1 text-center bg-surface-container p-1 rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-compact text-label-compact text-on-surface-variant">صالة</span>
+<span class="font-label-numeric text-label-numeric text-primary font-semibold">82</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-compact text-label-compact text-on-surface-variant">توصيل</span>
+<span class="font-label-numeric text-label-numeric text-secondary font-semibold">44</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-compact text-label-compact text-on-surface-variant">تيك أواي</span>
+<span class="font-label-numeric text-label-numeric text-on-surface font-semibold">22</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Average Order Value (ATV) -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">متوسط قيمة الطلب (Average Ticket)</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-headline-xl text-primary font-label-numeric">370</span>
+<span class="font-body-sm text-body-sm text-primary/80">ج.م / شيك</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-compact text-label-compact flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">arrow_upward</span>
+            +8.5%
+          </span>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<span>معدل الصالة:</span>
+<span class="font-label-numeric text-label-numeric text-on-surface">510 ج.م</span>
+</div>
+<div class="text-on-surface-variant font-body-sm text-body-sm">
+<span>الدليفري:</span>
+<span class="font-label-numeric text-label-numeric text-on-surface">220 ج.م</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Section: Hourly Sales Trend & Category Breakdown -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Hourly Trajectory Chart (8 cols) -->
+<div class="lg:col-span-8 bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md gap-2">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">حركة المبيعات بالساعة وتوقع الإيراد</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">مقارنة وتيرة المبيعات الفعلية بالهدف التشغيلي المحدد (Target 60K)</p>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">الفعلي اليوم</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-surface-container-highest"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">الهدف المستهدف</span>
+</div>
+</div>
+</div>
+<!-- SVG Timeline / Bar Chart Visualizer -->
+<div class="relative w-full h-56 pt-space-md">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 700 180">
+<!-- Grid Lines -->
+<line class="text-surface-container" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="700" y1="30" y2="30"></line>
+<line class="text-surface-container" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="700" y1="75" y2="75"></line>
+<line class="text-surface-container" stroke="currentColor" stroke-dasharray="4 4" x1="0" x2="700" y1="120" y2="120"></line>
+<line class="text-surface-container-high" stroke="currentColor" x1="0" x2="700" y1="165" y2="165"></line>
+<!-- Target Curve -->
+<path class="text-surface-container-highest" d="M 20 150 Q 150 130, 260 110 T 450 65 T 680 40" fill="none" stroke="currentColor" stroke-dasharray="6 6" stroke-width="2"></path>
+<!-- Actual Bars & Area Area -->
+<!-- 12 PM -->
+<rect class="fill-surface-container-high" height="20" rx="4" width="28" x="25" y="145"></rect>
+<!-- 02 PM -->
+<rect class="fill-surface-container-high" height="35" rx="4" width="28" x="90" y="130"></rect>
+<!-- 04 PM -->
+<rect class="fill-surface-container-high" height="50" rx="4" width="28" x="155" y="115"></rect>
+<!-- 06 PM (Peak Start) -->
+<rect class="fill-primary/60" height="85" rx="4" width="28" x="220" y="80"></rect>
+<!-- 07 PM -->
+<rect class="fill-primary/80" height="105" rx="4" width="28" x="285" y="60"></rect>
+<!-- 08 PM (High Peak) -->
+<rect class="fill-primary" height="130" rx="4" width="28" x="350" y="35"></rect>
+<!-- 09 PM (Current) -->
+<rect class="fill-primary" height="140" rx="4" width="28" x="415" y="25"></rect>
+<!-- 10 PM (Projected) -->
+<rect class="fill-primary/30" height="120" rx="4" stroke-dasharray="2 2" width="28" x="480" y="45"></rect>
+<!-- 11 PM (Projected) -->
+<rect class="fill-primary/30" height="95" rx="4" width="28" x="545" y="70"></rect>
+<!-- 12 AM (Projected) -->
+<rect class="fill-primary/20" height="60" rx="4" width="28" x="610" y="105"></rect>
+<!-- Live Marker for 9 PM -->
+<circle class="fill-secondary shadow-lg animate-ping" cx="429" cy="25" r="5"></circle>
+<circle class="fill-secondary" cx="429" cy="25" r="4"></circle>
+</svg>
+</div>
+<div class="grid grid-cols-10 text-center font-label-numeric text-label-compact text-on-surface-variant pt-2 border-t-0">
+<span>12:00 م</span>
+<span>02:00 م</span>
+<span>04:00 م</span>
+<span>06:00 م</span>
+<span>07:00 م</span>
+<span>08:00 م</span>
+<span class="text-secondary font-bold">09:00 م (الآن)</span>
+<span>10:00 م</span>
+<span>11:00 م</span>
+<span>12:00 ص</span>
+</div>
+<div class="mt-space-md bg-surface-container rounded-lg p-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm text-body-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]">trending_up</span>
+<span>الذروة الحالية: <strong>9,450 ج.م</strong> تم تحقيقها بين 08:00 و 09:00 مساءً</span>
+</div>
+<span class="font-label-compact text-label-compact text-secondary font-semibold bg-secondary-container/20 px-2 py-0.5 rounded">
+            تجاوز التوقع بـ +18%
+          </span>
+</div>
+</div>
+<!-- Sales Distribution by Category (4 cols) -->
+<div class="lg:col-span-4 bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">مبيعات أقسام المنيو</h2>
+<span class="font-label-compact text-label-compact text-on-surface-variant">اليوم</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">نسب مساهمة تصنيفات كافيه ومطعم أليجريا</p>
+</div>
+<div class="space-y-space-md">
+<!-- Item 1: Grills -->
+<div>
+<div class="flex items-center justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface flex items-center gap-1.5 font-medium">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+                المشاوي والصواني الفاخرة
+              </span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">38% (20,830 ج.م)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 38%"></div>
+</div>
+</div>
+<!-- Item 2: Tajines & Oriental -->
+<div>
+<div class="flex items-center justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface flex items-center gap-1.5 font-medium">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+                الطواجن والمنيو الشرقي
+              </span>
+<span class="font-label-numeric text-label-numeric text-secondary font-bold">26% (14,250 ج.م)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 26%"></div>
+</div>
+</div>
+<!-- Item 3: Western & Pasta -->
+<div>
+<div class="flex items-center justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface flex items-center gap-1.5 font-medium">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-fixed-dim"></span>
+                المنيو الغربي والباستا
+              </span>
+<span class="font-label-numeric text-label-numeric text-primary-fixed-dim font-bold">18% (9,860 ج.م)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed-dim h-full rounded-full" style="width: 18%"></div>
+</div>
+</div>
+<!-- Item 4: Feteer & Pizza -->
+<div>
+<div class="flex items-center justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface flex items-center gap-1.5 font-medium">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed"></span>
+                الفطير المشلتت والبيتزا
+              </span>
+<span class="font-label-numeric text-label-numeric text-secondary-fixed font-bold">11% (6,030 ج.م)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-fixed h-full rounded-full" style="width: 11%"></div>
+</div>
+</div>
+<!-- Item 5: Desserts & Soups -->
+<div>
+<div class="flex items-center justify-between font-body-sm text-body-sm mb-1">
+<span class="text-on-surface flex items-center gap-1.5 font-medium">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+                الحلويات والشوربة الساخنة
+              </span>
+<span class="font-label-numeric text-label-numeric text-tertiary font-bold">7% (3,850 ج.م)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 7%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-md">
+<a class="w-full py-2 bg-surface-container hover:bg-surface-container-high text-primary font-body-sm text-body-sm rounded-lg flex items-center justify-center gap-1 transition-colors" href="#">
+<span>عرض تفاصيل هوامش ربح الأقسام</span>
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Active Floor & Kitchen Operations Ribbon -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Floor Occupancy -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">table_bar</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">إشغال الصالة الفعلي</span>
+<span class="font-label-numeric text-label-numeric text-secondary font-bold">75% (18 / 24)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden mt-1.5">
+<div class="bg-secondary h-full rounded-full" style="width: 75%"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-compact text-label-compact mt-1">
+<span>6 طاولات شاغرة جاهزة</span>
+<span>2 طاولة حجز مسبق VIP</span>
+</div>
+</div>
+</div>
+<!-- Live Kitchen Status -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">skillet</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">الطلبات قيد الطهي (KDS)</span>
+<span class="font-label-numeric text-label-numeric text-primary font-bold">9 تذاكر نشطة</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden mt-1.5">
+<div class="bg-primary h-full rounded-full" style="width: 60%"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-compact text-label-compact mt-1">
+<span>متوسط وقت التحضير: 18 دقيقة</span>
+<span class="text-secondary font-semibold">المطبخ يعمل بكفاءة</span>
+</div>
+</div>
+</div>
+<!-- Service Crew On Floor -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest text-on-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">groups</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">فريق الخدمة بالصالة</span>
+<span class="font-label-numeric text-label-numeric text-on-surface font-bold">6 أفراد متواجدين</span>
+</div>
+<div class="flex items-center gap-1 mt-2">
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-compact text-label-compact text-on-surface">كابتن: هشام + وائل</span>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-compact text-label-compact text-on-surface-variant">4 ويترز</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Split: Best Selling Menu Items & Critical Raw Materials Alert -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Best Selling Menu Items (7 cols) -->
+<div class="lg:col-span-7 bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">workspace_premium</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">الأطباق الأكثر مبيعاً اليوم</h2>
+</div>
+<span class="font-label-compact text-label-compact px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">منيو أليجريا الواقعي</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">تحليل حجم الإقبال والقيمة الإجمالية لكل طبق</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right">
+<thead>
+<tr class="text-on-surface-variant font-label-compact text-label-compact bg-surface-container-lowest/40 rounded-lg">
+<th class="py-2.5 px-3 font-semibold">الصنف / الطبق</th>
+<th class="py-2.5 px-3 font-semibold text-center">الكمية المطلوبة</th>
+<th class="py-2.5 px-3 font-semibold text-left">إجمالي الإيراد</th>
+<th class="py-2.5 px-3 font-semibold text-center">الحالة</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-body-sm font-body-sm">
+<!-- Item 1 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container" data-alt="Exquisite Middle Eastern grilled meat platter with pigeon, lamb chops, and kofta served on an ornate luxury dark platter with garnish for Alegria Cafe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgCN0IYTsbhrqnHT8ZLYc6OAUR2ZlEqFxWx9JdMRjnSwZeQGpZKdD0zczqS50Z5j6Su4SYHUmQbzkg-QWuAVvkBf8ci5CoYM5usfsP2TnkQ0ZqZbD6KeCxZrnCPjRMR8Uob-_egDXjAhGda01W2UFCIdGJuPrrhNm6Mx0PYH6-TsgDgvFRw0YBHMi7wYet9x63gTt26QyER0AYYCStOYICuhHaRsg0mRR7PyCXkfBjVe6s9v53qLVGHw"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">صينية أليجريا ٤ أفراد</span>
+<span class="text-on-surface-variant font-body-sm text-[11px]">فرد حمام + تيس + كفتة + ممبار</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-label-numeric text-label-numeric text-primary font-bold">18 طلب</td>
+<td class="py-3 px-3 text-left font-label-numeric text-label-numeric text-on-surface font-semibold">14,400 ج.م</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-compact text-label-compact">ممتاز</span>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container" data-alt="Traditional Egyptian Oxtail tajine bubbling with rich onions alongside baked Egyptian rice in an earthenware clay pot warm atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZFCioecgL_dGf4jOjaywrktYzVt0N7FpWh-m4-lmvQLoF2KrordxF80GynNM2J5DbSar4JAx6SBBg2pDcJI3-nnWYkIfGciZgdrG3V7NhtkKVG3-41O7KVoUUC4emutlH6Tc_jYXtAN5Eexkcy1Z-dFodKAqlNGQlUGsQ74HJ0KAppDL70alU2lUm0Pc4GLh4Tdd0wJRHMZ4H64KD9I0N_112Sk9UqEA8_tpRLtEqQx-_L7qAhU64FQ"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">طاجن عكاوي بالبصل والأرز المعمر</span>
+<span class="text-on-surface-variant font-body-sm text-[11px]">طواجن فرن بلدي مخصوصة</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-label-numeric text-label-numeric text-primary font-bold">24 طلب</td>
+<td class="py-3 px-3 text-left font-label-numeric text-label-numeric text-on-surface font-semibold">6,720 ج.م</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-compact text-label-compact">ممتاز</span>
+</td>
+</tr>
+<!-- Item 3 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">outdoor_grill</span>
+</div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">كباب وكفتة ضاني مشوي على الفحم</span>
+<span class="text-on-surface-variant font-body-sm text-[11px]">مع خضار وسلطات شرقية</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-label-numeric text-label-numeric text-primary font-bold">31 طلب</td>
+<td class="py-3 px-3 text-left font-label-numeric text-label-numeric text-on-surface font-semibold">9,610 ج.م</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-compact text-label-compact">الأعلى طلباً</span>
+</td>
+</tr>
+<!-- Item 4 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[20px]">dinner_dining</span>
+</div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">كوردون بلو مع الصوص الخاص</span>
+<span class="text-on-surface-variant font-body-sm text-[11px]">يقدم مع مكرونة بينك صوص</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-label-numeric text-label-numeric text-primary font-bold">19 طلب</td>
+<td class="py-3 px-3 text-left font-label-numeric text-label-numeric text-on-surface font-semibold">4,180 ج.م</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-compact text-label-compact">مستقر</span>
+</td>
+</tr>
+<!-- Item 5 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">icecream</span>
+</div>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">أم علي بالقشطة البلدية والمكسرات</span>
+<span class="text-on-surface-variant font-body-sm text-[11px]">حلو ساخن محمص بالفرن</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-label-numeric text-label-numeric text-primary font-bold">42 طلب</td>
+<td class="py-3 px-3 text-left font-label-numeric text-label-numeric text-on-surface font-semibold">3,360 ج.م</td>
+<td class="py-3 px-3 text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-compact text-label-compact">الأكثر مبيعاً</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Critical Stock Alerts & Replenishment (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[22px]">warning</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">تنبيهات نواقص المخزون الحرج</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-error-container/30 text-error font-label-compact text-label-compact">4 مواد تحت الحد الأدنى</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">المواد الخام التي قاربت على النفاد لوردية السهرة</p>
+</div>
+<div class="space-y-space-sm">
+<!-- Alert 1: Lamb Meat (Critical) -->
+<div class="p-space-sm bg-surface-container rounded-lg flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-semibold text-on-surface font-body-md text-body-md block">لحم ضاني بلدي طازج</span>
+<span class="font-body-sm text-body-sm text-error flex items-center gap-1 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+                  متبقي 6.5 كجم فقط (الحد الأدنى: 15 كجم)
+                </span>
+</div>
+<button class="px-2.5 py-1 bg-primary text-on-primary font-label-compact text-label-compact rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">shopping_cart_checkout</span>
+                أمر شراء فوري
+              </button>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 25%"></div>
+</div>
+</div>
+<!-- Alert 2: Basmati Rice -->
+<div class="p-space-sm bg-surface-container rounded-lg flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-semibold text-on-surface font-body-md text-body-md block">أرز بسمتي هندي ممتاز (حبة طويلة)</span>
+<span class="font-body-sm text-body-sm text-primary flex items-center gap-1 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  متبقي 12 كجم (الحد الأدنى: 25 كجم)
+                </span>
+</div>
+<button class="px-2.5 py-1 bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-compact text-label-compact rounded-lg transition-colors">
+                طلب من مخزن الفرع
+              </button>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 48%"></div>
+</div>
+</div>
+<!-- Alert 3: Fresh Baladi Cream -->
+<div class="p-space-sm bg-surface-container rounded-lg flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-semibold text-on-surface font-body-md text-body-md block">قشطة بلدي طازجة (للحلو والطواجن)</span>
+<span class="font-body-sm text-body-sm text-error flex items-center gap-1 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                  متبقي 3 كجم (الحد الأدنى: 8 كجم)
+                </span>
+</div>
+<button class="px-2.5 py-1 bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-compact text-label-compact rounded-lg transition-colors">
+                طلب توريد
+              </button>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 37%"></div>
+</div>
+</div>
+<!-- Alert 4: Nuts & Dried Fruits -->
+<div class="p-space-sm bg-surface-container rounded-lg flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-semibold text-on-surface font-body-md text-body-md block">مكسرات مشكلة فاخرة (لوز، فستق، صنوبر)</span>
+<span class="font-body-sm text-body-sm text-primary flex items-center gap-1 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  متبقي 2.2 كجم (الحد الأدنى: 5 كجم)
+                </span>
+</div>
+<span class="font-label-compact text-label-compact text-on-surface-variant self-center">قيد التوريد (الساعة 10 م)</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 44%"></div>
+</div>
+</div>
+</div>
+<div class="pt-space-sm flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>آخر جرد للمخزن: 03:30 م بواسطة الشيف التنفيذي</span>
+<a class="text-primary hover:underline font-semibold" href="#">إدارة المخزون كاملة</a>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Treasury, Payment Methods Breakdown & Quick Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Treasury & Payment Channels (8 cols) -->
+<div class="lg:col-span-8 bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">account_balance_wallet</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">حركة الخزينة وتدفق المدفوعات اليومية</h2>
+</div>
+<div class="text-on-surface-variant font-body-sm text-body-sm">
+<span>إجمالي المحصل: </span>
+<strong class="text-primary font-label-numeric text-label-numeric">54,820 ج.م</strong>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md my-space-md">
+<!-- Cash Payment -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">نقدي (درج الكاشير)</span>
+<span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+</div>
+<div class="my-2">
+<span class="font-display-lg text-headline-md text-on-surface font-label-numeric">32,150</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"> ج.م</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-compact text-label-compact">
+<span>نسبة من الإجمالي:</span>
+<span class="text-primary font-semibold">59%</span>
+</div>
+</div>
+<!-- Card / POS Payment -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">ماكينات فيزا / POS</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">credit_card</span>
+</div>
+<div class="my-2">
+<span class="font-display-lg text-headline-md text-on-surface font-label-numeric">18,200</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"> ج.م</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-compact text-label-compact">
+<span>نسبة من الإجمالي:</span>
+<span class="text-secondary font-semibold">33%</span>
+</div>
+</div>
+<!-- Digital Wallets & InstaPay -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">إنستاباي ومحافظ ذكية</span>
+<span class="material-symbols-outlined text-primary-fixed-dim text-[18px]">contactless</span>
+</div>
+<div class="my-2">
+<span class="font-display-lg text-headline-md text-on-surface font-label-numeric">4,470</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"> ج.م</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-compact text-label-compact">
+<span>نسبة من الإجمالي:</span>
+<span class="text-primary-fixed-dim font-semibold">8%</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-highest/40 rounded-lg p-space-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]">money_off</span>
+<span class="text-body-sm font-body-sm text-on-surface">مصروفات تشغيل ومشتريات طارئة مسجلة اليوم:</span>
+<strong class="font-label-numeric text-label-numeric text-tertiary">3,200 ج.م</strong>
+</div>
+<span class="font-label-compact text-label-compact text-on-surface-variant">مسجلة بواسطة كابتن الصالة (سولار + خضار طازج)</span>
+</div>
+</div>
+<!-- Quick Executive Actions & POS Shortcuts (4 cols) -->
+<div class="lg:col-span-4 bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface pb-space-xs">إجراءات الإدارة السريعة</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">أوامر التحكم الفوري في وردية المطعم</p>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="flex flex-col items-center justify-center p-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface transition-all group">
+<span class="material-symbols-outlined text-[26px] text-primary group-hover:text-on-primary mb-1">point_of_sale</span>
+<span class="font-body-sm text-body-sm font-semibold">فتح كاشير إضافي</span>
+</button>
+<button class="flex flex-col items-center justify-center p-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface transition-all group">
+<span class="material-symbols-outlined text-[26px] text-secondary group-hover:text-on-primary mb-1">lock_clock</span>
+<span class="font-body-sm text-body-sm font-semibold">تقفيل وردية كاشير</span>
+</button>
+<button class="flex flex-col items-center justify-center p-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface transition-all group">
+<span class="material-symbols-outlined text-[26px] text-primary-fixed-dim group-hover:text-on-primary mb-1">table_restaurant</span>
+<span class="font-body-sm text-body-sm font-semibold">تعديل خريطة الطاولات</span>
+</button>
+<button class="flex flex-col items-center justify-center p-space-md rounded-lg bg-surface-container hover:bg-primary-container hover:text-on-primary text-on-surface transition-all group">
+<span class="material-symbols-outlined text-[26px] text-tertiary group-hover:text-on-primary mb-1">receipt</span>
+<span class="font-body-sm text-body-sm font-semibold">تسجيل سند صرف</span>
+</button>
+</div>
+<div class="mt-space-md pt-space-sm">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant bg-surface-container p-space-sm rounded-lg">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              الطابعات الحرارية: متصلة (4/4)
+            </span>
+<span class="text-primary font-semibold">KDS جاهز</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

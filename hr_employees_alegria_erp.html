@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>دليل الموظفين | أليجريا ERP</title>
+  <meta name="description" content="دليل وسجل موظفي أليجريا: الأقسام والأدوار والورديات، مع متابعة الحالة والتقييمات."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, الموظفين, دليل الموظفين, أدوار"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="دليل الموظفين | أليجريا ERP"/>
+  <meta property="og:description" content="دليل وسجل موظفي أليجريا: الأقسام والأدوار والورديات، مع متابعة الحالة والتقييمات."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="دليل الموظفين | أليجريا ERP"/>
+  <meta name="twitter:description" content="دليل وسجل موظفي أليجريا: الأقسام والأدوار والورديات، مع متابعة الحالة والتقييمات."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. TOP HEADER & QUICK EMPLOYEE ACTION BAR
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3 flex-wrap">
+        <div>
+          <div class="d-flex align-items-center gap-2 flex-wrap small text-soft breadcrumb-custom">
+            <span>لوحة الإدارة</span>
+            <i class="fa-solid fa-chevron-left"></i>
+            <span class="text-gold fw-bold">الموظفون</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-wrap mt-1">
+            <h1 class="h4 fw-black m-0 text-gold">دليل وسجل الموظفين (Staff Directory)</h1>
+            <span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> وردية العشاء (2) نشطة</span>
+            <span class="badge-pill-custom badge-green">كادر الخدمة الفعلي: 24 / 28 موظف</span>
+          </div>
+          <p class="text-soft small mt-2 mb-0">السجل الشامل للموظفين: الأقسام والأدوار والورديات، مع توزيع الكادر والتقييمات</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-gold btn-sm quick-action" data-title="إضافة موظف جديد"><i class="fa-solid fa-user-plus me-1"></i> إضافة موظف جديد</button>
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="استيراد دفعة موظفين"><i class="fa-solid fa-file-arrow-down me-1 text-green"></i> استيراد من ملف</button>
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="إدارة الأدوار والصلاحيات"><i class="fa-solid fa-user-gear me-1 text-gold"></i> الأدوار والصلاحيات</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. HR MODULE SUB-NAVIGATION STRIP
+         ============================================================ -->
+    <section class="panel-card p-2 mb-4 d-flex align-items-center gap-2 overflow-auto flex-nowrap">
+      <a href="hr_shifts_alegria_erp.html" class="btn btn-ghost btn-sm text-nowrap"><i class="fa-solid fa-calendar-week me-1"></i> الورديات</a>
+      <a href="hr_employees_alegria_erp.html" class="btn btn-gold btn-sm text-nowrap"><i class="fa-solid fa-address-book me-1"></i> الموظفون</a>
+      <a href="hr_payroll_alegria_erp.html" class="btn btn-ghost btn-sm text-nowrap"><i class="fa-solid fa-wallet me-1"></i> الرواتب</a>
+    </section>
+
+    <!-- ============================================================
+         3. WORKFORCE COUNT KPI
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <div class="col-12 col-md-6 col-xl-4">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <span class="stat-label d-block">إجمالي القوة العاملة</span>
+            <i class="fa-solid fa-user-group text-gold"></i>
+          </div>
+          <div class="d-flex align-items-baseline gap-2 mt-2 flex-wrap">
+            <span class="stat-value">28</span>
+            <small class="text-soft">عضو فريق</small>
+          </div>
+          <small class="text-green d-block mt-1"><i class="fa-solid fa-circle-check me-1"></i>10 مطبخ · 9 صالة · 4 كاشير · 5 بار وإشراف</small>
+          <div class="progress mt-3" style="height:6px;"><div class="progress-bar progress-gold" style="width:100%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. TEAM / DEPT SUMMARY CARDS
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <!-- Dept 1: Kitchen -->
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="panel-card p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong class="small"><i class="fa-solid fa-utensils text-gold me-1"></i> المطبخ الساخن</strong>
+            <span class="badge-pill-custom badge-gold tabular">10</span>
+          </div>
+          <p class="small text-soft mb-2">أعضاء مثبتون في القسم</p>
+          <div class="d-flex flex-column gap-1 small text-soft">
+            <span>شيف شواية أول · مساعد شيف · شيف أفران وطواجن · شيف باستا وغربي</span>
+          </div>
+          <div class="d-flex flex-wrap gap-1 mt-2">
+            <span class="badge-pill-custom badge-neutral">إبراهيم حمدي</span>
+            <span class="badge-pill-custom badge-neutral">كريم سعيد</span>
+            <span class="badge-pill-custom badge-neutral">عصام الدين حسن</span>
+            <span class="badge-pill-custom badge-neutral">مايكل سمير</span>
+          </div>
+        </div>
+      </div>
+      <!-- Dept 2: Hall & Service -->
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="panel-card p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong class="small"><i class="fa-solid fa-bell-concierge text-green me-1"></i> الصالة والخدمة</strong>
+            <span class="badge-pill-custom badge-green tabular">9</span>
+          </div>
+          <p class="small text-soft mb-2">أعضاء مثبتون في القسم</p>
+          <div class="d-flex flex-column gap-1 small text-soft">
+            <span>كابتن صالة VIP · كابتن صالة · مشرف الصالة</span>
+          </div>
+          <div class="d-flex flex-wrap gap-1 mt-2">
+            <span class="badge-pill-custom badge-neutral">حسام رضوان</span>
+            <span class="badge-pill-custom badge-neutral">مصطفى فهمي</span>
+            <span class="badge-pill-custom badge-neutral">أ. فهد السليمان</span>
+          </div>
+        </div>
+      </div>
+      <!-- Dept 3: Cashier & Treasury -->
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="panel-card p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong class="small"><i class="fa-solid fa-cash-register text-gold me-1"></i> الكاشير والخزينة</strong>
+            <span class="badge-pill-custom badge-gold tabular">4</span>
+          </div>
+          <p class="small text-soft mb-2">أعضاء مثبتون في القسم</p>
+          <div class="d-flex flex-column gap-1 small text-soft">
+            <span>أمين خزينة وكاشير · كاشير توصيل</span>
+          </div>
+          <div class="d-flex flex-wrap gap-1 mt-2">
+            <span class="badge-pill-custom badge-neutral">كريم عادل</span>
+            <span class="badge-pill-custom badge-neutral">محمود بدر</span>
+          </div>
+        </div>
+      </div>
+      <!-- Dept 4: Bar & Supervision -->
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="panel-card p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong class="small"><i class="fa-solid fa-martini-glass text-gold me-1"></i> البار والإشراف</strong>
+            <span class="badge-pill-custom badge-gold tabular">5</span>
+          </div>
+          <p class="small text-soft mb-2">أعضاء مثبتون في القسم</p>
+          <div class="d-flex flex-column gap-1 small text-soft">
+            <span>كبير باريستا · صانع حلويات · شيف تنفيذي</span>
+          </div>
+          <div class="d-flex flex-wrap gap-1 mt-2">
+            <span class="badge-pill-custom badge-neutral">عمر شريف</span>
+            <span class="badge-pill-custom badge-neutral">مدحت لطفي</span>
+            <span class="badge-pill-custom badge-neutral">شيف ماركوس أنطوان</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. EMPLOYEES DIRECTORY TABLE
+         ============================================================ -->
+    <section class="panel-card mb-4">
+      <div class="panel-head">
+        <div>
+          <h2><i class="fa-solid fa-address-book"></i> دليل الموظفين وسجل الكادر</h2>
+          <p class="text-soft small mb-0">مربوط بنظام البصمة وحالة الوردية الحالية وبيانات التقييم</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <div class="input-icon" style="min-width:200px;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="form-control form-control-sm" type="text" placeholder="بحث بالاسم أو الكود..."/>
+          </div>
+          <select class="form-select form-select-sm" style="width:auto;">
+            <option>كل الأقسام</option>
+            <option>المطبخ الساخن</option>
+            <option>الصالة والخدمة</option>
+            <option>المالية والصندوق</option>
+            <option>الصالة الخارجية</option>
+            <option>البار والإشراف</option>
+          </select>
+          <button type="button" class="btn btn-gold btn-sm quick-action" data-title="إضافة موظف جديد"><i class="fa-solid fa-user-plus me-1"></i> إضافة موظف</button>
+        </div>
+      </div>
+      <div class="panel-body flush table-wrap">
+        <table class="table table-alegria table-hover m-0" data-datatable>
+          <thead>
+            <tr>
+              <th>الموظف والكود</th>
+              <th>القسم</th>
+              <th>الدور</th>
+              <th>الوردية الحالية</th>
+              <th>حالة الدوام</th>
+              <th class="text-center">الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm">إ.ح</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">إبراهيم حمدي</strong>
+                    <small class="text-soft tabular">ALG-EMP-014 · شيف شواية أول</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold">المطبخ الساخن</span></td>
+              <td><span class="small">شيف شواية أول</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات إبراهيم حمدي" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف إبراهيم حمدي (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;background:var(--al-surface-2);color:var(--al-ink-soft);">ك.س</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">كريم سعيد</strong>
+                    <small class="text-soft">مساعد شيف شواية</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold">المطبخ الساخن</span></td>
+              <td><span class="small">مساعد شيف</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات كريم سعيد" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف كريم سعيد (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm">ع.د</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">عصام الدين حسن</strong>
+                    <small class="text-soft">شيف رئيسي (أفران وطواجن)</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold">المطبخ الساخن</span></td>
+              <td><span class="small">شيف رئيسي</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات عصام الدين حسن" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف عصام الدين حسن (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm">م.س</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">مايكل سمير</strong>
+                    <small class="text-soft">شيف (الباستا والغربي)</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold">المطبخ الساخن</span></td>
+              <td><span class="small">شيف</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات مايكل سمير" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف مايكل سمير (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">ح.ر</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">حسام رضوان</strong>
+                    <small class="text-soft tabular">ALG-EMP-021 · كابتن صالة VIP</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-green">الصالة والخدمة</span></td>
+              <td><span class="small">كابتن صالة VIP</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات حسام رضوان" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف حسام رضوان (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm" style="background:var(--al-amber-soft);color:var(--al-amber);">م.ف</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">مصطفى فهمي</strong>
+                    <small class="text-soft tabular">ALG-EMP-027 · كابتن صالة</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-green">الصالة الخارجية</span></td>
+              <td><span class="small">كابتن صالة</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-amber"><span class="dot dot-gold"></span> متأخر (تم الحسم الذاتي)</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات مصطفى فهمي" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف مصطفى فهمي (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm">ع.ش</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">عمر شريف</strong>
+                    <small class="text-soft tabular">ALG-EMP-009 · كبير باريستا</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold">بار المشروبات</span></td>
+              <td><span class="small">كبير باريستا</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> استراحة عشاء (15 د)</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات عمر شريف" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف عمر شريف (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm">م.ل</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">مدحت لطفي</strong>
+                    <small class="text-soft">صانع حلويات</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold">بار المشروبات</span></td>
+              <td><span class="small">صانع حلويات</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات مدحت لطفي" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف مدحت لطفي (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">ك.ع</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">كريم عادل</strong>
+                    <small class="text-soft tabular">ALG-EMP-032 · أمين خزينة و كاشير</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-green">المالية والصندوق</span></td>
+              <td><span class="small">أمين خزينة وكاشير</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات كريم عادل" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف كريم عادل (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">م.ب</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">محمود بدر</strong>
+                    <small class="text-soft">كاشير توصيل</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-green">المالية والصندوق</span></td>
+              <td><span class="small">كاشير توصيل</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات محمود بدر" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف محمود بدر (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm">م.أ</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">شيف ماركوس أنطوان</strong>
+                    <small class="text-soft">الشيف التنفيذي (مسؤول وردية)</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold">المطبخ</span></td>
+              <td><span class="small">الشيف التنفيذي</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات شيف ماركوس أنطوان" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف شيف ماركوس أنطوان (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm">ف.س</span>
+                  <div class="lh-sm">
+                    <strong class="d-block">أ. فهد السليمان</strong>
+                    <small class="text-soft">مشرف الصالة (مسؤول وردية)</small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-green">الصالة والخدمة</span></td>
+              <td><span class="small">مشرف صالة</span></td>
+              <td><span class="badge-pill-custom badge-gold">العشاء</span></td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="تعديل بيانات أ. فهد السليمان" title="تعديل"><i class="fa-solid fa-pen"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="ملف أ. فهد السليمان (السجل والرواتب)" title="الملف الكامل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Table Footer Summary -->
+      <div class="panel-head border-top border-bottom-0">
+        <span class="small text-soft">عرض <strong class="text-white">12</strong> من أصل <strong class="text-gold">28</strong> موظف مسجلين في الدليل</span>
+        <div class="d-flex align-items-center gap-1">
+          <button type="button" class="btn btn-ghost btn-sm px-2 py-0">السابق</button>
+          <button type="button" class="btn btn-gold btn-sm px-2 py-0">1</button>
+          <button type="button" class="btn btn-ghost btn-sm px-2 py-0">2</button>
+          <button type="button" class="btn btn-ghost btn-sm px-2 py-0">3</button>
+          <button type="button" class="btn btn-ghost btn-sm px-2 py-0">التالي</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "erp", page: "hr-employees" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Quick employee actions -> SweetAlert2
+    $('.quick-action').on('click', function () {
+      var title = $(this).data('title');
+      window.Al.toast('تم تنفيذ: ' + title, 'success');
+    });
+  </script>
+</body>
+</html>

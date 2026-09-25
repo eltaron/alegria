@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>شاشة المطبخ KDS | أليجريا ERP</title>
+  <meta name="description" content="شاشة عرض المطبخ KDS: تذاكر الطلبات الحية وتوزيع المحطات لنظام أليجريا للإدارة."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, نقاط البيع, المخزون, الرواتب"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="شاشة المطبخ KDS | أليجريا ERP"/>
+  <meta property="og:description" content="شاشة عرض المطبخ KDS: تذاكر الطلبات الحية وتوزيع المحطات لنظام أليجريا للإدارة."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="شاشة المطبخ KDS | أليجريا ERP"/>
+  <meta name="twitter:description" content="شاشة عرض المطبخ KDS: تذاكر الطلبات الحية وتوزيع المحطات لنظام أليجريا للإدارة."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container-fluid py-3">
+
+    <!-- ============================================================
+         1. TOP KPI STRIP (5 مؤشرات المطبخ)
+         ============================================================ -->
+    <section class="row g-3 mb-3">
+      <!-- KPI 1: بانتظار البدء -->
+      <div class="col-12 col-sm-6 col-lg-4 col-xxl">
+        <div class="stat-card">
+          <span class="position-absolute top-0 bottom-0 start-0" style="width:4px;background:var(--al-gold);"></span>
+          <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-3">
+              <span class="stat-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+              <div>
+                <span class="stat-label d-block">بانتظار البدء</span>
+                <div class="d-flex align-items-baseline gap-1">
+                  <span class="stat-value m-0 text-gold">05</span>
+                  <small class="text-soft">تذاكر جديدة</small>
+                </div>
+              </div>
+            </div>
+            <span class="badge-pill-custom badge-gold tabular">+2 في الدقيقة</span>
+          </div>
+        </div>
+      </div>
+      <!-- KPI 2: قيد الطهي -->
+      <div class="col-12 col-sm-6 col-lg-4 col-xxl">
+        <div class="stat-card">
+          <span class="position-absolute top-0 bottom-0 start-0" style="width:4px;background:var(--al-green);"></span>
+          <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-3">
+              <span class="stat-icon green"><i class="fa-solid fa-fire-burner"></i></span>
+              <div>
+                <span class="stat-label d-block">قيد الطهي والتحضير</span>
+                <div class="d-flex align-items-baseline gap-1">
+                  <span class="stat-value m-0 text-green">08</span>
+                  <small class="text-soft">على الخط الساخن</small>
+                </div>
+              </div>
+            </div>
+            <span class="badge-pill-custom badge-green">مستقر</span>
+          </div>
+        </div>
+      </div>
+      <!-- KPI 3: جاهز للتسليم (Expo) -->
+      <div class="col-12 col-sm-6 col-lg-4 col-xxl">
+        <div class="stat-card">
+          <span class="position-absolute top-0 bottom-0 start-0" style="width:4px;background:var(--al-green);"></span>
+          <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-3">
+              <span class="stat-icon green"><i class="fa-solid fa-bell-concierge"></i></span>
+              <div>
+                <span class="stat-label d-block">جاهز للتسليم (Expo)</span>
+                <div class="d-flex align-items-baseline gap-1">
+                  <span class="stat-value m-0">04</span>
+                  <small class="text-soft">طلب مكتمل</small>
+                </div>
+              </div>
+            </div>
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> استدعاء</span>
+          </div>
+        </div>
+      </div>
+      <!-- KPI 4: متوسط وقت الإنجاز -->
+      <div class="col-12 col-sm-6 col-lg-4 col-xxl">
+        <div class="stat-card">
+          <span class="position-absolute top-0 bottom-0 start-0" style="width:4px;background:var(--al-amber);"></span>
+          <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-3">
+              <span class="stat-icon amber"><i class="fa-solid fa-stopwatch"></i></span>
+              <div>
+                <span class="stat-label d-block">متوسط وقت الإنجاز</span>
+                <div class="d-flex align-items-baseline gap-1">
+                  <span class="stat-value m-0">14:10</span>
+                  <small class="text-green tabular fw-bold">(&lt; 18 د)</small>
+                </div>
+              </div>
+            </div>
+            <span class="badge-pill-custom badge-green">أداء ممتاز</span>
+          </div>
+        </div>
+      </div>
+      <!-- KPI 5: طلبات متأخرة -->
+      <div class="col-12 col-sm-6 col-lg-4 col-xxl">
+        <div class="stat-card" style="border-color:var(--al-rose);background:var(--al-rose-soft);">
+          <span class="position-absolute top-0 bottom-0 start-0" style="width:4px;background:var(--al-rose);"></span>
+          <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-3">
+              <span class="stat-icon rose"><i class="fa-solid fa-triangle-exclamation"></i></span>
+              <div>
+                <span class="stat-label d-block text-rose">طلبات متأخرة</span>
+                <div class="d-flex align-items-baseline gap-1">
+                  <span class="stat-value m-0 text-rose">01</span>
+                  <small class="text-rose">طاولة VIP-4</small>
+                </div>
+              </div>
+            </div>
+            <i class="fa-solid fa-volume-high fs-5 text-rose"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. KITCHEN SUB-BAR: STATIONS & ACTION TOOLBAR
+         ============================================================ -->
+    <section class="panel-card p-3 mb-3">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <!-- محطات المطبخ -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-gold btn-sm d-flex align-items-center gap-2">
+            <span>كافة المحطات</span>
+            <span class="badge rounded-pill text-bg-dark tabular">17</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm d-flex align-items-center gap-2">
+            <i class="fa-solid fa-fire-flame-curved text-gold"></i>
+            <span>الشواية والفحم (Grill)</span>
+            <span class="badge rounded-pill text-bg-dark tabular">5</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm d-flex align-items-center gap-2">
+            <i class="fa-solid fa-fire-burner text-gold"></i>
+            <span>الفرن والطواجن (Oven)</span>
+            <span class="badge rounded-pill text-bg-dark tabular">4</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm d-flex align-items-center gap-2">
+            <i class="fa-solid fa-kitchen-set text-gold"></i>
+            <span>المطبخ الغربي والباستا</span>
+            <span class="badge rounded-pill text-bg-dark tabular">3</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm d-flex align-items-center gap-2">
+            <i class="fa-solid fa-bowl-food text-gold"></i>
+            <span>المقبلات والسلطات</span>
+            <span class="badge rounded-pill text-bg-dark tabular">3</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm d-flex align-items-center gap-2">
+            <i class="fa-solid fa-ice-cream text-gold"></i>
+            <span>الحلويات والبار</span>
+            <span class="badge rounded-pill text-bg-dark tabular">2</span>
+          </button>
+        </div>
+        <!-- أدوات الخدمة -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <div class="btn-group btn-group-sm" role="group" aria-label="نوع الطلب">
+            <button type="button" class="btn btn-gold active">الكل</button>
+            <button type="button" class="btn btn-ghost">صالة (Dine-In)</button>
+            <button type="button" class="btn btn-ghost">استلام سريع</button>
+            <button type="button" class="btn btn-ghost">توصيل دليفري</button>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" id="toggle-sound-btn" title="كتم التنبيهات الصوتية">
+            <i class="fa-solid fa-volume-high"></i>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm" data-toast="تم استرجاع آخر طلب من سجل التذاكر">
+            <i class="fa-solid fa-clock-rotate-left"></i> استرجاع آخر طلب (Recall)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. MAIN DUAL CANVASES: KDS TICKETS + EXECUTIVE SUMMARY RAIL
+         ============================================================ -->
+    <div class="row g-3 align-items-start">
+
+      <!-- ===== LEFT / MAIN REGION: LIVE KITCHEN TICKETS ===== -->
+      <div class="col-xl-9">
+
+        <!-- Sub-header -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3 px-1">
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="dot dot-green"></span>
+            <h2 class="h5 fw-black m-0">تذاكر التحضير المباشرة النشطة (Live Kitchen Tickets)</h2>
+            <span class="badge-pill-custom badge-neutral tabular">محدث لحظياً</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 small text-soft">
+            <span>الترتيب: بالأقدمية والوقت المستغرق أولاً</span>
+            <i class="fa-solid fa-arrow-down-wide-short"></i>
+          </div>
+        </div>
+
+        <!-- Tickets mesh -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+
+          <!-- TICKET 1: متأخرة / أحمر (VIP-4) -->
+          <div class="col">
+            <article class="kds-ticket rose h-100 d-flex flex-column">
+              <div class="p-3 border-bottom" style="background:var(--al-rose-soft);">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <i class="fa-solid fa-triangle-exclamation text-rose"></i>
+                    <strong class="fw-bold">طاولة VIP-4</strong>
+                    <span class="badge-pill-custom badge-rose">صالة داخلية</span>
+                  </div>
+                  <span class="badge-pill-custom badge-rose tabular"><i class="fa-solid fa-stopwatch"></i> 24:15 د</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between small text-soft mt-2">
+                  <span class="fw-bold tabular text-rose">#ALG-2849</span>
+                  <span><i class="fa-solid fa-user text-soft me-1"></i>كابتن: حسام رضوان</span>
+                </div>
+                <div class="rounded py-1 px-2 text-center small fw-bold text-rose mt-2" style="background:rgba(192,57,43,.18);">
+                  تجاوز الوقت المستهدف (+4:15 دقيقة) - أولوية قصوى
+                </div>
+              </div>
+              <div class="p-3 d-flex flex-column gap-2 flex-grow-1">
+                <!-- Item 1 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">صينية أليجريا الفاخرة (4 أفراد)</strong>
+                        <small class="text-gold d-block">• أرز بسمتي زيادة • صصوص خليجي حار جانبي • لحم ويل دن</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-gold shrink-0">شواية وفرن</span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between small text-soft border-top mt-2 pt-2">
+                    <span>المشرف: الشيف عصام</span>
+                    <span class="text-green"><i class="fa-solid fa-circle-check me-1"></i>جاهز جزئياً</span>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">طاجن عكاوي بالبصل القاورمة</strong>
+                        <small class="text-gold d-block">• حار خفيف • زيادة ليمون مخلل</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-amber shrink-0">بالفرن (3 د)</span>
+                  </div>
+                </div>
+                <!-- Item 3: مكتمل -->
+                <div class="ticket-item done bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-al-2 text-green border">2</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">شوربة كوارع مخلية بالليمون</strong>
+                        <small class="text-soft d-block">تم تسليمه لمحطة التجميع</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-green shrink-0">جاهز ✓</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 border-top d-flex gap-2">
+                <button type="button" class="btn btn-gold btn-sm flex-grow-1" data-toast="تم إنجاز التذكرة #ALG-2849 وتسليمها للويتر">
+                  <i class="fa-solid fa-check-double me-1"></i>إنجاز وتسليم للويتر
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm btn-notify" title="استدعاء مدير الصالة للتأخير" data-msg="تم إبلاغ مدير الصالة بتأخير طاولة VIP-4">
+                  <i class="fa-solid fa-bullhorn"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- TICKET 2: قيد الطهي (كهرماني) -->
+          <div class="col">
+            <article class="kds-ticket amber h-100 d-flex flex-column">
+              <div class="p-3 border-bottom bg-al-2">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <i class="fa-solid fa-utensils text-gold"></i>
+                    <strong class="fw-bold">طاولة 12</strong>
+                    <span class="badge-pill-custom badge-gold">تراس خارجي</span>
+                  </div>
+                  <span class="badge-pill-custom badge-gold tabular"><i class="fa-solid fa-clock"></i> 11:40 د</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between small text-soft mt-2">
+                  <span class="fw-bold tabular">#ALG-2852</span>
+                  <span><i class="fa-solid fa-user text-soft me-1"></i>كابتن: أحمد سمير</span>
+                </div>
+                <div class="progress mt-2" style="height:6px;"><div class="progress-bar progress-gold" style="width:25%"></div></div>
+                <div class="d-flex justify-content-between small text-soft mt-1">
+                  <span>نسبة الإنجاز</span>
+                  <span class="text-gold fw-bold tabular">1 من 4 أطباق</span>
+                </div>
+              </div>
+              <div class="p-3 d-flex flex-column gap-2 flex-grow-1">
+                <!-- Item 1 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">2</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">مشكل كباب وكفتة ضاني بلدي</strong>
+                        <small class="text-gold d-block">• تسوية وسط Medium Well • بصل مشوي وسماق</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-gold shrink-0">شواية فحم</span>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">فتة موزة ضاني فاخرة</strong>
+                        <small class="text-gold d-block">• أرز مصري محمص • صوص طماطم وثوم مفروم</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-gold shrink-0">قسم الأرز</span>
+                  </div>
+                </div>
+                <!-- Item 3: مكتمل -->
+                <div class="ticket-item done bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-al-2 text-green border">2</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">سلطة بلدي مشكلة + طحينة مخصوص</strong>
+                        <small class="text-soft d-block">جاهز على طاولة التقديم</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-green shrink-0">جاهز ✓</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 border-top d-flex gap-2">
+                <button type="button" class="btn btn-ghost btn-sm flex-grow-1" data-toast="تم تحديث حالة أطباق التذكرة #ALG-2852">
+                  <i class="fa-solid fa-check text-green me-1"></i>تحديث حالة الأطباق
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm btn-notify" title="إرسال رسالة للمحطة" data-msg="تم إرسال رسالة لمحطة الشواية">
+                  <i class="fa-solid fa-comment-dots"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- TICKET 3: طلب جديد (استلام سريع) -->
+          <div class="col">
+            <article class="kds-ticket h-100 d-flex flex-column">
+              <div class="p-3 border-bottom bg-al-2">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <i class="fa-solid fa-bag-shopping text-green"></i>
+                    <strong class="fw-bold">استلام سريع (Takeaway)</strong>
+                  </div>
+                  <span class="badge-pill-custom badge-green tabular"><i class="fa-solid fa-stopwatch"></i> 02:10 د</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between small text-soft mt-2">
+                  <span class="fw-bold tabular">#TK-309</span>
+                  <span><i class="fa-solid fa-user-circle text-soft me-1"></i>م. خالد التميمي</span>
+                </div>
+                <div class="rounded py-1 px-2 text-center small text-green mt-2" style="background:rgba(15,138,95,.15);">
+                  طلب وارد حديثاً عبر شاشة الكاشير
+                </div>
+              </div>
+              <div class="p-3 d-flex flex-column gap-2 flex-grow-1">
+                <!-- Item 1 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">كوردون بلو مع بينك صوص</strong>
+                        <small class="text-gold d-block">• مكرونة بيني إضافية • صوص شيدر هولندي</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-neutral shrink-0">قسم الباستا</span>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">بيتزا تشيكن رانش مخصوصة</strong>
+                        <small class="text-gold d-block">• تسوية فرن حطب • إكسترا موزاريلا إيطالي</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-neutral shrink-0">فرن البيتزا</span>
+                  </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">باستا كانيلوني باللحم المفروم</strong>
+                        <small class="text-soft d-block">طلب ستاندرد طبق أليجريا</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-neutral shrink-0">المطبخ الغربي</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 border-top d-flex gap-2">
+                <button type="button" class="btn btn-gold btn-sm flex-grow-1" data-toast="بدأ التحضير الفوري للطلب #TK-309">
+                  <i class="fa-solid fa-play me-1"></i>بدء التحضير الفوري
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm btn-print" title="طباعة بون التجهيز" data-msg="تم إرسال بون التجهيز #TK-309 للطابعة">
+                  <i class="fa-solid fa-print"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- TICKET 4: دليفري وتوصيل -->
+          <div class="col">
+            <article class="kds-ticket amber h-100 d-flex flex-column">
+              <div class="p-3 border-bottom bg-al-2">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <i class="fa-solid fa-motorcycle text-gold"></i>
+                    <strong class="fw-bold">دليفري وتوصيل خارجي</strong>
+                  </div>
+                  <span class="badge-pill-custom badge-amber tabular"><i class="fa-solid fa-clock"></i> 08:35 د</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between small text-soft mt-2">
+                  <span class="fw-bold tabular">#DL-881</span>
+                  <span><i class="fa-solid fa-motorcycle text-soft me-1"></i>الطيار: محمود بدر</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between small text-soft mt-1">
+                  <span>الوجهة: التجمع الخامس (حي النرجس)</span>
+                  <span class="text-gold fw-bold tabular">المتبقي: 16 د</span>
+                </div>
+              </div>
+              <div class="p-3 d-flex flex-column gap-2 flex-grow-1">
+                <!-- Item 1 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">صينية العيلة مندي فاخر</strong>
+                        <small class="text-gold d-block">• ½ تيس بلدي + دجاجة مندي + ½ كفتة</small>
+                        <small class="text-soft d-block">• تغليف حراري خاص + دقوس خارجي</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-gold shrink-0">تجهيز المشويات</span>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">2</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">عريكة أليجريا بالقشطة والعسل</strong>
+                        <small class="text-gold d-block">• عسل سدر بلدي + كاجو محمص</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-neutral shrink-0">قسم الحلويات</span>
+                  </div>
+                </div>
+                <!-- Item 3: مكتمل -->
+                <div class="ticket-item done bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-al-2 text-green border">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">ممبار بلدي محشي حجم كبير</strong>
+                        <small class="text-soft d-block">جاهز معلب بالحراري</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-green shrink-0">جاهز ✓</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 border-top d-flex gap-2">
+                <button type="button" class="btn btn-ghost btn-sm flex-grow-1" data-toast="تم تغليف طلب #DL-881 ونقله للموزع">
+                  <i class="fa-solid fa-box-open me-1"></i>تغليف ونقل للموزع
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm btn-notify" title="إشعار كابتن التوصيل" data-msg="تم إرسال إشعار لكابتن التوصيل محمود بدر">
+                  <i class="fa-solid fa-bell"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- TICKET 5: الحلويات والقهوة (جاهز - أخضر) -->
+          <div class="col">
+            <article class="kds-ticket h-100 d-flex flex-column">
+              <div class="p-3 border-bottom" style="background:var(--al-green-soft);">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <i class="fa-solid fa-cake-candles text-green"></i>
+                    <strong class="fw-bold">طاولة 8</strong>
+                    <span class="badge-pill-custom badge-green">قسم الحلى والقهوة</span>
+                  </div>
+                  <span class="badge-pill-custom badge-green tabular"><i class="fa-solid fa-circle-check"></i> 05:20 د</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between small text-soft mt-2">
+                  <span class="fw-bold tabular text-green">#ALG-2847</span>
+                  <span><i class="fa-solid fa-user text-soft me-1"></i>كابتن: مصطفى فهمي</span>
+                </div>
+                <div class="rounded py-1 px-2 text-center small fw-bold text-green mt-2" style="background:rgba(15,138,95,.15);">
+                  جميع الأطباق جاهزة وساخنة بانتظار استلام الويتر
+                </div>
+              </div>
+              <div class="p-3 d-flex flex-column gap-2 flex-grow-1">
+                <!-- Item 1 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-green text-dark">2</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">أم علي بالقشطة والمكسرات المحمصة</strong>
+                        <small class="text-green d-block">جاهز ساخن طازج من الفرن ✓</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-green shrink-0">جاهز ✓</span>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-green text-dark">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">أرز معمر حلو بالقشطة الفاخرة</strong>
+                        <small class="text-green d-block">جاهز ساخن طازج ✓</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-green shrink-0">جاهز ✓</span>
+                  </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-green text-dark">3</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">2x قهوة تركي + 1x شاي كرك بالهيل</strong>
+                        <small class="text-green d-block">تم التحضير على الرملة والبار ✓</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-green shrink-0">جاهز ✓</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 border-top d-flex gap-2">
+                <button type="button" class="btn btn-green btn-sm flex-grow-1 btn-call-captain" data-table="8">
+                  <i class="fa-solid fa-bell me-1"></i>استدعاء الكابتن للاستلام
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" data-toast="تم إغلاق التذكرة #ALG-2847">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- TICKET 6: طاولة 21 (شواية) -->
+          <div class="col">
+            <article class="kds-ticket h-100 d-flex flex-column">
+              <div class="p-3 border-bottom bg-al-2">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <i class="fa-solid fa-utensils text-gold"></i>
+                    <strong class="fw-bold">طاولة 21</strong>
+                    <span class="badge-pill-custom badge-gold">صالة عائلات</span>
+                  </div>
+                  <span class="badge-pill-custom badge-gold tabular"><i class="fa-solid fa-clock"></i> 06:50 د</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between small text-soft mt-2">
+                  <span class="fw-bold tabular">#ALG-2856</span>
+                  <span><i class="fa-solid fa-user text-soft me-1"></i>كابتن: سارة كمال</span>
+                </div>
+                <div class="progress mt-2" style="height:6px;"><div class="progress-bar progress-gold" style="width:75%"></div></div>
+              </div>
+              <div class="p-3 d-flex flex-column gap-2 flex-grow-1">
+                <!-- Item 1 -->
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-gold-soft text-gold-strong">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">ريش بتلو مشوية على الفحم</strong>
+                        <small class="text-gold d-block">• صوص ديمي جلاس مدخن • بطاطس ودجز</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-gold shrink-0">شواية فحم</span>
+                  </div>
+                </div>
+                <!-- Item 2: مكتمل -->
+                <div class="ticket-item done bg-al-2 border rounded-3 p-2">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div class="d-flex align-items-start gap-2">
+                      <span class="qty-badge bg-al-2 text-green border">1</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">طاجن بامية باللحم الضاني</strong>
+                        <small class="text-soft d-block">تم إرساله لمحطة التسليم</small>
+                      </div>
+                    </div>
+                    <span class="badge-pill-custom badge-green shrink-0">جاهز ✓</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-3 border-top d-flex gap-2">
+                <button type="button" class="btn btn-ghost btn-sm flex-grow-1" data-toast="تم تسليم البنود المتبقية للتذكرة #ALG-2856">
+                  <i class="fa-solid fa-check text-green me-1"></i>تسليم البنود المتبقية
+                </button>
+                <button type="button" class="btn btn-ghost btn-sm" data-toast="لا توجد إضافات أخرى على التذكرة #ALG-2856">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== RIGHT REGION: ALL-DAY + EXPO + SHIFT STATS ===== -->
+      <aside class="col-xl-3 d-flex flex-column gap-3">
+
+        <!-- ALL-DAY ACCUMULATION -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <h3><i class="fa-solid fa-list-check"></i> تجميع كميات الأصناف (All-Day)</h3>
+            <span class="badge-pill-custom badge-neutral tabular">17 طلب نشط</span>
+          </div>
+          <div class="panel-body d-flex flex-column gap-2">
+            <!-- Station: الشواية -->
+            <div class="station-chip">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="chip-title text-gold d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-fire-flame-curved"></i> محطة الشواية والفحم
+                </span>
+                <span class="badge-pill-custom badge-gold tabular">9 قطع إجمالاً</span>
+              </div>
+              <div class="d-flex flex-column gap-1 small">
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>كباب ضاني بلدي</span><strong class="text-gold tabular">4 أسياخ</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>كفتة عجل أليجريا</span><strong class="text-gold tabular">3 أسياخ</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>ريش بتلو مدخنة</span><strong class="text-gold tabular">2 طلب</strong>
+                </div>
+              </div>
+            </div>
+            <!-- Station: الأفران -->
+            <div class="station-chip">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="chip-title text-gold d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-fire-burner"></i> الأفران والطواجن الشرقية
+                </span>
+                <span class="badge-pill-custom badge-amber tabular">6 أواني</span>
+              </div>
+              <div class="d-flex flex-column gap-1 small">
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>صينية أليجريا عائلية</span><strong class="text-amber tabular">3 صواني</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>طاجن عكاوي قاورمة</span><strong class="text-amber tabular">2 طاجن</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>طاجن بامية باللحم</span><strong class="text-amber tabular">1 طاجن</strong>
+                </div>
+              </div>
+            </div>
+            <!-- Station: الغربي -->
+            <div class="station-chip">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="chip-title text-green d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-kitchen-set"></i> المطبخ الغربي والبيتزا
+                </span>
+                <span class="badge-pill-custom badge-green tabular">4 أصناف</span>
+              </div>
+              <div class="d-flex flex-column gap-1 small">
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>كوردون بلو بينك صوص</span><strong class="text-green tabular">2 طبق</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>بيتزا تشيكن رانش</span><strong class="text-green tabular">2 بيتزا</strong>
+                </div>
+              </div>
+            </div>
+            <!-- Station: الحلويات -->
+            <div class="station-chip">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                <span class="chip-title text-amber d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-ice-cream"></i> الحلويات الشرقية والبار
+                </span>
+                <span class="badge-pill-custom badge-amber tabular">5 أطباق</span>
+              </div>
+              <div class="d-flex flex-column gap-1 small">
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>طواجن أم علي بالقشطة</span><strong class="text-amber tabular">3 طواجن</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center bg-al-2 rounded px-2 py-1">
+                  <span>عريكة سدر فاخرة</span><strong class="text-amber tabular">2 طبق</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPO PAGING ALERTS -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <h3><i class="fa-solid fa-phone-volume text-green"></i> منبه نداء الويترز (Expo Paging)</h3>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="panel-body d-flex flex-column gap-2">
+            <!-- Notification 1 -->
+            <div class="bg-al-2 border rounded-3 p-2 d-flex align-items-center justify-content-between gap-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">8</span>
+                <div class="lh-sm">
+                  <strong class="small d-block">طاولة 8 جاهزة تماماً</strong>
+                  <small class="text-soft">الكابتن: مصطفى فهمي (منذ 2 د)</small>
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-gold btn-call-captain" data-table="8">رنين مجدد</button>
+            </div>
+            <!-- Notification 2 -->
+            <div class="border rounded-3 p-2 d-flex align-items-center justify-content-between gap-2" style="background:var(--al-rose-soft);">
+              <div class="d-flex align-items-center gap-2">
+                <span class="avatar-sm" style="background:var(--al-rose-soft);color:var(--al-rose);border:1px solid var(--al-rose);">VIP</span>
+                <div class="lh-sm">
+                  <strong class="small d-block text-rose">تنبيه تأخير طاولة VIP-4</strong>
+                  <small class="text-soft">تم إبلاغ مدير الصالة فهد</small>
+                </div>
+              </div>
+              <i class="fa-solid fa-circle-check text-rose"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- KITCHEN SHIFT PRODUCTIVITY -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <h3><i class="fa-solid fa-gauge-high"></i> إنتاجية وردية المطبخ</h3>
+            <span class="badge-pill-custom badge-green tabular">98.4% دقة</span>
+          </div>
+          <div class="panel-body d-flex flex-column gap-3">
+            <div class="row g-2 text-center">
+              <div class="col-6">
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <span class="d-block fs-4 fw-black text-gold tabular">142</span>
+                  <small class="text-soft">طبق تم إنجازه</small>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="bg-al-2 border rounded-3 p-2">
+                  <span class="d-block fs-4 fw-black text-green tabular">0.0%</span>
+                  <small class="text-soft">أطباق مرتجعة</small>
+                </div>
+              </div>
+            </div>
+            <div class="bg-al-2 border rounded-3 p-2 d-flex align-items-center gap-3">
+              <span class="stat-icon" style="width:44px;height:44px;"><i class="fa-solid fa-user-tie"></i></span>
+              <div class="lh-sm">
+                <strong class="small d-block">الشيف التنفيذي: ماركوس أنطوان</strong>
+                <small class="text-gold">المطبخ الرئيسي - إدارة العمليات الكلية</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "../../assets", section: "erp", page: "kds" };
+  </script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/sweetalert2.all.min.js"></script>
+  <script src="../../assets/js/dataTables.min.js"></script>
+  <script src="../../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../../assets/js/layout.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    // KDS micro-interactions: sound toggle, call captain, print, notify
+    $('#toggle-sound-btn').on('click', function () {
+      var icon = $(this).find('i');
+      if (icon.hasClass('fa-volume-high')) {
+        icon.removeClass('fa-volume-high').addClass('fa-volume-mute');
+        window.Al.toast('تم كتم التنبيهات الصوتية', 'error');
+      } else {
+        icon.removeClass('fa-volume-mute').addClass('fa-volume-high');
+        window.Al.toast('تم تفعيل التنبيهات الصوتية', 'success');
+      }
+    });
+    $('.btn-call-captain').on('click', function () {
+      window.Al.toast('تم استدعاء الكابتن للطاولة ' + $(this).data('table'), 'success');
+    });
+    $('.btn-print').on('click', function () {
+      window.Al.toast($(this).data('msg') || 'تم إرسال البون للطابعة', 'success');
+    });
+    $('.btn-notify').on('click', function () {
+      window.Al.toast($(this).data('msg') || 'تم إرسال الإشعار', 'success');
+    });
+    $('[data-toast]').on('click', function () {
+      window.Al.toast($(this).data('toast'), 'success');
+    });
+    // Service type switch active state
+    $('.btn-group .btn').on('click', function () {
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+    });
+    // Station tab selector active state
+    $('section .btn-ghost').filter(':has(i.fa-solid)').on('click', function () {
+      var wrap = $(this).closest('section').find('.d-flex.align-items-center.gap-2.flex-wrap').first();
+      wrap.find('.btn').each(function () {
+        var hasCount = $(this).find('.badge').length > 0;
+        if (hasCount) { $(this).removeClass('btn-gold').addClass('btn-ghost'); }
+      });
+      if ($(this).find('.badge').length > 0) {
+        $(this).removeClass('btn-ghost').addClass('btn-gold');
+      }
+    });
+  </script>
+</body>
+</html>

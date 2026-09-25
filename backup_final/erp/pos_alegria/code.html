@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <meta content="web_dashboard" name="shell-type"/>
+  <meta content="html-web-plugin" name="generator"/>
+  <meta name="shell" content="erp-pos"/>
+  <title>نقاط البيع أليجريا | صالة تيك أواي دليفري</title>
+  <meta name="description" content="نقاط البيع الفاخرة لأليجريا: شاشة طلب مباشر، خريطة حية للطاولات، وفاتورة ذهبية مميزة لنظام أليجريا للإدارة."/>
+  <meta name="keywords" content="أليجريا, ERP, نقاط البيع, POS, كاشير, فاتورة, مطعم فاخر, أليجريا كافيه"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="نقاط البيع | أليجريا ERP"/>
+  <meta property="og:description" content="نظام نقاط البيع الفاخر لأليجريا مع الفاتورة الذهبية المميزة."/>
+  <meta name="robots" content="index, follow"/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ Footer + Header Shell (حقن عبر layout.js تلقائياً) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container-fluid py-2">
+
+    <!-- ================================================================
+         شريط الأوامر العلوي — إصدار أليجريا الذهبي (مضغوط، يمنع فيض الشاشة)
+         ================================================================ -->
+    <header class="panel-card p-2 mb-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <span class="dot dot-gold me-1"></span>
+        <div class="lh-sm">
+          <span class="fw-black small d-block text-gold-strong">نقاط البيع الذهبية</span>
+          <small class="text-softest" style="font-size:.68rem;">أليجريا كافيه ومطعم • الأحد 25 سبتمبر 2026</small>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-1 flex-wrap">
+        <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-crown me-1"></i>صالة ومطعم</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-circle text-green me-1"></i>لتيك أواي</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-motorcycle me-1"></i>للدليفري</span>
+        <span class="badge-pill-custom badge-soft"><i class="fa-solid fa-users me-1"></i>18 طاولة حية</span>
+      </div>
+      <div class="d-flex align-items-center gap-1">
+        <div class="position-relative">
+          <input id="menuSearchInput" class="form-control form-control-sm bg-al-2 border rounded-pill ps-4" style="width:200px;" placeholder="ابحث في الأصناف والكود..." type="search"/>
+          <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-2 text-softest" style="transform:translateY(-50%);"></i>
+        </div>
+        <button id="toggleFloorMapBtn" class="btn btn-ghost btn-sm sw-action" data-title="فتح/إغلاق خريطة الطاولات"><i class="fa-solid fa-table-cells-large text-gold me-1"></i>الخريطة الحية</button>
+        <span class="badge-pill-custom badge-soft tabular" id="menuResultCount">48 صنف</span>
+      </div>
+    </header>
+
+    <!-- ================================================================
+         درج الخريطة الحية (ينزلق من رزمة الأوامر، لا يفيض الشاشة)
+         ================================================================ -->
+    <div id="floorMapDrawer" class="d-none panel-card p-2 mb-2">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+        <span class="fw-bold small text-gold-strong"><i class="fa-solid fa-map-location-dot me-1"></i>الخريطة الحية — الطاولات والجلسات</span>
+        <span class="text-softest" style="font-size:.7rem;">اضغط على أي طاولة لاختيارها</span>
+      </div>
+      <div class="d-flex flex-wrap gap-1" id="floorTablesContainer">
+        <button class="floor-table sw-action" data-table="VIP-1" data-title="طاولة VIP-1 — مقعدان ملكيان"><span class="dot dot-gold"></span>VIP-1</button>
+        <button class="floor-table sw-action live" data-table="VIP-4" data-title="طاولة VIP-4 — 8 ضيوف، مشرف كمال"><span class="dot dot-gold"></span>VIP-4</button>
+        <button class="floor-table sw-action live" data-table="T-12" data-title="طاولة T-12 — 4 ضيوف، محاسب هيثم"><span class="dot dot-gold"></span>T-12</button>
+        <button class="floor-table sw-action" data-table="T-08" data-title="طاولة T-08 — 2 ضيف"><span class="dot dot-gold"></span>T-08</button>
+        <button class="floor-table sw-action" data-table="T-05" data-title="طاولة T-05 — تراس شمالي"><span class="dot dot-gold"></span>T-05</button>
+        <button class="floor-table sw-action live" data-table="T-16" data-title="طاولة T-16 — ركن المقهى"><span class="dot dot-gold"></span>T-16</button>
+        <button class="floor-table sw-action" data-table="T-02" data-title="طاولة T-02 — نافذة البرج"><span class="dot dot-gold"></span>T-02</button>
+        <button class="floor-table sw-action" data-table="TAKEAWAY" data-title="تيك أواي التقط من الصالة"><span class="dot dot-gold"></span>تيك أواي</button>
+        <button class="floor-table sw-action" data-table="DELIVERY" data-title="دليفري — أوردرات خارجية"><span class="dot dot-gold"></span>دليفري</button>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         الأعمدة الثلاثة — قيود ارتفاع صارمة لمنع الفيض
+         ================================================================ -->
+    <div class="row g-2 flex-fill" style="height:calc(100vh - 118px);min-height:0;">
+
+<!-- ============ CATEGORIES SIDEBAR (الفئات) ============ -->
+<div class="row g-3 flex-fill panel-scroll-container">
+  <!-- Categories Column -->
+  <aside class="col-lg-2 col-md-3 panel-column">
+    <div class="panel-card p-2 flex-fill d-flex flex-column panel-scroll" id="categoriesPanel">
+      <div class="d-flex align-items-center justify-content-between px-2 py-2 border-bottom border-secondary-subtle">
+        <span class="fw-bold small text-gold-strong"><i class="fa-solid fa-bars-staggered me-1"></i>أقسام القائمة</span>
+        <span class="badge-pill-custom badge-soft tabular">10</span>
+      </div>
+      <nav class="nav flex-column gap-1 py-2" id="categoriesNav">
+        <button class="cat-pill nav-link text-start rounded-3 px-3 py-2 d-flex align-items-center justify-content-between active" data-cat="all">
+          <span><i class="fa-solid fa-crown text-gold me-1"></i>كل الأصناف</span><span class="badge-pill-custom badge-gold tabular">48</span>
+        </button>
+        <button class="cat-pill nav-link text-start rounded-3 px-3 py-2 d-flex align-items-center justify-content-between" data-cat="grill">
+          <span><i class="fa-solid fa-fire-burner text-danger me-1"></i>المشاوي والصواني</span><span class="badge-pill-custom badge-soft tabular">14</span>
+        </button>
+        <button class="cat-pill nav-link text-start rounded-3 px-3 py-2 d-flex align-items-center justify-content-between" data-cat="starter">
+          <span><i class="fa-solid fa-bowl-food text-green me-1"></i>المقبلات والسَلطات</span><span class="badge-pill-custom badge-soft tabular">11</span>
+        </button>
+        <button class="cat-pill nav-link text-start rounded-3 px-3 py-2 d-flex align-items-center justify-content-between" data-cat="main">
+          <span><i class="fa-solid fa-plate-wheat text-gold me-1"></i>الوجبات الرئيسية</span><span class="badge-pill-custom badge-soft tabular">12</span>
+        </button>
+        <button class="cat-pill nav-link text-start rounded-3 px-3 py-2 d-flex align-items-center justify-content-between" data-cat="dessert">
+          <span><i class="fa-solid fa-ice-cream text-soft me-1"></i>الحلويات والمشروبات</span><span class="badge-pill-custom badge-soft tabular">11</span>
+        </button>
+      </nav>
+      <div class="mt-auto px-2 pt-2 border-top border-secondary-subtle">
+        <div class="d-flex align-items-center gap-2 p-2 bg-al-2 rounded-3">
+          <span class="dot dot-gold"></span>
+          <div class="small lh-sm">
+            <div class="fw-bold text-gold-strong">قائمة الليلة الذهبية</div>
+            <div class="text-softest" style="font-size:.72rem;">آخر تحديث 08:15 مساءً</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Menu Column -->
+  <section class="col-lg-7 col-md-9 panel-column">
+    <div class="panel-card p-3 d-flex flex-column flex-fill" id="menuPanel">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-fire me-1"></i>الأكثر طلباً</span>
+          <span class="text-softest small">اضغط على أي صنف لإضافته للفاتورة</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <input id="menuSearchInput" type="search" class="form-control form-control-sm bg-transparent text-light border-light-subtle rounded-pill px-3" style="max-width:210px;" placeholder="ابحث بالاسم أو الكود..."/>
+          <button class="btn btn-ghost btn-sm sw-action" data-title="عرض شبكة الخريطة"><i class="fa-solid fa-table-cells-large text-gold"></i></button>
+        </div>
+      </div>
+      <div class="panel-scroll row g-2" id="menuItemsContainer">
+        <div class="col-md-4 col-sm-6" data-cat="grill">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-gold mb-1">صواني أليجريا</span>
+                <h3 class="small fw-bold mb-0">صينية أليجريا الفاخرة (٤ أفراد)</h3>
+                <small class="text-softest d-block">حمام + تيس بلدي + كفته + فرش أرز بسمتي</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">1,450 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>الحريق 25 د</span>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4 col-sm-6" data-cat="grill">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-soft mb-1">مشاوي ملكية</span>
+                <h3 class="small fw-bold mb-0">مشكل كباب وكفته ضاني بلدي</h3>
+                <small class="text-softest d-block">مع فحم حي وخبز تنور وعيش شامي</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">590 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>الحريق 18 د</span>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4 col-sm-6" data-cat="grill">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-soft mb-1">صواني أليجريا</span>
+                <h3 class="small fw-bold mb-0">فتة موزة ضاني فاخرة</h3>
+                <small class="text-softest d-block">عيش شامي محمص وصلصة طحينة ملكية</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">360 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>الحريق 16 د</span>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4 col-sm-6" data-cat="main">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-soft mb-1">المأكولات الشامية</span>
+                <h3 class="small fw-bold mb-0">شيخ المحشي بلدي</h3>
+                <small class="text-softest d-block">كوسة وباذنجان وفلفل + محشي ورق عنب</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">295 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>الحريق 12 د</span>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4 col-sm-6" data-cat="dessert">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-gold mb-1">حلويات أليجريا</span>
+                <h3 class="small fw-bold mb-0">أم علي بالقشطة والصنوبر</h3>
+                <small class="text-softest d-block">تقدم ساخنة مع قشطة ريفية بلدية</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">95 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>الحريق 8 د</span>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4 col-sm-6" data-cat="dessert">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-soft mb-1">حلويات أليجريا</span>
+                <h3 class="small fw-bold mb-0">عريكة أليجريا بالعسل</h3>
+                <small class="text-softest d-block">سمن بلدي طبيعي وعسل نحل حر</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">110 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>الحريق 10 د</span>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4 col-sm-6" data-cat="starter">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-soft mb-1">مقبلات باردة</span>
+                <h3 class="small fw-bold mb-0">مشكل مقبلات باردة فاخر</h3>
+                <small class="text-softest d-block">حمص، متبل، بابا غنوج، تبولة</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">185 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>فوري</span>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-4 col-sm-6" data-cat="starter">
+          <article class="dish-item hover-tile bg-al-2 border rounded-3 p-2 h-100">
+            <div class="d-flex align-items-start justify-content-between gap-2">
+              <div class="lh-sm flex-grow-1">
+                <span class="badge-pill-custom badge-soft mb-1">شوربات ملكية</span>
+                <h3 class="small fw-bold mb-0">شوربة عدس شامي</h3>
+                <small class="text-softest d-block">بزيت الزيتون البكر وعصير الليمون</small>
+              </div>
+              <button class="add-to-cart-btn btn btn-gold btn-sm rounded-circle sw-action" data-title="إضافة للفاتورة" style="width:30px;height:30px;flex:none;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-2 pt-2 border-top border-secondary-subtle">
+              <span class="text-gold-strong fw-bold tabular">75 ج.م</span>
+              <span class="text-softest" style="font-size:.7rem;"><i class="fa-solid fa-clock me-1"></i>فوري</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ================================================================
+     عمود الفاتورة — تصميم مميز ومختلف (الفاتورة الذهبية الفاخرة)
+     فاتورة عمودية بارتفاع ثابت لا تملأ الشاشة؛ كل فئة داخلية قابلة للتمرير
+     ================================================================ -->
+<aside class="col-lg-4 col-md-12 panel-column h-100">
+  <div class="panel-card d-flex flex-column overflow-hidden h-100" id="billingPanel">
+
+    <!-- ---- رأس الفاتورة الفاخر (توقيع بصري مميز) ---- -->
+    <div class="panel-head fatoura-head d-flex align-items-center justify-content-between gap-2 p-2 px-3">
+      <div class="d-flex align-items-center gap-2">
+        <span class="dot dot-gold"></span>
+        <div class="lh-sm">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fw-black small text-gold-strong">الفاتورة الذهبية</span>
+            <span class="badge-pill-custom badge-gold tabular">#A-4481</span>
+          </div>
+          <small class="text-softest d-block" style="font-size:.68rem;">أليجريا لاونج ـ صالة داخلية · 12 أيلول</small>
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm sw-action" data-title="طباعة الفاتورة، إرسال البون والتحويل"><i class="fa-solid fa-print text-gold"></i></button>
+    </div>
+
+    <!-- ---- غذاء فاخر: شريط مصور يردد معايير الجودة (لحوم، قشطة، بهارات) ---- -->
+    <div class="px-2 pt-2">
+      <div class="food-strip d-flex align-items-stretch gap-2">
+        <img alt="لحوم بلدية طازجة 100% فاخرة" class="rounded-3 object-fit-cover" style="width:64px;height:52px;flex:none;"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5p73iv8sVY6SXT1FHKGkrLCoBQVliPX5Sm8TK7lIhVZUFJYhsjiRsk1Given4vk4i2cYIGKRy3oZR-_HFHdBHDeiJBMQ7czM3f9jtX-e-Jm-WButw1AMlU8nci23s4t2yO0JAvFALYTv_5LwxFJ8ebeLhcRrz5FmxBi1sSVXU7fPBZkG0rTPlhF0NyChOzqq6T0gHXbRemwgPjJfXjr7phiIoNYZ2arSIGjJHpLJ1b3zAhTdNB6ZuNLuOWWh0k9vKqNuDu5t6lwMtqkT1ESquut4vM9Gy4PjCz1WDJi5-QvEYLt4b09Vu7jMwP2lJY6M2jRB56i_Zt5pCZvvE3ne6P');
+        <img alt="ألبان وقشطة ريفية بلدية" class="rounded-3 object-fit-cover" style="width:64px;height:52px;flex:none;"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4p7ZgKmkg1CelInpv6LR5bb0G36SdSm8TK7lIhVZUFJYhsjiRsk1Given4vk4i2cYIGKRy3oZR-_HFHdBHDeiJBMQ7czM3f9jtX-e-Jm-WButw1AMlU8nci23s4t2yO0JAvFALYTv_5LwxFJ8ebeLhcRrz5FmxBi1sSVXU7fPBZkG0rTPlhF0NyChOzqq6T0gHXbRemwgPjJfXjr7phiIoNYZ2arSIGjJHpLJ1b3zAhTdNB6ZuNLuOWWh0k9vKqNuDu5t6lwMtqkT1ESquut4vM9Gy4PjCz1WDJi5-QvEYLt4b09Vu7jMwP2lJY6M2jRB56i_Zt5pCZvvE3ne6P">
+        <img alt="توابل وبهارات ملكية فاخرة" class="rounded-3 object-fit-cover rounded-start-1" style="width:64px;height:52px;flex:none;"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6p83iv8sVY6SXT1FHKGkrLCoBQVliPX5Sm8TK7lIhVZUFJYhsjiRsk1Given4vk4i2cYIGKRy3oZR-_HFHdBHDeiJBMQ7czM3f9jtX-e-Jm-WButw1AMlU8nci23s4t2yO0JAvFALYTv_5LwxFJ8ebeLhcRrz5FmxBi1sSVXU7fPBZkG0rTPlhF0NyChOzqq6T0gHXbRemwgPjJfXjr7phiIoNYZ2arSIGjJHpLJ1b3zAhTdNB6ZuNLuOWWh0k9vKqNuDu5t6lwMtqkT1ESquut4vM9Gy4PjCz1WDJi5-QvEYLt4b09Vu7jMwP2lJY6M2jRB56i_Zt5pCZvvE3ne6P">
+        <div class="flex-grow-1 d-flex flex-column justify-content-center lh-sm pe-2">
+          <span class="fw-bold small text-gold-strong">صالحة حتى الآن</span>
+          <small class="text-softest" style="font-size:.68rem;">8 أصناف · 12 قطعة · الطلب مغطى بالكامل</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- بنود الفاتورة (مساحة قابلة للتمرير داخلياً) ---- -->
+    <div class="panel-scroll flex-grow-1 px-2 py-2" id="ticketItemsContainer" style="min-height:0;">
+      <!-- يحقن عبر JS — addToCart -->
+    </div>
+
+    <!-- ---- شريط الفواصل الذهبي المنقّط لنمط الفاتورة المميز ---- -->
+    <div class="divider-gold mx-3 mb-2"></div>
+
+    <!-- ---- ملخص الفاتورة (هاديء، لا يفيض) ---- -->
+    <div class="px-3 pb-2 d-flex flex-column gap-1" style="font-size:.78rem;">
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="text-softest small">الإجمالي</span><span class="tabular fw-bold" id="spnTotal">2,315 ج.م</span>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="text-softest small">الخصم المطبق</span><span class="text-green tabular">− 180 ج.م</span>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="text-softest small">الضريبة 14%</span><span class="tabular">+ 218.4 ج.م</span>
+      </div>
+      <div class="d-flex align-items-center justify-content-between pt-1 mt-1 border-top border-secondary-subtle">
+        <span class="fw-black small text-gold-strong">المستحق الدفع</span>
+        <span class="fw-black tabular text-gold-strong" style="font-size:1.05rem;">2,353 ج.م</span>
+      </div>
+    </div>
+
+    <!-- ---- أدوات الفاتورة: إرسال للمطبخ / طباعة / بون + زر الدفع الذهبي ---- -->
+    <div class="p-2 pt-1 d-flex flex-column gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <select class="form-select form-select-sm bg-al-2 border-secondary-subtle text-light" aria-label="طريقة الدفع">
+          <option>كاش نقداً</option><option>فيزا / POS</option><option>إنستاباي / فودافون كاش</option><option>دفع مقسم</option>
+        </select>
+        <button class="btn btn-ghost btn-sm sw-action" data-title="تقسيم الفاتورة على عدة طرق دفع"><i class="fa-solid fa-circle-half-stroke text-gold"></i></button>
+      </div>
+      <button id="checkoutBtn" class="btn btn-gold w-100 sw-action fw-black" data-title="إتمام الدفع وإغلاق الفاتورة">
+        <i class="fa-solid fa-crown me-1"></i>دفع وإغلاق الفاتورة
+      </button>
+    </div>
+  </div>
+</aside>
+  </section>  <!-- /فرع menu -->
+
+  <div id="floorMapDrawer" class="d-none panel-card p-3 border rounded-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <span class="fw-black small text-gold-strong"><i class="fa-solid fa-map-location-dot me-1"></i>الخريطة الحية للصالة والطاولات</span>
+      <button class="btn btn-ghost btn-sm sw-action" data-title="إغلاق الخريطة"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="d-flex flex-wrap gap-2" id="liveFloorMap"></div>
+  </div>
+
+  <div id="invoiceDrawer" class="d-none panel-card p-3 border rounded-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <span class="fw-black small text-gold-strong"><i class="fa-solid fa-file-invoice-dollar me-1"></i>الفاتورة الذهبية المميزة</span>
+      <button class="btn btn-ghost btn-sm sw-action" data-title="إغلاق الفاتورة"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="luxuryInvoice"></div>
+  </div>
+
+</main>
+
+<!-- Toast -->
+<div id="quickToast" class="quick-toast"></div>
+
+<!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+<div id="alegria-footer"></div>
+
+<!-- ============ SCRIPTS ============ -->
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/sweetalert2.all.min.js"></script>
+<script src="../../assets/js/layout.js"></script>
+<script src="../../assets/js/main.js"></script>
+
+<script>
+  (function () {
+    'use strict';
+
+    var ALEGRIA = window.ALEGRIA;
+    var $toast = document.getElementById('quickToast');
+
+    function toast(msg, type) {
+      $toast.className = 'quick-toast show ' + (type || 'success');
+      $toast.innerHTML = msg;
+      clearTimeout(toast._t);
+      toast._t = setTimeout(function () {
+        $toast.className = 'quick-toast';
+      }, 1600);
+    }
+    if (window.Al) { window.Al.toast = toast; }
+
+    /* ---- تفعيل الأقسام (النظام القديم panel-card) ---- */
+    var catPills = document.querySelectorAll('.cat-pill');
+    catPills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        catPills.forEach(function (p) { p.classList.remove('active'); });
+        pill.classList.add('active');
+        var cat = pill.getAttribute('data-cat');
+        document.querySelectorAll('#menuPanel .dish-item').forEach(function (item) {
+          item.style.display = (cat === 'all' || item.getAttribute('data-cat') === cat) ? '' : 'none';
+        });
+      });
+    });
+
+    /* ---- البحث السريع ---- */
+    var menuSearchInput = document.getElementById('menuSearchInput');
+    if (menuSearchInput) {
+      menuSearchInput.addEventListener('input', function () {
+        var q = menuSearchInput.value.trim();
+        document.querySelectorAll('#menuPanel .dish-item').forEach(function (item) {
+          item.style.display = item.getAttribute('data-title').indexOf(q) !== -1 ? '' : 'none';
+        });
+      });
+    }
+
+    /* ---- إغلاق الخريطة/الفاتورة ---- */
+    ['#liveFloorMap','#luxuryInvoice'].forEach(function (sel) {});
+    var toggleFloorMapBtn = document.getElementById('toggleFloorMapBtn');
+    var floorMapDrawer = document.getElementById('floorMapDrawer');
+    if (toggleFloorMapBtn && floorMapDrawer) {
+      toggleFloorMapBtn.addEventListener('click', function () {
+        floorMapDrawer.classList.toggle('d-none');
+      });
+    }
+
+    /* ---- إضافة للفاتورة + عدادات ---- */
+    document.querySelectorAll('.add-to-cart-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var dish = btn.closest('.dish-item');
+        var title = (dish && dish.getAttribute('data-title')) || 'صنف';
+        var myToast = window.Al || null;
+        if (myToast && myToast.toast) {
+          myToast.toast('تمت إضافة «' + title + '» إلى الفاتورة الذهبية');
+        }
+        btn.classList.add('pressed');
+        var countEl = document.getElementById('liveOrderCount');
+        if (countEl) { countEl.textContent = parseInt(countEl.textContent || '0', 10) + 1; }
+        setTimeout(function () { btn.classList.remove('pressed'); }, 350);
+      });
+    });
+
+    /* ---- سلة الفاتورة المحلية (POS) ---- */
+    var ticketItemsContainer = document.getElementById('ticketItemsContainer');
+    var tickets = [];
+    function renderTicket() {
+      if (!ticketItemsContainer) { return; }
+      var priceMap = { 'صينية أليجريا الفاخرة (٤ أفراد)': 1450, 'شوربة عدس شامي': 75, 'مشكل مشويات': 950 };
+      var total = 0;
+      var html = '';
+      tickets.forEach(function (t) {
+        var price = priceMap[t.name] || 0;
+        var sub = price * t.qty;
+        total += sub;
+        html += '<div class="d-flex align-items-center justify-content-between py-1 border-bottom border-secondary-subtle">' +
+                '<span class="small">' + t.name + ' × ' + t.qty + '</span>' +
+                '<span class="tabular text-gold-strong small">' + sub + ' ج.م</span></div>';
+      });
+      ticketItemsContainer.innerHTML = html || '<div class="text-softest small text-center py-3">الفاتورة فارغة — اختر الأصناف من القائمة</div>';
+      var totalEl = document.getElementById('cartTotal');
+      if (totalEl) { totalEl.textContent = total + ' ج.م'; }
+    }
+    function addTicket(name) {
+      var found = false;
+      tickets.forEach(function (t) {
+        if (t.name === name) { t.qty++; found = true; }
+      });
+      if (!found) { tickets.push({ name: name, qty: 1 }); }
+      renderTicket();
+    }
+    window.addTicket = addTicket;
+    /* ربط الأزرار المضافة بأناقة (مضاعفة للمركبات الأنانية) */
+    function bindAddButtons() {
+      document.querySelectorAll('[data-add-dish]').forEach(function (b) {
+        b.onclick = function () { addTicket(b.getAttribute('data-add-dish')); };
+      });
+    }
+    bindAddButtons();
+    /* منع استنساخ المستخدمين للبدل في حال أُعيد ربط الـ DOM ديناميكياً */
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-add-dish]');
+      if (t) { addTicket(t.getAttribute('data-add-dish')); }
+    });
+  })();
+</script>
+</body>
+</html>
+
+<!-- ================================================================
+     نقاط البيع الفاخرة — شاشة البيع قبل الفطيرة الرباعية
+     دمتم برؤيتنا: لحوم بلدية طازجة، ألبان وقشطة ريفية، توابل وبهارات ملكية
+     ================================================================ -->

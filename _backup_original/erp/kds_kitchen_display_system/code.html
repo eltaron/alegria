@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-high":"#222a3d","surface-dim":"#0b1326","on-error":"#690005","secondary":"#4edea3","error-container":"#93000a","primary-fixed-dim":"#ffb77d","on-tertiary-fixed":"#40000d","on-secondary-container":"#00311f","background":"#0b1326","on-primary-fixed":"#2f1500","on-primary-container":"#432100","surface-container-highest":"#2d3449","tertiary-fixed-dim":"#ffb2b7","surface-tint":"#ffb77d","surface-container":"#171f33","surface-container-lowest":"#060e20","on-error-container":"#ffdad6","on-tertiary":"#67001b","secondary-fixed-dim":"#4edea3","on-secondary":"#003824","on-background":"#dae2fd","surface-container-low":"#131b2e","primary-container":"#d97707","surface-bright":"#31394d","inverse-on-surface":"#283044","on-surface-variant":"#dbc2b0","on-primary-fixed-variant":"#6e3900","on-tertiary-container":"#5b0017","on-primary":"#4d2600","inverse-primary":"#904d00","secondary-container":"#00a572","tertiary-fixed":"#ffdadb","on-tertiary-fixed-variant":"#92002a","inverse-surface":"#dae2fd","surface-variant":"#2d3449","tertiary":"#ffb2b7","primary-fixed":"#ffdcc3","on-secondary-fixed":"#002113","error":"#ffb4ab","tertiary-container":"#ff516a","outline-variant":"#554336","outline":"#a38c7c","secondary-fixed":"#6ffbbe","on-surface":"#dae2fd","on-secondary-fixed-variant":"#005236","primary":"#ffb77d","surface":"#0b1326"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-lg":"1rem","space-sm":"0.5rem","space-xs":"0.25rem","margin-lg":"2rem","space-md":"0.75rem","space-xl":"1.5rem","space-2xl":"2.5rem","margin":"1rem","gutter-lg":"1.5rem","gutter":"1rem"},"fontFamily":{"label-compact":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-numeric":["JetBrains Mono"],"body-md":["Plus Jakarta Sans"]},"fontSize":{"label-compact":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"headline-xl-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}],"display-lg":["3rem",{"lineHeight":"3.5rem","letterSpacing":"-0.02em","fontWeight":"700"}],"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"label-numeric":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.02em","fontWeight":"500"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed right-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col h-full"><div class="p-space-lg flex items-center justify-between gap-space-sm bg-surface-container-lowest/60"><div class="flex items-center gap-space-sm"><img alt="Alegria Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wx0ZfsNijxRnPn-H6a3S2NxbcdoEETcHIAMY9aSUOFi3Um6r8cAfgbnfSuEL7sU3oruvO9TdZgTsClHhjP71pSeOdefJsmaEgLQxHdxEiiti-xMIdyuEA0zpwhuGi6iTNRo-0fr0AhYCwAGB4dJhA9iKJvhfEMdd6Rx48kxnKx96pFiyQK33LDacpvHnxZp_E4jqs3CDOEar0smBnJBPam2ZjQ_3ZTRhhGhkqjOlWHinwewXaK4DUze7iz8Dm2xypb2EPLaozB3i0"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary tracking-wide">أليجريا كافيه</span><span class="font-body-sm text-body-sm text-on-surface-variant">إدارة المطاعم الفاخرة</span></div></div></div><div class="px-space-md py-space-sm"><div class="bg-surface-container px-space-md py-space-sm rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-compact text-label-compact text-secondary">الفرع الرئيسي - مفتوح الآن</span></div><span class="font-label-numeric text-label-numeric text-on-surface-variant">وردية المساء</span></div></div><nav class="flex-1 overflow-y-auto px-space-sm py-space-xs space-y-1" data-active-classes="bg-primary-container text-on-primary font-headline-md"><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="dashboard" href="#">لوحة التحكم العامة</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="pos-terminal" href="#">نقطة البيع وإدارة الطاولات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="kds-kitchen" href="#">إدارة المطبخ والطلبات (KDS)</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="menu-catalog" href="#">المنيو والمنتجات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="inventory-stock" href="#">المخزون والمواد الخام</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="recipes-costing" href="#">الوصفات والتكاليف</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="purchases-suppliers" href="#">المشتريات والموردين</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="finance-treasury" href="#">الخزينة والماليات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="reports-analytics" href="#">التقارير والتحليلات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="staff-permissions" href="#">المستخدمين والصلاحيات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="system-settings" href="#">الإعدادات والنظام</a></nav><div class="p-space-md bg-surface-container-lowest/50"><div class="flex items-center justify-between text-on-surface-variant"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary">support_agent</span><span class="font-body-sm text-body-sm">الدعم الفني VIP</span></div><span class="font-label-numeric text-label-numeric text-primary">24/7</span></div></div></div></aside><div class="pr-72"><header class="fixed top-0 right-72 left-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-gutter shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-primary">schedule</span><span class="font-body-sm text-body-sm text-on-surface-variant">الوردية:</span><span class="font-headline-md text-body-md text-on-surface">وردية العشاء (2)</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-secondary">table_restaurant</span><span class="font-body-sm text-body-sm text-on-surface-variant">إشغال الصالة:</span><span class="font-label-numeric text-label-numeric text-secondary">82% (28/34 طاولة)</span></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-primary">point_of_sale</span><span class="font-body-sm text-body-sm text-on-surface-variant">درج النقدية:</span><span class="font-label-numeric text-label-numeric text-primary">4,850 ر.س</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low p-space-xs rounded-lg"><button class="px-space-md py-1 rounded bg-primary-container text-on-primary font-headline-md text-body-sm flex items-center gap-space-xs transition-colors"><span class="material-symbols-outlined text-[16px]">add</span>طلب جديد</button><button class="px-space-md py-1 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs transition-colors"><span class="material-symbols-outlined text-[16px]">swap_horiz</span>نقل طاولة</button></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">calendar_today</span><span class="font-label-numeric text-label-numeric text-on-surface">اليوم، 24 أكتوبر 2024</span></div><div class="relative flex items-center justify-center p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container"></span></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex flex-col text-left"><span class="font-headline-md text-body-sm text-on-surface">فهد السليمان</span><span class="font-label-compact text-label-compact text-on-surface-variant">مدير الصالة العام</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full px-gutter-lg py-space-md space-y-space-lg">
+<!-- TOP KPI STRIP & BROADCAST BAR -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-sm">
+<!-- Stat 1: Pending Orders -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px] animate-pulse">hourglass_top</span>
+</div>
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block uppercase">بانتظار البدء</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-xl text-headline-xl text-primary font-label-numeric">05</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">تذاكر جديدة</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact font-label-numeric">+2 في الدقيقة</span>
+</div>
+<!-- Stat 2: Active Cooking -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block uppercase">قيد الطهي والتحضير</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-xl text-headline-xl text-secondary font-label-numeric">08</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">على الخط الساخن</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-label-compact text-label-compact">مستقر</span>
+</div>
+<!-- Stat 3: Ready for Expo -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-secondary-fixed"></div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined text-[22px]">room_service</span>
+</div>
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block uppercase">جاهز للتسليم (Expo)</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-xl text-headline-xl text-on-surface font-label-numeric">04</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">طلب مكتمل</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-compact text-label-compact flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+        استدعاء
+      </span>
+</div>
+<!-- Stat 4: Average Prep Time -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-center justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-primary-fixed-dim"></div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined text-[22px]">timer</span>
+</div>
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block uppercase">متوسط وقت الإنجاز</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-xl text-headline-xl text-on-surface font-label-numeric">14:10</span>
+<span class="font-body-sm text-body-sm text-secondary font-label-numeric">(&lt; 18 د)</span>
+</div>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-label-compact text-label-compact">أداء ممتاز</span>
+</div>
+<!-- Stat 5: Delayed Alert -->
+<div class="bg-error-container/25 rounded-xl p-space-md flex items-center justify-between shadow-sm relative overflow-hidden group animate-pulse">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[22px]">crisis_alert</span>
+</div>
+<div>
+<span class="font-label-compact text-label-compact text-error font-medium block uppercase">طلبات متأخرة</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-xl text-headline-xl text-error font-label-numeric">01</span>
+<span class="font-body-sm text-body-sm text-on-error-container">طاولة VIP-4</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-error">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</div>
+</div>
+</section>
+<!-- KITCHEN SUB-BAR: STATIONS & ACTION TOOLBAR -->
+<section class="bg-surface-container-low rounded-xl p-space-md flex flex-wrap items-center justify-between gap-space-md shadow-sm">
+<!-- Stations Tab Selectors -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+<button class="px-space-md py-space-xs rounded-lg bg-primary-container text-on-primary font-headline-md text-body-sm flex items-center gap-space-xs transition-colors shrink-0">
+<span>كافة المحطات</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-lowest/40 font-label-numeric text-label-compact">17</span>
+</button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-sm flex items-center gap-space-xs transition-colors shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">outdoor_grill</span>
+<span>الشواية والفحم (Grill)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-lowest text-on-surface font-label-numeric text-label-compact">5</span>
+</button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-sm flex items-center gap-space-xs transition-colors shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">soup_kitchen</span>
+<span>الفرن والطواجن (Oven)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-lowest text-on-surface font-label-numeric text-label-compact">4</span>
+</button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-sm flex items-center gap-space-xs transition-colors shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">skillet</span>
+<span>المطبخ الغربي والباستا</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-lowest text-on-surface font-label-numeric text-label-compact">3</span>
+</button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-sm flex items-center gap-space-xs transition-colors shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">lunch_dining</span>
+<span>المقبلات والسلطات</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-lowest text-on-surface font-label-numeric text-label-compact">3</span>
+</button>
+<button class="px-space-md py-space-xs rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-md text-body-sm flex items-center gap-space-xs transition-colors shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">bakery_dining</span>
+<span>الحلويات والبار</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-lowest text-on-surface font-label-numeric text-label-compact">2</span>
+</button>
+</div>
+<!-- Quick Tools / Service Type Switch -->
+<div class="flex items-center gap-space-sm shrink-0">
+<div class="bg-surface-container p-space-xs rounded-lg flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-bright text-on-surface font-label-compact text-label-compact">الكل</button>
+<button class="px-space-sm py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-compact text-label-compact">صالة (Dine-In)</button>
+<button class="px-space-sm py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-compact text-label-compact">استلام سريع</button>
+<button class="px-space-sm py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-compact text-label-compact">توصيل دليفري</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="toggle-sound-btn" title="كتم التنبيهات الصوتية">
+<span class="material-symbols-outlined text-[18px]">volume_up</span>
+</button>
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>استرجاع آخر طلب (Recall)</span>
+</button>
+</div>
+</div>
+</section>
+<!-- MAIN DUAL CANVASES: KDS TICKETS + EXECUTIVE SUMMARY RAIL -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT / MAIN REGION: TICKET CARDS GRID (9 COLUMNS) -->
+<div class="xl:col-span-9 space-y-space-md">
+<!-- SUB-HEADER TITLE -->
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-secondary animate-ping"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface">تذاكر التحضير المباشرة النشطة (Live Kitchen Tickets)</h2>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-numeric text-label-compact">محدث لحظياً</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">الترتيب: بالأقدمية والوقت المستغرق أولاً</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">sort</span>
+</div>
+</div>
+<!-- CARDS MESH -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- TICKET 1: DELAYED / CRITICAL ALERT (RED ACCENT) -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-md flex flex-col justify-between group transition-all duration-200 hover:-translate-y-0.5">
+<!-- Ticket Header Ribbon -->
+<div class="bg-error-container text-on-error-container p-space-md flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-error animate-bounce">warning</span>
+<span class="font-headline-md text-body-md font-bold tracking-wide">طاولة VIP-4</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/60 text-error font-label-compact text-label-compact font-label-numeric">صالة داخلية</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest/80 px-space-sm py-0.5 rounded text-error font-label-numeric text-body-md font-bold">
+<span class="material-symbols-outlined text-[16px] animate-pulse">timer</span>
+<span>24:15 د</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-space-xs">
+<span class="text-on-surface font-label-numeric">#ALG-2849</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>كابتن: حسام رضوان</span>
+</div>
+</div>
+<!-- Alert tag line -->
+<div class="w-full bg-error/20 rounded py-0.5 px-space-xs text-center text-error font-label-compact text-label-compact font-bold">
+              تجاوز الوقت المستهدف (+4:15 دقيقة) - أولوية قصوى
+            </div>
+</div>
+<!-- Ticket Content / Food Items -->
+<div class="p-space-md space-y-space-md flex-1">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors group/item">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">صينية أليجريا الفاخرة (4 أفراد)</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">
+                      • أرز بسمتي زيادة • صصوص خليجي حار جانبي • لحم ويل دن
+                    </p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact shrink-0">شواية وفرن</span>
+</div>
+<div class="mt-space-sm flex items-center justify-between text-on-surface-variant font-label-compact text-label-compact pt-space-xs">
+<span>المشرف: الشيف عصام</span>
+<button class="text-secondary hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                  جاهز جزئياً
+                </button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">طاجن عكاوي بالبصل القاورمة</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• حار خفيف • زيادة ليمون مخلل</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary-fixed-dim font-label-compact text-label-compact shrink-0">بالفرن (3 د)</span>
+</div>
+</div>
+<!-- Item 3 - Completed Line -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/60 opacity-60 line-through">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-surface-container-high text-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">2</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface">شوربة كوارع مخلية بالليمون</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">تم تسليمه لمحطة التجميع</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary/15 text-secondary font-label-compact text-label-compact shrink-0">جاهز ✓</span>
+</div>
+</div>
+</div>
+<!-- Ticket Action Buttons -->
+<div class="p-space-md bg-surface-container-lowest/40 flex items-center gap-space-xs">
+<button class="flex-1 py-space-sm px-space-sm rounded-lg bg-primary hover:bg-primary-fixed text-on-primary font-headline-md text-body-sm flex items-center justify-center gap-space-xs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span>إنجاز وتسليم للويتر</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-error-container/30 hover:bg-error-container text-error flex items-center justify-center transition-colors" title="استدعاء مدير الصالة للتأخير">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+</button>
+</div>
+</article>
+<!-- TICKET 2: ACTIVE COOKING (AMBER / GOLD ACCENT) -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-md flex flex-col justify-between group transition-all duration-200 hover:-translate-y-0.5">
+<!-- Ticket Header Ribbon -->
+<div class="bg-surface-container-high p-space-md flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">deck</span>
+<span class="font-headline-md text-body-md font-bold tracking-wide text-on-surface">طاولة 12</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-low text-primary font-label-compact text-label-compact">تراس خارجي</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-space-sm py-0.5 rounded text-primary font-label-numeric text-body-md font-bold">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>11:40 د</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-space-xs">
+<span class="text-on-surface font-label-numeric">#ALG-2852</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>كابتن: أحمد سمير</span>
+</div>
+</div>
+<!-- Progress mini bar -->
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full w-1/4"></div>
+</div>
+<div class="flex justify-between items-center font-label-compact text-label-compact text-on-surface-variant">
+<span>نسبة الإنجاز</span>
+<span class="font-label-numeric text-primary">1 من 4 أطباق</span>
+</div>
+</div>
+<!-- Items -->
+<div class="p-space-md space-y-space-md flex-1">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">2</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">مشكل كباب وكفتة ضاني بلدي</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• تسوية وسط Medium Well • بصل مشوي وسماق</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact shrink-0">شواية فحم</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">فتة موزة ضاني فاخرة</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• أرز مصري محمص • صوص طماطم وثوم مفروم</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact shrink-0">قسم الأرز</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/60 opacity-60 line-through">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-surface-container-high text-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">2</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface">سلطة بلدي مشكلة + طحينة مخصوص</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">جاهز على طاولة التقديم</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary/15 text-secondary font-label-compact text-label-compact shrink-0">جاهز ✓</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-space-md bg-surface-container-lowest/40 flex items-center gap-space-xs">
+<button class="flex-1 py-space-sm px-space-sm rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface font-headline-md text-body-sm flex items-center justify-center gap-space-xs transition-colors">
+<span class="material-symbols-outlined text-[18px] text-secondary">check</span>
+<span>تحديث حالة الأطباق</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-colors" title="إرسال رسالة للمحطة">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+</article>
+<!-- TICKET 3: NEW ORDER PENDING (BLUE/CYAN ACCENT) -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-md flex flex-col justify-between group transition-all duration-200 hover:-translate-y-0.5">
+<!-- Ticket Header Ribbon -->
+<div class="bg-surface-container-high p-space-md flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-secondary">takeout_dining</span>
+<span class="font-headline-md text-body-md font-bold tracking-wide text-on-surface">استلام سريع (Takeaway)</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-space-sm py-0.5 rounded text-secondary font-label-numeric text-body-md font-bold">
+<span class="material-symbols-outlined text-[16px] animate-pulse">timer</span>
+<span>02:10 د</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-space-xs">
+<span class="text-on-surface font-label-numeric">#TK-309</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">account_circle</span>
+<span>م. خالد التميمي</span>
+</div>
+</div>
+<!-- Sub Info -->
+<div class="w-full bg-secondary-container/20 rounded py-0.5 px-space-xs text-center text-secondary font-label-compact text-label-compact">
+              طلب وارد حديثاً عبر شاشة الكاشير
+            </div>
+</div>
+<!-- Items -->
+<div class="p-space-md space-y-space-md flex-1">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">كوردون بلو مع بينك صوص</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• مكرونة بيني إضافية • صوص شيدر هولندي</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-compact text-label-compact shrink-0">قسم الباستا</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">بيتزا تشيكن رانش مخصوصة</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• تسوية فرن حطب • إكسترا موزاريلا إيطالي</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-compact text-label-compact shrink-0">فرن البيتزا</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">باستا كانيلوني باللحم المفروم</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">طلب ستاندرد طبق أليجريا</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-compact text-label-compact shrink-0">المطبخ الغربي</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-space-md bg-surface-container-lowest/40 flex items-center gap-space-xs">
+<button class="flex-1 py-space-sm px-space-sm rounded-lg bg-primary-container hover:bg-primary text-on-primary font-headline-md text-body-sm flex items-center justify-center gap-space-xs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+<span>بدء التحضير الفوري</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-colors" title="طباعة بون التجهيز">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+</div>
+</article>
+<!-- TICKET 4: DELIVERY DISPATCH (PURPLE/TERTIARY ACCENT) -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-md flex flex-col justify-between group transition-all duration-200 hover:-translate-y-0.5">
+<!-- Ticket Header Ribbon -->
+<div class="bg-surface-container-high p-space-md flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-tertiary">two_wheeler</span>
+<span class="font-headline-md text-body-md font-bold tracking-wide text-on-surface">دليفري وتوصيل خارجي</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-space-sm py-0.5 rounded text-tertiary font-label-numeric text-body-md font-bold">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>08:35 د</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-space-xs">
+<span class="text-on-surface font-label-numeric">#DL-881</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sports_motorsports</span>
+<span>الطيار: محمود بدر</span>
+</div>
+</div>
+<!-- Destination line -->
+<div class="flex items-center justify-between font-label-compact text-label-compact text-on-surface-variant">
+<span>الوجهة: التجمع الخامس (حي النرجس)</span>
+<span class="text-tertiary font-label-numeric">المتبقي: 16 د</span>
+</div>
+</div>
+<!-- Items -->
+<div class="p-space-md space-y-space-md flex-1">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">صينية العيلة مندي فاخر</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• ½ تيس بلدي + دجاجة مندي + ½ كفتة</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">• تغليف حراري خاص + دقوس خارجي</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact shrink-0">تجهيز المشويات</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">2</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">عريكة أليجريا بالقشطة والعسل</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• عسل سدر بلدي + كاجو محمص</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-compact text-label-compact shrink-0">قسم الحلويات</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/60 opacity-60 line-through">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-surface-container-high text-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface">ممبار بلدي محشي حجم كبير</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">جاهز معلب بالحراري</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary/15 text-secondary font-label-compact text-label-compact shrink-0">جاهز ✓</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-space-md bg-surface-container-lowest/40 flex items-center gap-space-xs">
+<button class="flex-1 py-space-sm px-space-sm rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface font-headline-md text-body-sm flex items-center justify-center gap-space-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+<span>تغليف ونقل للموزع</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-colors" title="إشعار كابتن التوصيل">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+</button>
+</div>
+</article>
+<!-- TICKET 5: DESSERTS & COFFEE (EMERALD / READY STATE) -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-md flex flex-col justify-between group transition-all duration-200 hover:-translate-y-0.5">
+<!-- Ticket Header Ribbon -->
+<div class="bg-surface-container-high p-space-md flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-secondary">bakery_dining</span>
+<span class="font-headline-md text-body-md font-bold tracking-wide text-on-surface">طاولة 8</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-low text-secondary font-label-compact text-label-compact">قسم الحلى والقهوة</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-space-sm py-0.5 rounded text-secondary font-label-numeric text-body-md font-bold">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>05:20 د</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-space-xs">
+<span class="text-on-surface font-label-numeric">#ALG-2847</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>كابتن: مصطفى فهمي</span>
+</div>
+</div>
+<!-- Alert tag line -->
+<div class="w-full bg-secondary-container/20 rounded py-0.5 px-space-xs text-center text-secondary font-label-compact text-label-compact font-bold">
+              جميع الأطباق جاهزة وساخنة بانتظار استلام الويتر
+            </div>
+</div>
+<!-- Items -->
+<div class="p-space-md space-y-space-md flex-1">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/60">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-secondary text-on-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">2</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">أم علي بالقشطة والمكسرات المحمصة</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">جاهز ساخن طازج من الفرن ✓</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary/15 text-secondary font-label-compact text-label-compact shrink-0">جاهز ✓</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/60">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-secondary text-on-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">أرز معمر حلو بالقشطة الفاخرة</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">جاهز ساخن طازج ✓</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary/15 text-secondary font-label-compact text-label-compact shrink-0">جاهز ✓</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/60">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-secondary text-on-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">3</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">2x قهوة تركي + 1x شاي كرك بالهيل</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">تم التحضير على الرملة والبار ✓</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary/15 text-secondary font-label-compact text-label-compact shrink-0">جاهز ✓</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="p-space-md bg-surface-container-lowest/40 flex items-center gap-space-xs">
+<button class="flex-1 py-space-sm px-space-sm rounded-lg bg-secondary text-on-secondary font-headline-md text-body-sm flex items-center justify-center gap-space-xs transition-colors shadow-sm animate-pulse">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+<span>استدعاء الكابتن للاستلام</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-colors" title="إغلاق التذكرة">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</article>
+<!-- TICKET 6: GRILL MASTER QUICK QUEUE (TASTING & APPETIZERS) -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-md flex flex-col justify-between group transition-all duration-200 hover:-translate-y-0.5">
+<div class="bg-surface-container-high p-space-md flex flex-col gap-space-xs relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">table_restaurant</span>
+<span class="font-headline-md text-body-md font-bold tracking-wide text-on-surface">طاولة 21</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-low text-primary font-label-compact text-label-compact">صالة عائلات</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-space-sm py-0.5 rounded text-primary font-label-numeric text-body-md font-bold">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>06:50 د</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-space-xs">
+<span class="text-on-surface font-label-numeric">#ALG-2856</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>كابتن: سارة كمال</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full w-3/4"></div>
+</div>
+</div>
+<div class="p-space-md space-y-space-md flex-1">
+<div class="p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface font-semibold">ريش بتلو مشوية على الفحم</h4>
+<p class="font-body-sm text-body-sm text-primary mt-0.5">• صوص ديمي جلاس مدخن • بطاطس ودجز</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact shrink-0">شواية فحم</span>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest/60 opacity-60 line-through">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-6 h-6 rounded bg-surface-container-high text-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold shrink-0">1</span>
+<div>
+<h4 class="font-headline-md text-body-md text-on-surface">طاجن بامية باللحم الضاني</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">تم إرساله لمحطة التسليم</p>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-secondary/15 text-secondary font-label-compact text-label-compact shrink-0">جاهز ✓</span>
+</div>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-lowest/40 flex items-center gap-space-xs">
+<button class="flex-1 py-space-sm px-space-sm rounded-lg bg-surface-container-highest hover:bg-surface-bright text-on-surface font-headline-md text-body-sm flex items-center justify-center gap-space-xs transition-colors">
+<span class="material-symbols-outlined text-[18px] text-secondary">check</span>
+<span>تسليم البنود المتبقية</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</article>
+</div>
+</div>
+<!-- RIGHT REGION: ALL-DAY ACCUMULATOR & EXPO HELPER RAIL (3 COLUMNS) -->
+<aside class="xl:col-span-3 space-y-space-md">
+<!-- ALL-DAY ACCUMULATIVE DISHES (تجميع أصناف المطبخ التراكمية) -->
+<div class="bg-surface-container-low rounded-xl p-space-md space-y-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">format_list_bulleted</span>
+<h3 class="font-headline-md text-body-md text-on-surface font-bold">تجميع كميات الأصناف (All-Day)</h3>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-label-compact text-label-compact font-label-numeric">17 طلب نشط</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Station 1: Grill -->
+<div class="bg-surface-container p-space-sm rounded-lg space-y-space-xs">
+<div class="flex items-center justify-between text-primary font-body-sm text-body-sm font-semibold">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">outdoor_grill</span>
+<span>محطة الشواية والفحم</span>
+</div>
+<span class="font-label-numeric text-label-compact bg-surface-container-high px-1.5 py-0.2 rounded">9 قطع إجمالاً</span>
+</div>
+<div class="space-y-1 font-body-sm text-body-sm text-on-surface">
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>كباب ضاني بلدي</span>
+<span class="font-label-numeric text-primary font-bold">4 أسياخ</span>
+</div>
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>كفتة عجل أليجريا</span>
+<span class="font-label-numeric text-primary font-bold">3 أسياخ</span>
+</div>
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>ريش بتلو مدخنة</span>
+<span class="font-label-numeric text-primary font-bold">2 طلب</span>
+</div>
+</div>
+</div>
+<!-- Station 2: Oven & Tagines -->
+<div class="bg-surface-container p-space-sm rounded-lg space-y-space-xs">
+<div class="flex items-center justify-between text-primary-fixed-dim font-body-sm text-body-sm font-semibold">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">soup_kitchen</span>
+<span>الأفران والطواجن الشرقية</span>
+</div>
+<span class="font-label-numeric text-label-compact bg-surface-container-high px-1.5 py-0.2 rounded">6 أواني</span>
+</div>
+<div class="space-y-1 font-body-sm text-body-sm text-on-surface">
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>صينية أليجريا عائلية</span>
+<span class="font-label-numeric text-primary-fixed-dim font-bold">3 صواني</span>
+</div>
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>طاجن عكاوي قاورمة</span>
+<span class="font-label-numeric text-primary-fixed-dim font-bold">2 طاجن</span>
+</div>
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>طاجن بامية باللحم</span>
+<span class="font-label-numeric text-primary-fixed-dim font-bold">1 طاجن</span>
+</div>
+</div>
+</div>
+<!-- Station 3: Western & Pasta -->
+<div class="bg-surface-container p-space-sm rounded-lg space-y-space-xs">
+<div class="flex items-center justify-between text-secondary font-body-sm text-body-sm font-semibold">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">skillet</span>
+<span>المطبخ الغربي والبيتزا</span>
+</div>
+<span class="font-label-numeric text-label-compact bg-surface-container-high px-1.5 py-0.2 rounded">4 أصناف</span>
+</div>
+<div class="space-y-1 font-body-sm text-body-sm text-on-surface">
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>كوردون بلو بينك صوص</span>
+<span class="font-label-numeric text-secondary font-bold">2 طبق</span>
+</div>
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>بيتزا تشيكن رانش</span>
+<span class="font-label-numeric text-secondary font-bold">2 بيتزا</span>
+</div>
+</div>
+</div>
+<!-- Station 4: Desserts -->
+<div class="bg-surface-container p-space-sm rounded-lg space-y-space-xs">
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm font-semibold">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">bakery_dining</span>
+<span>الحلويات الشرقية والبار</span>
+</div>
+<span class="font-label-numeric text-label-compact bg-surface-container-high px-1.5 py-0.2 rounded">5 أطباق</span>
+</div>
+<div class="space-y-1 font-body-sm text-body-sm text-on-surface">
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>طواجن أم علي بالقشطة</span>
+<span class="font-label-numeric text-tertiary font-bold">3 طواجن</span>
+</div>
+<div class="flex justify-between items-center py-0.5 bg-surface-container-low px-space-xs rounded">
+<span>عريكة سدر فاخرة</span>
+<span class="font-label-numeric text-tertiary font-bold">2 طبق</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- WAITER PAGING / EXPO CALL MONITOR -->
+<div class="bg-surface-container-low rounded-xl p-space-md space-y-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">ring_volume</span>
+<h3 class="font-headline-md text-body-md text-on-surface font-bold">منبه نداء الويترز (Expo Paging)</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+</div>
+<div class="space-y-space-sm">
+<!-- Notification 1 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-label-numeric text-body-sm font-bold">
+                8
+              </div>
+<div>
+<span class="font-headline-md text-body-sm text-on-surface block">طاولة 8 جاهزة تماماً</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">الكابتن: مصطفى فهمي (منذ 2 د)</span>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded bg-secondary-container text-on-secondary-container font-label-compact text-label-compact hover:bg-secondary transition-colors">
+              رنين مجدد
+            </button>
+</div>
+<!-- Notification 2 -->
+<div class="bg-error-container/20 p-space-sm rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-error-container text-error flex items-center justify-center font-label-numeric text-body-sm font-bold">
+                VIP
+              </div>
+<div>
+<span class="font-headline-md text-body-sm text-error block">تنبيه تأخير طاولة VIP-4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">تم إبلاغ مدير الصالة فهد</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-error">check_circle</span>
+</div>
+</div>
+</div>
+<!-- KITCHEN SHIFT & PERFORMANCE RADAR -->
+<div class="bg-surface-container-low rounded-xl p-space-md space-y-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">speed</span>
+<h3 class="font-headline-md text-body-md text-on-surface font-bold">إنتاجية وردية المطبخ</h3>
+</div>
+<span class="font-label-numeric text-label-compact text-secondary">98.4% دقة</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs text-center">
+<div class="bg-surface-container p-space-sm rounded-lg">
+<span class="font-headline-xl text-headline-xl text-primary font-label-numeric block">142</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">طبق تم إنجازه</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded-lg">
+<span class="font-headline-xl text-headline-xl text-secondary font-label-numeric block">0.0%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">أطباق مرتجعة</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pt-space-xs bg-surface-container-lowest/60 p-space-sm rounded-lg">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[20px]">chef_hat</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-sm text-on-surface">الشيف التنفيذي: ماركوس أنطوان</span>
+<span class="font-body-sm text-body-sm text-primary">المطبخ الرئيسي - إدارة العمليات الكلية</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for muting alerts and ticket feedback
+  document.addEventListener('DOMContentLoaded', () => {
+    const soundBtn = document.getElementById('toggle-sound-btn');
+    if (soundBtn) {
+      soundBtn.addEventListener('click', () => {
+        const icon = soundBtn.querySelector('.material-symbols-outlined');
+        if (icon.textContent === 'volume_up') {
+          icon.textContent = 'volume_off';
+          soundBtn.classList.add('text-error');
+        } else {
+          icon.textContent = 'volume_up';
+          soundBtn.classList.remove('text-error');
+        }
+      });
+    }
+  });
+</script></main></div></body></html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>الخزينة والمالية | أليجريا ERP</title>
+  <meta name="description" content="الإدارة المالية والخزينة وحركة النقدية لنظام أليجريا: السيولة النقدية، سندات القبض والصرف، والتسويات المالية."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, نقاط البيع, الخزينة, المالية, الرواتب"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="الخزينة والمالية | أليجريا ERP"/>
+  <meta property="og:description" content="الرقابة الحية على السيولة النقدية، تدفقات المبيعات، سندات القبض والصرف، والتسويات المالية لمطعم أليجريا."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="الخزينة والمالية | أليجريا ERP"/>
+  <meta name="twitter:description" content="الرقابة الحية على السيولة النقدية، تدفقات المبيعات، سندات القبض والصرف، والتسويات المالية لمطعم أليجريا."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. TOP HEADER & QUICK FINANCE ACTION BAR
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3 flex-wrap">
+        <div>
+          <div class="d-flex align-items-center gap-2 flex-wrap small text-soft breadcrumb-custom">
+            <span>لوحة الإدارة</span>
+            <i class="fa-solid fa-chevron-left"></i>
+            <span class="text-gold fw-bold">الإدارة المالية والخزينة وحركة النقدية</span>
+            <span class="badge-pill-custom badge-green ms-1"><span class="dot dot-green"></span> متصل لحظياً بنقاط البيع وحسابات البنوك</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-wrap mt-1">
+            <h1 class="h4 fw-black m-0">الإدارة المالية والخزينة وحركة النقدية</h1>
+            <span class="badge-pill-custom badge-neutral tabular">الخزينة والمالية</span>
+          </div>
+          <p class="text-soft small mb-0 mt-1">
+            الرقابة الحية على السيولة النقدية، تدفقات المبيعات، سندات القبض والصرف، والتسويات المالية لمطعم أليجريا
+          </p>
+        </div>
+        <!-- Quick Finance Action Buttons -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-gold btn-sm" data-confirm="هل تريد إنشاء سند صرف جديد وتسجيله على الخزينة الآن؟"><i class="fa-solid fa-money-bill-transfer me-1"></i> + سند صرف جديد</button>
+          <button type="button" class="btn btn-outline-gold btn-sm quick-action" data-title="فتح نموذج سند قبض / توريد جديد"><i class="fa-solid fa-file-invoice-dollar me-1"></i> + سند قبض / توريد</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-confirm="هل تريد تنفيذ تحويل نقدي بين الخزائن وتحديد الحسابين؟"><i class="fa-solid fa-right-left me-1 text-green"></i> تحويل بين الخزائن</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-confirm="هل تريد إغلاق الوردية المالية الحالية وإنشاء تقرير المطابقة؟"><i class="fa-solid fa-lock me-1 text-rose"></i> إغلاق الوردية المالية</button>
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="تصدير القوائم المالية (Excel / PDF)"><i class="fa-solid fa-file-arrow-down me-1"></i> تصدير القوائم</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. FINANCIAL KPIs ROW (6 cards)
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <!-- Card 1: Total Liquidity -->
+      <div class="col-sm-6 col-lg-4 col-xl-2">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <span class="stat-label d-block w-100">السيولة النقدية المتاحة</span>
+            <span class="stat-icon"><i class="fa-solid fa-wallet"></i></span>
+          </div>
+          <div class="stat-value mt-2 text-gold tabular">486,200</div>
+          <small class="text-soft d-block"><span class="text-green fw-bold"><i class="fa-solid fa-arrow-trend-up me-1"></i>+8.4% هذا الشهر</span></small>
+          <div class="bg-al-2 border rounded-3 px-2 py-1 small text-soft mt-3 d-flex justify-content-between align-items-center">
+            <span>خزينة مركزية + بنك + نقاط بيع</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2: Today's Net Revenue -->
+      <div class="col-sm-6 col-lg-4 col-xl-2">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <span class="stat-label d-block w-100">مبيعات وإيرادات اليوم</span>
+            <span class="stat-icon green"><i class="fa-solid fa-money-bill-trend-up"></i></span>
+          </div>
+          <div class="stat-value mt-2 text-green tabular">54,820</div>
+          <small class="text-soft d-block"><span class="dot dot-green me-1"></span>مطابق للـ POS لحظياً</small>
+          <div class="bg-al-2 border rounded-3 px-2 py-1 small text-soft mt-3 row text-center g-0 mx-0">
+            <div class="col-4 px-0 tabular">كاش 32K</div>
+            <div class="col-4 px-0 tabular">فيزا 18K</div>
+            <div class="col-4 px-0 tabular">إنستا 4.4K</div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3: OPEX -->
+      <div class="col-sm-6 col-lg-4 col-xl-2">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <span class="stat-label d-block w-100">مصروفات التشغيل اليومية</span>
+            <span class="stat-icon amber"><i class="fa-solid fa-basket-shopping"></i></span>
+          </div>
+          <div class="stat-value mt-2 text-rose tabular">3,200</div>
+          <small class="text-soft d-block">سندات صرف وخضار وصيانة</small>
+          <div class="bg-al-2 border rounded-3 px-2 py-1 small text-soft mt-3 d-flex justify-content-between align-items-center">
+            <span>سقف الصرف اليومي: <strong class="text-gold-strong tabular">6,000 ج.م</strong></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4: Daily Net Cash Flow -->
+      <div class="col-sm-6 col-lg-4 col-xl-2">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <span class="stat-label d-block w-100">صافي التدفق اليومي</span>
+            <span class="stat-icon green"><i class="fa-solid fa-arrow-right-left"></i></span>
+          </div>
+          <div class="stat-value mt-2 text-green tabular">+51,620</div>
+          <small class="text-green fw-bold d-block"><i class="fa-solid fa-circle-check me-1"></i>فائض إيجابي مريح</small>
+          <div class="bg-al-2 border rounded-3 px-2 py-1 small text-soft mt-3 d-flex justify-content-between align-items-center">
+            <span>الإيراد - المصروف المباشر</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 5: Accounts Payable -->
+      <div class="col-sm-6 col-lg-4 col-xl-2">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <span class="stat-label d-block w-100">مستحقات الموردين</span>
+            <span class="stat-icon amber"><i class="fa-solid fa-hourglass-half"></i></span>
+          </div>
+          <div class="stat-value mt-2 tabular">86,400</div>
+          <small class="text-rose fw-bold d-block"><i class="fa-solid fa-bell me-1"></i>42,680 ج.م خلال 48 ساعة</small>
+          <div class="bg-al-2 border rounded-3 px-2 py-1 small text-soft mt-3 d-flex justify-content-between align-items-center">
+            <span>مطابق لشاشة المشتريات</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 6: Operating Margin & Food Cost -->
+      <div class="col-sm-6 col-lg-4 col-xl-2">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <span class="stat-label d-block w-100">هامش الربح التشغيلي</span>
+            <span class="stat-icon"><i class="fa-solid fa-chart-simple"></i></span>
+          </div>
+          <div class="stat-value mt-2 text-gold tabular">34.8%</div>
+          <small class="text-soft d-block">Food Cost: <strong class="text-green tabular">31.4%</strong></small>
+          <div class="bg-al-2 border rounded-3 px-2 py-1 small text-soft mt-3 d-flex justify-content-between align-items-center">
+            <span>مستهدف الشهر: <strong class="tabular">32.5%</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. TREASURIES AND BANK BALANCES ROW (5 cash vessels)
+         ============================================================ -->
+    <section class="mb-4">
+      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span class="stat-icon" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-vault"></i></span>
+          <h2 class="h5 fw-black m-0">أرصدة الخزائن والحسابات النشطة</h2>
+          <span class="badge-pill-custom badge-neutral tabular">(5 أوعية نقدية)</span>
+        </div>
+        <a href="#" class="btn btn-ghost btn-sm quick-action" data-title="كشف حركة الأوعية النقدية : تم فتح التقرير"><i class="fa-solid fa-file-lines me-1 text-gold"></i> كشف حركة الأوعية <i class="fa-solid fa-angle-left ms-1"></i></a>
+      </div>
+      <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-5">
+        <!-- Account 1: Main Safe -->
+        <div class="col">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div>
+                <div class="fw-black small">خزينة الفرع الرئيسية</div>
+                <div class="small text-soft">Main Safe - أمانات الكافيه</div>
+              </div>
+              <span class="badge-pill-custom badge-amber">تنبيه حد الأمان</span>
+            </div>
+            <div class="stat-value mt-3 text-gold tabular">142,500 <small class="fs-6 text-soft">ج.م</small></div>
+            <div class="progress mt-2" style="height:6px;"><div class="progress-bar progress-gold" style="width:95%"></div></div>
+            <small class="text-soft d-block mt-1">السقف 150K (يُوصى بإيداع بنكي للمتبقي)</small>
+            <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+              <span>الوردية الحالية</span>
+              <i class="fa-solid fa-user-shield text-gold"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Account 2: POS Drawer 1 -->
+        <div class="col">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div>
+                <div class="fw-black small">درج كاشير الصالة</div>
+                <div class="small text-soft">POS Drawer 1 (وردية 2)</div>
+              </div>
+              <span class="badge-pill-custom badge-green">نشط ومفتوح</span>
+            </div>
+            <div class="stat-value mt-3 text-green tabular">18,450 <small class="fs-6 text-soft">ج.م</small></div>
+            <div class="progress mt-2" style="height:6px;"><div class="progress-bar bg-success" style="width:61%"></div></div>
+            <small class="text-soft d-block mt-1">الكاشير: كريم عادل</small>
+            <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+              <span>نقدية العشاء</span>
+              <i class="fa-solid fa-cash-register text-green"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Account 3: POS Drawer 2 -->
+        <div class="col">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div>
+                <div class="fw-black small">درج كاشير التيك أواي</div>
+                <div class="small text-soft">Takeaway &amp; Delivery</div>
+              </div>
+              <span class="badge-pill-custom badge-green">نشط</span>
+            </div>
+            <div class="stat-value mt-3 tabular">8,300 <small class="fs-6 text-soft">ج.م</small></div>
+            <div class="progress mt-2" style="height:6px;"><div class="progress-bar" style="width:41%;background:var(--al-ink-faint);"></div></div>
+            <small class="text-soft d-block mt-1">عهد الكباتن وتوصيل الطلبات</small>
+            <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+              <span>تسليم جزئي متوقع</span>
+              <i class="fa-solid fa-truck-fast text-soft"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Account 4: Commercial Bank CIB -->
+        <div class="col">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div>
+                <div class="fw-black small">البنك التجاري الدولي</div>
+                <div class="small text-soft">CIB - الحساب التشغيلي</div>
+              </div>
+              <span class="badge-pill-custom badge-neutral">ربط بنكي حي</span>
+            </div>
+            <div class="stat-value mt-3 text-gold tabular">265,000 <small class="fs-6 text-soft">ج.م</small></div>
+            <div class="progress mt-2" style="height:6px;"><div class="progress-bar progress-gold" style="width:78%"></div></div>
+            <small class="text-soft d-block mt-1">شامل تحصيلات نقاط الدفع الإلكتروني</small>
+            <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+              <span class="tabular">IBAN: EG6400...910</span>
+              <i class="fa-solid fa-credit-card text-gold"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Account 5: InstaPay & Digital Wallets -->
+        <div class="col">
+          <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+              <div>
+                <div class="fw-black small">إنستاباي والمحافظ الرقمية</div>
+                <div class="small text-soft">InstaPay &amp; Wallets</div>
+              </div>
+              <span class="badge-pill-custom badge-green">تسوية فورية</span>
+            </div>
+            <div class="stat-value mt-3 text-green tabular">51,950 <small class="fs-6 text-soft">ج.م</small></div>
+            <div class="progress mt-2" style="height:6px;"><div class="progress-bar bg-success" style="width:52%"></div></div>
+            <small class="text-soft d-block mt-1">التحويلات المباشرة من الضيوف</small>
+            <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+              <span class="tabular" dir="ltr">alegria.cafe@instapay</span>
+              <i class="fa-solid fa-mobile-screen text-green"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. ANALYTICS: CASH FLOW (7 DAYS) + P&L COST BREAKDOWN
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <!-- Chart: Cash Inflow vs Outflow -->
+      <div class="col-lg-7">
+        <div class="panel-card h-100">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-chart-column"></i> مقارنة التدفقات النقدية (آخر 7 أيام)</h2>
+              <p class="text-soft small mb-0">مقارنة الإيرادات المحصلة بالمصروفات وسداد الفواتير</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 small text-soft">
+              <span><span class="dot dot-green me-1"></span>إيراد نقدي / بنكي</span>
+              <span><span class="dot me-1" style="background:var(--al-rose);box-shadow:0 0 8px var(--al-rose);"></span>صرف ومشتريات</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <svg viewBox="0 0 700 200" preserveAspectRatio="none" class="w-100" style="height:225px;overflow:visible;">
+              <defs>
+                <linearGradient id="inflowGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#4edea3" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#4edea3" stop-opacity="0.0"/>
+                </linearGradient>
+                <linearGradient id="outflowGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#ffb2b7" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#ffb2b7" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <line stroke="#2d3449" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="700" y1="40" y2="40"/>
+              <line stroke="#2d3449" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="700" y1="90" y2="90"/>
+              <line stroke="#2d3449" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="700" y1="140" y2="140"/>
+              <line stroke="#2d3449" stroke-width="1" x1="0" x2="700" y1="190" y2="190"/>
+              <polygon fill="url(#inflowGrad)" points="20,130 110,80 210,105 310,60 410,75 510,45 620,35 620,190 20,190"/>
+              <polyline fill="none" points="20,130 110,80 210,105 310,60 410,75 510,45 620,35" stroke="#4edea3" stroke-width="3"/>
+              <polyline fill="none" points="20,165 110,150 210,135 310,160 410,120 510,140 620,155" stroke="#ffb2b7" stroke-dasharray="6 3" stroke-width="2.5"/>
+              <circle cx="20" cy="130" fill="#0b1326" r="4" stroke="#4edea3" stroke-width="2"/>
+              <circle cx="110" cy="80" fill="#0b1326" r="4" stroke="#4edea3" stroke-width="2"/>
+              <circle cx="210" cy="105" fill="#0b1326" r="4" stroke="#4edea3" stroke-width="2"/>
+              <circle cx="310" cy="60" fill="#0b1326" r="4" stroke="#4edea3" stroke-width="2"/>
+              <circle cx="410" cy="75" fill="#0b1326" r="4" stroke="#4edea3" stroke-width="2"/>
+              <circle cx="510" cy="45" fill="#0b1326" r="4" stroke="#4edea3" stroke-width="2"/>
+              <circle cx="620" cy="35" fill="#4edea3" r="5" stroke="#dae2fd" stroke-width="2"/>
+            </svg>
+            <div class="row text-center small text-soft mt-2 g-0 tabular">
+              <div class="col">18 أكتوبر</div>
+              <div class="col">19 أكتوبر</div>
+              <div class="col">20 أكتوبر</div>
+              <div class="col">21 أكتوبر</div>
+              <div class="col">22 أكتوبر</div>
+              <div class="col">23 أكتوبر</div>
+              <div class="col text-green fw-bold">اليوم 24</div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-3 p-2 mt-3 flex-wrap gap-2 small">
+              <span><i class="fa-solid fa-chart-line text-gold me-1"></i>معدل الفائض النقدي الأسبوعي: <strong class="text-green tabular">+284,300 ج.م</strong></span>
+              <span class="badge-pill-custom badge-green">معدل تحصيل ممتاز بنسبة 94%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- P&L Cost Breakdown & Structure -->
+      <div class="col-lg-5">
+        <div class="panel-card h-100">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-chart-pie"></i> هيكل تكاليف ومصروفات أكتوبر</h2>
+              <p class="text-soft small mb-0">توزيع النسب التقديرية للأرباح والنفقات</p>
+            </div>
+            <span class="badge-pill-custom badge-gold tabular">صافي الربح 29.6%</span>
+          </div>
+          <div class="panel-body d-flex flex-column gap-3">
+            <div>
+              <div class="d-flex justify-content-between small mb-1 flex-wrap gap-1">
+                <span><span class="dot dot-gold me-1"></span>تكلفة الأغذية والمشروبات (F&amp;B Cost)</span>
+                <span><span class="text-gold-strong fw-bold tabular">31.4%</span> <span class="text-soft">(112,500 ج.م)</span></span>
+              </div>
+              <div class="progress" style="height:8px;"><div class="progress-bar progress-gold" style="width:31.4%"></div></div>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between small mb-1 flex-wrap gap-1">
+                <span><span class="dot dot-green me-1"></span>الرواتب والأجور المباشرة (Labor)</span>
+                <span><span class="text-green fw-bold tabular">22.0%</span> <span class="text-soft">(78,800 ج.م)</span></span>
+              </div>
+              <div class="progress" style="height:8px;"><div class="progress-bar bg-success" style="width:22%"></div></div>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between small mb-1 flex-wrap gap-1">
+                <span><span class="dot me-1" style="background:var(--al-rose);box-shadow:0 0 8px var(--al-rose);"></span>إيجار الكافيه والكهرباء والمرافق</span>
+                <span><span class="text-rose fw-bold tabular">11.0%</span> <span class="text-soft">(39,400 ج.م)</span></span>
+              </div>
+              <div class="progress" style="height:8px;"><div class="progress-bar bg-danger" style="width:11%"></div></div>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between small mb-1 flex-wrap gap-1">
+                <span><span class="dot me-1" style="background:var(--al-ink-faint);box-shadow:none;"></span>صيانة، تسويق، ونثريات يومية</span>
+                <span><span class="text-ink-faint fw-bold tabular">6.0%</span> <span class="text-soft">(21,500 ج.م)</span></span>
+              </div>
+              <div class="progress" style="height:8px;"><div class="progress-bar" style="width:6%;background:var(--al-ink-faint);"></div></div>
+            </div>
+            <div class="pt-1">
+              <div class="d-flex justify-content-between small mb-1 flex-wrap gap-1">
+                <span class="text-green fw-bold"><span class="dot dot-green me-1"></span>صافي الربح التشغيلي المحقق</span>
+                <span><span class="text-green fw-bold tabular">29.6%</span> <span class="text-green">(106,000 ج.م)</span></span>
+              </div>
+              <div class="progress" style="height:10px;"><div class="progress-bar progress-gold" style="width:29.6%"></div></div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center small text-soft border-top pt-2">
+              <span>إجمالي الإيراد التشغيلي التراكمي:</span>
+              <strong class="text-gold fw-bold tabular">358,200 ج.م</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. MAIN LEDGER SECTION & COMPLIANCE SIDEBAR
+         ============================================================ -->
+    <section class="row g-3">
+      <!-- Left / Center: Financial Ledger -->
+      <div class="col-lg-8">
+        <div class="panel-card h-100">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-book-open text-green"></i> سجل الحركات المالية وسندات الخزينة الحية</h2>
+              <p class="text-soft small mb-0">تحديث فوري لكل سند صرف، توريد كاشير، أو دفع إلكتروني</p>
+            </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <span class="badge-pill-custom badge-neutral tabular">عرض 6 من أصل 48 حركة مسجلة اليوم</span>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <div class="input-icon">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" id="ledgerSearch" class="form-control form-control-sm" style="min-width:180px;" placeholder="بحث برقم السند أو المستفيد..."/>
+                </div>
+                <select id="filterType" class="form-select form-select-sm" style="width:auto;">
+                  <option value="all">جميع الحركات</option>
+                  <option value="سندات صرف">سندات صرف</option>
+                  <option value="سندات قبض">سندات قبض</option>
+                  <option value="تحويلات خزينة">تحويلات خزينة</option>
+                  <option value="سداد موردين">سداد موردين</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body flush table-wrap">
+            <table id="ledgerTable" class="table table-alegria table-hover m-0" data-datatable data-datatable-opts='{"pageLength":6,"order":[]}'>
+              <thead>
+                <tr>
+                  <th>رقم السند</th>
+                  <th>البيان والتفاصيل</th>
+                  <th>الحساب / الخزينة</th>
+                  <th class="text-start">المبلغ</th>
+                  <th class="text-center">الحالة</th>
+                  <th class="text-center">الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1: Supplier Payment -->
+                <tr data-cat="سداد موردين">
+                  <td>
+                    <div class="fw-bold text-gold-strong small tabular">#V-8941</div>
+                    <small class="text-soft tabular">19:42 مساءً</small>
+                  </td>
+                  <td>
+                    <div class="fw-black small">سداد دفعة مورد لحوم (شركة الأمانة)</div>
+                    <small class="text-soft">سداد جزئي للفاتورة رقم INV-1082 • المعتمد: فهد السليمان</small>
+                  </td>
+                  <td><span class="badge-pill-custom badge-neutral">خزينة الفرع الرئيسية</span></td>
+                  <td class="text-start"><span class="fw-bold text-rose tabular">-20,000 ج.م</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green">معتمد ومسدد</span></td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-ghost btn-sm quick-action" style="padding:.2rem .55rem;" data-title="طباعة سند الصرف #V-8941"><i class="fa-solid fa-print"></i></button>
+                  </td>
+                </tr>
+                <!-- Row 2: POS Shift Deposit -->
+                <tr data-cat="سندات قبض">
+                  <td>
+                    <div class="fw-bold text-green small tabular">#REC-4410</div>
+                    <small class="text-soft tabular">17:15 مساءً</small>
+                  </td>
+                  <td>
+                    <div class="fw-black small">إقفال وتوريد نقدية وردية الغداء</div>
+                    <small class="text-soft">توريد درج كاشير 1 لصالح الخزينة المركزية • الكاشير: أحمد سمير</small>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green">درج كاشير 1 ← الخزينة</span></td>
+                  <td class="text-start"><span class="fw-bold text-green tabular">+28,400 ج.م</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green">مكتمل ومطابق</span></td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-ghost btn-sm quick-action" style="padding:.2rem .55rem;" data-title="عرض تفاصيل سند التوريد #REC-4410"><i class="fa-solid fa-eye"></i></button>
+                  </td>
+                </tr>
+                <!-- Row 3: Daily Petty Cash Voucher -->
+                <tr data-cat="سندات صرف">
+                  <td>
+                    <div class="fw-bold text-gold-strong small tabular">#V-8940</div>
+                    <small class="text-soft tabular">15:30 عصراً</small>
+                  </td>
+                  <td>
+                    <div class="fw-black small">شراء خضار طازج مستعجل وسولار للمولد</div>
+                    <small class="text-soft">نثريات تشغيلية استثنائية • تم إرفاق الفاتورة الضريبية</small>
+                  </td>
+                  <td><span class="badge-pill-custom badge-neutral">عهدة نثريات الصالة</span></td>
+                  <td class="text-start"><span class="fw-bold text-rose tabular">-1,250 ج.م</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold">مرفق به الفاتورة</span></td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-ghost btn-sm quick-action" style="padding:.2rem .55rem;" data-title="عرض الفاتورة الضريبية المرفقة #V-8940"><i class="fa-solid fa-receipt"></i></button>
+                  </td>
+                </tr>
+                <!-- Row 4: Digital Wallet InstaPay -->
+                <tr data-cat="سندات قبض">
+                  <td>
+                    <div class="fw-bold text-green small tabular">#TRX-9932</div>
+                    <small class="text-soft tabular">14:10 ظهراً</small>
+                  </td>
+                  <td>
+                    <div class="fw-black small">دفع طاولة VIP (صينية أليجريا الفاخرة)</div>
+                    <small class="text-soft">تحويل إنستاباي مباشر • رقم المرجع البنكي 40992187</small>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green">محفظة إنستاباي</span></td>
+                  <td class="text-start"><span class="fw-bold text-green tabular">+3,219 ج.م</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green">مطابق آلياً</span></td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-ghost btn-sm quick-action" style="padding:.2rem .55rem;" data-title="التحقق من المعاملة البنكية المرجع 40992187"><i class="fa-solid fa-circle-check"></i></button>
+                  </td>
+                </tr>
+                <!-- Row 5: Maintenance Expense -->
+                <tr data-cat="سندات صرف">
+                  <td>
+                    <div class="fw-bold text-gold-strong small tabular">#V-8939</div>
+                    <small class="text-soft tabular">11:45 صباحاً</small>
+                  </td>
+                  <td>
+                    <div class="fw-black small">صيانة ثلاجة التجميد العميقة الرئيسية</div>
+                    <small class="text-soft">شركة كولد برو للتبريد • تحويل إلكتروني من حساب البنك</small>
+                  </td>
+                  <td><span class="badge-pill-custom badge-neutral">البنك التجاري (CIB)</span></td>
+                  <td class="text-start"><span class="fw-bold text-rose tabular">-3,500 ج.م</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green">معتمد ومسدد</span></td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-ghost btn-sm quick-action" style="padding:.2rem .55rem;" data-title="عرض مستند الصرف الإلكتروني #V-8939"><i class="fa-solid fa-file-lines"></i></button>
+                  </td>
+                </tr>
+                <!-- Row 6: VIP Event Reservation Deposit -->
+                <tr data-cat="سندات قبض">
+                  <td>
+                    <div class="fw-bold text-green small tabular">#REC-4409</div>
+                    <small class="text-soft tabular">10:00 صباحاً</small>
+                  </td>
+                  <td>
+                    <div class="fw-black small">دفعة مقدمة لحجز قاعة الـ VIP لمناسبة عائلية</div>
+                    <small class="text-soft">العميل: م. حازم المنشاوي • تاريخ الحفل 28 أكتوبر</small>
+                  </td>
+                  <td><span class="badge-pill-custom badge-neutral">الخزينة الرئيسية</span></td>
+                  <td class="text-start"><span class="fw-bold text-green tabular">+10,000 ج.م</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green">معتمد وموثق</span></td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-ghost btn-sm quick-action" style="padding:.2rem .55rem;" data-title="طباعة سند القبض #REC-4409"><i class="fa-solid fa-print"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel-body border-top pt-2 pb-2">
+            <div class="d-flex justify-content-between align-items-center small text-soft flex-wrap gap-2">
+              <span><span class="dot dot-green me-1"></span>آخر تحديث للحركات: اليوم الساعة 19:42</span>
+              <span class="text-soft">إجمالي المقبوض: <strong class="text-green tabular">+41,619 ج.م</strong> · إجمالي المصروف: <strong class="text-rose tabular">-24,750 ج.م</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: Financial Compliance & Control Sidebar -->
+      <div class="col-lg-4">
+        <div class="d-flex flex-column gap-3">
+          <!-- 1. Petty Cash Tracking -->
+          <div class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h2><i class="fa-solid fa-wallet"></i> متابعة العهد النقدية المؤقتة</h2>
+              </div>
+              <button type="button" class="btn btn-ghost btn-sm" data-confirm="هل تريد تغذية عهدة نقدية وإنشاء سند تغذية جديد؟"><i class="fa-solid fa-plus me-1"></i> تغذية عهدة</button>
+            </div>
+            <div class="panel-body d-flex flex-column gap-2">
+              <!-- Executive Chef Petty Cash -->
+              <div class="bg-al-2 border rounded-3 p-2">
+                <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+                  <div>
+                    <strong class="small d-block">عهدة الشيف التنفيذي (مشتريات طارئة)</strong>
+                  </div>
+                  <span class="badge-pill-custom badge-rose tabular">متبقي 950 ج.م</span>
+                </div>
+                <div class="progress mt-2" style="height:6px;"><div class="progress-bar bg-danger" style="width:81%"></div></div>
+                <div class="d-flex justify-content-between align-items-center small mt-1 flex-wrap gap-1">
+                  <span class="text-soft">المصروف: <span class="tabular">4,050 ج.م</span> من أصل <span class="tabular">5,000 ج.م</span></span>
+                  <span class="text-rose fw-bold">يجب التغذية قريباً</span>
+                </div>
+              </div>
+              <!-- Operations Manager Petty Cash -->
+              <div class="bg-al-2 border rounded-3 p-2">
+                <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+                  <div>
+                    <strong class="small d-block">عهدة مدير التشغيل (الصيانة والضيافة)</strong>
+                  </div>
+                  <span class="badge-pill-custom badge-green tabular">متبقي 6,800 ج.م</span>
+                </div>
+                <div class="progress mt-2" style="height:6px;"><div class="progress-bar bg-success" style="width:32%"></div></div>
+                <div class="d-flex justify-content-between align-items-center small mt-1 flex-wrap gap-1">
+                  <span class="text-soft">المصروف: <span class="tabular">3,200 ج.م</span> من أصل <span class="tabular">10,000 ج.م</span></span>
+                  <span class="text-green fw-bold">وضع آمن ومريح</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 2. Shift Reconciliation & Cash Variance Radar -->
+          <div class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h2><i class="fa-solid fa-square-check text-green"></i> رادار الفروقات ومطابقة الكاشير</h2>
+              </div>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="panel-body">
+              <div class="bg-al-2 border rounded-3 p-3 text-center">
+                <div class="text-green d-flex align-items-center justify-content-center gap-2">
+                  <i class="fa-solid fa-circle-check fs-4"></i>
+                  <span class="fw-black fs-3 tabular">0.00 ج.م</span>
+                </div>
+                <div class="fw-black small mt-1">مطابقة نقدية تامة بنسبة 100%</div>
+                <p class="small text-soft mb-0 mt-1">
+                  إجمالي النقدية المحصلة فعلياً تطابق مبيعات نظام نقاط البيع للورديتين السابقة والحالية دون أي عجز أو زيادة مسجلة.
+                </p>
+              </div>
+              <div class="row g-2 mt-2">
+                <div class="col-6">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex flex-column">
+                    <small class="text-soft">مبيعات النظام (System):</small>
+                    <strong class="tabular">54,820 ج.م</strong>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex flex-column">
+                    <small class="text-soft">المقبوض الفعلي (Actual):</small>
+                    <strong class="text-green tabular">54,820 ج.م</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 3. Upcoming Obligations & Payables Calendar -->
+          <div class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h2><i class="fa-solid fa-calendar-day text-rose"></i> التزامات واستحقاقات قادمة</h2>
+              </div>
+              <span class="badge-pill-custom badge-rose tabular">3 فواتير حرجة</span>
+            </div>
+            <div class="panel-body">
+              <div class="d-flex flex-column gap-2">
+                <!-- Payable 1 -->
+                <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <strong class="small d-block">سداد دفعة مطاحن الشرق (دقيق وبن)</strong>
+                    <small class="text-rose">تستحق غداً: <span class="tabular">25 أكتوبر</span></small>
+                  </div>
+                  <span class="fw-bold tabular small text-nowrap">14,500 ج.م</span>
+                </div>
+                <!-- Payable 2 -->
+                <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <strong class="small d-block">رواتب طاقم العمل والشيفات</strong>
+                    <small class="text-soft">تستحق: <span class="tabular">1 نوفمبر</span> (بعد 7 أيام)</small>
+                  </div>
+                  <span class="fw-bold text-gold-strong tabular small text-nowrap">120,000 ج.م</span>
+                </div>
+                <!-- Payable 3 -->
+                <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <strong class="small d-block">القسط الإيجاري الشهري لمقر الكافيه</strong>
+                    <small class="text-soft">تستحق: <span class="tabular">5 نوفمبر</span></small>
+                  </div>
+                  <span class="fw-bold tabular small text-nowrap">45,000 ج.م</span>
+                </div>
+              </div>
+              <button type="button" class="btn btn-ghost w-100 mt-3 btn-sm quick-action" data-title="عرض جدول السيولة التقديرية لكامل الشهر">
+                <i class="fa-solid fa-table-list me-1 text-gold"></i> عرض جدول السيولة التقديرية لكامل الشهر
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "../../assets", section: "erp", page: "treasury" };
+  </script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/sweetalert2.all.min.js"></script>
+  <script src="../../assets/js/dataTables.min.js"></script>
+  <script src="../../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../../assets/js/layout.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    // Confirm-then-toast actions (transfers / reconciliations / approvals / fund feeds)
+    $('[data-confirm]').on('click', function () {
+      var msg = $(this).data('confirm');
+      window.Al.confirm('تأكيد', msg, function () {
+        window.Al.toast('تم تنفيذ العملية', 'success');
+      });
+    });
+
+    // Non-destructive treasury quick actions -> toast
+    $('.quick-action').on('click', function () {
+      var title = $(this).data('title');
+      window.Al.toast('تم تنفيذ: ' + title, 'success');
+    });
+
+    // Ledger toolbar: type filter + live search wired to DataTables instance
+    if ($.fn.DataTable && $.fn.DataTable.isDataTable($('#ledgerTable'))) {
+      var dt = $('#ledgerTable').DataTable();
+
+      $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var cat = $('#filterType').val();
+        if (cat === 'all') return true;
+        var rowCat = dt.row(dataIndex).node().getAttribute('data-cat');
+        return rowCat === cat;
+      });
+
+      $('#filterType').on('change', function () { dt.draw(); });
+      $('#ledgerSearch').on('keyup', function () { dt.search(this.value).draw(); });
+    }
+  </script>
+</body>
+</html>

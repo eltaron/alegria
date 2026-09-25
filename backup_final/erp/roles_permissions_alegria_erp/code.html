@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>المستخدمون والصلاحيات الفردية | أليجريا ERP</title>
+  <meta name="description" content="إدارة المستخدمين والصلاحيات الفردية، المصادقة الثنائية 2FA، وسياسات الأمان لنظام أليجريا Haute ERP."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, نقاط البيع, المستخدمين, الصلاحيات, الأمان"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="المستخدمون والصلاحيات الفردية | أليجريا ERP"/>
+  <meta property="og:description" content="إدارة المستخدمين والصلاحيات الفردية، المصادقة الثنائية 2FA، وسياسات الأمان لنظام أليجريا Haute ERP."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="المستخدمون والصلاحيات الفردية | أليجريا ERP"/>
+  <meta name="twitter:description" content="إدارة المستخدمين والصلاحيات الفردية، المصادقة الثنائية 2FA، وسياسات الأمان لنظام أليجريا Haute ERP."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+  <style>
+    .filter-tab { white-space: nowrap; font-weight: 700; }
+    .role-chip { margin-inline-end: .25rem; }
+    @keyframes alPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .45; }
+    }
+    .pulse-dot { animation: alPulse 1.6s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. TOP META ACTION HEADER (breadcrumb + badges + quick actions)
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3 flex-wrap">
+        <div class="d-flex flex-column gap-2" style="max-width:50rem;">
+          <nav aria-label="breadcrumb" class="breadcrumb-custom small">
+            <span><i class="fa-solid fa-shield-halved text-gold me-1"></i>إدارة النظام</span>
+            <i class="fa-solid fa-angle-left mx-1"></i>
+            <span class="text-gold-strong fw-bold">المستخدمون والصلاحيات</span>
+          </nav>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> مستوى الحماية: عالي جداً (AES-256)</span>
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-cloud"></i> النسخ السحابي: <strong>منذ 18 دقيقة</strong></span>
+            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-circle-check text-gold"></i> Enterprise v2.4</span>
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> 2FA مفعل إجبارياً</span>
+          </div>
+          <h1 class="h2 fw-black m-0">إدارة المستخدمين والصلاحيات الفردية</h1>
+          <p class="mb-0">التحكم الشامل في مستويات تفويض الكوادر التشغيلية، حوكمة مسارات النقدية ونقاط البيع، ومصفوفة صلاحيات الفروع والأدوار الوظيفية في كافيه أليجريا.</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-gold add-user">
+            <i class="fa-solid fa-user-plus me-2"></i> + إضافة مستخدم
+          </button>
+          <button type="button" class="btn btn-ghost" id="triggerSync"><i class="fa-solid fa-rotate text-gold me-1"></i> مزامنة الدليل</button>
+          <button type="button" class="btn btn-ghost" id="triggerExport"><i class="fa-solid fa-file-export text-green me-1"></i> تصدير التقارير</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. SECURITY & OPERATION KPI CARDS (4)
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <!-- Card 1: Active User Licenses -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">تراخيص المستخدمين النشطة</span>
+              <div class="stat-value mt-1">24 <small class="fs-6 text-soft">/ 30 رخصة</small></div>
+            </div>
+            <span class="badge-pill-custom badge-green tabular">80% تشغيل</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft">4 مدراء • 6 كاشير</small>
+            <span class="stat-icon" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-users"></i></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2: Connected Terminals (Live Sessions) -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">الجلسات المتصلة لحظياً</span>
+              <div class="stat-value mt-1 text-green">16 <small class="fs-6 text-soft">محطة طرفية</small></div>
+            </div>
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مستقر</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft pulse-dot"><span class="dot dot-green me-1"></span>8 POS • 5 KDS • 3 لوحة تحكم</small>
+            <span class="stat-icon green" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-tower-broadcast"></i></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3: Role Definitions Matrix -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">الأدوار والمجموعات الصلاحية</span>
+              <div class="stat-value mt-1">7 <small class="fs-6 text-soft">مجموعات مخصصة</small></div>
+            </div>
+            <span class="badge-pill-custom badge-gold">100% موثقة</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-soft">آخر تحديث للصلاحية: أمس</small>
+            <span class="stat-icon amber" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-scale-balanced"></i></span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 4: Threat Intel & Blocked Attempts -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">مؤشر التهديدات والتنبيهات</span>
+              <div class="stat-value mt-1">0 <small class="fs-6 text-soft">اختراقات نشطة</small></div>
+            </div>
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مراقبة</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <small class="text-rose">محاولة دخول خاطئة (تم حظرها)</small>
+            <span class="stat-icon rose" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-shield-virus"></i></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. NAVIGATION SUB-TABS
+         ============================================================ -->
+    <ul class="nav nav-pills gap-2 mb-4 overflow-x-auto flex-nowrap pb-1" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link filter-tab active" href="#usersTable"><i class="fa-solid fa-user-gear text-gold me-1"></i> إدارة المستخدمين والحسابات <span class="badge-pill-custom badge-gold ms-1 tabular">24</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link filter-tab" href="#permMatrix"><i class="fa-solid fa-shield-halved text-gold me-1"></i> مصفوفة الأدوار والصلاحيات (Roles Matrix)</a>
+      </li>
+    </ul>
+
+    <!-- ============================================================
+         4. MAIN WORKSPACE: USERS DIRECTORY + PERMISSION MATRIX
+         ============================================================ -->
+    <section class="row g-3 align-items-start">
+
+      <div class="col-12 d-flex flex-column gap-3">
+
+        <!-- Filter and Search Toolbar -->
+        <div class="panel-card p-3">
+          <div class="row g-2 align-items-end">
+            <div class="col-lg-4">
+              <label class="form-label-custom" for="filterSearch">بحث سريع في الدليل</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="form-control" id="filterSearch" placeholder="بحث بالاسم، الكود، البريد، أو رقم الهاتف..."/>
+              </div>
+            </div>
+            <div class="col-6 col-lg-2">
+              <label class="form-label-custom" for="filterRole">الدور الوظيفي</label>
+              <select id="filterRole" class="form-select">
+                <option value="">كافة الأدوار الوظيفية</option>
+                <option value="super">Super Admin (الإدارة العليا)</option>
+                <option value="finance">مدير مالي وخزينة</option>
+                <option value="cashier">كاشير ومبيعات</option>
+                <option value="chef">شيف تنفيذي ومطبخ</option>
+                <option value="captain">كابتن ومضيف صالة VIP</option>
+                <option value="procurement">مشتريات ومستودعات</option>
+                <option value="cook">طاهي المطبخ (KDS)</option>
+              </select>
+            </div>
+            <div class="col-6 col-lg-2">
+              <label class="form-label-custom" for="filterBranch">الفرع</label>
+              <select id="filterBranch" class="form-select">
+                <option value="">كافة الفروع</option>
+                <option value="main">الفرع الرئيسي - الرياض (Centria)</option>
+                <option value="diriya">فرع الدرعية VIP Lounge</option>
+                <option value="cloud">المطبخ السحابي المركزي</option>
+                <option value="proc">المشتريات والمستودعات المركزية</option>
+                <option value="all">كافة الفروع والمحطات</option>
+              </select>
+            </div>
+            <div class="col-6 col-lg-2">
+              <label class="form-label-custom" for="filterStatus">حالة الحساب</label>
+              <select id="filterStatus" class="form-select">
+                <option value="">حالة الحساب: الكل</option>
+                <option value="active">نشط (Active)</option>
+                <option value="suspended">موقوف مؤقتاً</option>
+                <option value="locked">مغلق أمنياً</option>
+              </select>
+            </div>
+            <div class="col-6 col-lg-2 d-flex gap-2">
+              <button type="button" class="btn btn-ghost flex-grow-1" id="filterReset" title="تفريغ التصفية">
+                <i class="fa-solid fa-filter-circle-xmark me-1"></i> تفريغ
+              </button>
+              <button type="button" class="btn btn-gold add-user text-nowrap"><i class="fa-solid fa-user-plus me-1"></i> إضافة مستخدم</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users DataTable -->
+        <div class="panel-card overflow-hidden" id="usersTable">
+          <div class="panel-head">
+            <h2><i class="fa-solid fa-user-gear"></i> دليل المستخدمين والحسابات الفردية <span class="badge-pill-custom badge-gold ms-1 tabular">24</span></h2>
+            <span class="small text-soft">رخصة <strong class="text-gold-strong tabular">24 / 30</strong> • المصادقة الثنائية مفعلة لجميع الحسابات</span>
+          </div>
+          <div class="panel-body flush table-wrap">
+            <table class="table table-alegria table-hover align-middle m-0 w-100" data-datatable>
+              <thead>
+                <tr>
+                  <th>المستخدم والكود الوظيفي</th>
+                  <th>الدور والمستوى</th>
+                  <th>الفروع والمحطات المصرحة</th>
+                  <th class="text-center">المصادقة (2FA)</th>
+                  <th>آخر نشاط</th>
+                  <th class="text-center">الحالة</th>
+                  <th class="text-end">إجراءات سريعة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- User 1: Super Admin -->
+                <tr data-name="فهد السليمان" data-role="super" data-branch="all" data-status="active">
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm"><i class="fa-solid fa-shield-halved"></i></span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">فهد السليمان</strong>
+                        <div class="text-soft font-mono" style="font-size:.72rem;">
+                          <span class="text-gold fw-bold">ALG-USR-001</span>
+                          <span>•</span>
+                          <span>fahad@alegriagroup.com</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> Super Admin</span></td>
+                  <td><span class="fw-semibold small">كافة الفروع</span> <span class="text-soft small">(كامل الصلاحيات)</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل بأمان عالي"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="small"><span class="dot dot-green me-1"></span>الآن (نشط)</strong>
+                      <div class="text-soft" style="font-size:.72rem;">MacBook Pro • الرياض</div>
+                    </div>
+                  </td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
+                  <td class="text-end">
+                    <div class="d-flex justify-content-end gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 2: Executive Chef Marcus -->
+                <tr data-name="شيف ماركوس أنطوان" data-role="chef" data-branch="cloud" data-status="active">
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="background:var(--al-amber-soft);color:var(--al-amber);">M</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">شيف ماركوس أنطوان</strong>
+                        <div class="text-soft font-mono" style="font-size:.72rem;">
+                          <span class="text-gold fw-bold">ALG-USR-007</span>
+                          <span>•</span>
+                          <span>marcus.chef@alegria.sa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-amber"><i class="fa-solid fa-utensils"></i> شيف تنفيذي <small>(Culinary Dir)</small></span></td>
+                  <td><span class="small">المطبخ المركزي • KDS الشواية • الوصفات</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="small">قبل 12 دقيقة</strong>
+                      <div class="text-soft" style="font-size:.72rem;">iPad Pro #Kitchen-01</div>
+                    </div>
+                  </td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
+                  <td class="text-end">
+                    <div class="d-flex justify-content-end gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 3: Chief Cashier & Treasury -->
+                <tr data-name="كريم عادل" data-role="cashier" data-branch="main" data-status="active">
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">ك</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">كريم عادل</strong>
+                        <div class="text-soft font-mono" style="font-size:.72rem;">
+                          <span class="text-gold fw-bold">ALG-USR-014</span>
+                          <span>•</span>
+                          <span>kareem.pos@alegria.sa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green"><i class="fa-solid fa-cash-register"></i> كاشير أول وأمين خزينة</span></td>
+                  <td><span class="small">الفرع الرئيسي • POS صالة 1 • الخزينة 01</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="small"><span class="dot dot-green me-1"></span>الآن (POS-01)</strong>
+                      <div class="text-soft" style="font-size:.72rem;">محطة الكاشير الرئيسية</div>
+                    </div>
+                  </td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
+                  <td class="text-end">
+                    <div class="d-flex justify-content-end gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 4: VIP Floor Captain -->
+                <tr data-name="حسام رضوان" data-role="captain" data-branch="diriya" data-status="active">
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm">ح</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">حسام رضوان</strong>
+                        <div class="text-soft font-mono" style="font-size:.72rem;">
+                          <span class="text-gold fw-bold">ALG-USR-019</span>
+                          <span>•</span>
+                          <span>hossam.vip@alegria.sa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-bell-concierge"></i> مشرف صالة وكابتن VIP</span></td>
+                  <td><span class="small">فرع الدرعية VIP • جهاز نادل 04</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="small">قبل 5 دقائق</strong>
+                      <div class="text-soft" style="font-size:.72rem;">Handheld Waiter Tab</div>
+                    </div>
+                  </td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
+                  <td class="text-end">
+                    <div class="d-flex justify-content-end gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 5: Procurement Manager -->
+                <tr data-name="م. سارة كمال" data-role="procurement" data-branch="proc" data-status="active">
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="background:var(--al-rose-soft);color:var(--al-rose);">س</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">م. سارة كمال</strong>
+                        <div class="text-soft font-mono" style="font-size:.72rem;">
+                          <span class="text-gold fw-bold">ALG-USR-004</span>
+                          <span>•</span>
+                          <span>sara.proc@alegria.sa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-truck-field"></i> مدير جودة ومشتريات</span></td>
+                  <td><span class="small">المشتريات • المستودعات المركزية</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="small">قبل ساعة</strong>
+                      <div class="text-soft" style="font-size:.72rem;">Dell Precision • المكتب</div>
+                    </div>
+                  </td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
+                  <td class="text-end">
+                    <div class="d-flex justify-content-end gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 6: KDS Grill Cook -->
+                <tr data-name="إبراهيم حمدي" data-role="cook" data-branch="cloud" data-status="active">
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="background:var(--al-surface-2);color:var(--al-ink-soft);border:1px solid var(--al-line-strong);">إ</span>
+                      <div class="lh-sm">
+                        <strong class="small d-block">إبراهيم حمدي</strong>
+                        <div class="text-soft font-mono" style="font-size:.72rem;">
+                          <span class="text-gold fw-bold">ALG-USR-022</span>
+                          <span>•</span>
+                          <span>ibrahim.kds@alegria.sa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-kitchen-set"></i> طاهي محطة الشواية</span></td>
+                  <td><span class="small">شاشة KDS الشواية فقط <span class="text-faint">(Station #3)</span></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-neutral" title="تم الاكتفاء برمز PIN في المطبخ"><i class="fa-solid fa-lock"></i> PIN</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="small"><span class="dot dot-green me-1"></span>الآن (KDS-03)</strong>
+                      <div class="text-soft" style="font-size:.72rem;">Kitchen Touchscreen</div>
+                    </div>
+                  </td>
+                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
+                  <td class="text-end">
+                    <div class="d-flex justify-content-end gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="px-3 py-2 d-flex flex-wrap align-items-center justify-content-between gap-2 small text-soft" style="border-top:1px solid var(--al-line);">
+            <span>عرض <strong class="text-gold tabular">1 إلى 6</strong> من إجمالي <strong class="tabular">24</strong> مستخدم مسجل</span>
+            <span class="d-flex align-items-center gap-2 flex-wrap">
+              <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-signal text-green me-1"></i> 3 جلسات نشطة لحظياً</span>
+              <button type="button" class="btn btn-ghost btn-sm add-user"><i class="fa-solid fa-user-plus text-gold me-1"></i> إضافة مستخدم</button>
+            </span>
+          </div>
+        </div>
+
+        <!-- Interactive Role-Permission Matrix Sneak Peek -->
+        <div class="panel-card overflow-hidden" id="permMatrix">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-shield-halved"></i> مصفوفة حوكمة وتفويض الصلاحيات (Role Permissions Grid)</h2>
+              <p class="text-soft small mb-0">التحكم في العمليات الحساسة: الخصومات، إلغاء البنود بعد الإرسال، وفتح الدرج بدون فواتير</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnEditMatrix"><i class="fa-solid fa-sliders text-gold me-1"></i> تعديل مصفوفة القواعد</button>
+          </div>
+          <div class="panel-body flush table-wrap">
+            <table class="table table-alegria align-middle m-0 w-100">
+              <thead>
+                <tr>
+                  <th style="min-width:280px;">الوظيفة / الصلاحية الحساسة</th>
+                  <th class="text-center text-gold">Super Admin</th>
+                  <th class="text-center text-green">مدير الفرع</th>
+                  <th class="text-center text-amber">كاشير رئيسي</th>
+                  <th class="text-center">كابتن صالة</th>
+                  <th class="text-center text-soft">طاهي المطبخ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="fw-bold small">فتح درج النقدية يدويًا</span> <span class="text-faint d-block" style="font-size:.72rem;">No-Sale Drawer Kick</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-amber" title="مطلوب إدخال سبب معتمد"><i class="fa-solid fa-key"></i> PIN</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                </tr>
+                <tr>
+                  <td><span class="fw-bold small">منح خصم ضيافة استثنائي (&gt; 15%)</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-amber" title="حد أقصى 10% لـ VIP فقط"><i class="fa-solid fa-key"></i> PIN</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                </tr>
+                <tr>
+                  <td><span class="fw-bold small">إلغاء بند من الطلب بعد بدء تجهيزه بالمطبخ</span> <span class="text-faint d-block" style="font-size:.72rem;">Void Item</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-amber" title="مطلوب إدخال سبب معتمد"><i class="fa-solid fa-key"></i> PIN</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                </tr>
+                <tr>
+                  <td><span class="fw-bold small">تعديل تكاليف ومكونات وصفات الأطباق</span> <span class="text-faint d-block" style="font-size:.72rem;">Recipe Costs</span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
+                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="px-3 py-2 d-flex flex-wrap align-items-center gap-3 small text-soft" style="border-top:1px solid var(--al-line);">
+            <span><i class="fa-solid fa-circle-info text-gold me-1"></i>دليل دلالات الصلاحيات:</span>
+            <span><span class="badge-pill-custom badge-gold me-1"><i class="fa-solid fa-circle-check"></i></span>مفوض بالكامل</span>
+            <span><span class="badge-pill-custom badge-amber me-1"><i class="fa-solid fa-key"></i> PIN</span>بموافقة مشرف</span>
+            <span><span class="badge-pill-custom badge-rose me-1"><i class="fa-solid fa-ban"></i></span>محظور</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "../../assets", section: "erp", page: "users" };
+  </script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/sweetalert2.all.min.js"></script>
+  <script src="../../assets/js/dataTables.min.js"></script>
+  <script src="../../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../../assets/js/layout.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    (function ($) {
+      'use strict';
+
+      // ---- Filter toolbar wired to the users DataTable ----
+      $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var tr = settings.aoData[dataIndex].nTr;
+        var role = $('#filterRole').val();
+        var branch = $('#filterBranch').val();
+        var status = $('#filterStatus').val();
+        if (role && tr.getAttribute('data-role') !== role) return false;
+        if (branch && tr.getAttribute('data-branch') !== branch) return false;
+        if (status && tr.getAttribute('data-status') !== status) return false;
+        return true;
+      });
+
+      $(function () {
+        var dt = $('table[data-datatable]').DataTable();
+
+        $('#filterSearch').on('keyup change input', function () {
+          dt.search(this.value).draw();
+        });
+        $('#filterRole, #filterBranch, #filterStatus').on('change', function () {
+          dt.draw();
+        });
+        $('#filterReset').on('click', function () {
+          $('#filterSearch').val('');
+          $('#filterRole').val('');
+          $('#filterBranch').val('');
+          $('#filterStatus').val('');
+          dt.search('').draw();
+          window.Al.toast('تم تفريغ التصفية', 'info');
+        });
+
+        // ---- Row actions ----
+        $('.row-edit').on('click', function () {
+          window.Al.toast('تم فتح بيانات المستخدم', 'success');
+        });
+        $('.row-suspend').on('click', function () {
+          var name = $(this).closest('tr').data('name') || 'المستخدم';
+          window.Al.confirm('تعليق المستخدم', 'سيتم تعليق حساب "' + name + '" مؤقتاً ومنع تسجيل الدخول حتى إعادة التفعيل.', function () {
+            window.Al.toast('تم تعليق المستخدم: ' + name, 'success');
+          }, { confirmText: 'نعم، علّق الحساب', color: '#d97707' });
+        });
+        $('.row-delete').on('click', function () {
+          var name = $(this).closest('tr').data('name') || 'المستخدم';
+          window.Al.confirm('حذف المستخدم', 'سيتم حذف حساب "' + name + '" نهائياً مع أرشفة سجل النشاط الأمني الخاص به.', function () {
+            window.Al.toast('تم حذف المستخدم: ' + name, 'success');
+          }, { confirmText: 'نعم، احذف نهائياً', color: '#c0392b' });
+        });
+
+        // ---- Add user (prompt) ----
+        $('.add-user').on('click', function () {
+          window.Al.prompt('إضافة مستخدم', 'الاسم الكامل للمستخدم', function (val) {
+            window.Al.toast('تمت إضافة المستخدم: ' + (val || 'بدون اسم'), 'success');
+          });
+        });
+
+        // ---- Top actions: sync / export ----
+        $('#triggerSync').on('click', function () {
+          window.Al.toast('تمت مزامنة الدليل مع جميع الفروع', 'success');
+        });
+        $('#triggerExport').on('click', function () {
+          window.Al.toast('تم تجهيز تصدير تقارير المستخدمين', 'success');
+        });
+
+        // ---- Matrix helpers ----
+        $('#btnEditMatrix').on('click', function () {
+          window.Al.toast('تم فتح محرر مصفوفة القواعد', 'success');
+        });
+      });
+    })(jQuery);
+  </script>
+</body>
+</html>

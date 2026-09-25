@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إتمام الطلب | أليجريا كافيه ومطعم</title>
+  <meta name="description" content="أكمل طلبك من أليجريا: بيانات التوصيل ووسيلة الدفع وتأكيد الطلب."/>
+  <meta name="keywords" content="أليجريا, كافيه, مطعم, قهوة إسبيشال, منيو رقمي, طلب أونلاين, الرياض"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#f6f1e7"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="إتمام الطلب | أليجريا كافيه ومطعم"/>
+  <meta property="og:description" content="أكمل طلبك من أليجريا: بيانات التوصيل ووسيلة الدفع وتأكيد الطلب."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="إتمام الطلب | أليجريا كافيه ومطعم"/>
+  <meta name="twitter:description" content="أكمل طلبك من أليجريا: بيانات التوصيل ووسيلة الدفع وتأكيد الطلب."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body class="bg-al">
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main>
+
+    <!-- ============================================================
+         1. PAGE HERO
+         ============================================================ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb-custom small mb-3" aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+              <a href="alegria_digital_menu.html" class="text-decoration-none text-gold">
+                <i class="fa-solid fa-house me-1"></i> الرئيسية
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="cart_checkout_alegria.html" class="text-decoration-none text-gold">سلة الضيافة</a>
+            </li>
+            <li class="breadcrumb-item active fw-bold" aria-current="page">إتمام الطلب</li>
+          </ol>
+        </nav>
+
+        <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-4">
+          <div>
+            <span class="eyebrow mb-2" style="justify-content:flex-start;"><i class="fa-solid fa-feather-pointed"></i> تأكيد الطلب النهائي • Secure Checkout</span>
+            <h1 class="display-5 fw-black mt-1 mb-0">إتمام الطلب وتأكيد الضيافة</h1>
+            <p class="text-soft lead mt-3 mb-0" style="max-width:640px;">
+              خطوة أخيرة قبل أن ينطلق طلبك إلى مطبخنا الملكي. أكمل بياناتك، اختر نمط الاستلام وطريقة الدفع، وسنتولّى الباقي بحرفية أليجريا المعتادة.
+            </p>
+          </div>
+          <div class="panel-card px-4 py-3 d-flex align-items-center gap-3 flex-shrink-0">
+            <span class="avatar-sm" style="width:46px;height:46px;font-size:1.05rem;"><i class="fa-solid fa-utensils"></i></span>
+            <div class="lh-sm">
+              <span class="text-faint small d-block">رقم الطلب المتوقع</span>
+              <span class="fw-bold text-gold-strong"><i class="fa-regular fa-hashtag me-1"></i>AEG-<span class="font-mono" id="orderGuess">2026</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. CHECKOUT STEPPER
+         ============================================================ -->
+    <section class="section pt-4 pb-0">
+      <div class="container">
+        <div class="stepbar mb-4">
+          <a class="step step-link done" href="alegria_digital_menu.html">
+            <span class="step-num"><i class="fa-solid fa-check"></i></span>
+            <span>اختيار الأطباق</span>
+          </a>
+          <span class="step-dots text-faint">•••</span>
+          <a class="step step-link done" href="cart_checkout_alegria.html">
+            <span class="step-num"><i class="fa-solid fa-check"></i></span>
+            <span>مراجعة السلة</span>
+          </a>
+          <span class="step-dots text-faint">•••</span>
+          <span class="step current">
+            <span class="step-num">٣</span>
+            <span>إتمام الطلب</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. MAIN CHECKOUT WORKSPACE
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="row g-4 g-lg-5 align-items-start" id="checkoutWorkspace">
+
+          <!-- ============ CUSTOMER FORM (8 cols) ============ -->
+          <div class="col-lg-8">
+            <div class="panel-card checkout-panel position-relative overflow-hidden" id="checkoutForm">
+              <div class="position-absolute top-0 start-0 end-0" style="height:4px;background:linear-gradient(90deg,var(--al-gold),var(--al-gold-strong),var(--al-amber));"></div>
+              <div class="panel-head">
+                <div class="d-flex align-items-center gap-3">
+                  <span class="stat-icon mb-0"><i class="fa-solid fa-user-check"></i></span>
+                  <div>
+                    <h1 class="fs-4 mb-0">بيانات الطلب والتوصيل</h1>
+                    <p class="small mb-0 mt-1 text-soft">ثلاث مجموعات سريعة وتنتهي رحلتك</p>
+                  </div>
+                </div>
+                <span class="badge-pill-custom badge-gold" id="itemsBadge">٠ أصناف</span>
+              </div>
+
+              <div class="panel-body">
+
+                <!-- Group 1: بيانات التواصل -->
+                <div class="field-group">
+                  <div class="field-group-title"><span class="fg-num">١</span> بيانات التواصل</div>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label-custom"><i class="fa-solid fa-user text-gold me-1"></i> الاسم الكامل</label>
+                      <input type="text" id="customerName" class="form-control" placeholder="مثال: عبدالعزيز السعد"/>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label-custom"><i class="fa-solid fa-phone text-gold me-1"></i> رقم الجوال</label>
+                      <input type="tel" id="customerPhone" dir="ltr" class="form-control text-start" placeholder="05xxxxxxxx"/>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Group 2: عنوان التوصيل -->
+                <div class="field-group">
+                  <div class="field-group-title"><span class="fg-num">٢</span> عنوان التوصيل</div>
+                  <label class="form-label-custom"><i class="fa-solid fa-location-dot text-gold me-1"></i> العنوان التفصيلي</label>
+                  <textarea id="customerAddress" rows="3" class="form-control resize-none" placeholder="الحي، الشارع، رقم العقار، أي معلم قريب..."></textarea>
+                </div>
+
+                <!-- Group 3: موعد وطريقة الاستلام -->
+                <div class="field-group">
+                  <div class="field-group-title"><span class="fg-num">٣</span> موعد الاستلام</div>
+                  <div class="d-flex flex-column flex-sm-row gap-2">
+                    <label class="opt-tile delivery-time p-3 m-0 selected flex-fill d-flex align-items-center gap-3">
+                      <input checked type="radio" name="delivery_time" value="immediate" class="d-none">
+                      <span class="opt-ico tone-amber"><i class="fa-solid fa-bolt"></i></span>
+                      <span class="flex-grow-1">
+                        <span class="fw-bold d-block">توصيل فوري</span>
+                        <span class="small text-soft">أسطول الحماية الحرارية • ٣٥-٤٥ دقيقة</span>
+                      </span>
+                    </label>
+                    <label class="opt-tile delivery-time p-3 m-0 flex-fill d-flex align-items-center gap-3">
+                      <input type="radio" name="delivery_time" value="scheduled" class="d-none">
+                      <span class="opt-ico tone-green"><i class="fa-solid fa-calendar-check"></i></span>
+                      <span class="flex-grow-1">
+                        <span class="fw-bold d-block">موعد مسبق</span>
+                        <span class="small text-soft">حدّد ساعة تناسب ولائمكم</span>
+                      </span>
+                    </label>
+                    <label class="opt-tile delivery-time p-3 m-0 flex-fill d-flex align-items-center gap-3">
+                      <input type="radio" name="delivery_time" value="pickup" class="d-none">
+                      <span class="opt-ico tone-rose"><i class="fa-solid fa-store"></i></span>
+                      <span class="flex-grow-1">
+                        <span class="fw-bold d-block">استلام ذاتي</span>
+                        <span class="small text-soft">صندوق أليجريا الذهبي جاهزاً</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Group 4: الدفع -->
+                <div class="field-group">
+                  <div class="field-group-title"><span class="fg-num">٤</span> طريقة الدفع</div>
+                  <div class="d-flex flex-column flex-md-row gap-2">
+                    <label class="opt-tile payment-option p-3 m-0 selected flex-fill d-flex align-items-center gap-3">
+                      <input checked type="radio" name="payment_method" value="cash" class="d-none">
+                      <span class="opt-ico"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+                      <span class="flex-grow-1">
+                        <span class="fw-bold d-block">عند الاستلام</span>
+                        <span class="small text-soft">نقداً أو جهاز مدى المحمول</span>
+                      </span>
+                    </label>
+                    <label class="opt-tile payment-option p-3 m-0 flex-fill d-flex align-items-center gap-3">
+                      <input type="radio" name="payment_method" value="card" class="d-none">
+                      <span class="opt-ico tone-amber"><i class="fa-solid fa-credit-card"></i></span>
+                      <span class="flex-grow-1">
+                        <span class="fw-bold d-block">بطاقة بنكية</span>
+                        <span class="small text-soft">مدى • فيزا • ماستركارد • Apple Pay</span>
+                      </span>
+                    </label>
+                    <label class="opt-tile payment-option p-3 m-0 flex-fill d-flex align-items-center gap-3">
+                      <input type="radio" name="payment_method" value="wallet" class="d-none">
+                      <span class="opt-ico tone-green"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                      <span class="flex-grow-1">
+                        <span class="fw-bold d-block">محفظة إلكترونية</span>
+                        <span class="small text-soft">STC Pay وأبرز المحافظ</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Summary hint -->
+                <div class="p-3 rounded-3 bg-al-2 d-flex align-items-center gap-2 small mt-2" id="summaryHint">
+                  <i class="fa-solid fa-basket-shopping text-gold fs-5"></i>
+                  <span id="summaryHintText">سلتك تحتوي على ٠ أصناف تنتظر التأكيد.</span>
+                </div>
+
+                <!-- Actions -->
+                <div class="d-flex flex-column flex-sm-row gap-2 mt-4">
+                  <button id="confirmOrderBtn" type="button" class="btn btn-gold btn-lg rounded-pill px-4 fw-bold flex-fill">
+                    <i class="fa-solid fa-check-circle me-1"></i> تأكيد الطلب وتحضير المائدة
+                  </button>
+                  <a href="cart_checkout_alegria.html" class="btn btn-ghost btn-lg rounded-pill px-4 flex-fill">
+                    <i class="fa-solid fa-cart-shopping me-1"></i> مراجعة السلة
+                  </a>
+                </div>
+                <p class="small text-center text-soft mb-0 mt-3">
+                  <i class="fa-solid fa-lock text-gold me-1"></i> بياناتك محمية بتشفير 256-bit ويتم استخدامها لتأكيد التوصيل فقط.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ ORDER SUMMARY (4 cols) ============ -->
+          <aside class="col-lg-4">
+            <div class="panel-card position-relative overflow-hidden sticky-lg-top" style="top:1.5rem;">
+              <div class="position-absolute top-0 start-0 end-0" style="height:3px;background:linear-gradient(90deg,var(--al-gold),var(--al-gold-strong));"></div>
+              <div class="panel-head">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-receipt text-gold fs-5"></i>
+                  <h3 class="fs-5 mb-0">ملخص الطلب</h3>
+                </div>
+                <span class="badge-pill-custom badge-gold" style="text-transform:none;" id="orderCountBadge">٠ أصناف</span>
+              </div>
+
+              <div class="panel-body">
+                <!-- Items List (rendered from window.Cart) -->
+                <div class="d-flex flex-column" id="orderItems"></div>
+
+                <!-- Financial Breakdown -->
+                <div class="d-flex flex-column gap-2 mt-4 pt-3" style="border-top:1px solid var(--al-line);">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <span class="text-soft">المجموع الفرعي</span>
+                    <span class="fw-bold" id="checkoutSubtotal">٠ ج.م</span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between text-gold">
+                    <span class="d-flex align-items-center gap-1">
+                      <i class="fa-solid fa-truck-fast"></i>
+                      <span>التوصيل والضيافة</span>
+                    </span>
+                    <span class="fw-bold text-gold-strong">مجاناً <span class="text-faint small"><s>٤٥</s> ج.م</span></span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between text-soft">
+                    <span class="d-flex align-items-center gap-1"><i class="fa-solid fa-circle-info text-gold"></i> ضريبة القيمة المضافة</span>
+                    <span class="text-faint small">١٤٪ مشمولة</span>
+                  </div>
+
+                  <!-- Grand Total -->
+                  <div class="total-box d-flex align-items-baseline justify-content-between mt-3">
+                    <div>
+                      <span class="fw-black d-block">الإجمالي المستحق</span>
+                      <span class="small text-soft">يشمل التغليف الحريري</span>
+                    </div>
+                    <div class="text-end" dir="ltr">
+                      <span class="fw-black fs-3 text-gold-strong font-mono" id="checkoutTotal">٠</span>
+                      <span class="fw-bold text-gold-strong me-1">ج.م</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Security row -->
+                <div class="security-row row g-2 text-center mt-4 pt-3" style="border-top:1px dashed var(--al-line-strong);">
+                  <div class="col-4 sec-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>تشفير بنكي آمن</span>
+                  </div>
+                  <div class="col-4 sec-item">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <span>ضمان وصول ساخن</span>
+                  </div>
+                  <div class="col-4 sec-item">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>دعم كونسيرج فوري</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+
+        <!-- Empty state (عند خلو السلة) -->
+        <div id="emptyState" class="d-none text-center pt-5">
+          <div class="panel-card p-5 mx-auto" style="max-width:560px;">
+            <span class="stat-icon amber mb-3 mx-auto" style="width:72px;height:72px;font-size:1.8rem;border-radius:50%;">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </span>
+            <h2 class="fs-4 fw-bold mb-2">لا توجد أصناف للطلب</h2>
+            <p class="text-soft mb-4">سلة مشترياتك فارغة حالياً. تصفح قائمتنا واختر ما يليق بمائدتك.</p>
+            <a href="alegria_digital_menu.html" class="btn btn-gold btn-lg rounded-pill px-5 fw-bold">
+              <i class="fa-solid fa-utensils me-1"></i> تصفح المنيو
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "front", page: "checkout" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/dataTables.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script>
+    function formatMoney(n) {
+      return new Intl.NumberFormat('ar-EG').format(Math.round(Number(n) || 0)) + ' ج.م';
+    }
+
+    function renderCart() {
+      var items = (window.Cart && window.Cart.items()) || [];
+      var count = window.Cart ? window.Cart.count() : 0;
+      var total = window.Cart ? window.Cart.total() : 0;
+      var arabicCount = new Intl.NumberFormat('ar-EG').format(count);
+      var year = new Date().getFullYear();
+      if (window.location.pathname.indexOf('alegria') > -1) { $('#orderGuess').text(year); }
+
+      $('#orderItems').empty();
+
+      if (!items.length) {
+        $('#checkoutWorkspace').addClass('d-none');
+        $('#checkoutForm').addClass('d-none');
+        $('#emptyState').removeClass('d-none');
+      } else {
+        $('#checkoutWorkspace').removeClass('d-none');
+        $('#checkoutForm').removeClass('d-none');
+        $('#emptyState').addClass('d-none');
+
+        items.forEach(function (item) {
+          var linePrice = (item.count || 0) * (item.price || 0);
+          var row = $('<div>').addClass('summary-item').append(
+            $('<span>').addClass('summary-thumb').append($('<i>').addClass('fa-solid fa-utensils')),
+            $('<div>').addClass('flex-grow-1 min-w-0').append(
+              $('<div>').addClass('d-flex align-items-baseline justify-content-between gap-2').append(
+                $('<h4>').addClass('fs-6 fw-bold mb-0 text-truncate').text(item.name || 'صنف'),
+                $('<span>').addClass('fw-bold text-gold-strong text-nowrap').text(formatMoney(linePrice))
+              ),
+              $('<div>').addClass('d-flex align-items-center justify-content-between mt-1 small text-soft').append(
+                $('<span>').addClass('font-mono text-faint').text('الكمية: ×' + new Intl.NumberFormat('ar-EG').format(item.count || 0))
+              )
+            )
+          );
+          if (item.extra) {
+            row.append($('<span>').addClass('small text-faint flex-shrink-0').text(item.extra));
+          }
+          $('#orderItems').append(row);
+        });
+      }
+
+      $('#orderCountBadge, #itemsBadge').text(arabicCount + ' أصناف');
+      $('#summaryHintText').text('سلتك تحتوي على ' + arabicCount + ' ' + (count === 1 ? 'صنف واحد' : 'أصناف') + ' تنتظر التأكيد.');
+      $('#checkoutSubtotal').text(formatMoney(total));
+      $('#checkoutTotal').text(new Intl.NumberFormat('ar-EG').format(Math.round(total)));
+    }
+
+    $(function () {
+      renderCart();
+
+      $('.delivery-time').on('click', function () {
+        $('.delivery-time').removeClass('selected');
+        $(this).addClass('selected');
+        $(this).find('input').prop('checked', true);
+      });
+
+      $('.payment-option').on('click', function () {
+        $('.payment-option').removeClass('selected');
+        $(this).addClass('selected');
+        $(this).find('input').prop('checked', true);
+      });
+
+      $(document).on('alegria:cart', renderCart);
+
+      $('#confirmOrderBtn').on('click', function () {
+        var name = $.trim($('#customerName').val());
+        var phone = $.trim($('#customerPhone').val());
+
+        if (!name || !phone) {
+          window.Al.warn('أكمل بياناتك', 'يرجى إدخال الاسم الكامل ورقم الجوال لتأكيد الطلب.');
+          return;
+        }
+
+        window.Al.confirm('تأكيد الطلب', 'سيتم إرسال الطلب إلى المطبخ:', function () {
+          window.Cart.clear();
+          window.Al.ok('تم استلام طلبك', 'سنتواصل معك لتأكيد التوصيل');
+          setTimeout(function () {
+            window.location.href = 'customer_orders_tracking_alegria.html';
+          }, 1600);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>المشتريات والموردون | أليجريا ERP</title>
+  <meta name="description" content="المشتريات والموردون: أوامر الشراء والفواتير وأرصدة الموردين لنظام أليجريا للإدارة."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, نقاط البيع, المخزون, الرواتب"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="المشتريات والموردون | أليجريا ERP"/>
+  <meta property="og:description" content="المشتريات والموردون: أوامر الشراء والفواتير وأرصدة الموردين لنظام أليجريا للإدارة."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="المشتريات والموردون | أليجريا ERP"/>
+  <meta name="twitter:description" content="المشتريات والموردون: أوامر الشراء والفواتير وأرصدة الموردين لنظام أليجريا للإدارة."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. TOP BREADCRUMB & PAGE ACTION BAR
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3 flex-wrap">
+        <div>
+          <div class="d-flex align-items-center gap-2 flex-wrap small text-soft breadcrumb-custom">
+            <span>لوحة الإدارة</span>
+            <i class="fa-solid fa-chevron-left"></i>
+            <span class="text-gold fw-bold">المشتريات والموردين</span>
+            <span class="badge-pill-custom badge-green ms-1"><span class="dot dot-green"></span> مرتبط لحظياً بأرصدة المخازن والخزينة</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-wrap mt-1">
+            <h1 class="h4 fw-black m-0">إدارة المشتريات وحسابات الموردين</h1>
+            <span class="badge-pill-custom badge-neutral tabular">Alegria-ERP v2.4</span>
+          </div>
+        </div>
+        <!-- Action Buttons -->
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="تصدير كشف الحسابات"><i class="fa-solid fa-file-arrow-down me-1"></i> تصدير كشف الحسابات</button>
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="تسجيل دفعة لمورد"><i class="fa-solid fa-money-bill-wave me-1 text-green"></i> تسجيل دفعة لمورد</button>
+          <button type="button" class="btn btn-outline-gold btn-sm" data-confirm="هل تريد إنشاء أمر شراء (PO) جديد وإرساله للمورد؟"><i class="fa-solid fa-cart-plus me-1"></i> + أمر شراء (PO)</button>
+          <button type="button" class="btn btn-gold btn-sm" data-confirm="هل تريد إضافة فاتورة مشتريات جديدة إلى السجل؟"><i class="fa-solid fa-receipt me-1"></i> + فاتورة مشتريات جديدة</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. KPI METRIC CARDS GRID (4) - ملخص المشتريات
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <!-- KPI 1: Month Purchases -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">إجمالي مشتريات الشهر</span>
+              <div class="stat-value mt-1">348,250 <small class="fs-6 text-gold">ج.م</small></div>
+            </div>
+            <span class="stat-icon"><i class="fa-solid fa-bag-shopping"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4 gap-2 flex-wrap">
+            <small class="text-green"><i class="fa-solid fa-arrow-trend-down me-1"></i> -2.4% توفير تكلفة</small>
+            <span class="badge-pill-custom badge-neutral tabular">42 فاتورة مسجلة</span>
+          </div>
+        </div>
+      </div>
+      <!-- KPI 2: Due to Suppliers -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">مستحقات الموردين الآجلة</span>
+              <div class="stat-value mt-1 text-gold">86,400 <small class="fs-6 text-gold">ج.م</small></div>
+            </div>
+            <span class="stat-icon amber"><i class="fa-solid fa-wallet"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4 gap-2 flex-wrap">
+            <small class="text-gold fw-bold"><i class="fa-solid fa-exclamation me-1"></i> استحقاق دفعة خلال 48 ساعة</small>
+            <span class="badge-pill-custom badge-neutral">4 دفعات</span>
+          </div>
+        </div>
+      </div>
+      <!-- KPI 3: Inbound POs & Receiving -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">أوامر شراء قيد التوريد والفحص</span>
+              <div class="stat-value mt-1 text-green">4 أوامر <small class="fs-6 text-soft fw-normal">نشطة</small></div>
+            </div>
+            <span class="stat-icon green"><i class="fa-solid fa-truck"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4 gap-2 flex-wrap">
+            <small class="text-soft">بقيمة تقديرية:</small>
+            <span class="badge-pill-custom badge-neutral tabular">32,800 ج.م</span>
+          </div>
+        </div>
+      </div>
+      <!-- KPI 4: Debit Notes & Quality Returns -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <span class="stat-label d-block">المرتجعات والتسويات (Debit Notes)</span>
+              <div class="stat-value mt-1">3,450 <small class="fs-6 text-soft">ج.م</small></div>
+            </div>
+            <span class="stat-icon" style="background:var(--al-surface-2);color:var(--al-ink-soft);"><i class="fa-solid fa-rotate-left"></i></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4 gap-2 flex-wrap">
+            <small class="text-green"><span class="dot dot-green me-1"></span> معدل مرتجع 0.9% (ممتاز)</small>
+            <span class="badge-pill-custom badge-neutral">3 إشعارات</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. NAVIGATION TABS
+         ============================================================ -->
+    <section class="d-flex align-items-center justify-content-between flex-wrap gap-2 border-bottom pb-2 mb-3">
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <button type="button" class="btn btn-gold btn-sm active"><i class="fa-solid fa-receipt me-1"></i> فواتير المشتريات <span class="badge-pill-custom badge-neutral ms-1 tabular">34</span></button>
+        <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="أوامر الشراء والتوريد"><i class="fa-solid fa-hourglass-half me-1"></i> أوامر الشراء والتوريد <span class="badge-pill-custom badge-neutral ms-1 tabular">6</span></button>
+        <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="دليل وكشف حساب الموردين"><i class="fa-solid fa-store me-1"></i> دليل وكشف حساب الموردين <span class="badge-pill-custom badge-neutral ms-1 tabular">14</span></button>
+        <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="أذون الاستلام والفحص (GRN)"><i class="fa-solid fa-clipboard-check me-1"></i> أذون الاستلام والفحص (GRN) <span class="badge-pill-custom badge-neutral ms-1 tabular">8</span></button>
+        <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="مرتجعات المشتريات"><i class="fa-solid fa-arrow-rotate-left me-1"></i> مرتجعات المشتريات</button>
+      </div>
+      <div class="d-none d-lg-flex align-items-center gap-2 small text-soft">
+        <i class="fa-solid fa-rotate"></i>
+        <span class="tabular">آخر مزامنة: 18:42:10</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. SMART FILTER & SEARCH BAR
+         ============================================================ -->
+    <section class="panel-card p-3 mb-4">
+      <div class="d-flex flex-column flex-xl-row align-items-stretch xl-items-center justify-content-between gap-3">
+        <!-- Search Input -->
+        <div class="input-icon flex-grow-1" style="min-width:280px;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="form-control" placeholder="البحث برقم الفاتورة، اسم المورد، الصنف المورّد، أو كود GRN..."/>
+        </div>
+        <!-- Filters Row -->
+        <div class="d-flex flex-wrap align-items-center gap-2">
+          <!-- Supplier Select -->
+          <div class="d-flex align-items-center gap-1">
+            <i class="fa-solid fa-building text-soft"></i>
+            <select class="form-select form-select-sm" aria-label="المورد">
+              <option value="all">كافة الموردين (14)</option>
+              <option value="amana">شركة الأمانة للحوم</option>
+              <option value="sharq">مطاحن الشرق للدقيق والأرز</option>
+              <option value="reef">مزارع الريف للألبان</option>
+              <option value="baraka">زيوت وثلاجات البركة</option>
+              <option value="nokhba">بهارات وتغليف النخبة</option>
+            </select>
+          </div>
+          <!-- Payment Status Select -->
+          <div class="d-flex align-items-center gap-1">
+            <i class="fa-solid fa-money-check-dollar text-soft"></i>
+            <select class="form-select form-select-sm" aria-label="حالة السداد">
+              <option value="all">حالة السداد: الكل</option>
+              <option value="paid">مدفوعة بالكامل</option>
+              <option value="partial">مدفوعة جزئياً</option>
+              <option value="unpaid">آجلة غير مدفوعة</option>
+              <option value="overdue">متأخرة السداد</option>
+            </select>
+          </div>
+          <!-- Warehouse Receiving Status -->
+          <div class="d-flex align-items-center gap-1">
+            <i class="fa-solid fa-warehouse text-soft"></i>
+            <select class="form-select form-select-sm" aria-label="الاستلام المخزني">
+              <option value="all">الاستلام المخزني: الكل</option>
+              <option value="received">تم الاستلام والإضافة 100%</option>
+              <option value="inspecting">قيد الفحص والوزن</option>
+              <option value="partial">استلام جزئي</option>
+            </select>
+          </div>
+          <!-- Date Range -->
+          <div class="d-flex align-items-center gap-1">
+            <i class="fa-solid fa-calendar-days text-soft"></i>
+            <select class="form-select form-select-sm" aria-label="النطاق الزمني">
+              <option value="oct">شهر أكتوبر 2024</option>
+              <option value="today">اليوم</option>
+              <option value="week">هذا الأسبوع</option>
+              <option value="custom">نطاق مخصص...</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm px-2 quick-action" data-title="تصفير الفلاتر" title="تصفير الفلاتر"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. PURCHASES MASTER TABLE (سجل فواتير التوريد الأخيرة)
+         ============================================================ -->
+    <section class="panel-card">
+      <!-- Table Header & Counter -->
+      <div class="panel-head">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <h2><i class="fa-solid fa-file-invoice"></i> سجل فواتير التوريد الأخيرة</h2>
+          <span class="badge-pill-custom badge-neutral tabular">34 فاتورة</span>
+        </div>
+        <div class="d-flex align-items-center gap-2 small text-soft">
+          <i class="fa-solid fa-sliders"></i>
+          <span>عرض: 10 من أصل 34</span>
+        </div>
+      </div>
+      <!-- Table Container -->
+      <div class="panel-body flush table-wrap">
+        <table class="table table-alegria table-hover m-0" data-datatable>
+          <thead>
+            <tr>
+              <th>رقم الفاتورة والمرجع</th>
+              <th>المورد والتصنيف</th>
+              <th>التاريخ والاستحقاق</th>
+              <th>المستودع المستلم</th>
+              <th>الإجمالي مع الضريبة</th>
+              <th>حالة الدفع</th>
+              <th>الربط المخزني</th>
+              <th class="text-center">الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row 1: Al-Amana Meat -->
+            <tr>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block text-gold tabular">#INV-2024-1082</strong>
+                  <small class="text-soft tabular">PO-8841 (عقد أسبوعي)</small>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm"><i class="fa-solid fa-drumstick-bite"></i></span>
+                  <div class="lh-sm">
+                    <strong class="d-block small">شركة الأمانة للحوم</strong>
+                    <small class="text-soft">لحوم ضاني وبتلو بلدي معتمدة</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular small">24 أكتوبر 2024</strong>
+                  <small class="text-gold tabular">استحقاق: 26 أكتوبر (خلال يومين)</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-snowflake text-gold"></i> ثلاجة اللحوم المركزية</span></td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular">42,600 <small class="text-soft fw-normal">ج.م</small></strong>
+                  <small class="text-soft tabular">شامل VAT (5,231 ج.م)</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> آجل (متبقي كامل)</span></td>
+              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-391 (مكتمل 100%)</small></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="تسجيل سداد" data-confirm="هل تريد تسجيل سداد الفاتورة #INV-2024-1082 بقيمة 42,600 ج.م؟"><i class="fa-solid fa-money-bill-wave text-gold"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1082" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1082 للمورد شركة الأمانة للحوم؟"><i class="fa-solid fa-eye"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 2: Reef Farms Dairy -->
+            <tr>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block text-gold tabular">#INV-2024-1079</strong>
+                  <small class="text-soft tabular">PO-8835 (توريد يومي)</small>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);"><i class="fa-solid fa-droplet"></i></span>
+                  <div class="lh-sm">
+                    <strong class="d-block small">مزارع الريف للألبان</strong>
+                    <small class="text-soft">قشطة طازجة، جبن، وسمن فلاحي</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular small">23 أكتوبر 2024</strong>
+                  <small class="text-green">تم السداد بالخزينة</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-kitchen-set text-green"></i> مخزن تحضير الحلويات</span></td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular">18,200 <small class="text-soft fw-normal">ج.م</small></strong>
+                  <small class="text-soft tabular">شامل VAT (2,235 ج.م)</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مدفوعة بالكامل</span></td>
+              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-388 (مكتمل 100%)</small></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1079" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1079 للمورد مزارع الريف للألبان؟"><i class="fa-solid fa-eye"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 3: Sharq Mills (Rice & Flour) -->
+            <tr>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block text-gold tabular">#INV-2024-1075</strong>
+                  <small class="text-soft tabular">PO-8820 (دفعة شهرية)</small>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm"><i class="fa-solid fa-wheat-awn"></i></span>
+                  <div class="lh-sm">
+                    <strong class="d-block small">مطاحن الشرق الكبرى</strong>
+                    <small class="text-soft">أرز بسمتي هندي ودقيق فاخر</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular small">21 أكتوبر 2024</strong>
+                  <small class="text-soft tabular">استحقاق: 10 نوفمبر</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-boxes-stacked text-soft"></i> المستودع الرئيسي (الجاف)</span></td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular">29,000 <small class="text-soft fw-normal">ج.م</small></strong>
+                  <small class="text-soft tabular">مسدد: 14,500 ج.م</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> سداد جزئي (50%)</span></td>
+              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-382 (مكتمل 100%)</small></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="تسجيل دفعة" data-confirm="هل تريد تسجيل دفعة متبقية بقيمة 14,500 ج.م لفاتورة #INV-2024-1075؟"><i class="fa-solid fa-money-bill-wave text-gold"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1075" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1075 للمورد مطاحن الشرق الكبرى؟"><i class="fa-solid fa-eye"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 4: Baraka Poultry & Frozen -->
+            <tr>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block text-gold tabular">#INV-2024-1068</strong>
+                  <small class="text-soft tabular">PO-8812 (استثنائي)</small>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm"><i class="fa-solid fa-egg"></i></span>
+                  <div class="lh-sm">
+                    <strong class="d-block small">ثلاجات وزيوت البركة</strong>
+                    <small class="text-soft">دواجن طازجة، بط، وزيوت ذرة</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular small">19 أكتوبر 2024</strong>
+                  <small class="text-green">تم السداد بشيك بنكي</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-snowflake text-gold"></i> ثلاجة التجميد العميقة</span></td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular">15,750 <small class="text-soft fw-normal">ج.م</small></strong>
+                  <small class="text-soft tabular">شامل الضريبة 14%</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مدفوعة بالكامل</span></td>
+              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-376 (مكتمل 100%)</small></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1068" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1068 للمورد ثلاجات وزيوت البركة؟"><i class="fa-solid fa-eye"></i></button>
+                </div>
+              </td>
+            </tr>
+            <!-- Row 5: Nokhba Spices & Packaging (Under inspection) -->
+            <tr>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block text-gold tabular">#INV-2024-1062</strong>
+                  <small class="text-soft tabular">PO-8799 (تجهيز سفرة)</small>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-sm"><i class="fa-solid fa-box"></i></span>
+                  <div class="lh-sm">
+                    <strong class="d-block small">بهارات وتغليف النخبة</strong>
+                    <small class="text-soft">خلطات توابل خاصة وعلب فاخرة</small>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular small">17 أكتوبر 2024</strong>
+                  <small class="text-soft tabular">استحقاق: 17 نوفمبر</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-boxes-stacked text-soft"></i> مخزن التعبئة والمطبخ</span></td>
+              <td>
+                <div class="lh-sm">
+                  <strong class="d-block tabular">8,900 <small class="text-soft fw-normal">ج.م</small></strong>
+                  <small class="text-soft">صافي مع الخصم</small>
+                </div>
+              </td>
+              <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> آجل (30 يوم)</span></td>
+              <td><small class="text-amber tabular"><i class="fa-solid fa-rotate me-1"></i>GRN-369 (قيد الفحص)</small></td>
+              <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1062" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
+                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1062 للمورد بهارات وتغليف النخبة؟"><i class="fa-solid fa-eye"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Table Footer Summary (pagination handled by DataTables) -->
+      <div class="panel-head border-top border-bottom-0">
+        <span class="small text-soft">عرض <strong class="text-gold tabular">1 - 5</strong> من إجمالي <strong class="text-gold tabular">34</strong> فاتورة مسجلة لشهر أكتوبر</span>
+        <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-circle-info"></i> البحث والصفحة القادمة عبر شريط DataTables</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "../../assets", section: "erp", page: "purchasing" };
+  </script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/sweetalert2.all.min.js"></script>
+  <script src="../../assets/js/dataTables.min.js"></script>
+  <script src="../../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../../assets/js/layout.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    // Confirm-then-toast actions (view / pay / approve / create)
+    $('[data-confirm]').on('click', function () {
+      var msg = $(this).data('confirm');
+      window.Al.confirm('تأكيد', msg, function () {
+        window.Al.toast('تم تنفيذ العملية', 'success');
+      });
+    });
+
+    // Simple purchasing quick actions -> toast
+    $('.quick-action').on('click', function () {
+      var title = $(this).data('title');
+      window.Al.toast('تم تنفيذ: ' + title, 'success');
+    });
+  </script>
+</body>
+</html>

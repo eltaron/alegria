@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تواصل معنا | أليجريا كافيه ومطعم</title>
+  <meta name="description" content="تواصل مع أليجريا كافيه ومطعم: العنوان والهاتف وواتساب وساعات العمل."/>
+  <meta name="keywords" content="أليجريا, كافيه, مطعم, قهوة إسبيشال, منيو رقمي, طلب أونلاين, الرياض"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#f6f1e7"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="تواصل معنا | أليجريا كافيه ومطعم"/>
+  <meta property="og:description" content="تواصل مع أليجريا كافيه ومطعم: العنوان والهاتف وواتساب وساعات العمل."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="تواصل معنا | أليجريا كافيه ومطعم"/>
+  <meta name="twitter:description" content="تواصل مع أليجريا كافيه ومطعم: العنوان والهاتف وواتساب وساعات العمل."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    /* تعديل مخصص لصفحة تواصل معنا فقط */
+    .page-hero {
+      position: relative;
+      background: transparent;
+      border-bottom: 0;
+      padding: 3.75rem 0 2.75rem;
+      overflow: hidden;
+    }
+    .page-hero::after { display: none; }
+  </style>
+</head>
+<body class="bg-al">
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main>
+
+    <!-- ============================================================
+         1. HERO + CONTACT STRIP
+         ============================================================ -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb-custom d-flex align-items-center flex-wrap gap-2 mb-2" aria-label="breadcrumb">
+          <a href="alegria_landing_page.html"><i class="fa-solid fa-house me-1"></i>الرئيسية</a>
+          <i class="fa-solid fa-chevron-right text-faint"></i>
+          <span class="text-gold-strong fw-semibold">تواصل معنا</span>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <h1 class="section-title m-0">تواصل معنا</h1>
+          <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-bell-concierge me-1"></i>كونسيرج فاخر</span>
+        </div>
+
+        <p class="text-soft mt-3 mb-0" style="max-width:680px;">يسعدنا الرد على استفساراتكم وتنسيق تجربتكم في أليجريا: حجوزات، مناسبات خاصة، أو استفسار عن قوائم الطعام.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. QUICK CONTACT STRIP
+         ============================================================ -->
+    <section class="section pt-0">
+      <div class="container">
+        <div class="rounded-4 overflow-hidden border" style="background:var(--al-surface);">
+          <div class="row g-0 align-items-stretch">
+
+            <!-- Call / WhatsApp -->
+            <div class="col-6 col-lg-3 contact-cell">
+              <span class="icon-disc icon-disc--lg mb-3"><i class="fa-solid fa-headset"></i></span>
+              <span class="contact-label">الاتصال المباشر</span>
+              <span class="badge-pill-custom badge-gold align-self-start"><i class="fa-solid fa-headset me-1"></i>متاح ٢٤/٧</span>
+              <a class="contact-value mt-2" dir="ltr" href="tel:+966114508899">+966 11 450 8899</a>
+              <a class="contact-sub" dir="ltr" href="tel:+966567823411">+966 56 782 3411</a>
+              <div class="d-flex align-items-center gap-2 mt-auto pt-2">
+                <span class="avatar-sm" style="width:36px;height:36px;"><i class="fa-brands fa-whatsapp text-green"></i></span>
+                <span class="text-soft small">متوفرون على واتساب</span>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="col-6 col-lg-3 contact-cell">
+              <span class="icon-disc icon-disc--lg icon-disc--amber mb-3"><i class="fa-solid fa-envelope-open-text"></i></span>
+              <span class="contact-label">المراسلات</span>
+              <span class="badge-pill-custom badge-neutral align-self-start">للاستفسارات الرسمية</span>
+              <a class="contact-value mt-2" dir="ltr" href="mailto:concierge@alegria-dining.com">concierge@alegria-dining.com</a>
+              <a class="contact-sub" dir="ltr" href="mailto:events@alegria-dining.com">events@alegria-dining.com</a>
+              <div class="mt-auto pt-2">
+                <span class="text-soft small">رد شخصي خلال ساعتين</span>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="col-6 col-lg-3 contact-cell">
+              <span class="icon-disc icon-disc--lg mb-3"><i class="fa-solid fa-clock"></i></span>
+              <span class="contact-label">ساعات الضيافة</span>
+              <span class="badge-pill-custom badge-green align-self-start"><i class="fa-solid fa-circle-check me-1"></i>مفتوح الآن</span>
+              <div class="d-flex justify-content-between align-items-center gap-3 w-100 mt-2 small">
+                <span class="text-soft">السبت - الخميس</span>
+                <span class="contact-value">٧ ص - ١ ص</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center gap-3 w-100 small">
+                <span class="text-soft">الجمعة</span>
+                <span class="contact-sub fw-bold">١ م - ٢ ص</span>
+              </div>
+            </div>
+
+            <!-- Valet -->
+            <div class="col-6 col-lg-3 contact-cell">
+              <span class="icon-disc icon-disc--lg icon-disc--green mb-3"><i class="fa-solid fa-car"></i></span>
+              <span class="contact-label">وصف السيارات</span>
+              <span class="badge-pill-custom badge-neutral align-self-start">خدمة مجانية</span>
+              <ul class="list-unstyled small text-soft mt-2 mb-0">
+                <li class="d-flex align-items-start gap-2"><i class="fa-solid fa-circle-check text-gold mt-1"></i><span>مواقف محروسة بكاميرات</span></li>
+                <li class="d-flex align-items-start gap-2 mt-1"><i class="fa-solid fa-circle-check text-gold mt-1"></i><span>استقبال بماء الورد والبخور</span></li>
+              </ul>
+              <div class="mt-auto pt-2">
+                <a class="text-gold-strong fw-bold small text-decoration-none" href="tel:+966114508899"><i class="fa-solid fa-key me-1"></i>حجز المدخل الملكي</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. BRANCHES (تبويبات + بيانات الفرع)
+         ============================================================ -->
+    <section class="section bg-al-2 border-top">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+          <div>
+            <h2 class="section-title fs-4 m-0">فروعنا وطرق الوصول</h2>
+            <p class="text-soft small mb-0">اختر الفرع لعرض العنوان والاتجاهات وبيانات الحجز</p>
+          </div>
+        </div>
+
+        <ul class="nav nav-pills tab-switch mb-4" id="branchTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab-riyadh" data-bs-toggle="pill" data-bs-target="#branch-riyadh" type="button" role="tab" aria-controls="branch-riyadh" aria-selected="true">
+              <i class="fa-solid fa-location-dot"></i> فرع الرياض
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-cairo" data-bs-toggle="pill" data-bs-target="#branch-cairo" type="button" role="tab" aria-controls="branch-cairo" aria-selected="false">
+              <i class="fa-solid fa-location-dot"></i> فرع القاهرة الجديدة
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <!-- Riyadh -->
+          <div class="tab-pane fade show active" id="branch-riyadh" role="tabpanel" aria-labelledby="tab-riyadh">
+            <div class="panel-card p-4 p-lg-5">
+              <div class="row g-4 align-items-stretch">
+                <div class="col-lg-5">
+                  <div class="position-relative rounded-4 overflow-hidden shadow h-100 min-vh-25" style="min-height:240px;">
+                    <img class="img-fluid w-100 h-100 object-fit-cover" alt="أجواء أليجريا الرياض" src="images/landing/10-main-hall.jpg"/>
+                    <span class="position-absolute bottom-0 start-0 end-0 p-3" style="background:linear-gradient(to top, rgba(27,28,26,.85), transparent);">
+                      <span class="text-gold-soft small fw-bold" style="letter-spacing:.08em;">أجواء الفرع الرئيسي</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-7 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                    <div>
+                      <h3 class="fs-4 fw-bold mb-1">أليجريا الرياض - الملقا أفينيو</h3>
+                      <span class="badge-pill-custom badge-gold">المقر الرئيسي • السعودية</span>
+                    </div>
+                    <span class="text-gold fw-bold"><i class="fa-solid fa-star"></i> ٤.٩</span>
+                  </div>
+                  <div class="mt-4 d-flex flex-column gap-3">
+                    <div class="d-flex align-items-start gap-3">
+                      <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-map-location-dot"></i></span>
+                      <div>
+                        <h4 class="fs-6 fw-bold mb-0">العنوان</h4>
+                        <p class="text-soft small mb-0">طريق التخصصي، مجمع الملقا أفينيو، الرياض</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                      <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-couch"></i></span>
+                      <div>
+                        <h4 class="fs-6 fw-bold mb-0">المرافق</h4>
+                        <p class="text-soft small mb-0">جلسات عائلية، تيراس مطل، مصلى، شحن كهربائي</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                      <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-phone-volume"></i></span>
+                      <div>
+                        <h4 class="fs-6 fw-bold mb-0">خط الحجز</h4>
+                        <p class="small fw-bold mb-0 text-start" dir="ltr">+966 11 450 8899</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-wrap align-items-center gap-2 mt-auto pt-4">
+                    <a class="btn btn-gold rounded-pill px-4 flex-grow-1" href="https://maps.google.com/?q=Al+Malqa+Avenue+Riyadh" target="_blank">
+                      <i class="fa-solid fa-diamond-turn-right me-1"></i> طلب الاتجاهات عبر Google Maps
+                    </a>
+                    <button class="btn btn-ghost rounded-pill px-4" type="button" onclick="document.getElementById('branch-select').value='riyadh';document.getElementById('inquiry-section').scrollIntoView({behavior:'smooth'});">حجز طاولة</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cairo -->
+          <div class="tab-pane fade" id="branch-cairo" role="tabpanel" aria-labelledby="tab-cairo">
+            <div class="panel-card p-4 p-lg-5">
+              <div class="row g-4 align-items-stretch">
+                <div class="col-lg-5">
+                  <div class="position-relative rounded-4 overflow-hidden shadow h-100" style="min-height:240px;">
+                    <img class="img-fluid w-100 h-100 object-fit-cover" alt="أجواء أليجريا القاهرة" src="images/landing/09-vip-lounge.jpg"/>
+                    <span class="position-absolute bottom-0 start-0 end-0 p-3" style="background:linear-gradient(to top, rgba(27,28,26,.85), transparent);">
+                      <span class="text-gold-soft small fw-bold" style="letter-spacing:.08em;">أجواء فرع القاهرة</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-7 d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                    <div>
+                      <h3 class="fs-4 fw-bold mb-1">أليجريا القاهرة - بلازا أرينا</h3>
+                      <span class="badge-pill-custom badge-gold">التجمع الخامس • مصر</span>
+                    </div>
+                    <span class="text-gold fw-bold"><i class="fa-solid fa-star"></i> ٤.٨</span>
+                  </div>
+                  <div class="mt-4 d-flex flex-column gap-3">
+                    <div class="d-flex align-items-start gap-3">
+                      <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-map-location-dot"></i></span>
+                      <div>
+                        <h4 class="fs-6 fw-bold mb-0">العنوان</h4>
+                        <p class="text-soft small mb-0">شارع التسعين الشمالي، مجمع بلازا أرينا، التجمع الخامس</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                      <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-couch"></i></span>
+                      <div>
+                        <h4 class="fs-6 fw-bold mb-0">المرافق</h4>
+                        <p class="text-soft small mb-0">جلسات خارجية، جناح رجال أعمال، شاشة للمناسبات</p>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                      <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-phone-volume"></i></span>
+                      <div>
+                        <h4 class="fs-6 fw-bold mb-0">خط الحجز</h4>
+                        <p class="small fw-bold mb-0 text-start" dir="ltr">+20 2 2810 5544</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-wrap align-items-center gap-2 mt-auto pt-4">
+                    <a class="btn btn-gold rounded-pill px-4 flex-grow-1" href="https://maps.google.com/?q=North+90th+Street+New+Cairo" target="_blank">
+                      <i class="fa-solid fa-diamond-turn-right me-1"></i> طلب الاتجاهات عبر Google Maps
+                    </a>
+                    <button class="btn btn-ghost rounded-pill px-4" type="button" onclick="document.getElementById('branch-select').value='cairo';document.getElementById('inquiry-section').scrollIntoView({behavior:'smooth'});">حجز طاولة</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. CONCIERGE & INQUIRY FORM
+         ============================================================ -->
+    <section class="section" id="inquiry-section">
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-4">
+            <span class="eyebrow"><i class="fa-solid fa-bell-concierge text-gold"></i> مكتب خدمة الضيوف</span>
+            <h2 class="section-title fs-3 mt-2">دعنا نعتني بتفاصيل زيارتك</h2>
+            <p class="text-soft">حجز طاولة، صالة مغلقة، مناسبة خاصة، أو استفسار عن قوائم الطعام — يراسلكم الكونسيرج شخصياً خلال أقل من ساعتين.</p>
+            <div class="rounded-3 p-3 mt-4" style="border-inline-start:4px solid var(--al-gold);background:var(--al-surface-2);">
+              <p class="text-soft small mb-0"><strong>ملاحظة:</strong> لطلب التنسيق المباشر مع رئيس الطهاة بشأن الحساسية أو الوجبات المخصصة، اذكر ذلك في الرسالة.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="panel-card p-4 p-lg-5">
+              <form class="row g-4" id="contactForm">
+                <div class="col-md-6">
+                  <label class="form-label-custom d-block" for="guest-name"><i class="fa-solid fa-user text-gold me-1"></i> الاسم الكريم <span class="text-rose">*</span></label>
+                  <input class="form-control" id="guest-name" type="text" placeholder="مثال: عبدالرحمن" required/>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom d-block" for="guest-phone"><i class="fa-solid fa-phone text-gold me-1"></i> رقم الجوال / واتساب <span class="text-rose">*</span></label>
+                  <input class="form-control text-start" id="guest-phone" dir="ltr" type="tel" placeholder="05x xxx xxxx" required/>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom d-block" for="guest-email"><i class="fa-solid fa-envelope text-gold me-1"></i> البريد الإلكتروني <span class="text-rose">*</span></label>
+                  <input class="form-control text-start" id="guest-email" dir="ltr" type="email" placeholder="name@domain.com" required/>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom d-block" for="branch-select"><i class="fa-solid fa-store text-gold me-1"></i> الفرع المطلوب <span class="text-rose">*</span></label>
+                  <select class="form-select" id="branch-select" required>
+                    <option value="riyadh">فرع الرياض - التخصصي (الملقا أفينيو)</option>
+                    <option value="cairo">فرع القاهرة - التجمع الخامس (بلازا أرينا)</option>
+                    <option value="any">استفسار عام / غير محدد بفرع</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom d-block" for="inquiry-type"><i class="fa-solid fa-tags text-gold me-1"></i> نوع الطلب <span class="text-rose">*</span></label>
+                  <select class="form-select" id="inquiry-type" required>
+                    <option value="table">حجز طاولة VIP</option>
+                    <option value="private-room">حجز صالة مغلقة</option>
+                    <option value="celebration">مناسبة خاصة</option>
+                    <option value="corporate">فعاليات شركات</option>
+                    <option value="feedback">مقترح أو استفسار عن المنيو</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom d-block" for="preferred-date"><i class="fa-solid fa-calendar-days text-gold me-1"></i> التاريخ المفضل (اختياري)</label>
+                  <input class="form-control" id="preferred-date" type="date"/>
+                </div>
+                <div class="col-12">
+                  <label class="form-label-custom d-block" for="guest-message"><i class="fa-solid fa-note-sticky text-gold me-1"></i> التفاصيل ورغبات الضيافة</label>
+                  <textarea class="form-control" id="guest-message" rows="3" placeholder="عدد الضيوف، متطلبات غذائية، تفاصيل المناسبة..."></textarea>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="whatsapp-confirm" checked/>
+                    <label class="form-check-label text-soft small" for="whatsapp-confirm">أفضل استقبال الرد وتأكيد الحجز عبر الواتساب.</label>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <button class="btn btn-gold btn-lg rounded-pill px-5 shadow w-100" type="submit">
+                    <span>إرسال الاستفسار</span>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                  </button>
+                  <div class="d-none align-items-center gap-2 rounded-3 bg-gold-soft text-gold-strong p-3 mt-3 text-start" id="form-success">
+                    <i class="fa-solid fa-circle-check fs-5"></i>
+                    <span class="small fw-bold">شكراً لكم. سيتواصل كونسيرج أليجريا معكم خلال أقل من ساعتين.</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "front", page: "contact" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    $(function () {
+      $('#contactForm').on('submit', function (e) {
+        e.preventDefault();
+        window.Al.toast('تم إرسال رسالتكم بنجاح! سنرد عليكم قريباً', 'success');
+        this.reset();
+      });
+    });
+  </script>
+</body>
+</html>

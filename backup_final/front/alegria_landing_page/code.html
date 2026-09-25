@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>أليجريا كافيه ومطعم | القهوة الإسبيشال والأطباق الفاخرة</title>
+  <meta name="description" content="مطعم وكافيه أليجريا: قهوة إسبيشال مختصة وأطباق شرقية وغربية فاخرة. اطلب أونلاين من المنيو الرقمي أو تواصل معنا."/>
+  <meta name="keywords" content="أليجريا, كافيه, مطعم, قهوة إسبيشال, منيو رقمي, طلب أونلاين, الرياض"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#f6f1e7"/>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="أليجريا كافيه ومطعم | القهوة الإسبيشال والأطباق الفاخرة"/>
+  <meta property="og:description" content="مطعم وكافيه أليجريا: قهوة إسبيشال مختصة وأطباق شرقية وغربية فاخرة. اطلب أونلاين من المنيو الرقمي أو تواصل معنا."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="أليجريا كافيه ومطعم | القهوة الإسبيشال والأطباق الفاخرة"/>
+  <meta name="twitter:description" content="مطعم وكافيه أليجريا: قهوة إسبيشال مختصة وأطباق شرقية وغربية فاخرة. اطلب أونلاين من المنيو الرقمي أو تواصل معنا."/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "أليجريا كافيه ومطعم",
+    "alternateName": "Alegria Cafe & Restaurant",
+    "servesCuisine": ["قهوة إسبيشال مختصة", "مطبخ شرقي", "مطبخ غربي فاخر"],
+    "priceRange": "SAR",
+    "telephone": "+966 11 234 5678",
+    "address": { "@type": "PostalAddress", "city": "الرياض", "streetAddress": "حي السليمانية", "addressCountry": "SA" },
+    "openingHours": "Mo-Su 08:00-02:00"
+  }
+  </script>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="../../assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="../../assets/css/style.css"/>
+</head>
+<body class="bg-al">
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main>
+
+    <!-- ============================================================
+         1. HERO SECTION (الترحيب الفاخر والاستقبال)
+         ============================================================ -->
+    <section class="position-relative overflow-hidden hero-landing">
+      <div class="position-absolute hero-glow" aria-hidden="true"></div>
+      <div class="container position-relative pt-4 pb-5">
+        <div class="row g-5 align-items-center pt-3 pb-2">
+          <div class="col-lg-6">
+            <span class="eyebrow rise">واحة الضيافة والمذاق الملكي الأصيل</span>
+            <h1 class="display-5 fw-black lh-base mt-3 rise rise-1">
+              أهلاً بكم في <span class="text-gold-metal">أليجريا</span>
+              <span class="d-block fs-3 mt-2 text-soft fw-bold">حيث تلتقي أصالة المذاق بفخامة الضيافة</span>
+            </h1>
+            <p class="lead text-soft mt-3 rise rise-2" style="max-width:570px;">
+              رحلة طهي استثنائية تحتفي بروائع المشاوي المتبلة على الفحم، والفتة الملكية بالموزة الذائبة، وطواجن الفخار المعتقة، لتختتم بلحظات مترفة مع حلوياتنا الطازجة وقهوتنا المختصة.
+            </p>
+            <div class="d-flex flex-wrap align-items-center gap-3 mt-4 rise rise-2">
+              <a href="#reservation" class="btn btn-gold btn-lg rounded-pill px-4">
+                <i class="fa-solid fa-utensils me-1"></i> احجز طاولتك الآن
+              </a>
+              <a href="#menu-highlights" class="btn btn-ghost btn-lg rounded-pill px-4">
+                <i class="fa-solid fa-book-open me-1 text-gold"></i> استكشف قائمة الطعام
+              </a>
+            </div>
+            <div class="d-flex flex-wrap align-items-center gap-4 mt-4 rise rise-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="d-flex gap-1 text-gold fs-5">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="lh-sm">
+                  <span class="d-block fw-bold">٤.٩ من ٥</span>
+                  <small class="text-soft">+٥,٠٠٠ ضيف وسفير للمذاق الرفيع</small>
+                </div>
+              </div>
+              <div class="d-none d-sm-flex align-items-center gap-2 text-soft small">
+                <i class="fa-solid fa-circle-check text-gold"></i> لحوم بلدية طازجة يومياً
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="position-relative hero-visual rise rise-2">
+              <img alt="وليمة أليجريا الفاخرة المشاوي والطواجن والفتة الملكية"
+                   class="img-fluid w-100 object-fit-cover"
+                   style="height:520px;"
+                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6OsdQiR2LXyNHcCsMUvFb1gHBMdrC2LSBL1VJ02vX9JHNSHsfjd4XMWU4c6Ar9HhSA-e1qzOqvpoljtiCJh80g83pjg0tNKgbSJiIzimkyqymCfcd0UV4Cd6vHsvX_OzkriC961IOJ9K8RKJasyrScuZjueJLr11yDr9xa0_cUG1Vq2WJlhFsPuT4-N_PnZVTItizeoio-X_rT2JVbqOLfc8aVCerkj3p2wNXcOYQdxooPhD0TcgGbA"/>
+              <div class="hero-visual-tag">
+                <div class="d-flex align-items-center gap-3">
+                  <span class="avatar-sm" style="width:44px;height:44px;font-size:1rem;"><i class="fa-solid fa-fire-burner"></i></span>
+                  <div class="lh-sm">
+                    <span class="fw-bold d-block">سفرة أليجريا المتكاملة</span>
+                    <small class="text-soft">مذاق الطهي البطيء والشواء الفاخر</small>
+                  </div>
+                </div>
+                <span class="badge-pill-custom badge-gold">توقيع الشيف</span>
+              </div>
+              <span class="hero-seal" aria-hidden="true"><i class="fa-solid fa-crown"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. OUR STORY & PHILOSOPHY (قصة ومفهوم أليجريا)
+         ============================================================ -->
+    <section class="section overflow-hidden">
+      <div class="container">
+        <div class="text-center mx-auto" style="max-width:820px;">
+          <span class="eyebrow reveal">فلسفة الطهي الشرقي النبيل</span>
+          <h2 class="section-title display-5 fw-black lh-base mt-3 reveal">أصالة <span class="text-gold-strong">نرويها</span> في كل طبق <span class="arabesque" aria-hidden="true">✦</span></h2>
+          <div class="credo-rule reveal" aria-hidden="true"><span></span><i class="fa-solid fa-diamond text-gold"></i><span></span></div>
+          <p class="lead text-soft mt-4 reveal">
+            في أليجريا، لا نطهو الطعام فحسب؛ بل نحيي تراث الموائد الشرقية العريقة باختيار أجود قطع اللحوم البلدية والبهارات المعتّقة، لنقدّم سفرة دافئة نجلس حولها جميعاً كعائلة واحدة.
+          </p>
+        </div>
+
+        <div class="credo-card mx-auto mt-4 reveal" style="max-width:920px;">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-lg-5 credo-aside d-flex flex-column justify-content-center p-4 p-lg-5">
+              <span class="eyebrow">من يد شيفاتنا إلى مائدتكم</span>
+              <div class="fw-black fs-3 mt-2" style="line-height:1.5;">حكاية أصالة <span class="text-gold-strong">تُروى</span></div>
+              <p class="text-soft small mt-2 mb-0">نُصغي لكل تفصيلة منذ التتبيل الأولى حتى تلامس الشوكة الطبق، كي تصل النكهة إليكم كما توارثها جدودنا جيلاً بعد جيل.</p>
+            </div>
+            <div class="col-lg-7 credo-body d-flex flex-column p-4 p-lg-5">
+              <div class="d-flex align-items-center gap-3 credo-quote">
+                <span class="avatar-sm bg-gold-soft text-gold-strong flex-shrink-0" style="width:52px;height:52px;font-size:1.2rem;"><i class="fa-solid fa-feather-pointed"></i></span>
+                <p class="mb-0 fs-5 fw-bold" style="line-height:1.9;">«السفرة في أليجريا ليست وجبة… بل طقس يُجلس العائلة ويُحيي الحكاية والنكهة معاً.»</p>
+              </div>
+              <div class="d-flex flex-wrap gap-2 mt-4">
+                <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-medal me-1"></i>خامات منتقاة يومياً من المزارع المعتمدة</span>
+                <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-fire me-1"></i>طبخ بطيء متقن على الفحم</span>
+                <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-mortar-pestle me-1"></i>بهاراتنا تطحن أمامكم يومياً</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 gx-lg-5 mt-3">
+          <div class="col-6 col-lg-3">
+            <div class="pillar">
+              <div class="pillar-num">٠١</div>
+              <h3 class="fs-5 fw-bold mt-3 mb-1">لحوم بلدية ١٠٠٪</h3>
+              <p class="text-soft small mb-0">أجود قطع الضأن والبتلو الطازجة يومياً من مزارعنا المعتمدة لضمان النضارة.</p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="pillar">
+              <div class="pillar-num">٠٢</div>
+              <h3 class="fs-5 fw-bold mt-3 mb-1">طهي بطيء على الفحم</h3>
+              <p class="text-soft small mb-0">تتبيلات متوارثة وموزات وطواجن تحترف النار الهادئة لساعات حتى الكمال.</p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="pillar">
+              <div class="pillar-num">٠٣</div>
+              <h3 class="fs-5 fw-bold mt-3 mb-1">بهارات معتقة</h3>
+              <p class="text-soft small mb-0">خلطاتنا الخاصة من الحبهان والمستكة والزعفران تُطحن وتُحمّص أمام الطهاة.</p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="pillar">
+              <div class="pillar-num">٠٤</div>
+              <h3 class="fs-5 fw-bold mt-3 mb-1">سفرة تجمعكم</h3>
+              <p class="text-soft small mb-0">أطباقنا صُممت لتُشارك، فالأكل في أليجريا طقس يجمع العائلة والأحباب.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. CURATED MENU HIGHLIGHTS (قائمة الطعام المختارة)
+         ============================================================ -->
+    <section class="section bg-white" id="menu-highlights">
+      <div class="container">
+        <div class="text-center mb-4">
+          <span class="eyebrow">روائع الطهاة وتواقيع السفرة</span>
+          <h2 class="section-title display-6 mt-2">قائمة مختارة بعناية للمتذوقين</h2>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+          <button type="button" class="btn btn-gold rounded-pill btn-sm px-3 filter-cat active" data-cat="all">كل الأطباق</button>
+          <button type="button" class="btn btn-ghost rounded-pill btn-sm px-3 filter-cat" data-cat="family">صواني العائلة</button>
+          <button type="button" class="btn btn-ghost rounded-pill btn-sm px-3 filter-cat" data-cat="clay">الطواجن الفخارية</button>
+          <button type="button" class="btn btn-ghost rounded-pill btn-sm px-3 filter-cat" data-cat="dessert">الحلويات والبار</button>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+          <!-- Royal Platter (hero card) -->
+          <div class="col-lg-7" data-row="family">
+            <div class="panel-card h-100 d-flex flex-column overflow-hidden card-zoom">
+              <div class="media-frame" style="height:300px;">
+                <img alt="صينية أليجريا الفاخرة المشويات والمقبلات على الطريقة الملكية"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxaO-q3PnpaKW-FbHTMhKiRNKyDlPvjSNpASi-htZaRQQnDRXU27TDgVM6Qn-dQoIUhLu8nsTc1OjBG2mc06ieZdAfudTU9yog-a7NpMTYQ-ZKA1H-rg4mOteLpc8NnpaxFqu6pV7SkkC3_n4Z1cinZcXkwc9LaFTpf8bsvsKIUdRhDnF7OAtu1KPR5s7ereKyLszr3SrADX_Lvm6ni35Di0cwCwIZr5ttcaatlyPlWtNnJSOY5S0uMA"/>
+                <span class="badge-pill-custom badge-gold media-tag">الطبق الأكثر طلباً للعائلات</span>
+                <span class="price-chip"><i class="fa-solid fa-coins"></i> ١,٤٥٠ ج.م</span>
+              </div>
+              <div class="p-4 p-lg-5 d-flex flex-column flex-grow-1" style="padding-top:1.35rem !important;">
+                <h3 class="section-title fs-3">صينية أليجريا الفاخرة (صينية الملوك)</h3>
+                <p class="text-soft flex-grow-1">سفرة ملكية تحتفي بأكرم تقاليد الضيافة: تشكيلة سخية من كباب وكفتة الضأن المتبلة، ريش البتلو المشوية على الجمر، فرد حمام محشي فريك على الطريقة القاهرية، ممبار بلدي مقرمش، تقدم فوق جبل من الأرز البسمتي المبخر بالزعفران والمكسرات الذهبية المحمصة.</p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <span class="badge-pill-custom badge-neutral">تكفي ٤ - ٥ أفراد</span>
+                  <span class="badge-pill-custom badge-neutral">تقدم مع ٦ أنواع مقبلات وسلطات</span>
+                  <span class="badge-pill-custom badge-neutral">خبز طازج من الفرن مباشرة</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center rounded-3 p-3 bg-al-2 flex-wrap gap-2">
+                  <span class="fw-semibold"><i class="fa-solid fa-bowl-food text-gold me-1"></i>جاهزة للشواء والتقديم الطازج فور طلبكم</span>
+                  <a href="#reservation" class="btn btn-gold rounded-pill btn-sm px-4">طلب الطاولة</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fattah -->
+          <div class="col-lg-5" data-row="family">
+            <div class="panel-card h-100 d-flex flex-column overflow-hidden card-zoom">
+              <div class="media-frame" style="height:210px;">
+                <img alt="فتة موزة ضاني فاخرة بالأرز المحمص والخل والثوم"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAGP9QHb-A_C3vpb-knRTyaqGceyKIuOKDS0fXrJagz8_6oXg9mZJNkcA_VLE6ikPKNExl16RD9W6ovLavPPzM7UI4yOhflLaUGlDwzjRzDiM_zDGyF4zwY75YcXagF5_lkvGO8dI_xqK5Ojq_S4FJwAEoahSbGwiMVoa4rBNlOPCv8jIPgmNtiN3LjNPeMQuA2AJ7DPAU7gdzvM1KkLYIGIVoP-UHKXrLPouvw_gdn7xSXLaVg"/>
+                <span class="badge-pill-custom badge-amber media-tag">طهي بطيء ٦ ساعات</span>
+                <span class="price-chip">٤٩٠ ج.م</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h4 class="fs-5 fw-bold">فتة موزة ضاني فاخرة</h4>
+                <p class="text-soft flex-grow-1">قطعة موزة ضاني بلدية كاملة مسواة حتى الذوبان، تقدم على فراش من الأرز المصري المحمص بالسمن البلدي والخبز المقرمش مع طشة الثوم والخل والصلصة الحمراء الغنية.</p>
+                <div class="text-gold fw-semibold"><i class="fa-solid fa-bell-concierge me-1"></i>تذوب بمجرد لمس الشوكة</div>
+              </div>
+            </div>
+          </div>
+          <!-- Tajen Okawy -->
+          <div class="col-lg-6" data-row="clay">
+            <div class="panel-card h-100 d-flex flex-column overflow-hidden card-zoom">
+              <div class="media-frame" style="height:210px;">
+                <img alt="طاجن عكاوي بالبصل القاورمة والمستكة في فخار معتق"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4nOt7MK9Ts3JeXPhWOGAbTzPlmtQpUGMhEqX4p3iDxZGDIWa3D_0Iko55dWbijW9UbDNmwVypUCv7-8Lt56raUHOSj-JIjlINHfsVKB6xU55qbP718DXIqZ8aylKRog_9gZ_BTNAD6ml8e4IU0bFHnmPpqkhF2h-D6IKMSMhJx7HBoNcpdfpKGImGnAruGWkedZrk6_tD8aVA3gEapZnzf7DvxSNziVcfL2VEsZ0yH6uSRFb0qsuMmw"/>
+                <span class="badge-pill-custom badge-neutral media-tag">فخار معتق</span>
+                <span class="price-chip">٣٨٠ ج.م</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h4 class="fs-5 fw-bold">طاجن عكاوي بالبصل القاورمة والمستكة</h4>
+                <p class="text-soft flex-grow-1">قطع العكاوي المطهوة بعناية داخل طاجن فخاري مغطى بعجينة الفرن الذهبية، مكرملة بالبصل الصغير وحبوب الحبهان والمستكة الحرة لتعطيك صوصاً بنياً مركزاً وشهياً.</p>
+                <div class="text-soft small"><i class="fa-solid fa-circle-check text-gold me-1"></i>يقدم مع الأرز المعمر بالقشطة الفلاحي</div>
+              </div>
+            </div>
+          </div>
+          <!-- Cordon Bleu -->
+          <div class="col-lg-6" data-row="dessert">
+            <div class="panel-card h-100 d-flex flex-column overflow-hidden card-zoom">
+              <div class="media-frame" style="height:210px;">
+                <img alt="كوردون بلو مقرمش محشو بالجبن الذائب ومغمور بالبينك صوص"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1_muzG9vchrz0_6703Q10cYt2j2jQhWx9mcp_npcWqhkjWDMcdMsAxremW0oRajQTB5Mc4zlbGhHz4-Rqal7Nz01a7YrWgSZ6JW7wn30b1PIB5QqOyuzlui-P-EsyhwZfAfmA6gVhCmq3v54AbetTgpig_-2bKkT3rnndJ-NR75rgNktdaXymF3aR5aj1ZPBZzplYyFPrl_HO09Ris0lByHfWFHpc_x629mya7zRHwd7YH5bfjaR2w"/>
+                <span class="badge-pill-custom badge-green media-tag">عصري مبتكر</span>
+                <span class="price-chip">٣١٠ ج.م</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h4 class="fs-5 fw-bold">كوردون بلو بينك صوص</h4>
+                <p class="text-soft flex-grow-1">صدور دجاج طازجة مقرمشة محشوة بالجبن الفاخر واللحم المدخن، مغمورة بصلصة البينك صوص المخملية الغنية بالكريمة مع مكرونة بيني إيطالية طازجة.</p>
+                <div class="text-soft small"><i class="fa-solid fa-utensils text-gold me-1"></i>قرمشة متقنة وجبن غني ذائب</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dessert & Coffee highlight -->
+        <div class="rounded-4 p-4 p-lg-5 mt-4 bg-al-2 border reveal">
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+              <div class="badge-pill-custom badge-gold mb-2"><i class="fa-solid fa-mug-hot"></i> ختام المائدة الملكية</div>
+              <h3 class="section-title display-6 mt-3">عريكة أليجريا الملكية وأم علي بالقشطة البلدية</h3>
+              <p class="text-soft">لا تكتمل تجربة أليجريا إلا مع أطباق الحلوى التي نخبزها أمامكم: أم علي المقرمشة المغمورة بالحليب الساخن والمكسرات المحمصة والقشطة الطازجة، أو عريكة التمر الفاخرة، تقدم بجانب شاي الكرك العطري بالهيل أو القهوة التركية المحضرة على الرمل الساخن.</p>
+              <div class="row g-3 mt-2">
+                <div class="col-6">
+                  <div class="panel-card p-3">
+                    <div class="fw-bold">أم علي الفخارية</div>
+                    <small class="text-soft">قشطة بلدية ومكسرات</small>
+                    <div class="text-gold-strong fw-black mt-1">١٤٥ ج.م</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="panel-card p-3">
+                    <div class="fw-bold">قهوة رملية وكرك</div>
+                    <small class="text-soft">تحضر على الطريقة الأصيلة</small>
+                    <div class="text-gold-strong fw-black mt-1">٧٥ ج.م</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="media-frame rounded-4" style="height:340px;">
+                    <img alt="أم علي الفاخرة بالقشطة البلدية والمكسرات في طبق فخاري"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZTBUBD7MZSunj7wAsprhRE8sSrMcVrapEYNRdKEICIW1yEzlVg-PZVd91PBMomskY0sRxXb41-9veAE-_jm7tt56hvjyBkPsdkM9JBi-etsdU7d7CsVKwiKHm8yGk57DxGJd1Z45Z7vU_1mVekzho44BWtaDZ-Q8dWOVEN9sPvGcYNlRI7G9-rp9ft7Dsdvf-ZIyCaf4ZL1RYXM0r-lxGCsVnD3IGomqTr0AUSJolCtI3EjJsxvBisQ"/>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="media-frame rounded-4" style="height:340px;">
+                    <img alt="القهوة التركية على الرمل الساخن مع الهيل والزعفران"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuACdSUw19Q68K_rtCs0oTjDPNDYNXXFc3g0tqOiGp2n36j1dVTLUT43sZseuKmytSA1hjW63Ms8JNGJG1J1PpcM2IRIzBg0BdvGkqQl1D7BZZUu6YDQsNqVwvf5nHbpJmmAAVjL75YkhTmtXWXpfxCsAsXqj0Um2XLIxB-TLXRN1-4Xt8ZX87jaK-5Ic51Qj59bC-lFiYGEt1gQYrNc4vYtsv8Kq_AicatgYYzKMhSy_b3me1yGrlaGFA"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. THE ALEGRIA EXPERIENCE (أجواء الضيافة)
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width:640px;">
+          <span class="eyebrow center">أبعاد الضيافة الرحبة</span>
+          <h2 class="section-title center display-6 mt-2">جلسات تناسب كل مناسباتكم</h2>
+          <p class="text-soft mt-3">صممنا مساحات أليجريا لتلبي رغباتكم في الاسترخاء وتناول الطعام وسط أجواء مدروسة التفاصيل.</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="panel-card amb-card h-100 d-flex flex-column overflow-hidden card-zoom">
+              <div class="media-frame" style="height:220px;">
+                <img alt="التراس الخارجي والنافورة في أليجريا مع جلسات الحديقة"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSLew6FhkUCH1rGo_n8NAMLNjzTw_6nW3lbmbXbEs1Q4s1z6u4WYpSPJJyTV8UYPcvVH1Y8A4aRSrLXZE27CEQjfv1LD1j5ViMhhLlU0Uz7U1J_m5ed03weyWwoiCEBfoibfnadBeF7jeJteGyOkf8LhdMf_oPy83yDGj0L3n_joKKGhPmGueOFGUkgFMfaCZb0F7eEBXJljB_uhUaZCiUMreUfjjV_rrI_r5CUoLaWitvHGwpRXZX_w"/>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h4 class="fs-5 fw-bold"><i class="fa-solid fa-umbrella-beach text-gold me-1"></i>التراس الخارجي والنافورة</h4>
+                <p class="text-soft small flex-grow-1">استمتع بنسيم الهواء العليل وجلسات الحديقة الخارجية مع خرير المياه الهادئ، المكان المثالي لسهرات الشاي والمشاوي المسائية.</p>
+                <div class="text-gold fw-semibold small border-top pt-3"><i class="fa-solid fa-sun me-1"></i>جلسات مريحة مكيفة ومفتوحة</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel-card amb-card h-100 d-flex flex-column overflow-hidden card-zoom">
+              <div class="media-frame" style="height:220px;">
+                <img alt="جناح كبار الشخصيات VIP بمفروشات مخملية وإضاءة دافئة"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFdBReLicy6qU5riQV2V6vQhfIeXFhL5I-JeDJbIaGz5ri2I5HfWbKyZbGon5cT1AVEJ7-YuSBSpYOA8EvyfMx1gn-Oy7IHt0Zhg_zxsyrIRvLSKRoZWla8f6v_VX3LZQQDVNDR1chcGMM8t_Z7tr0bIH0c6pPuHTvrTEr_oaD64yak2svGsG0N1OduttXMgCxABvxOJj2euBIeRBNeqzxkS0TjFxyx6f19YIAF4aBHA2yVQ2TmH0V2w"/>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h4 class="fs-5 fw-bold"><i class="fa-solid fa-star text-gold me-1"></i>أجنحة كبار الشخصيات VIP</h4>
+                <p class="text-soft small flex-grow-1">صالات مغلقة مخصصة لعزائم الأعمال والاجتماعات العائلية الخاصة مع خدمة كابتن ونادل مخصص لتلبية كل طلباتكم باحترافية.</p>
+                <div class="text-amber fw-semibold small border-top pt-3"><i class="fa-solid fa-lock me-1"></i>خصوصية وخدمة فندقية حصرية</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel-card amb-card h-100 d-flex flex-column overflow-hidden card-zoom">
+              <div class="media-frame" style="height:220px;">
+                <img alt="الصالة الداخلية الدافئة بديكورات خشبية وإضاءة نحاسية"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-JYtkJzGJxzxRumRQstXAkN1tmJkdzQcKrgbFsWtszGIdNe91Ea8Lxc2c5QgoQDBJoYgRIbJAtc78sviOslM8HxJwHpDwxsxix2ab_QKWC2Z1fQg2TzJGUNDiXh9WYxULa-uLHXPG4f9tJER38i1Mv9Od_jAmw66L_VKYLvbZenGaG-CowW_0v-njyoJlfGZyvQWqmm6bDOUZQ51YzAwYMKWY17xlOzUkJtxY_JouNf43Xnf_BRrRQg"/>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h4 class="fs-5 fw-bold"><i class="fa-solid fa-couch text-gold me-1"></i>الصالة الداخلية الدافئة</h4>
+                <p class="text-soft small flex-grow-1">ديكورات خشبية أنيقة وثريات نحاسية وإضاءة دافئة مريحة للعين، مع مقاعد مخملية مريحة لتناول وجبات الغداء والعشاء بهدوء.</p>
+                <div class="text-green fw-semibold small border-top pt-3"><i class="fa-solid fa-music me-1"></i>أنغام شرقية هادئة طوال اليوم</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Perks bar -->
+        <div class="d-flex flex-wrap gap-4 justify-content-around align-items-center rounded-4 p-4 mt-4 bg-al-2 border reveal">
+          <div class="d-flex align-items-center gap-2 fw-semibold">
+            <i class="fa-solid fa-mug-saucer text-gold fs-4"></i> ضيافة قهوة عربية وتمر عند الاستقبال
+          </div>
+          <div class="d-flex align-items-center gap-2 fw-semibold">
+            <i class="fa-solid fa-square-parking text-gold fs-4"></i> خدمة صف سيارات (فاليت) مجاناً
+          </div>
+          <div class="d-flex align-items-center gap-2 fw-semibold">
+            <i class="fa-solid fa-champagne-glasses text-gold fs-4"></i> ترتيبات خاصة لأعياد الميلاد والاحتفالات
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. GUEST PRAISE & REVIEWS (آراء ضيوفنا)
+         ============================================================ -->
+    <section class="section bg-white">
+      <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width:640px;">
+          <span class="eyebrow center">شهادات نعتز بها</span>
+          <h2 class="section-title center display-6 mt-2">ماذا يقول ضيوف أليجريا؟</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="panel-card h-100 p-4 d-flex flex-column">
+              <div class="text-gold-strong mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="fst-italic text-soft flex-grow-1">"صينية أليجريا المشاوي شيء من عالم آخر! اللحم البلدي طري جداً والتتبيلة متوازنة بدون بهارات مبالغ فيها، والخدمة تستحق 5 نجوم من لحظة دخولنا وحتى القهوة والضيافة."</p>
+              <div class="d-flex align-items-center gap-3 border-top pt-3 mt-3">
+                <span class="avatar-sm bg-gold-soft text-gold-strong">م</span>
+                <div class="lh-sm">
+                  <span class="fw-bold d-block">د. محمود القاضي</span>
+                  <small class="text-soft">عزومة عائلية - التجمع</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel-card h-100 p-4 d-flex flex-column">
+              <div class="text-gold-strong mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="fst-italic text-soft flex-grow-1">"فتة الموزة الضاني وطاجن العكاوي هنا تفوقا على أفضل مطاعم مصر الفاخرة. الأجواء مريحة جداً والتراس الخارجي ساحر، وبالتأكيد أم علي بالقشطة ختام لا يمكن تفويته."</p>
+              <div class="d-flex align-items-center gap-3 border-top pt-3 mt-3">
+                <span class="avatar-sm bg-gold-soft text-gold-strong">س</span>
+                <div class="lh-sm">
+                  <span class="fw-bold d-block">سارة المنصوري</span>
+                  <small class="text-soft">عشاء عمل خاص</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel-card h-100 p-4 d-flex flex-column">
+              <div class="text-gold-strong mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="fst-italic text-soft flex-grow-1">"كرم الضيافة المصري الأصيل بأرقى حلة عصرية. القهوة الرملية وشاي الكرك بعد الغداء مع العريكة جعلت جلستنا لا تُنسى. أصبح أليجريا وجهتنا الأولى دائماً."</p>
+              <div class="d-flex align-items-center gap-3 border-top pt-3 mt-3">
+                <span class="avatar-sm bg-gold-soft text-gold-strong">ع</span>
+                <div class="lh-sm">
+                  <span class="fw-bold d-block">م. عمر الشريف</span>
+                  <small class="text-soft">زيارة أسبوعية متكررة</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. RESERVATION FORM (نموذج الحجز السهل)
+         ============================================================ -->
+    <section class="section bg-al-2 border-top" id="reservation">
+      <div class="container" style="max-width:900px;">
+        <div class="panel-card p-4 p-lg-5 reveal position-relative overflow-hidden" style="background-image:radial-gradient(520px 240px at 12% 0%, var(--al-gold-soft), transparent 60%);">
+          <div class="text-center mx-auto mb-4" style="max-width:580px;">
+            <h2 class="section-title center fs-2">احجز طاولتك في أليجريا</h2>
+            <div class="res-badge mt-2 d-flex align-items-center justify-content-center">
+              <span class="sep"></span><i class="fa-solid fa-diamond text-gold"></i><span class="sep"></span>
+            </div>
+            <p class="text-soft">يسعدنا استقبالكم وتجهيز مائدتكم بعناية تامة. تأكيد فوري ومباشر لراحتكم.</p>
+          </div>
+
+          <form class="row g-3" id="reservation-form">
+            <div class="col-md-6">
+              <label class="form-label-custom"><i class="fa-solid fa-calendar text-gold me-1"></i> تاريخ الزيارة</label>
+              <input type="date" class="form-control" value="2025-05-20"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom"><i class="fa-solid fa-clock text-gold me-1"></i> وقت الزيارة المفضل</label>
+              <select class="form-select">
+                <option>غداء عائلي مبكر (١:٠٠ م - ٤:٠٠ م)</option>
+                <option selected>عشاء فاخر مسائي (٧:٠٠ م - ١٠:٠٠ م)</option>
+                <option>سهرة ومشاوي ليلية (١٠:٠٠ م - ١:٠٠ ص)</option>
+                <option>فطور شرقي ملكي (٩:٠٠ ص - ١٢:٠٠ ظ)</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom"><i class="fa-solid fa-users text-gold me-1"></i> عدد الضيوف</label>
+              <select class="form-select">
+                <option>شخصان (طاولة خاصة هادئة)</option>
+                <option>٣ - ٥ أشخاص (جلسة عائلية)</option>
+                <option selected>٦ - ٨ أشخاص (عزومة مائدة كبيرة)</option>
+                <option>أكثر من ٨ أشخاص (جناح خاص VIP)</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom"><i class="fa-solid fa-chair text-gold me-1"></i> نوع الجلسة المفضلة</label>
+              <select class="form-select">
+                <option selected>التراس الخارجي المفتوح مع النافورة</option>
+                <option>الصالة الداخلية الدافئة</option>
+                <option>جناح كبار الشخصيات المغلق (VIP Suite)</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom"><i class="fa-solid fa-user text-gold me-1"></i> الاسم الكريم</label>
+              <input type="text" class="form-control" placeholder="الاسم الأول والعائلة"/>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label-custom"><i class="fa-solid fa-phone text-gold me-1"></i> رقم الهاتف (للتأكيد الفوري عبر واتساب)</label>
+              <input type="tel" dir="ltr" class="form-control text-start" placeholder="010XXXXXXXX"/>
+            </div>
+            <div class="col-12">
+              <label class="form-label-custom"><i class="fa-solid fa-note-sticky text-gold me-1"></i> ملاحظات إضافية أو طلب خاص</label>
+              <textarea class="form-control" rows="2" placeholder="هل هناك مناسبة خاصة نحتفل بها معكم؟ اذكر رغبتكم هنا..."></textarea>
+            </div>
+            <div class="col-12 text-center pt-3">
+              <button type="submit" class="btn btn-gold btn-lg rounded-pill px-5 shadow">
+                <i class="fa-solid fa-calendar-check me-1"></i> تأكيد حجز الطاولة
+              </button>
+              <p class="text-soft small mt-3 mb-0">لا يلزم دفع أي رسوم مسبقة للحجز العادي • إلغاء مجاني في أي وقت</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. LOCATION & HOSPITALITY HOURS (الموقع ومواعيد العمل)
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band p-4 p-lg-5 reveal" style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuD-JYtkJzGJxzxRumRQstXAkN1tmJkdzQcKrgbFsWtszGIdNe91Ea8Lxc2c5QgoQDBJoYgRIbJAtc78sviOslM8HxJwHpDwxsxix2ab_QKWC2Z1fQg2TzJGUNDiXh9WYxULa-uLHXPG4f9tJER38i1Mv9Od_jAmw66L_VKYLvbZenGaG-CowW_0v-njyoJlfGZyvQWqmm6bDOUZQ51YzAwYMKWY17xlOzUkJtxY_JouNf43Xnf_BRrRQg');background-size:cover;background-position:center;">
+          <div class="cta-veil"></div>
+          <div class="cta-glow" aria-hidden="true"></div>
+          <div class="position-relative">
+            <div class="row g-4 g-lg-5 align-items-center">
+              <div class="col-lg-7">
+                <span class="eyebrow">للاستفسار والحجز والمناسبات الخاصة</span>
+                <h2 class="display-6 fw-black lh-base mt-3">مائدتكم <span class="text-gold-metal">جاهزة</span> بانتظاركم</h2>
+                <p class="cta-meta mt-3" style="max-width:540px;">
+                  نتشرف باستقبالكم طوال أيام الأسبوع لوجبات الإفطار الملكي والغداء والعشاء حتى ساعات الفجر الأولى، مع خدمة الفاليت المجانية بانتظاركم عند المدخل.
+                </p>
+                <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+                  <a href="https://wa.me/" target="_blank" class="btn btn-gold btn-lg rounded-pill px-4 shadow">
+                    <i class="fa-brands fa-whatsapp me-1"></i> محادثة واتساب مباشرة
+                  </a>
+                  <a href="tel:+201002345678" class="btn btn-light btn-lg rounded-pill px-4">
+                    <i class="fa-solid fa-phone me-1 text-gold-strong"></i> اتصال فوري
+                  </a>
+                  <span class="cta-phone d-none d-md-inline-flex align-items-center gap-2">
+                    <i class="fa-solid fa-mobile-screen-button text-gold"></i>
+                    <span dir="ltr">+20 100 234 5678</span>
+                  </span>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="d-flex flex-column gap-3">
+                  <div class="rounded-4 p-3" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px);">
+                    <div class="d-flex justify-content-between align-items-center gap-2">
+                      <span class="cta-meta"><i class="fa-regular fa-clock"></i> مواعيد العمل والضيافة</span>
+                      <span class="fw-black" style="color:var(--al-gold);">٩:٠٠ ص - ٢:٠٠ ص</span>
+                    </div>
+                  </div>
+                  <div class="rounded-4 p-3" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px);">
+                    <div class="cta-meta small">
+                      <div class="d-flex align-items-center gap-1 mb-1"><i class="fa-solid fa-location-dot"></i>فرع التجمع الفاخر</div>
+                      <div style="padding-inline-start:1.45rem;">شارع التسعين الشمالي، بلازا أرينا، التجمع الخامس، القاهرة الجديدة.</div>
+                    </div>
+                  </div>
+                  <div class="rounded-4 p-3 d-flex align-items-center gap-3" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px);">
+                    <span class="avatar-sm bg-gold-soft text-gold-strong" style="width:46px;height:46px;font-size:1.05rem;"><i class="fa-solid fa-bell-concierge"></i></span>
+                    <div class="cta-meta small">فريق ضيافتنا مستعد لتجهيز مائدتكم وتزيينها لمناسباتكم الخاصة.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "../../assets", section: "front", page: "landing" };
+  </script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/sweetalert2.all.min.js"></script>
+  <script src="../../assets/js/dataTables.min.js"></script>
+  <script src="../../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../../assets/js/layout.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    // Menu category filter
+    $(function () {
+      $('.filter-cat').on('click', function () {
+        $('.filter-cat').removeClass('btn-gold active').addClass('btn-ghost');
+        $(this).removeClass('btn-ghost').addClass('btn-gold active');
+      });
+      // Reservation form -> SweetAlert2
+      $('#reservation-form').on('submit', function (e) {
+        e.preventDefault();
+        Swal.fire({
+          icon: 'success',
+          title: 'تم استلام طلب حجزكم بنجاح!',
+          text: 'سيتواصل معكم فريق الاستقبال لتأكيد الطاولة فوراً.',
+          confirmButtonColor: '#c59b27',
+          confirmButtonText: 'تمام'
+        });
+        $(this).trigger('reset');
+      });
+    });
+  </script>
+</body>
+</html>

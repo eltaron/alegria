@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>الورديات والحضور | أليجريا ERP</title>
+  <meta name="description" content="إدارة الورديات والحضور والانصراف والبصمة: خريطة المحطات الحية، سجل الحضور، وتوزيع التبس."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, الورديات, الحضور, البصمة, توزيع التبس"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="الورديات والحضور | أليجريا ERP"/>
+  <meta property="og:description" content="إدارة الورديات والحضور والانصراف والبصمة: خريطة المحطات الحية، سجل الحضور، وتوزيع التبس."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="الورديات والحضور | أليجريا ERP"/>
+  <meta name="twitter:description" content="إدارة الورديات والحضور والانصراف والبصمة: خريطة المحطات الحية، سجل الحضور، وتوزيع التبس."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. TOP ACTION BAR & LIVE STATUS HEADER
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3 flex-wrap">
+        <div>
+          <div class="d-flex align-items-center gap-2 flex-wrap small text-soft breadcrumb-custom">
+            <span>لوحة الإدارة</span>
+            <i class="fa-solid fa-chevron-left"></i>
+            <span class="text-gold fw-bold">الورديات والحضور</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-wrap mt-1">
+            <h1 class="h4 fw-black m-0 text-gold">الورديات والحضور</h1>
+            <span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> وردية العشاء (2) نشطة</span>
+            <span class="badge-pill-custom badge-green">كادر الخدمة الفعلي: 24 / 28 موظف</span>
+          </div>
+          <p class="text-soft small mt-2 mb-0">مراقبة الانضباط التشغيلي، قياس إنتاجية المحطات ومطابخ الطهي، ومتابعة الحضور والانصراف وتسجيل البصمة لحظياً</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <a href="hr_employees_alegria_erp.html" class="btn btn-gold btn-sm"><i class="fa-solid fa-user-plus me-1"></i> إضافة موظف جديد</a>
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="بدء / إغلاق وردية"><i class="fa-solid fa-person-running me-1 text-green"></i> بدء / إغلاق وردية</button>
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="تسجيل بصمة يدوية"><i class="fa-solid fa-fingerprint me-1 text-gold"></i> تسجيل بصمة يدوية</button>
+          <a href="hr_payroll_alegria_erp.html" class="btn btn-ghost btn-sm"><i class="fa-solid fa-money-check-dollar me-1 text-green"></i> اعتماد مسير الرواتب</a>
+          <button type="button" class="btn btn-ghost btn-sm quick-action" data-title="تصدير التقارير" title="تصدير التقارير"><i class="fa-solid fa-share-nodes"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. KPI EXECUTIVE CARDS STRIP (ATTENDANCE / OVERTIME / EFFICIENCY)
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <!-- KPI: Attendance -->
+      <div class="col-12 col-sm-6 col-xl">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <span class="stat-label d-block">حضور الوردية الحالية</span>
+            <i class="fa-solid fa-user-shield text-green"></i>
+          </div>
+          <div class="d-flex align-items-baseline gap-2 mt-2 flex-wrap">
+            <span class="stat-value text-green">24</span>
+            <small class="tabular text-soft">/ 25 مجدول (96%)</small>
+          </div>
+          <div class="d-flex gap-2 flex-wrap small mt-1">
+            <span class="text-rose">0 غياب</span>
+            <span class="text-faint">•</span>
+            <span class="text-gold">1 إجازة سنوية</span>
+            <span class="text-faint">•</span>
+            <span class="text-soft">3 راحة</span>
+          </div>
+          <div class="progress mt-3" style="height:6px;"><div class="progress-bar bg-success" style="width:96%"></div></div>
+        </div>
+      </div>
+      <!-- KPI: Overtime -->
+      <div class="col-12 col-sm-6 col-xl">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <span class="stat-label d-block">ساعات العمل الإضافي (Overtime)</span>
+            <i class="fa-solid fa-stopwatch text-amber"></i>
+          </div>
+          <div class="d-flex align-items-baseline gap-2 mt-2 flex-wrap">
+            <span class="stat-value tabular">38.5</span>
+            <small class="text-soft">ساعة / أكتوبر</small>
+          </div>
+          <small class="text-soft d-block mt-1">سقف الأمان المعتمد: 50.0 ساعة كحد أقصى</small>
+          <div class="progress mt-3" style="height:6px;"><div class="progress-bar bg-warning" style="width:65%"></div></div>
+        </div>
+      </div>
+      <!-- KPI: Service Efficiency -->
+      <div class="col-12 col-sm-6 col-xl">
+        <div class="stat-card">
+          <div class="d-flex justify-content-between align-items-start">
+            <span class="stat-label d-block">مؤشر كفاءة الخدمة وسرعة الطاقم</span>
+            <i class="fa-solid fa-star text-gold"></i>
+          </div>
+          <div class="d-flex align-items-baseline gap-2 mt-2 flex-wrap">
+            <span class="stat-value text-gold">4.85</span>
+            <small class="text-soft">/ 5.0</small>
+          </div>
+          <small class="text-green d-block mt-1"><i class="fa-solid fa-gauge-high me-1"></i>متوسط وقت تجهيز الطبق: 11 دقيقة</small>
+          <div class="progress mt-3" style="height:6px;"><div class="progress-bar progress-gold" style="width:94%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. MODULE SUB-NAVIGATION STRIP
+         ============================================================ -->
+    <section class="panel-card p-2 mb-4 d-flex align-items-center gap-2 overflow-auto flex-nowrap">
+      <a href="hr_shifts_alegria_erp.html" class="btn btn-gold btn-sm text-nowrap"><i class="fa-solid fa-id-badge me-1"></i> حالة الحضور والورديات اللحظية (Live)</a>
+      <a href="hr_employees_alegria_erp.html" class="btn btn-ghost btn-sm text-nowrap"><i class="fa-solid fa-address-book me-1"></i> دليل وسجل الموظفين (Staff Directory - 28)</a>
+      <a href="hr_shifts_alegria_erp.html" class="btn btn-ghost btn-sm text-nowrap"><i class="fa-solid fa-calendar-week me-1"></i> جدول الورديات وتوزيع المحطات (Roster)</a>
+      <a href="hr_payroll_alegria_erp.html" class="btn btn-ghost btn-sm text-nowrap"><i class="fa-solid fa-wallet me-1"></i> مسير الرواتب والمكافآت والعمولات (Payroll)</a>
+      <a href="hr_payroll_alegria_erp.html" class="btn btn-ghost btn-sm text-nowrap"><i class="fa-solid fa-clipboard-check me-1"></i> طلبات الإجازات والسلف (3 جديدة) <span class="badge-pill-custom badge-rose ms-1">3</span></a>
+    </section>
+
+    <!-- ============================================================
+         4. OPERATIONAL STATIONS FLOOR & SHIFTS MATRIX
+         ============================================================ -->
+    <section class="panel-card mb-4">
+      <div class="panel-head">
+        <div>
+          <h2><i class="fa-solid fa-table-cells"></i> خريطة الورديات وتوزيع المحطات الحية اليوم</h2>
+          <p class="text-soft small mb-0">الخميس، 24 أكتوبر 2024 — وردية العشاء والسهرة (05:00 م - 01:30 ص)</p>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap small">
+          <span class="text-soft">مسؤولو الوردية:</span>
+          <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-utensils"></i> شيف ماركوس أنطوان</span>
+          <span class="badge-pill-custom badge-green"><i class="fa-solid fa-bell-concierge"></i> أ. فهد السليمان</span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row g-3">
+          <!-- Station 1: Grill & Charcoal -->
+          <div class="col-md-6 col-xl-4">
+            <div class="station-chip h-100 d-flex flex-column justify-content-between hover-tile">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="small"><i class="fa-solid fa-fire-flame-curved text-gold me-1"></i> الشواية والفحم</strong>
+                  <span class="dot dot-green"></span>
+                </div>
+                <p class="small text-soft mb-2">2 شيف نشط · حمولة طلبات: 100%</p>
+                <div class="d-flex flex-column gap-2">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;">إ.ح</span>
+                      <span class="small">إبراهيم حمدي</span>
+                    </div>
+                    <span class="tabular small text-green">4:45 م</span>
+                  </div>
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;background:var(--al-surface-2);color:var(--al-ink-soft);">ك.س</span>
+                      <span class="small">كريم سعيد (مساعد)</span>
+                    </div>
+                    <span class="tabular small text-green">4:50 م</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+                <span>كفاءة المحطة</span>
+                <strong class="text-green tabular">100%</strong>
+              </div>
+            </div>
+          </div>
+          <!-- Station 2: Ovens & Casseroles -->
+          <div class="col-md-6 col-xl-4">
+            <div class="station-chip h-100 d-flex flex-column justify-content-between hover-tile">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="small"><i class="fa-solid fa-fire-burner text-gold me-1"></i> الأفران والطواجن</strong>
+                  <span class="dot dot-green"></span>
+                </div>
+                <p class="small text-soft mb-2">1 شيف رئيسي نشط</p>
+                <div class="d-flex flex-column gap-2">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;">ع.د</span>
+                      <span class="small">عصام الدين حسن</span>
+                    </div>
+                    <span class="tabular small text-green">4:52 م</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+                <span>أطباق منجزة</span>
+                <strong class="text-gold tabular">36 طبق</strong>
+              </div>
+            </div>
+          </div>
+          <!-- Station 3: Western & Pasta -->
+          <div class="col-md-6 col-xl-4">
+            <div class="station-chip h-100 d-flex flex-column justify-content-between hover-tile">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="small"><i class="fa-solid fa-bowl-food text-gold me-1"></i> الباستا والغربي</strong>
+                  <span class="dot dot-green"></span>
+                </div>
+                <p class="small text-soft mb-2">1 شيف ومساعد</p>
+                <div class="d-flex flex-column gap-2">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;">م.س</span>
+                      <span class="small">مايكل سمير</span>
+                    </div>
+                    <span class="tabular small text-green">4:40 م</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+                <span>متوسط التسليم</span>
+                <strong class="text-green tabular">9 دقيقة</strong>
+              </div>
+            </div>
+          </div>
+          <!-- Station 4: VIP & Dining Hall -->
+          <div class="col-md-6 col-xl-4">
+            <div class="station-chip h-100 d-flex flex-column justify-content-between hover-tile">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="small"><i class="fa-solid fa-bell-concierge text-green me-1"></i> صالة VIP والصالة</strong>
+                  <span class="dot dot-green"></span>
+                </div>
+                <p class="small text-soft mb-2">3 كباتن صالة على رأس العمل</p>
+                <div class="d-flex flex-column gap-2">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;background:var(--al-green-soft);color:var(--al-green);">ح.ر</span>
+                      <span class="small">حسام رضوان (VIP-4)</span>
+                    </div>
+                    <span class="tabular small text-green">4:42 م</span>
+                  </div>
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;background:var(--al-green-soft);color:var(--al-green);">م.ف</span>
+                      <span class="small">مصطفى فهمي</span>
+                    </div>
+                    <span class="tabular small text-green">4:55 م</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+                <span>رضا الضيوف</span>
+                <strong class="text-gold tabular">4.92 / 5</strong>
+              </div>
+            </div>
+          </div>
+          <!-- Station 5: Bar & Pastry -->
+          <div class="col-md-6 col-xl-4">
+            <div class="station-chip h-100 d-flex flex-column justify-content-between hover-tile">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="small"><i class="fa-solid fa-mug-hot text-gold me-1"></i> البار والمشروبات</strong>
+                  <span class="dot dot-green"></span>
+                </div>
+                <p class="small text-soft mb-2">باريستا وصانع حلويات</p>
+                <div class="d-flex flex-column gap-2">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;">ع.ش</span>
+                      <span class="small">عمر شريف (باريستا)</span>
+                    </div>
+                    <span class="tabular small text-green">4:30 م</span>
+                  </div>
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;">م.ل</span>
+                      <span class="small">مدحت لطفي (حلو)</span>
+                    </div>
+                    <span class="tabular small text-green">4:58 م</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+                <span>مشروبات منفذة</span>
+                <strong class="text-gold tabular">94 كأس</strong>
+              </div>
+            </div>
+          </div>
+          <!-- Station 6: Cashier & POS -->
+          <div class="col-md-6 col-xl-4">
+            <div class="station-chip h-100 d-flex flex-column justify-content-between hover-tile">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <strong class="small"><i class="fa-solid fa-cash-register text-green me-1"></i> الكاشير والخزينة</strong>
+                  <span class="dot dot-green"></span>
+                </div>
+                <p class="small text-soft mb-2">كاشير صالة وكاشير تيك أواي</p>
+                <div class="d-flex flex-column gap-2">
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;background:var(--al-green-soft);color:var(--al-green);">ك.ع</span>
+                      <span class="small">كريم عادل (POS-1)</span>
+                    </div>
+                    <span class="tabular small text-green">4:45 م</span>
+                  </div>
+                  <div class="bg-al-2 border rounded-3 p-2 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;background:var(--al-green-soft);color:var(--al-green);">م.ب</span>
+                      <span class="small">محمود بدر (توصيل)</span>
+                    </div>
+                    <span class="tabular small text-green">4:50 م</span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center small text-soft border-top mt-3 pt-2">
+                <span>مطابقة الإغلاق</span>
+                <strong class="text-green tabular">100% متطابق</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. ATTENDANCE TABLE + TIPS  |  SHIFT HANDOVER NOTES
+         ============================================================ -->
+    <section class="row g-3">
+
+      <div class="col-12 d-flex flex-column gap-3">
+
+        <!-- Attendance & Productivity Table -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-stopwatch"></i> سجل الحضور والانصراف والإنتاجية الفردية اللحظي</h2>
+              <p class="text-soft small mb-0">مربوط بنظام البصمة البيومترية وشاشات نقاط البيع (POS &amp; KDS)</p>
+            </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <div class="input-icon" style="min-width:200px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input class="form-control form-control-sm" type="text" placeholder="بحث بالاسم أو الكود..."/>
+              </div>
+              <select class="form-select form-select-sm" style="width:auto;">
+                <option>كل الأقسام</option>
+                <option>المطبخ الساخن</option>
+                <option>الصالة والخدمة</option>
+                <option>المالية والصندوق</option>
+                <option>الصالة الخارجية</option>
+              </select>
+            </div>
+          </div>
+          <div class="panel-body flush table-wrap">
+            <table class="table table-alegria table-hover m-0" data-datatable>
+              <thead>
+                <tr>
+                  <th>الموظف والكود</th>
+                  <th>القسم والمحطة</th>
+                  <th>تسجيل الدخول الفعلي</th>
+                  <th>حالة الدوام</th>
+                  <th>الساعات المنجزة</th>
+                  <th>إنتاجية الوردية</th>
+                  <th class="text-center">الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1 -->
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm">إ.ح</span>
+                      <div class="lh-sm">
+                        <strong class="d-block">إبراهيم حمدي</strong>
+                        <small class="text-soft tabular">ALG-EMP-014 · شيف شواية أول</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-gold">المطبخ الساخن</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block text-green tabular">04:48 م</strong>
+                      <small class="text-green">مبكر بـ 12 دقيقة (وجه)</small>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+                  <td class="tabular">05:12 س</td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block tabular">48 طبق منجز</strong>
+                      <small class="text-green">سرعة تسليم 100%</small>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-inline-flex gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="إضافة مكافأة لـ إبراهيم حمدي" title="إضافة مكافأة"><i class="fa-solid fa-medal"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="سجل البصمة والتعديل" title="سجل البصمة والتعديل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">ح.ر</span>
+                      <div class="lh-sm">
+                        <strong class="d-block">حسام رضوان</strong>
+                        <small class="text-soft tabular">ALG-EMP-021 · كابتن صالة VIP</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green">الصالة والخدمة</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block text-green tabular">04:42 م</strong>
+                      <small class="text-green">مبكر بـ 18 دقيقة (كارت)</small>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+                  <td class="tabular">05:18 س</td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block text-gold tabular">18,450 ر.س</strong>
+                      <small class="text-green">تقييم طاولة 4.95 ★</small>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-inline-flex gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="إضافة مكافأة لـ حسام رضوان" title="إضافة مكافأة"><i class="fa-solid fa-medal"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="سجل البصمة والتعديل" title="سجل البصمة والتعديل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm">ع.ش</span>
+                      <div class="lh-sm">
+                        <strong class="d-block">عمر شريف</strong>
+                        <small class="text-soft tabular">ALG-EMP-009 · كبير باريستا</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-gold">بار المشروبات</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block text-green tabular">04:30 م</strong>
+                      <small class="text-green">تحضير البار الصباحي</small>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> استراحة عشاء (15 د)</span></td>
+                  <td class="tabular">05:30 س</td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block tabular">94 كوب سبشيلتي</strong>
+                      <small class="text-gold">هدر مواد: 0.1% فقط</small>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-inline-flex gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="إضافة مكافأة لـ عمر شريف" title="إضافة مكافأة"><i class="fa-solid fa-medal"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="سجل البصمة والتعديل" title="سجل البصمة والتعديل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 4 -->
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">ك.ع</span>
+                      <div class="lh-sm">
+                        <strong class="d-block">كريم عادل</strong>
+                        <small class="text-soft tabular">ALG-EMP-032 · أمين خزينة و كاشير</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green">المالية والصندوق</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block text-green tabular">04:45 م</strong>
+                      <small class="text-green">استلام عهدة 2,000 ر.س</small>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> على رأس العمل</span></td>
+                  <td class="tabular">05:15 س</td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block tabular">134 فاتورة مغلقة</strong>
+                      <small class="text-green">فارق الدرج 0.00 ر.س</small>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-inline-flex gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="إضافة مكافأة لـ كريم عادل" title="إضافة مكافأة"><i class="fa-solid fa-medal"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="سجل البصمة والتعديل" title="سجل البصمة والتعديل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Row 5 (Late) -->
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="avatar-sm" style="background:var(--al-amber-soft);color:var(--al-amber);">م.ف</span>
+                      <div class="lh-sm">
+                        <strong class="d-block">مصطفى فهمي</strong>
+                        <small class="text-soft tabular">ALG-EMP-027 · كابتن صالة</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-green">الصالة الخارجية</span></td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block text-amber tabular">05:14 م</strong>
+                      <small class="text-amber">تأخير 14 دقيقة (مُبرر)</small>
+                    </div>
+                  </td>
+                  <td><span class="badge-pill-custom badge-amber"><span class="dot dot-gold"></span> متأخر (تم الحسم الذاتي)</span></td>
+                  <td class="tabular">04:46 س</td>
+                  <td>
+                    <div class="lh-sm">
+                      <strong class="d-block tabular">9,200 ر.س</strong>
+                      <small class="text-soft">خدمة 8 طاولات</small>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-inline-flex gap-1">
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="إجراء لفت نظر لـ مصطفى فهمي" title="إجراء لفت نظر"><i class="fa-solid fa-triangle-exclamation text-amber"></i></button>
+                      <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="سجل البصمة والتعديل" title="سجل البصمة والتعديل"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Table Footer Pagination / Quick Action Summary -->
+          <div class="panel-head border-top border-bottom-0">
+            <span class="small text-soft">عرض <strong class="text-white">5</strong> من أصل <strong class="text-gold">24</strong> موظف مسجلين حالياً في الوردية</span>
+            <div class="d-flex align-items-center gap-1">
+              <button type="button" class="btn btn-ghost btn-sm px-2 py-0">السابق</button>
+              <button type="button" class="btn btn-gold btn-sm px-2 py-0">1</button>
+              <button type="button" class="btn btn-ghost btn-sm px-2 py-0">2</button>
+              <button type="button" class="btn btn-ghost btn-sm px-2 py-0">3</button>
+              <button type="button" class="btn btn-ghost btn-sm px-2 py-0">التالي</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Tips & Service Charge Distribution -->
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-hand-holding-dollar"></i> توزيع التبس ورسوم الخدمة (Live Service Charge &amp; Tips Pool)</h2>
+              <p class="text-soft small mb-0">موزعة آلياً طبقاً لساعات التواجد الفعلي وتقييمات خدمة الزبائن</p>
+            </div>
+            <span class="badge-pill-custom badge-neutral">المحصل حتى اللحظة: <strong class="text-gold tabular ms-1">4,850 ر.س</strong></span>
+          </div>
+          <div class="panel-body">
+            <div class="row g-3">
+              <!-- Pool 1 -->
+              <div class="col-md-4">
+                <div class="bg-al-2 border rounded-3 p-3 h-100 d-flex flex-column justify-content-between">
+                  <div>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <strong class="small">طاقم الصالة والضيافة</strong>
+                      <span class="badge-pill-custom badge-green">60%</span>
+                    </div>
+                    <small class="text-soft d-block">9 أفراد · استحقاق الفرد: ~323.3 ر.س</small>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-baseline mt-3">
+                    <small class="text-soft">المبلغ الإجمالي</small>
+                    <strong class="fs-5 text-green tabular">2,910 ر.س</strong>
+                  </div>
+                </div>
+              </div>
+              <!-- Pool 2 -->
+              <div class="col-md-4">
+                <div class="bg-al-2 border rounded-3 p-3 h-100 d-flex flex-column justify-content-between">
+                  <div>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <strong class="small">طاقم المطبخ والطهي (BOH)</strong>
+                      <span class="badge-pill-custom badge-gold">30%</span>
+                    </div>
+                    <small class="text-soft d-block">10 أفراد · استحقاق الفرد: ~145.5 ر.س</small>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-baseline mt-3">
+                    <small class="text-soft">المبلغ الإجمالي</small>
+                    <strong class="fs-5 text-gold tabular">1,455 ر.س</strong>
+                  </div>
+                </div>
+              </div>
+              <!-- Pool 3 -->
+              <div class="col-md-4">
+                <div class="bg-al-2 border rounded-3 p-3 h-100 d-flex flex-column justify-content-between">
+                  <div>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <strong class="small">النظافة والتجهيز والإشراف</strong>
+                      <span class="badge-pill-custom badge-amber">10%</span>
+                    </div>
+                    <small class="text-soft d-block">5 أفراد · استحقاق الفرد: ~97.0 ر.س</small>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-baseline mt-3">
+                    <small class="text-soft">المبلغ الإجمالي</small>
+                    <strong class="fs-5 tabular">485 ر.س</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "erp", page: "hr" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Quick HR actions -> SweetAlert2
+    $('.quick-action').on('click', function () {
+      var title = $(this).data('title');
+      window.Al.toast('تم تنفيذ: ' + title, 'success');
+    });
+  </script>
+</body>
+</html>

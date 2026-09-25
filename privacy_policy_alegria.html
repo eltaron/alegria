@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>سياسة الخصوصية | أليجريا كافيه ومطعم</title>
+  <meta name="description" content="سياسة خصوصية أليجريا: البيانات التي نجمعها، وكيف نستخدمها، ومدد الاحتفاظ، وحقوقك في الوصول والتصحيح والحذف."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .legal-shell {
+      max-width: 1120px;
+      margin-inline: auto;
+    }
+    .legal-hero {
+      padding-bottom: 3.25rem;
+    }
+    .legal-hero .legal-mark {
+      position: relative;
+    }
+    .legal-hero .legal-mark::after {
+      content: "";
+      position: absolute;
+      inset: -26px;
+      border-radius: 50%;
+      background: radial-gradient(
+        closest-side,
+        color-mix(in srgb, var(--al-gold) 22%, transparent),
+        transparent 72%
+      );
+      z-index: -1;
+    }
+    .legal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .legal-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.42rem 0.85rem;
+      border-radius: 999px;
+      background: var(--al-surface);
+      border: 1px solid var(--al-line);
+      box-shadow: var(--al-shadow-sm);
+      color: var(--al-ink-soft);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .legal-meta-item i {
+      color: var(--al-gold-strong);
+      font-size: 0.75rem;
+    }
+    .legal-progress {
+      height: 4px;
+      border-radius: 999px;
+      background: var(--al-line);
+      overflow: hidden;
+    }
+    .legal-progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: var(--al-grad-gold);
+      transition: width 0.12s linear;
+    }
+    .legal-toc {
+      max-height: 16rem;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    .legal-toc .toc-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.15rem;
+      border-bottom: 1px solid var(--al-line);
+      background: var(--al-surface-2);
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--al-surface-2) 60%, transparent),
+        transparent
+      );
+      border-radius: var(--al-radius) var(--al-radius) 0 0;
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--al-ink);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .legal-toc .toc-head i {
+      color: var(--al-gold-strong);
+    }
+    .legal-toc .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0.55rem;
+    }
+    .legal-toc .toc-list a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.6rem;
+      border-radius: var(--al-radius-sm);
+      color: var(--al-ink-soft);
+      font-size: 0.855rem;
+      font-weight: 700;
+      line-height: 1.5;
+      transition:
+        color 0.22s,
+        background-color 0.22s;
+    }
+    .legal-toc .toc-list .n {
+      width: 23px;
+      height: 23px;
+      flex: none;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--al-surface-2);
+      border: 1px solid var(--al-line);
+      color: var(--al-ink-faint);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 800;
+      transition:
+        background 0.22s,
+        color 0.22s,
+        border-color 0.22s;
+    }
+    .legal-toc .toc-list a:hover {
+      background: var(--al-surface-2);
+      color: var(--al-ink);
+    }
+    .legal-toc .toc-list a.active {
+      background: color-mix(in srgb, var(--al-gold) 13%, transparent);
+      color: var(--al-gold-strong);
+    }
+    .legal-toc .toc-list a.active .n {
+      background: var(--al-grad-gold);
+      border-color: transparent;
+      color: #fff;
+    }
+    .legal-highlight {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      height: 100%;
+      padding: 0.95rem 1rem;
+      background: var(--al-surface);
+      border: 1px solid var(--al-line);
+      border-radius: var(--al-radius);
+      box-shadow: var(--al-shadow-sm);
+      transition:
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.25s,
+        border-color 0.25s;
+    }
+    .legal-highlight:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--al-shadow);
+      border-color: var(--al-line-strong);
+    }
+    .legal-highlight strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: var(--al-ink);
+      margin-bottom: 0.15rem;
+    }
+    .legal-highlight p {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.75;
+      color: var(--al-ink-soft);
+    }
+    .legal-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 1.1rem 1.2rem;
+      border-radius: var(--al-radius);
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--al-gold) 9%, var(--al-surface)),
+        var(--al-surface)
+      );
+      border: 1px solid var(--al-line-strong);
+      box-shadow: var(--al-shadow-sm);
+    }
+    .legal-callout span {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: var(--al-ink-soft);
+    }
+    .legal-section {
+      scroll-margin-top: 5.5rem;
+      padding: 1.35rem 1.45rem;
+      background: var(--al-surface);
+      border: 1px solid var(--al-line);
+      border-radius: var(--al-radius-lg);
+      box-shadow: var(--al-shadow-sm);
+      transition:
+        box-shadow 0.25s,
+        border-color 0.25s;
+    }
+    .legal-section:hover {
+      border-color: var(--al-line-strong);
+      box-shadow: var(--al-shadow);
+    }
+    .legal-section .sec-head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 0.95rem;
+      border-bottom: 1px dashed var(--al-line-strong);
+    }
+    .legal-section .sec-head .n {
+      width: 30px;
+      height: 30px;
+      flex: none;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--al-grad-gold);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 800;
+      box-shadow: 0 4px 12px -4px color-mix(in srgb, var(--al-gold) 70%, transparent);
+    }
+    .legal-section .sec-head h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1.45;
+      color: var(--al-ink);
+    }
+    .legal-section h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 850;
+      color: var(--al-gold-strong);
+      margin: 1.15rem 0 0.45rem;
+    }
+    .legal-section h3::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: none;
+      border-radius: 2px;
+      background: var(--al-gold);
+      transform: rotate(45deg);
+    }
+    .legal-section p,
+    .legal-section li {
+      color: var(--al-ink-soft);
+      line-height: 2;
+      font-size: 0.915rem;
+    }
+    .legal-section p {
+      margin-bottom: 0.7rem;
+    }
+    .legal-section ul {
+      list-style: none;
+      padding-inline-start: 0;
+      margin: 0 0 0.4rem;
+    }
+    .legal-section li {
+      position: relative;
+      padding-inline-start: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .legal-section li::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0.3rem;
+      top: 0.75em;
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--al-gold-soft);
+      border: 1px solid var(--al-gold);
+      transform: rotate(45deg);
+    }
+    .legal-section li strong {
+      color: var(--al-ink);
+      font-weight: 850;
+    }
+    .legal-section a {
+      color: var(--al-gold-strong);
+      font-weight: 800;
+      border-bottom: 1px dashed currentColor;
+    }
+    .legal-section a:hover {
+      border-bottom-style: solid;
+    }
+    .legal-note {
+      font-size: 0.845rem !important;
+      line-height: 1.9 !important;
+      color: var(--al-ink-faint) !important;
+      background: var(--al-surface-2);
+      border-inline-start: 3px solid var(--al-line-strong);
+      border-radius: var(--al-radius-sm);
+      padding: 0.65rem 0.85rem;
+    }
+    .legal-contact {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.35rem;
+      border-radius: var(--al-radius-lg);
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--al-gold) 10%, var(--al-surface)),
+        var(--al-surface)
+      );
+      border: 1px solid var(--al-line-strong);
+      box-shadow: var(--al-shadow-sm);
+    }
+    .legal-contact .c-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .legal-contact .c-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--al-ink-soft);
+    }
+    .legal-contact .c-list i {
+      color: var(--al-gold-strong);
+      font-size: 0.8rem;
+    }
+    .legal-navcard {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      height: 100%;
+      padding: 0.95rem 1.1rem;
+      border-radius: var(--al-radius);
+      background: var(--al-surface);
+      border: 1px solid var(--al-line);
+      box-shadow: var(--al-shadow-sm);
+      color: var(--al-ink);
+      transition:
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.25s,
+        border-color 0.25s;
+    }
+    .legal-navcard:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--al-shadow);
+      border-color: var(--al-gold);
+      color: var(--al-ink);
+    }
+    .legal-navcard .grow {
+      flex: 1;
+      min-width: 0;
+    }
+    .legal-navcard small {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--al-ink-faint);
+    }
+    .legal-navcard strong {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 900;
+      color: var(--al-ink);
+    }
+    .legal-navcard > i {
+      color: var(--al-gold-strong);
+      font-size: 0.85rem;
+      flex: none;
+    }
+    @media (min-width: 992px) {
+      .legal-toc {
+        position: sticky;
+        top: 1.25rem;
+        max-height: min(68vh, 560px);
+      }
+      .legal-section {
+        scroll-margin-top: 1.5rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .legal-progress span,
+      .legal-highlight,
+      .legal-navcard {
+        transition: none;
+      }
+      .legal-highlight:hover,
+      .legal-navcard:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="alegria-header"></div>
+
+  <main>
+    <section class="page-hero legal-hero">
+      <div class="container legal-shell">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="eyebrow mb-2"><i class="fa-solid fa-shield-halved"></i> الوثائق القانونية</span>
+            <h1 class="mb-2">سياسة الخصوصية</h1>
+            <p class="lead mb-3">
+              نوضّح في هذه الوثيقة البيانات التي نجمعها عند استخدامك موقع أليجريا وخدماتها، وكيف نستخدمها ونحميها،
+              وما هي حقوقك تجاه هذه البيانات.
+            </p>
+            <div class="legal-meta">
+              <span class="legal-meta-item"><i class="fa-solid fa-calendar-check"></i> آخر تحديث: يناير 2025</span>
+              <span class="legal-meta-item"><i class="fa-solid fa-hashtag"></i> الإصدار 1.0</span>
+              <span class="legal-meta-item"><i class="fa-solid fa-circle-check"></i> معتمدة من إدارة الامتثال</span>
+              <span class="legal-meta-item"><i class="fa-solid fa-stopwatch"></i> زمن القراءة: 6 دقائق</span>
+            </div>
+          </div>
+          <div class="col-lg-4 d-none d-lg-flex justify-content-center">
+            <span class="legal-mark"><span class="icon-disc icon-disc--lg"><i class="fa-solid fa-user-shield"></i></span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-4 py-lg-5">
+      <div class="container legal-shell">
+        <div class="legal-progress mb-4" role="presentation"><span id="legalProgress"></span></div>
+
+        <div class="row g-4">
+          <aside class="col-lg-3">
+            <nav class="legal-toc panel-card" aria-label="محتويات الوثيقة">
+              <div class="toc-head"><i class="fa-solid fa-list-ul"></i><span>محتويات الوثيقة</span></div>
+              <ul class="toc-list">
+                <li><a href="#intro"><span class="n">1</span>مقدمة ونطاق التطبيق</a></li>
+                <li><a href="#collect"><span class="n">2</span>البيانات التي نجمعها</a></li>
+                <li><a href="#use"><span class="n">3</span>كيف نستخدم بياناتك</a></li>
+                <li><a href="#legal"><span class="n">4</span>الأساس القانوني للمعالجة</a></li>
+                <li><a href="#share"><span class="n">5</span>مشاركة البيانات</a></li>
+                <li><a href="#security"><span class="n">6</span>أمن البيانات</a></li>
+                <li><a href="#retain"><span class="n">7</span>مدة الاحتفاظ</a></li>
+                <li><a href="#rights"><span class="n">8</span>حقوقك</a></li>
+                <li><a href="#cookies"><span class="n">9</span>ملفات الارتباط</a></li>
+                <li><a href="#children"><span class="n">10</span>خصوصية الأطفال</a></li>
+                <li><a href="#changes"><span class="n">11</span>تعديل السياسة</a></li>
+                <li><a href="#contact"><span class="n">12</span>التواصل معنا</a></li>
+              </ul>
+            </nav>
+          </aside>
+
+          <div class="col-lg-9 d-flex flex-column gap-3">
+
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="legal-highlight">
+                  <span class="icon-disc icon-disc--sm icon-disc--green"><i class="fa-solid fa-handshake-angle"></i></span>
+                  <div>
+                    <strong>لا نبيع بياناتك</strong>
+                    <p>لا نبيع بياناتك لأي طرف ثالث ولا نستخدمها لأغراض تسويقية.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="legal-highlight">
+                  <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-lock"></i></span>
+                  <div>
+                    <strong>تشفير كامل</strong>
+                    <p>الاتصال والبيانات مشفّرة أثناء النقل وفي حالة السكون.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="legal-highlight">
+                  <span class="icon-disc icon-disc--sm icon-disc--amber"><i class="fa-solid fa-scale-balanced"></i></span>
+                  <div>
+                    <strong>تحكّم كامل لك</strong>
+                    <p>يمكنك الوصول إلى بياناتك أو تصحيحها أو حذفها في أي وقت.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="legal-callout">
+              <span class="icon-disc icon-disc--xs"><i class="fa-solid fa-circle-info"></i></span>
+              <span>
+                استخدامك للموقع يعني موافقتك على هذه السياسة. نجمع الحد الأدنى من البيانات اللازمة لتقديم الخدمة،
+                ولا نبيع بياناتك لأي طرف ثالث.
+              </span>
+            </div>
+
+            <section class="legal-section" id="intro">
+              <div class="sec-head">
+                <span class="n">1</span>
+                <h2>مقدمة ونطاق التطبيق</h2>
+              </div>
+              <p>
+                تنطبق هذه السياسة على موقع أليجريا الإلكتروني وطبيقات الحجز التابعة لنا، وتشمل الفروع في الرياض والقاهرة.
+                وفي حال كان لديك استفسار من خارج نطاق هذه الوثيقة، تواصل مع مدير البيانات المعيّن المذكور في قسم التواصل.
+              </p>
+            </section>
+
+            <section class="legal-section" id="collect">
+              <div class="sec-head">
+                <span class="n">2</span>
+                <h2>البيانات التي نجمعها</h2>
+              </div>
+              <h3>بيانات تقدّمها أنت طوعاً</h3>
+              <ul>
+                <li>بيانات التعريف والتواصل: الاسم، البريد الإلكتروني، رقم الجوال.</li>
+                <li>بيانات الطلبات: تفاصيل الأصناف، والعنوان، وطريقة الدفع.</li>
+                <li>بيانات التقييمات والتعليقات عند مشاركتها.</li>
+                <li>رسائل التواصل عبر نموذج «تواصل معنا» أو الدعم الفني.</li>
+              </ul>
+              <h3>بيانات تُجمع تلقائياً</h3>
+              <ul>
+                <li>بيانات تقنية: نوع المتصفح، نظام التشغيل، عنوان الشبكة، الصفحات التي زرتها.</li>
+                <li>سجلات أمان تتيح كشف محاولات الدخول غير المصرّح بها.</li>
+                <li>تفضيلات العرض مثل اللغة والوضع الليلي.</li>
+              </ul>
+              <h3>بيانات لا نجمعها</h3>
+              <p>
+                لا نخزّن أرقام بطاقات الدفع على خوادمنا. تُعالَج المدفوعات عبر بوابات معتمدة، ونحتفظ فقط بمرجع العملية
+                وآخر أربعة أرقام للتحقق والاسترداد.
+              </p>
+            </section>
+
+            <section class="legal-section" id="use">
+              <div class="sec-head">
+                <span class="n">3</span>
+                <h2>كيف نستخدم بياناتك</h2>
+              </div>
+              <p>نستخدم بياناتك للأغراض التالية:</p>
+              <ul>
+                <li>تنفيذ طلباتك وحجزاتها وتوصيلها.</li>
+                <li>إدارة حساباتك ومنحك الصلاحيات المناسبة.</li>
+                <li>التواصل معك بشأن حالة الطلب أو أي تحديث يهمك.</li>
+                <li>تحسين جودة الخدمة وسرعة استجابة الخوادم.</li>
+                <li>الامتثال للأنظمة المحاسبية والضريبية المطبّقة.</li>
+                <li>منع الاحتيال وحماية المنظومة من الاختراقات.</li>
+              </ul>
+            </section>
+
+            <section class="legal-section" id="legal">
+              <div class="sec-head">
+                <span class="n">4</span>
+                <h2>الأساس القانوني للمعالجة</h2>
+              </div>
+              <p>نعالج بياناتك استناداً إلى واحد من الأسس التالية:</p>
+              <ul>
+                <li><strong>تنفيذ العقد:</strong> تنفيذ طلباتك وحجوزاتك التي تطلبها.</li>
+                <li><strong>الالتزام القانوني:</strong> حفظ سجلات الفواتير والضريبة لفترة يفرضها النظام.</li>
+                <li><strong>المصلحة المشروعة:</strong> تشغيل المنظومة بأمان ومنع إساءة الاستخدام.</li>
+                <li><strong>الموافقة:</strong> الرسائل الترويجية والتواصل عبر البريد أو الرسائل النصية.</li>
+              </ul>
+            </section>
+
+            <section class="legal-section" id="share">
+              <div class="sec-head">
+                <span class="n">5</span>
+                <h2>مشاركة البيانات</h2>
+              </div>
+              <p>لا نشارك بياناتك لأغراض تسويقية. ولا نشاركها إلا مع:</p>
+              <ul>
+                <li>شركاء التوصيل، الذين يحتاجون العنوان وبيانات الاتصال فقط لتسليم الطلب.</li>
+                <li>بوابات الدفع ومزودو خدمات الدفع المعتمدون لإتمام العملية.</li>
+                <li>مزودي البنية السحابية ضمن اتفاقيات معالجة موثوقة.</li>
+                <li>الجهات الحكومية المختصة عند وجود طلب نظامي ملزم.</li>
+              </ul>
+              <p class="legal-note">
+                نلتزم بقصر المشاركة على الحد اللازم لكل حالة، ونلتزم تعهدات سرية مع جميع المعالجين.
+              </p>
+            </section>
+
+            <section class="legal-section" id="security">
+              <div class="sec-head">
+                <span class="n">6</span>
+                <h2>أمن البيانات</h2>
+              </div>
+              <p>نطبّق مجموعة من الضوابط لحماية بياناتك:</p>
+              <ul>
+                <li>تشفير الاتصال بالكامل عبر بروتوكول آمن.</li>
+                <li>تشفير قاعدة البيانات في حالة السكون والتشغيل.</li>
+                <li>تحقّق متعدد العوامل من الدخول إلى الأنظمة الإدارية.</li>
+                <li>سجل تدقيق يوثّق كل عملية وصول أو تعديل.</li>
+                <li>فحص دوري للثغرات واختبار اختراق دوري.</li>
+              </ul>
+            </section>
+
+            <section class="legal-section" id="retain">
+              <div class="sec-head">
+                <span class="n">7</span>
+                <h2>مدة الاحتفاظ بالبيانات</h2>
+              </div>
+              <ul>
+                <li><strong>بيانات الطلبات والفواتير:</strong> عشر سنوات وفق المتطلبات المحاسبية والضريبية.</li>
+                <li><strong>بيانات الحساب:</strong> طوال فترة نشاط حسابك، ثم سنة واحدة بعد إغلاقه.</li>
+                <li><strong>سجلات الأمان:</strong> سنتان لاكتشاف الأنشطة المشبوهة.</li>
+                <li><strong>الرسائل التسويقية:</strong> حتى سحب موافقتك، مع نسخة تُحفظ للدليل.</li>
+              </ul>
+            </section>
+
+            <section class="legal-section" id="rights">
+              <div class="sec-head">
+                <span class="n">8</span>
+                <h2>حقوقك</h2>
+              </div>
+              <p>يحق لك في أي وقت:</p>
+              <ul>
+                <li><strong>الوصول:</strong> الحصول على نسخة من بياناتك المحفوظة.</li>
+                <li><strong>التصحيح:</strong> تعديل أي بيانات غير دقيقة أو قديمة.</li>
+                <li><strong>الحذف:</strong> طلب محو بياناتك متى انتهت الغرض من جمعها.</li>
+                <li><strong>الاعتراض:</strong> رفض معالجة معيّنة مع بقاء حقك في الخدمة.</li>
+                <li><strong>النقل:</strong> استلام بياناتك بصيغة قابلة للقراءة آلياً.</li>
+                <li><strong>سحب الموافقة:</strong> في أي وقت مع مراعاة أثر ذلك على الخدمة.</li>
+              </ul>
+              <p class="legal-note">
+                نستجيب لطلباتك خلال ثلاثين يوماً كحدّ أقصى. قد نطلب توثيق هويتك لحماية بياناتك من الوصول غير المصرّح به.
+              </p>
+            </section>
+
+            <section class="legal-section" id="cookies">
+              <div class="sec-head">
+                <span class="n">9</span>
+                <h2>ملفات الارتباط</h2>
+              </div>
+              <p>نستخدم أنواعاً محدودة من ملفات الارتباط:</p>
+              <ul>
+                <li><strong>ضرورية:</strong> لحفظ سلة المشتريات وجلسة الدخول.</li>
+                <li><strong>تفضيلية:</strong> لحفظ الوضع الليلي واللغة المختارة.</li>
+                <li><strong>قياس الأداء:</strong> لإحصاء الزيارات وتحسين المحتوى، وتكون اختيارية.</li>
+              </ul>
+              <p>يمكنك حذف ملفات الارتباط أو منعها من إعدادات المتصفح، مع العلم أن منع الضرورية يعطّل السلة والدخول.</p>
+            </section>
+
+            <section class="legal-section" id="children">
+              <div class="sec-head">
+                <span class="n">10</span>
+                <h2>خصوصية الأطفال</h2>
+              </div>
+              <p>
+                الموقع والخدمات موجّهة للبالغين. لا نجمع بيانات أطفال دون عمر 16 سنة عن علم أولياء الأمور.
+                عند اكتشاف أي بيانات تخص طفل، نحذفها فوراً.
+              </p>
+            </section>
+
+            <section class="legal-section" id="changes">
+              <div class="sec-head">
+                <span class="n">11</span>
+                <h2>تعديل السياسة</h2>
+              </div>
+              <p>
+                قد نحدّث هذه السياسة عند تغيّر خدماتنا أو الأنظمة المطبّقة. سيظهر تاريخ آخر تحديث في أعلى الصفحة،
+                وسنشعرك بالتغييرات الجوهرية عبر البريد الإلكتروني أو إشعار داخل المنظومة قبل ثلاثين يوماً على الأقل.
+              </p>
+            </section>
+
+            <section class="legal-section" id="contact">
+              <div class="sec-head">
+                <span class="n">12</span>
+                <h2>التواصل معنا</h2>
+              </div>
+              <p>لأي استفسار يتعلق بهذه السياسة، يمكنك التواصل معنا عبر:</p>
+              <ul>
+                <li>صفحة <a href="contact_us_alegria.html">تواصل معنا</a>.</li>
+                <li>الدعم الفني: <a href="vip_support_24_7.html">مركز الدعم VIP</a> على مدار الساعة.</li>
+              </ul>
+            </section>
+
+            <div class="legal-contact">
+              <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-headset"></i></span>
+              <div class="grow">
+                <div class="fw-bold mb-1" style="color:var(--al-ink);">هل لديك سؤال عن بياناتك؟</div>
+                <ul class="c-list">
+                  <li><i class="fa-solid fa-envelope"></i> <span class="font-mono" dir="ltr">concierge@alegria-dining.com</span></li>
+                  <li><i class="fa-solid fa-phone"></i> <span class="font-mono" dir="ltr">+966 11 234 5678</span></li>
+                </ul>
+              </div>
+              <a href="vip_support_24_7.html" class="btn btn-gold">
+                <i class="fa-solid fa-headset me-1"></i> الدعم الفني
+              </a>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <a href="terms_of_use_alegria.html" class="legal-navcard">
+                  <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-file-contract"></i></span>
+                  <span class="grow">
+                    <small>الوثيقة التالية</small>
+                    <strong>شروط الاستخدام</strong>
+                  </span>
+                  <i class="fa-solid fa-arrow-left"></i>
+                </a>
+              </div>
+              <div class="col-md-6">
+                <a href="contact_us_alegria.html" class="legal-navcard">
+                  <span class="grow">
+                    <small>الوثيقة السابقة</small>
+                    <strong>تواصل معنا</strong>
+                  </span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span class="icon-disc icon-disc--sm"><i class="fa-solid fa-envelope"></i></span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="alegria-footer"></div>
+
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "front", page: "privacy" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      var links = Array.prototype.slice.call(document.querySelectorAll('.legal-toc a[href^="#"]'));
+      var bar = document.getElementById('legalProgress');
+      if (!links.length) { return; }
+      var secs = links.map(function (a) {
+        return document.getElementById(a.getAttribute('href').slice(1));
+      }).filter(Boolean);
+      function upd() {
+        var mark = window.scrollY + 200;
+        var idx = 0;
+        secs.forEach(function (s, i) { if (s.offsetTop <= mark) { idx = i; } });
+        links.forEach(function (a, i) { a.classList.toggle('active', i === idx); });
+        if (bar) {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0) + '%';
+        }
+      }
+      var queued = false;
+      window.addEventListener('scroll', function () {
+        if (queued) { return; }
+        queued = true;
+        window.requestAnimationFrame(function () { upd(); queued = false; });
+      }, { passive: true });
+      window.addEventListener('resize', upd);
+      upd();
+    })();
+  </script>
+</body>
+</html>

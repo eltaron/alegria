@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>الخزينة والمالية | أليجريا ERP</title>
+  <meta name="description" content="الإدارة المالية والخزينة وحركة النقدية لنظام أليجريا: السيولة النقدية، سندات القبض والصرف، والتسويات المالية."/>
+  <meta name="keywords" content="أليجريا, نظام إدارة المطاعم, ERP, نقاط البيع, الخزينة, المالية, الرواتب"/>
+  <meta name="author" content="أليجريا كافيه ومطعم"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="theme-color" content="#0b1326"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+  <meta property="og:locale" content="ar_SA"/>
+  <meta property="og:site_name" content="أليجريا كافيه ومطعم | Alegria"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="الخزينة والمالية | أليجريا ERP"/>
+  <meta property="og:description" content="الرقابة الحية على السيولة النقدية، تدفقات المبيعات، سندات القبض والصرف، والتسويات المالية لمطعم أليجريا."/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="الخزينة والمالية | أليجريا ERP"/>
+  <meta name="twitter:description" content="الرقابة الحية على السيولة النقدية، تدفقات المبيعات، سندات القبض والصرف، والتسويات المالية لمطعم أليجريا."/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+
+  <style>
+    /* ============================================================
+       Treasury page — page-scoped layer (.tr-*)
+       ============================================================ */
+    .tr-kpi { height: 100%; }
+    .tr-kpi .stat-value { font-size: 1.65rem; line-height: 1.15; }
+    .tr-kpi__cap {
+      font-size: 0.68rem;
+      letter-spacing: 0;
+      color: var(--al-ink-faint);
+    }
+
+    /* payment-method split inside a KPI card */
+    .tr-split {
+      display: flex;
+      height: 7px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--al-ink-faint);
+    }
+    .tr-split > i { display: block; height: 100%; }
+    .tr-split__key {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--al-ink-soft);
+      margin-top: 0.35rem;
+    }
+    .tr-split__key b { font-family: var(--font-mono); font-weight: 700; }
+
+    /* day switcher */
+    .tr-days { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+    .tr-day {
+      border: 1px solid var(--al-line);
+      background: var(--al-surface-2);
+      color: var(--al-ink-soft);
+      border-radius: 0.6rem;
+      padding: 0.3rem 0.55rem;
+      font-size: 0.72rem;
+      line-height: 1.25;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      text-align: center;
+      min-width: 3.1rem;
+    }
+    .tr-day b { display: block; font-family: var(--font-mono); font-size: 0.8rem; }
+    .tr-day:hover { border-color: var(--al-gold); color: var(--al-ink); }
+    .tr-day.on {
+      background: var(--al-grad-gold);
+      border-color: transparent;
+      color: #241a12;
+    }
+    .tr-day.today { box-shadow: 0 0 0 1px var(--al-gold) inset; }
+
+    /* vessel cards */
+    .tr-vessel { height: 100%; }
+    .tr-vessel__top { display: flex; justify-content: space-between; gap: 0.5rem; align-items: flex-start; }
+    .tr-vessel__name { font-weight: 900; font-size: 0.8rem; }
+    .tr-vessel__sub { font-size: 0.7rem; color: var(--al-ink-soft); }
+    .tr-vessel__amt { font-family: var(--font-mono); font-size: 1.35rem; font-weight: 800; margin-top: 0.6rem; }
+    .tr-vessel__amt small { font-size: 0.7rem; font-weight: 400; color: var(--al-ink-soft); }
+    .tr-meter {
+      position: relative;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--al-ink-faint);
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .tr-meter__fill { position: absolute; inset-block: 0; inset-inline-start: 0; border-radius: 999px; }
+    .tr-meter__fill.gold { background: var(--al-grad-gold); }
+    .tr-meter__fill.green { background: var(--al-green); }
+    .tr-meter__fill.rose { background: var(--al-rose); }
+    .tr-meter__fill.amber { background: var(--al-gold); }
+    .tr-meter__fill.neutral { background: var(--al-ink-faint); }
+    .tr-meter__scale {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.66rem;
+      color: var(--al-ink-soft);
+      margin-top: 0.25rem;
+    }
+    .tr-vessel__foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--al-ink-soft);
+      border-top: 1px solid var(--al-line);
+      margin-top: 0.7rem;
+      padding-top: 0.5rem;
+    }
+
+    /* liquidity composition bar */
+    .tr-comp { display: flex; height: 26px; border-radius: 0.5rem; overflow: hidden; }
+    .tr-comp > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.66rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #10182c;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    /* cash-flow chart */
+    .tr-chart { position: relative; }
+    .tr-chart svg { width: 100%; height: 260px; display: block; }
+    .tr-chart .gl { stroke: var(--al-line); stroke-width: 1; }
+    .tr-chart .gl-dash { stroke-dasharray: 4 5; }
+    .tr-chart .ax { fill: var(--al-ink-soft); font-size: 10px; font-family: var(--font-mono); }
+    .tr-chart .axt { fill: var(--al-ink-faint); font-size: 10px; }
+    .tr-chart .lbl { fill: var(--al-ink-soft); font-size: 10.5px; font-weight: 700; }
+    .tr-chart .bar-in { fill: var(--al-green); opacity: 0.85; }
+    .tr-chart .bar-out { fill: var(--al-rose); opacity: 0.75; }
+    .tr-chart .netline { fill: none; stroke: var(--al-gold); stroke-width: 2; stroke-dasharray: 5 4; }
+    .tr-chart .hit { fill: transparent; cursor: pointer; }
+    .tr-chart .hit:hover + .bar-in, .tr-chart .bar-in.on { fill: var(--al-gold); opacity: 1; }
+    .tr-chart .bar-in.on { fill: var(--al-gold); opacity: 1; }
+    .tr-tip {
+      position: absolute;
+      z-index: 20;
+      min-width: 11rem;
+      background: var(--al-surface-2);
+      border: 1px solid var(--al-gold);
+      border-radius: 0.5rem;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.72rem;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+    }
+    .tr-tip.on { opacity: 1; }
+    .tr-tip__t { font-weight: 800; margin-bottom: 0.2rem; }
+    .tr-tip__r { display: flex; justify-content: space-between; gap: 0.75rem; }
+    .tr-tip__r span { color: var(--al-ink-soft); }
+    .tr-tip__r b { font-family: var(--font-mono); }
+
+    /* cost structure */
+    .tr-stack { display: flex; height: 30px; border-radius: 0.45rem; overflow: hidden; }
+    .tr-stack > i { display: block; height: 100%; position: relative; }
+    .tr-row { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem 0.75rem; align-items: center; }
+    .tr-row__l { font-size: 0.78rem; }
+    .tr-row__v { font-family: var(--font-mono); font-weight: 800; font-size: 0.82rem; text-align: end; }
+    .tr-row__a { font-family: var(--font-mono); font-size: 0.72rem; color: var(--al-ink-soft); text-align: end; }
+    .tr-gap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.74rem;
+      border: 1px dashed var(--al-line);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.6rem;
+    }
+
+    /* ledger */
+    .tr-ledger { width: 100%; margin: 0; min-width: 640px; }
+    .tr-ledger thead th {
+      font-size: 0.74rem;
+      color: var(--al-ink-soft);
+      font-weight: 700;
+      white-space: nowrap;
+      background: var(--al-surface-2);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .tr-ledger tbody td { font-size: 0.78rem; vertical-align: middle; white-space: nowrap; }
+    .tr-ledger tbody tr:hover { background: var(--al-surface-2); }
+    .tr-ledger__ref { font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; }
+    .tr-ledger__sep { color: var(--al-ink-faint); margin: 0 0.45em; }
+    .tr-ledger__stmt {
+      display: block;
+      max-width: 22rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+    .tr-ledger__det {
+      display: block;
+      max-width: 30rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.7rem;
+      color: var(--al-ink-soft);
+    }
+    .tr-ledger__acct { display: flex; align-items: center; gap: 0.5em; min-width: 0; max-width: 24rem; }
+    .tr-ledger__acct > .tr-ledger__d { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tr-ledger__d { font-size: 0.7rem; color: var(--al-ink-soft); }
+    .tr-nowrap { white-space: nowrap; flex: 0 0 auto; line-height: 1.45; }
+    .tr-sechead {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      gap: 0.5rem;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+    .tr-sechead > .stat-icon,
+    .tr-sechead > .tr-nowrap { flex: 0 0 auto; }
+    .tr-sechead > h2 {
+      margin: 0;
+      font-weight: 900;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+      font-size: clamp(0.9rem, 1.55vw, 1.15rem);
+    }
+    .tr-amt { font-family: var(--font-mono); font-weight: 800; font-size: 0.88rem; white-space: nowrap; }
+    .tr-amt.in { color: var(--al-green); }
+    .tr-amt.out { color: var(--al-rose); }
+    .tr-sort {
+      background: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      gap: 0.3rem;
+      align-items: center;
+    }
+    .tr-sort i { font-size: 0.6rem; opacity: 0.35; }
+    .tr-sort.on i { opacity: 1; color: var(--al-gold); }
+    .tr-empty { padding: 2rem 1rem; text-align: center; color: var(--al-ink-soft); }
+    .tr-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.76rem;
+      border-top: 1px solid var(--al-line);
+      padding-top: 0.6rem;
+    }
+    .tr-pager { display: flex; gap: 0.25rem; align-items: center; }
+    .tr-pager button {
+      min-width: 2rem;
+      border: 1px solid var(--al-line);
+      background: var(--al-surface-2);
+      color: var(--al-ink-soft);
+      border-radius: 0.4rem;
+      padding: 0.15rem 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      cursor: pointer;
+    }
+    .tr-pager button.on { background: var(--al-grad-gold); border-color: transparent; color: #241a12; font-weight: 800; }
+    .tr-pager button:disabled { opacity: 0.35; cursor: default; }
+
+    /* sidebar blocks */
+    .tr-petty { border: 1px solid var(--al-line); border-radius: 0.6rem; padding: 0.55rem 0.65rem; }
+    .tr-ok {
+      border: 1px solid var(--al-green);
+      background: color-mix(in srgb, var(--al-green) 12%, transparent);
+      border-radius: 0.6rem;
+      padding: 0.85rem;
+      text-align: center;
+    }
+    .tr-ok__v { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; color: var(--al-green); }
+    .tr-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .tr-mini > div {
+      border: 1px solid var(--al-line);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.5rem;
+    }
+    .tr-mini small { display: block; color: var(--al-ink-soft); font-size: 0.68rem; }
+    .tr-mini b { font-family: var(--font-mono); font-size: 0.85rem; }
+    .tr-ob {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.6rem;
+      border: 1px solid var(--al-line);
+      border-inline-start: 3px solid var(--al-ink-faint);
+      border-radius: 0.5rem;
+      padding: 0.45rem 0.6rem;
+    }
+    .tr-ob.critical { border-inline-start-color: var(--al-rose); }
+    .tr-ob__t { font-size: 0.76rem; font-weight: 700; }
+    .tr-ob__d { font-size: 0.68rem; color: var(--al-ink-soft); }
+    .tr-ob__a { font-family: var(--font-mono); font-weight: 800; font-size: 0.82rem; white-space: nowrap; }
+    .tr-note { font-size: 0.72rem; color: var(--al-ink-soft); }
+
+    /* voucher print sheet */
+    .tr-print { display: none; }
+
+    @media print {
+      body * { visibility: hidden !important; }
+      .tr-print, .tr-print * { visibility: visible !important; }
+      .tr-print {
+        display: block !important;
+        position: absolute;
+        inset-inline-start: 0;
+        top: 0;
+        width: 100%;
+        color: #000;
+        background: #fff;
+        padding: 18px;
+      }
+      @page { margin: 12mm; }
+    }
+
+    @media (max-width: 575.98px) {
+      .tr-chart svg { height: 220px; }
+      .tr-ledger thead th, .tr-ledger tbody td { font-size: 0.72rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main class="container py-4">
+
+    <!-- ============================================================
+         1. TOP HEADER + DAY SWITCHER + QUICK FINANCE ACTIONS
+         ============================================================ -->
+    <section class="panel-card p-3 p-lg-4 mb-4">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-start justify-content-between gap-3">
+        <div>
+          <div class="d-flex align-items-center gap-2 flex-wrap small text-soft breadcrumb-custom">
+            <span>لوحة الإدارة</span>
+            <i class="fa-solid fa-chevron-left"></i>
+            <span class="text-gold fw-bold">الخزينة والمالية</span>
+            <span class="badge-pill-custom badge-green ms-1"><span class="dot dot-green"></span> متصل بنقاط البيع والحسابات البنكية</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 flex-wrap mt-1">
+            <h1 class="h4 fw-black m-0">الخزينة وحركة النقدية</h1>
+            <span class="badge-pill-custom badge-neutral tabular">أكتوبر 2024</span>
+          </div>
+          <p class="text-soft small mb-0 mt-1">
+            كل رقم في هذه الصفحة محسوب من دفتر سندات واحد — الإجماليات والتواقيع والمخططات لا يمكن أن تخالف بعضها.
+          </p>
+        </div>
+        <div class="d-flex flex-column align-items-xl-end gap-2">
+          <div class="tr-days" id="trDays" role="group" aria-label="اختيار يوم الحركة"></div>
+          <div class="d-flex align-items-center gap-2 flex-wrap">
+            <button type="button" class="btn btn-gold btn-sm" data-confirm="هل تريد إنشاء سند صرف جديد وتسجيله على الخزينة الآن؟"><i class="fa-solid fa-money-bill-transfer me-1"></i> + سند صرف جديد</button>
+            <button type="button" class="btn btn-outline-gold btn-sm" data-confirm="هل تريد فتح نموذج سند قبض / توريد جديد؟"><i class="fa-solid fa-file-invoice-dollar me-1"></i> + سند قبض / توريد</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-confirm="هل تريد تنفيذ تحويل نقدي بين الخزائن وتحديد الحسابين؟"><i class="fa-solid fa-right-left me-1 text-green"></i> تحويل بين الخزائن</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-confirm="هل تريد إغلاق الوردية المالية الحالية وإنشاء تقرير المطابقة؟"><i class="fa-solid fa-lock me-1 text-rose"></i> إغلاق الوردية</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="trExport"><i class="fa-solid fa-file-arrow-down me-1"></i> تصدير CSV</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. FINANCIAL KPIs — every value injected from the ledger model
+         ============================================================ -->
+    <section class="row g-3 mb-4" id="trKpis"></section>
+
+    <!-- ============================================================
+         3. TREASURIES & BANK BALANCES — all with a stated ceiling
+         ============================================================ -->
+    <section class="mb-4">
+      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3">
+        <div class="tr-sechead">
+          <span class="stat-icon" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-vault"></i></span>
+          <h2>أرصدة الخزائن والحسابات النشطة</h2>
+          <span class="badge-pill-custom badge-neutral tabular tr-nowrap" id="trVesselCount"></span>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span class="tr-note" id="trHeadroom"></span>
+        </div>
+      </div>
+      <div class="row g-3" id="trVessels"></div>
+      <div class="panel-card mt-3">
+        <div class="panel-body">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+            <span class="small fw-bold">تركيبة السيولة النقدية</span>
+            <span class="tr-note" id="trCompNote"></span>
+          </div>
+          <div class="tr-comp" id="trComp"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. ANALYTICS — real 7-day cash-flow chart + cost structure
+         ============================================================ -->
+    <section class="row g-3 mb-4">
+      <div class="col-lg-7">
+        <div class="panel-card h-100">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-chart-column"></i> حركة النقدية (آخر 7 أيام)</h2>
+              <p class="text-soft small mb-0">وارد مقابل صادر لكل يوم، والفرق الصافي بينهما</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 small text-soft flex-wrap">
+              <span><span class="dot dot-green me-1"></span>وارد</span>
+              <span><span class="dot dot-rose me-1"></span>صادر</span>
+              <span><span class="dot dot-gold me-1"></span>صافي</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="tr-chart" id="trChart">
+              <svg viewBox="0 0 720 260" role="img" aria-label="مخطط أعمدة التدفق النقدي اليومي"></svg>
+              <div class="tr-tip" id="trTip"></div>
+            </div>
+            <div class="row g-2 mt-3" id="trChartStats"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="panel-card h-100">
+          <div class="panel-head">
+            <div>
+              <h2><i class="fa-solid fa-chart-pie"></i> هيكل تكاليف ومصروفات أكتوبر</h2>
+              <p class="text-soft small mb-0">نسب محسوبة من صافي الإيراد التراكمي للشهر</p>
+            </div>
+            <span class="badge-pill-custom badge-gold tabular" id="trMarginBadge"></span>
+          </div>
+          <div class="panel-body d-flex flex-column gap-2">
+            <div class="tr-stack" id="trStack"></div>
+            <div class="d-flex flex-column gap-2 mt-1" id="trStruct"></div>
+            <div class="tr-gap mt-1" id="trMarginGap"></div>
+            <div class="d-flex justify-content-between align-items-center small text-soft border-top pt-2 mt-1">
+              <span>صافي الإيراد التشغيلي التراكمي:</span>
+              <strong class="text-gold fw-bold tabular" id="trMonthRev"></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. LEDGER — full width, own row
+         ============================================================ -->
+    <section>
+      <div class="panel-card">
+        <div class="panel-head">
+          <div>
+            <h2><i class="fa-solid fa-book-open text-green"></i> دفتر سندات الخزينة</h2>
+            <p class="text-soft small mb-0" id="trLedgerSub"></p>
+          </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <div class="input-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="trSearch" class="form-control form-control-sm" placeholder="رقم السند، البيان، المستفيد..." aria-label="بحث في دفتر السندات"/>
+              </div>
+              <select id="trFilter" class="form-select form-select-sm" style="width:auto;" aria-label="تصفية نوع الحركة">
+                <option value="all">جميع الحركات</option>
+              </select>
+              <select id="trFlow" class="form-select form-select-sm" style="width:auto;" aria-label="تصفية اتجاه الحركة">
+                <option value="all">وارد وصادر</option>
+                <option value="in">وارد فقط</option>
+                <option value="out">صادر فقط</option>
+              </select>
+            </div>
+          </div>
+          <div class="panel-body flush table-wrap">
+            <div class="table-responsive">
+              <table class="table table-alegria tr-ledger">
+                <thead>
+                  <tr>
+                    <th><button type="button" class="tr-sort" data-sort="time">السند / الوقت <i class="fa-solid fa-sort"></i></button></th>
+                    <th>البيان</th>
+                    <th>التفاصيل</th>
+                    <th>الحساب / النوع</th>
+                    <th class="text-start"><button type="button" class="tr-sort" data-sort="amt">المبلغ <i class="fa-solid fa-sort"></i></button></th>
+                    <th class="text-center">الحالة</th>
+                    <th class="text-center">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="trRows"></tbody>
+              </table>
+            </div>
+            <div class="tr-empty" id="trEmpty" hidden>
+              <i class="fa-solid fa-inbox d-block fs-3 mb-2"></i>
+              لا توجد حركات مطابقة للفلاتر الحالية
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="tr-foot">
+              <div class="tr-pager" id="trPager"></div>
+              <div class="d-flex align-items-center gap-3 flex-wrap" id="trTotals"></div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         6. PETTY CASH / RECONCILIATION / OBLIGATIONS
+         ============================================================ -->
+    <section class="row g-3">
+        <div class="col-lg-4">
+          <div class="d-flex flex-column gap-3 h-100">
+            <!-- petty cash -->
+            <div class="panel-card h-100">
+              <div class="panel-head">
+                <div><h2><i class="fa-solid fa-wallet"></i> متابعة العهد النقدية</h2></div>
+                <button type="button" class="btn btn-ghost btn-sm" data-confirm="هل تريد تغذية عهدة نقدية وإنشاء سند تغذية جديد؟"><i class="fa-solid fa-plus me-1"></i> تغذية</button>
+              </div>
+              <div class="panel-body d-flex flex-column gap-2" id="trPetty"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="d-flex flex-column gap-3 h-100">
+            <!-- cash reconciliation -->
+            <div class="panel-card h-100">
+              <div class="panel-head">
+                <div><h2><i class="fa-solid fa-scale-balanced text-green"></i> مطابقة النقدية</h2></div>
+                <span class="badge-pill-custom badge-green" id="trReconBadge"></span>
+              </div>
+              <div class="panel-body d-flex flex-column gap-2">
+                <div class="tr-ok">
+                  <div class="tr-ok__v" id="trReconVar"></div>
+                  <div class="fw-black small mt-1" id="trReconPct"></div>
+                  <p class="tr-note mb-0 mt-1" id="trReconNote"></p>
+                </div>
+                <div class="tr-mini" id="trReconMini"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="d-flex flex-column gap-3 h-100">
+            <!-- obligations -->
+            <div class="panel-card h-100">
+              <div class="panel-head">
+                <div><h2><i class="fa-solid fa-calendar-day text-rose"></i> التزامات واستحقاقات</h2></div>
+                <span class="badge-pill-custom badge-rose tabular" id="trObligBadge"></span>
+              </div>
+              <div class="panel-body d-flex flex-column gap-2">
+                <div id="trOblig" class="d-flex flex-column gap-2"></div>
+                <div class="tr-gap mt-1" id="trCoverGap"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+  </main>
+
+  <div class="tr-print" id="trPrint"></div>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "erp", page: "treasury" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      /* ==========================================================
+         1. RAW DATA — the only hand-entered numbers on the page
+         ========================================================== */
+var DAYS = [
+  { d: '18', day: 'الجمعة', cash: 21300, card: 12600, wallet: 2980, opex: 3450, inflow: 39500, outflow: 28900 },
+  { d: '19', day: 'السبت', cash: 24700, card: 14900, wallet: 3610, opex: 2980, inflow: 45800, outflow: 31400 },
+  { d: '20', day: 'الأحد', cash: 20150, card: 12200, wallet: 2740, opex: 4650, inflow: 37600, outflow: 34200 },
+  { d: '21', day: 'الاثنين', cash: 22900, card: 13800, wallet: 3320, opex: 3120, inflow: 41900, outflow: 30700 },
+  { d: '22', day: 'الثلاثاء', cash: 27400, card: 16500, wallet: 3950, opex: 3780, inflow: 49300, outflow: 35900 },
+  { d: '23', day: 'الأربعاء', cash: 30100, card: 18000, wallet: 4270, opex: 3240, inflow: 54600, outflow: 33100 },
+  { d: '24', day: 'الخميس', cash: 32000, card: 18400, wallet: 4420, opex: 3200, inflow: 56900, outflow: 24750 }
+];
+
+var MOVES = [
+  ['18', '16:10', 'REC-4382', 'توريد نقدية وردية الفطار', 'توريد درج كاشير الفطار لصالح الخزينة المركزية', 'درج كاشير ← الخزينة', 14200, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-07'],
+  ['18', '22:35', 'REC-4383', 'توريد نقدية وردية الغداء', 'توريد درج كاشير الغداء نهاية الوردية', 'درج كاشير ← الخزينة', 16300, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-12'],
+  ['18', '20:05', 'TRX-9918', 'دفع طاولة ببطاقة ائتمانية', 'تحصيل عبر جهاز نقاط البيع - فيزا', 'محفظة البطاقات', 3000, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-558211'],
+  ['18', '21:18', 'TRX-9919', 'تحويل محفظة رقمية', 'تحويل إنستاباي مباشر من طاولة', 'محفظة إنستاباي', 6000, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-558244'],
+  ['18', '11:20', 'V-8921', 'شراء خضار وفواكه طازجة', 'نثريات تشغيلية - تم إرفاق الفاتورة الضريبية', 'عهدة نثريات الصالة', -5400, 'سندات صرف', 'مرفق به الفاتورة', 'gold', 'receipt', 'TAX-77120'],
+  ['18', '09:05', 'V-8922', 'وقود وسولار للمولد', 'صيانة تشغيلية - تعبئة وقود المولد الرئيسي', 'الخزينة الرئيسية', -1800, 'سندات صرف', 'معتمد ومسدد', 'green', 'print', 'CREW-04'],
+  ['18', '13:40', 'V-8923', 'سداد دفعة مورد دجاج', 'فاتورة توريدات لحظية - شركة الدواجن', 'البنك التجاري (CIB)', -21700, 'سداد موردين', 'معتمد ومسدد', 'green', 'print', 'INV-1044'],
+  ['19', '15:30', 'REC-4384', 'توريد نقدية وردية الفطار', 'توريد درج كاشير الفطار - متوسط مغلق', 'درج كاشير ← الخزينة', 16900, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-07'],
+  ['19', '23:10', 'REC-4385', 'توريد نقدية وردية الغداء', 'توريد درج كاشير الغداء - متوسط مغلق', 'درج كاشير ← الخزينة', 19400, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-12'],
+  ['19', '19:50', 'TRX-9920', 'دفع طاولة ببطاقة ائتمانية', 'تحصيل عبر جهاز نقاط البيع - ماستركارد', 'محفظة البطاقات', 4500, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-559002'],
+  ['19', '20:22', 'TRX-9921', 'تحويل محفظة رقمية', 'تحويل إنستاباي - طلب توصيل', 'محفظة إنستاباي', 5000, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-559031'],
+  ['19', '12:10', 'V-8924', 'سداد دفعة مورد لحوم', 'سداد جزئي للفاتورة - شركة الأمانة', 'البنك التجاري (CIB)', -18600, 'سداد موردين', 'معتمد ومسدد', 'green', 'print', 'INV-1051'],
+  ['19', '10:15', 'V-8925', 'نثريات تشغيلية للمطبخ', 'أدوات مطبخ ومستلزمات نظافة', 'عهدة نثريات الصالة', -4200, 'سندات صرف', 'مرفق به الفاتورة', 'gold', 'receipt', 'TAX-77208'],
+  ['19', '16:50', 'V-8926', 'صيانة وحدات تكييف الصالة', 'شركة القاهرة للصيانة - عقد سنوي', 'البنك التجاري (CIB)', -8600, 'سندات صرف', 'معتمد ومسدد', 'green', 'print', 'INV-220'],
+  ['20', '16:05', 'REC-4386', 'توريد نقدية وردية الفطار', 'توريد درج كاشير الفطار', 'درج كاشير ← الخزينة', 13700, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-07'],
+  ['20', '23:20', 'REC-4387', 'توريد نقدية وردية الغداء', 'توريد درج كاشير الغداء', 'درج كاشير ← الخزينة', 15100, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-12'],
+  ['20', '20:10', 'TRX-9922', 'دفع طاولة ببطاقة ائتمانية', 'تحصيل عبر جهاز نقاط البيع - فيزا', 'محفظة البطاقات', 4300, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-559874'],
+  ['20', '21:40', 'TRX-9923', 'تحويل محفظة رقمية', 'تحويل إنستاباي - طاولة عائلية', 'محفظة إنستاباي', 4500, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-559902'],
+  ['20', '11:30', 'V-8927', 'سداد فاتورة مطاحن الشرق', 'دقيق وبن - دفعة شهرية', 'البنك التجاري (CIB)', -14500, 'سداد موردين', 'معتمد ومسدد', 'green', 'print', 'INV-1058'],
+  ['20', '09:45', 'V-8928', 'شراء خضار طازجة مستعجل', 'نثريات تشغيلية - فاتورة ضريبية مرفقة', 'عهدة نثريات الصالة', -3900, 'سندات صرف', 'مرفق به الفاتورة', 'gold', 'receipt', 'TAX-77340'],
+  ['20', '14:20', 'V-8929', 'مصروف طارئ - تالف مفاجئ', 'تالف في ثلاجة الألبان - إصلاح عاجل', 'الخزينة الرئيسية', -15800, 'سندات صرف', 'قيد المراجعة', 'rose', 'receipt', 'INV-233'],
+  ['21', '15:45', 'REC-4388', 'توريد نقدية وردية الفطار', 'توريد درج كاشير الفطار', 'درج كاشير ← الخزينة', 15400, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-07'],
+  ['21', '23:05', 'REC-4389', 'توريد نقدية وردية الغداء', 'توريد درج كاشير الغداء', 'درج كاشير ← الخزينة', 17600, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-12'],
+  ['21', '19:35', 'TRX-9924', 'دفع طاولة ببطاقة ائتمانية', 'تحصيل عبر جهاز نقاط البيع - فيزا', 'محفظة البطاقات', 4400, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-560441'],
+  ['21', '20:55', 'TRX-9925', 'تحويل محفظة رقمية', 'تحويل إنستاباي - طاولة VIP', 'محفظة إنستاباي', 4500, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-560470'],
+  ['21', '12:05', 'V-8930', 'سداد دفعة مورد سمك', 'توريدات يومية - شركة النيل للأسماك', 'البنك التجاري (CIB)', -17200, 'سداد موردين', 'معتمد ومسدد', 'green', 'print', 'INV-1063'],
+  ['21', '10:50', 'V-8931', 'نثريات صالة الضيافة', 'أدوات مائدة ومناديل وترحيب', 'عهدة نثريات الصالة', -6100, 'سندات صرف', 'مرفق به الفاتورة', 'gold', 'receipt', 'TAX-77402'],
+  ['21', '17:10', 'V-8932', 'صيانة ماكينة الإسبريسو', 'شركة كولد برو - قطع غيار', 'البنك التجاري (CIB)', -7400, 'سندات صرف', 'معتمد ومسدد', 'green', 'print', 'INV-241'],
+  ['22', '16:00', 'REC-4390', 'توريد نقدية وردية الفطار', 'توريد درج كاشير الفطار', 'درج كاشير ← الخزينة', 18100, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-07'],
+  ['22', '23:15', 'REC-4391', 'توريد نقدية وردية الغداء', 'توريد درج كاشير الغداء', 'درج كاشير ← الخزينة', 20700, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-12'],
+  ['22', '20:15', 'TRX-9926', 'دفع طاولة ببطاقة ائتمانية', 'تحصيل عبر جهاز نقاط البيع - فيزا', 'محفظة البطاقات', 5000, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-561012'],
+  ['22', '21:25', 'TRX-9927', 'تحويل محفظة رقمية', 'تحويل إنستاباي - حجز ليلي', 'محفظة إنستاباي', 5500, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-561048'],
+  ['22', '11:15', 'V-8933', 'سداد فاتورة مكسرات', 'مكسرات ومواد تجهيز - شركة بريميوم', 'البنك التجاري (CIB)', -12800, 'سداد موردين', 'معتمد ومسدد', 'green', 'print', 'INV-1070'],
+  ['22', '09:30', 'V-8934', 'شراء خضار وخضار طازجة', 'نثريات تشغيلية يومية', 'عهدة نثريات الصالة', -4600, 'سندات صرف', 'مرفق به الفاتورة', 'gold', 'receipt', 'TAX-77488'],
+  ['22', '13:05', 'V-8935', 'فاتورة الكهرباء والوقود', 'شركة الكهرباء - الربع الثالث', 'البنك التجاري (CIB)', -18500, 'سندات صرف', 'معتمد ومسدد', 'green', 'print', 'INV-249'],
+  ['23', '15:20', 'REC-4392', 'توريد نقدية وردية الفطار', 'توريد درج كاشير الفطار', 'درج كاشير ← الخزينة', 19800, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-07'],
+  ['23', '23:25', 'REC-4393', 'توريد نقدية وردية الغداء', 'توريد درج كاشير الغداء', 'درج كاشير ← الخزينة', 22400, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-12'],
+  ['23', '19:45', 'TRX-9928', 'دفع طاولة ببطاقة ائتمانية', 'تحصيل عبر جهاز نقاط البيع - فيزا', 'محفظة البطاقات', 6100, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-561803'],
+  ['23', '20:35', 'TRX-9929', 'تحويل محفظة رقمية', 'تحويل إنستاباي - مناسبة VIP', 'محفظة إنستاباي', 6300, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-561840'],
+  ['23', '12:40', 'V-8936', 'سداد فاتورة زيوت وسمن', 'شركة النيل للزيوت - ربع سنوي', 'البنك التجاري (CIB)', -13200, 'سداد موردين', 'معتمد ومسدد', 'green', 'print', 'INV-1077'],
+  ['23', '10:10', 'V-8937', 'مطبوعات ودعاية', 'منيو خارجي ومطبوعات موسمية', 'الخزينة الرئيسية', -3400, 'سندات صرف', 'مرفق به الفاتورة', 'gold', 'receipt', 'TAX-77511'],
+  ['23', '17:45', 'V-8938', 'صيانة ثلاجة التجميد العميقة', 'شركة كولد برو للتبريد', 'البنك التجاري (CIB)', -16500, 'سندات صرف', 'معتمد ومسدد', 'green', 'print', 'INV-254'],
+  ['24', '10:00', 'REC-4409', 'دفعة مقدمة لحجز قاعة VIP', 'العميل: م. حازم المنشاوي - تاريخ الحفل 28 أكتوبر', 'الخزينة الرئيسية', 10000, 'سندات قبض', 'معتمد وموثق', 'green', 'print', 'RES-118'],
+  ['24', '10:30', 'REC-4408', 'توريد نقدية وردية الفطار', 'توريد درج كاشير الفطار', 'درج كاشير ← الخزينة', 6120, 'سندات قبض', 'معتمد ومسدد', 'green', 'print', 'CREW-07'],
+  ['24', '14:10', 'TRX-9932', 'دفع طاولة VIP (صينية أليجريا الفاخرة)', 'تحويل إنستاباي مباشر', 'محفظة إنستاباي', 3219, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-40992187'],
+  ['24', '17:15', 'REC-4410', 'إقفال وتوريد نقدية وردية الغداء', 'توريد درج كاشير 1 - الكاشير: أحمد سمير', 'درج كاشير ← الخزينة', 28400, 'سندات قبض', 'مكتمل ومطابق', 'green', 'print', 'CREW-12'],
+  ['24', '19:20', 'TRX-9931', 'دفع طاولة عائلية ببطاقة', 'تحصيل عبر جهاز نقاط البيع - ماستركارد', 'محفظة البطاقات', 5760, 'سندات قبض', 'مطابق آلياً', 'green', 'check', 'REF-562410'],
+  ['24', '21:05', 'REC-4407', 'حجز طاولة مناسبة - صلاة العيد', 'دفعة حجز كاملة - تم تقديمها', 'الخزينة الرئيسية', 3401, 'سندات قبض', 'معتمد وموثق', 'green', 'print', 'RES-121'],
+  ['24', '11:45', 'V-8939', 'صيانة ثلاجة التجميد العميقة الرئيسية', 'شركة كولد برو للتبريد - تحويل إلكتروني', 'البنك التجاري (CIB)', -3500, 'سندات صرف', 'معتمد ومسدد', 'green', 'print', 'INV-255'],
+  ['24', '15:30', 'V-8940', 'شراء خضار طازج مستعجل وسولار للمولد', 'نثريات تشغيلية استثنائية - فاتورة ضريبية مرفقة', 'عهدة نثريات الصالة', -1250, 'سندات صرف', 'مرفق به الفاتورة', 'gold', 'receipt', 'TAX-77590'],
+  ['24', '19:42', 'V-8941', 'سداد دفعة مورد لحوم (شركة الأمانة)', 'سداد جزئي للفاتورة رقم INV-1082 - المعتمد: فهد السليمان', 'خزينة الفرع الرئيسية', -20000, 'سداد موردين', 'معتمد ومسدد', 'green', 'print', 'INV-1082']
+];
+
+var VESSELS = [
+  ['خزينة الفرع الرئيسية', 'Main Safe - أمانات الكافيه', 142500, 150000, 'amber', 'تنبيه حد الأمان', 'الوردية الحالية', 'fa-user-shield'],
+  ['درج كاشير الصالة', 'POS Drawer 1 - وردية 2', 18450, 30000, 'green', 'نشط ومفتوح', 'الكاشير: كريم عادل', 'fa-cash-register'],
+  ['درج كاشير التيك أواي', 'Takeaway & Delivery', 8300, 20000, 'neutral', 'نشط', 'عهد الكابتن وتوصيل الطلبات', 'fa-truck-fast'],
+  ['البنك التجاري الدولي', 'CIB - الحساب التشغيلي', 265000, 340000, 'gold', 'ربط بنكي حي', 'IBAN: EG6400...910', 'fa-building-columns'],
+  ['إنستاباي والمحافظ الرقمية', 'InstaPay & Wallets', 51950, 100000, 'green', 'تسوية فورية', 'alegria.cafe@instapay', 'fa-mobile-screen']
+];
+
+var PETTY = [
+  ['عهدة الشيف التنفيذي', 'مشتريات طارئة للمطبخ', 5000, 4050],
+  ['عهدة مدير التشغيل', 'الصيانة والضيافة', 10000, 3200]
+];
+
+var STRUCT = [
+  ['تكلفة الأغذية والمشروبات', 31.4, 'gold', 'fa-utensils'],
+  ['الرواتب والأجور المباشرة', 22, 'green', 'fa-users'],
+  ['الإيجار والمرافق', 11, 'rose', 'fa-bolt'],
+  ['صيانة وتسويق ونثريات', 6, 'faint', 'fa-screwdriver-wrench']
+];
+
+var OBLIG = [
+  ['سداد دفعة مطاحن الشرق (دقيق وبن)', '25 أكتوبر', 1, 14500, 'critical'],
+  ['سداد مورد اللحوم (شركة الأمانة)', '27 أكتوبر', 3, 20000, 'critical'],
+  ['رواتب طاقم العمل والشيفات', '1 نوفمبر', 8, 120000, 'critical'],
+  ['القسط الإيجاري الشهري للمقر', '5 نوفمبر', 12, 45000, 'normal']
+];
+      var MONTH_REV = 358200;
+      var MARGIN = 29.6;
+      var MARGIN_TARGET = 32.5;
+      var OPEX_CAP = 6000;
+      var TODAY = "24";
+
+      var STATE = { day: 6, sort: "time", dir: -1, page: 0, per: 8, q: "", cat: "all", flow: "all" };
+
+      /* ==========================================================
+         2. HELPERS
+         ========================================================== */
+      var $ = window.jQuery;
+      function el(id) { return document.getElementById(id); }
+      function fmt(n) { return Math.round(n).toLocaleString("en-US"); }
+      function sgn(n) { return (n > 0 ? "+" : n < 0 ? "−" : "") + fmt(Math.abs(n)); }
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+      function set(id, html) { var n = el(id); if (n) n.innerHTML = html; }
+      function sum(a, f) { return a.reduce(function (t, x) { return t + f(x); }, 0); }
+      function cur() { return DAYS[STATE.day]; }
+      function revenue(d) { return d.cash + d.card + d.wallet; }
+      function dayMoves(di) {
+        var d = DAYS[di].d;
+        return MOVES.filter(function (m) { return m[0] === d; }).sort(function (a, b) { return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0; });
+      }
+      function liquidity() { return sum(VESSELS, function (v) { return v[2]; }); }
+      function capacity() { return sum(VESSELS, function (v) { return v[3]; }); }
+      function payableTotal() { return sum(OBLIG, function (o) { return o[3]; }); }
+      function payableWithin(days) { return sum(OBLIG.filter(function (o) { return o[2] <= days; }), function (o) { return o[3]; }); }
+
+      /* ==========================================================
+         3. DAY SWITCHER
+         ========================================================== */
+      function renderDays() {
+        set("trDays", DAYS.map(function (d, i) {
+          var on = i === STATE.day ? " on" : "";
+          var today = d.d === TODAY ? " today" : "";
+          return '<button type="button" class="tr-day' + on + today + '" data-day="' + i + '">' +
+            '<b>' + d.d + "</b>" + d.day + "</button>";
+        }).join(""));
+      }
+
+      /* ==========================================================
+         4. KPIs — derived, never typed
+         ========================================================== */
+      function kpi(label, icon, tone, value, unit, foot, extra) {
+        return '<div class="col-sm-6 col-md-4"><div class="stat-card tr-kpi h-100">' +
+          '<div class="d-flex justify-content-between align-items-start gap-2">' +
+          '<span class="stat-label d-block w-100">' + label + "</span>" +
+          '<span class="stat-icon ' + tone + '"><i class="fa-solid ' + icon + '"></i></span></div>' +
+          '<div class="stat-value mt-2 ' + (value.indexOf("−") > -1 ? "text-rose" : tone === "green" ? "text-green" : tone === "rose" ? "text-rose" : "text-gold") + ' tabular">' + value +
+          (unit ? ' <small class="fs-6 text-soft">' + unit + "</small>" : "") + "</div>" +
+          (extra || "") +
+          '<div class="bg-al-2 border rounded-3 px-2 py-1 mt-3">' + foot + "</div>" +
+          "</div></div>";
+      }
+
+      function renderKpis() {
+        var d = cur();
+        var rev = revenue(d);
+        var liq = liquidity(), cap = capacity();
+        var mv = dayMoves(STATE.day);
+        var inSum = sum(mv.filter(function (m) { return m[6] > 0; }), function (m) { return m[6]; });
+        var outSum = Math.abs(sum(mv.filter(function (m) { return m[6] < 0; }), function (m) { return m[6]; }));
+        var pay = payableTotal(), pay48 = payableWithin(2);
+        var opNet = rev - d.opex;
+        var used = liq / cap * 100;
+
+        var split =
+          '<div class="tr-split mt-2">' +
+          '<i style="width:' + (d.cash / rev * 100).toFixed(1) + '%;background:var(--al-green)"></i>' +
+          '<i style="width:' + (d.card / rev * 100).toFixed(1) + '%;background:var(--al-gold)"></i>' +
+          '<i style="width:' + (d.wallet / rev * 100).toFixed(1) + '%;background:var(--al-teal)"></i>' +
+          "</div>" +
+          '<div class="tr-split__key"><span>كاش ' + (d.cash / rev * 100).toFixed(0) + '%</span>' +
+          '<span>بطاقة ' + (d.card / rev * 100).toFixed(0) + '%</span>' +
+          '<span>محفظة ' + (d.wallet / rev * 100).toFixed(0) + "%</span></div>";
+
+        var html = "";
+
+        html += kpi("السيولة النقدية المتاحة", "fa-wallet", "", fmt(liq), "ج.م",
+          '<div class="d-flex justify-content-between small"><span class="text-soft">المستخدَم من السقف</span>' +
+          '<strong class="tabular">' + used.toFixed(1) + "%</strong></div>" +
+          '<div class="tr-meter"><i class="tr-meter__fill gold" style="width:' + used.toFixed(1) + '%"></i></div>' +
+          '<div class="tr-kpi__cap d-flex justify-content-between mt-1"><span>سقف السعة ' + fmt(cap) + "</span><span>فائض " + fmt(cap - liq) + "</span></div>");
+
+        html += kpi("صافي الإيراد المشحون", "fa-money-bill-trend-up", "green", fmt(rev), "ج.م",
+          '<div class="d-flex justify-content-between small"><span class="text-soft">صافي التشغيل بعد المصروف</span>' +
+          '<strong class="text-green tabular">' + sgn(opNet) + "</strong></div>",
+          split);
+
+        html += kpi("صافي حركة الخزينة", "fa-scale-unbalanced", "green", sgn(inSum - outSum), "ج.م",
+          '<div class="d-flex justify-content-between small"><span class="text-soft">وارد / صادر</span>' +
+          '<strong class="tabular"><span class="text-green">' + fmt(inSum) + '</span> / <span class="text-rose">' + fmt(outSum) + "</span></strong></div>" +
+          '<div class="tr-kpi__cap mt-1">وارد أعلى من الإيراد ب ' + fmt(inSum - rev) + " (دفعات حجوزات وتحصيل مؤجل)</div>");
+
+        var opexPct = d.opex / OPEX_CAP * 100;
+        html += kpi("مصروفات التشغيل", "fa-basket-shopping", "amber", fmt(d.opex), "ج.م",
+          '<div class="d-flex justify-content-between small"><span class="text-soft">سقف الصرف اليومي</span>' +
+          '<strong class="tabular">' + fmt(OPEX_CAP) + "</strong></div>" +
+          '<div class="tr-meter"><i class="tr-meter__fill ' + (opexPct > 85 ? "rose" : "amber") + '" style="width:' + opexPct.toFixed(1) + '%"></i></div>' +
+          '<div class="tr-kpi__cap mt-1">' + opexPct.toFixed(0) + "% مستخدَم</div>");
+
+        html += kpi("مستحقات الموردين (الشهر)", "fa-hourglass-half", "rose", fmt(pay), "ج.م",
+          '<div class="d-flex justify-content-between small"><span class="text-soft">خلال 48 ساعة</span>' +
+          '<strong class="text-rose tabular">' + fmt(pay48) + "</strong></div>" +
+          '<div class="tr-kpi__cap mt-1">خلال 7 أيام: ' + fmt(payableWithin(7)) + " · تغطيتها " + (liq / pay).toFixed(2) + "× السيولة</div>");
+
+        var gap = MARGIN - MARGIN_TARGET;
+        html += kpi("هامش الربح التشغيلي (أكتوبر)", "fa-chart-simple", "", MARGIN.toFixed(1), "%",
+          '<div class="d-flex justify-content-between small"><span class="text-soft">المستهدف الشهري</span>' +
+          '<strong class="tabular">' + MARGIN_TARGET.toFixed(1) + "%</strong></div>" +
+          '<div class="tr-meter"><i class="tr-meter__fill ' + (gap < 0 ? "rose" : "green") + '" style="width:' + (MARGIN / 50 * 100).toFixed(1) + '%"></i></div>' +
+          '<div class="tr-kpi__cap mt-1">' + (gap < 0 ? "دون المستهدف ب  " + Math.abs(gap).toFixed(1) + " نقطة" : "فوق المستهدف ب  " + gap.toFixed(1) + " نقطة") + "</div>");
+
+        set("trKpis", html);
+      }
+
+      /* ==========================================================
+         5. VESSELS + LIQUIDITY COMPOSITION
+         ========================================================== */
+      function renderVessels() {
+        var tones = { gold: "gold", green: "green", rose: "rose", amber: "amber", neutral: "neutral" };
+        set("trVessels", VESSELS.map(function (v) {
+          var p = v[2] / v[3] * 100;
+          var pcls = p >= 90 ? "rose" : p >= 75 ? "amber" : "green";
+          var bcls = v[4] === "neutral" ? "badge-neutral" : v[4] === "amber" ? "badge-amber" : v[4] === "green" ? "badge-green" : "badge-gold";
+          return '<div class="col-sm-6 col-lg-4 col-xl"><div class="stat-card tr-vessel">' +
+            '<div class="tr-vessel__top"><div><div class="tr-vessel__name">' + esc(v[0]) + "</div>" +
+            '<div class="tr-vessel__sub">' + esc(v[1]) + "</div></div>" +
+            '<span class="badge-pill-custom ' + bcls + '">' + esc(v[5]) + "</span></div>" +
+            '<div class="tr-vessel__amt tabular">' + fmt(v[2]) + ' <small>ج.م</small></div>' +
+            '<div class="tr-meter"><i class="tr-meter__fill ' + pcls + '" style="width:' + p.toFixed(1) + '%"></i></div>' +
+            '<div class="tr-meter__scale"><span>' + p.toFixed(1) + "% من السقف</span><span>" + fmt(v[3]) + "</span></div>" +
+            '<div class="tr-vessel__foot"><span>' + esc(v[6]) + "</span>" +
+            '<i class="fa-solid ' + esc(v[7]) + ' text-soft"></i></div>' +
+            "</div></div>";
+        }).join(""));
+
+        var liq = liquidity(), cap = capacity();
+        set("trVesselCount", VESSELS.length + " أوعية نقدية");
+        set("trHeadroom", "السيولة " + fmt(liq) + " من سقف سعة " + fmt(cap) + " — فائض متاح " + fmt(cap - liq) + " ج.م");
+
+        var colors = ["var(--al-gold)", "var(--al-green)", "var(--al-teal)", "var(--al-amber)", "var(--al-rose)"];
+        set("trComp", VESSELS.map(function (v, i) {
+          var p = v[2] / liq * 100;
+          return '<span style="width:' + p.toFixed(2) + "%;background:" + colors[i % colors.length] + '" title="' + esc(v[0]) + '">' +
+            (p > 9 ? p.toFixed(0) + "%" : "") + "</span>";
+        }).join(""));
+        set("trCompNote", "الإجمالي " + fmt(liq) + " ج.م موزع على " + VESSELS.length + " أوعية");
+      }
+
+      /* ==========================================================
+         6. CASH-FLOW CHART (7 days, grouped bars + net line)
+         ========================================================== */
+      function renderChart() {
+        var W = 720, H = 260, L = 46, R = 706, T = 18, B = 214;
+        var gw = (R - L) / DAYS.length;
+        var max = Math.max.apply(null, DAYS.map(function (d) { return Math.max(d.inflow, d.outflow); }));
+        var step = Math.pow(10, Math.floor(Math.log(max) / Math.LN10));
+        var top = Math.ceil(max / (step / 2)) * (step / 2);
+        var y = function (v) { return B - (v / top) * (B - T); };
+        var cx = function (i) { return R - (i + 0.5) * gw; };
+
+        var s = "";
+        for (var g = 0; g <= 4; g++) {
+          var v = top / 4 * g;
+          s += '<line class="gl' + (g ? " gl-dash" : "") + '" x1="' + L + '" x2="' + R + '" y1="' + y(v).toFixed(1) + '" y2="' + y(v).toFixed(1) + '"/>';
+          s += '<text class="ax" x="' + (R + 6) + '" y="' + (y(v) + 3.5).toFixed(1) + '">' + fmt(v) + "</text>";
+        }
+
+        var bars = "", labels = "", hits = "", pts = [];
+        DAYS.forEach(function (d, i) {
+          var c = cx(i);
+          var hi = B - y(d.inflow), ho = B - y(d.outflow);
+          var bi = c - 26, bo = c + 4;
+          var isCur = i === STATE.day;
+          bars += '<rect class="bar-in' + (isCur ? " on" : "") + '" x="' + bi.toFixed(1) + '" y="' + y(d.inflow).toFixed(1) + '" width="22" height="' + hi.toFixed(1) + '" rx="2"/>';
+          bars += '<rect class="bar-out" x="' + bo.toFixed(1) + '" y="' + y(d.outflow).toFixed(1) + '" width="22" height="' + ho.toFixed(1) + '" rx="2"/>';
+          bars += '<text class="ax" x="' + (bi + 11).toFixed(1) + '" y="' + (y(d.inflow) - 5).toFixed(1) + '" text-anchor="middle">' + Math.round(d.inflow / 1000) + "K</text>";
+          bars += '<text class="ax" x="' + (bo + 11).toFixed(1) + '" y="' + (y(d.outflow) - 5).toFixed(1) + '" text-anchor="middle">' + Math.round(d.outflow / 1000) + "K</text>";
+          labels += '<text class="' + (isCur ? "lbl" : "axt") + '" x="' + c.toFixed(1) + '" y="' + (B + 18) + '" text-anchor="middle">' + d.day + " " + d.d + "</text>";
+          labels += '<text class="axt" x="' + c.toFixed(1) + '" y="' + (B + 31) + '" text-anchor="middle">' + sgn(d.inflow - d.outflow) + "</text>";
+          hits += '<rect class="hit" data-i="' + i + '" x="' + (c - gw / 2 + 2).toFixed(1) + '" y="' + T + '" width="' + (gw - 4).toFixed(1) + '" height="' + (B - T) + '"/>';
+          pts.push([c.toFixed(1), y(d.inflow - d.outflow / 2).toFixed(1)]);
+        });
+
+        s += bars;
+        s += '<polyline class="netline" points="' + pts.map(function (p) { return p[0] + "," + p[1]; }).join(" ") + '"/>';
+        s += labels;
+        s += hits;
+
+        var svg = document.querySelector("#trChart svg");
+        if (svg) svg.innerHTML = s;
+
+        var wIn = sum(DAYS, function (d) { return d.inflow; });
+        var wOut = sum(DAYS, function (d) { return d.outflow; });
+        var wRev = sum(DAYS, revenue);
+        var best = DAYS.reduce(function (a, b) { return b.inflow > a.inflow ? b : a; });
+        var cells = [
+          ["إيراد الأسبوع", fmt(wRev) + " ج.م", "text-gold", "fa-sack-dollar"],
+          ["وارد الأسبوع", fmt(wIn) + " ج.م", "text-green", "fa-arrow-down"],
+          ["صادر الأسبوع", fmt(wOut) + " ج.م", "text-rose", "fa-arrow-up"],
+          ["صافي الأسبوع", fmt(wIn - wOut) + " ج.م", "text-green", "fa-equals"],
+          ["نسبة الصرف للتحصيل", (wOut / wIn * 100).toFixed(1) + "%", "text-gold", "fa-percent"],
+          ["أعلى يوم وارد", best.d + " أكتوبر", "text-gold", "fa-arrow-trend-up"]
+        ];
+        set("trChartStats", cells.map(function (c) {
+          return '<div class="col-6 col-md-4"><div class="bg-al-2 border rounded-3 px-2 py-2 h-100">' +
+            '<small class="text-soft d-block"><i class="fa-solid ' + c[3] + ' me-1"></i>' + c[0] + "</small>" +
+            '<strong class="tabular ' + c[2] + '">' + c[1] + "</strong></div></div>";
+        }).join(""));
+      }
+
+      /* ==========================================================
+         7. COST STRUCTURE
+         ========================================================== */
+      function renderStruct() {
+        var colors = { gold: "var(--al-grad-gold)", green: "var(--al-green)", rose: "var(--al-rose)", faint: "var(--al-ink-faint)" };
+        set("trStack", STRUCT.concat([["صافي الربح", MARGIN, "green", ""]]).map(function (s) {
+          return '<i style="width:' + s[1].toFixed(1) + "%;background:" + colors[s[2]] + '" title="' + esc(s[0]) + " " + s[1] + '%"></i>';
+        }).join(""));
+
+        set("trStruct", STRUCT.map(function (s) {
+          var amt = Math.round(MONTH_REV * s[1] / 100);
+          return '<div class="tr-row"><div class="tr-row__l"><i class="fa-solid ' + s[3] + ' me-1"></i>' + esc(s[0]) + "</div>" +
+            '<div><div class="tr-row__v">' + s[1].toFixed(1) + '%</div><div class="tr-row__a">' + fmt(amt) + " ج.م</div></div></div>";
+        }).join("") +
+          '<div class="tr-row" style="border-top:1px solid var(--al-line);padding-top:.45rem">' +
+          '<div class="tr-row__l text-green fw-bold"><i class="fa-solid fa-circle-check me-1"></i>صافي الربح التشغيلي</div>' +
+          '<div><div class="tr-row__v text-green">' + MARGIN.toFixed(1) + '%</div>' +
+          '<div class="tr-row__a">' + fmt(Math.round(MONTH_REV * MARGIN / 100)) + " ج.م</div></div></div>");
+
+        var gap = MARGIN - MARGIN_TARGET;
+        set("trMarginBadge", "صافي الربح " + MARGIN.toFixed(1) + "%");
+        set("trMarginGap",
+          '<span class="text-soft">الفارق عن المستهدف ' + MARGIN_TARGET.toFixed(1) + '%</span>' +
+          '<strong class="' + (gap < 0 ? "text-rose" : "text-green") + ' tabular">' + (gap < 0 ? "−" : "+") + Math.abs(gap).toFixed(1) + " نقطة مئوية</strong>");
+        set("trMonthRev", fmt(MONTH_REV) + " ج.م");
+      }
+
+      /* ==========================================================
+         8. LEDGER
+         ========================================================== */
+      function visibleRows() {
+        var q = STATE.q.trim().toLowerCase();
+        var rows = dayMoves(STATE.day).filter(function (m) {
+          if (STATE.cat !== "all" && m[7] !== STATE.cat) return false;
+          if (STATE.flow === "in" && m[6] < 0) return false;
+          if (STATE.flow === "out" && m[6] > 0) return false;
+          if (!q) return true;
+          return (m[2] + " " + m[3] + " " + m[4] + " " + m[5] + " " + m[11]).toLowerCase().indexOf(q) > -1;
+        });
+        var k = STATE.sort;
+        rows.sort(function (a, b) {
+          var x, y;
+          if (k === "amt") { x = a[6]; y = b[6]; }
+          else { x = a[1]; y = b[1]; }
+          if (x < y) return -1 * STATE.dir;
+          if (x > y) return 1 * STATE.dir;
+          return 0;
+        });
+        return rows;
+      }
+
+      function renderLedger() {
+        var rows = visibleRows();
+        var pages = Math.max(1, Math.ceil(rows.length / STATE.per));
+        if (STATE.page >= pages) STATE.page = pages - 1;
+        var slice = rows.slice(STATE.page * STATE.per, STATE.page * STATE.per + STATE.per);
+        var d = cur();
+
+        set("trLedgerSub", d.d + " أكتوبر · " + dayMoves(STATE.day).length + " سند · الإجمالي " + fmt(revenue(d)) + " ج.م محصّل من نقاط البيع");
+        set("trEmpty", "");
+        el("trEmpty").hidden = rows.length > 0;
+
+        var icons = { print: "fa-print", receipt: "fa-receipt", check: "fa-circle-check" };
+        var acts = { print: "طباعة السند", receipt: "عرض الفاتورة", check: "تحقق من المرجع" };
+        set("trRows", slice.map(function (m) {
+          var isIn = m[6] > 0;
+          var tone = isIn ? "green" : m[9] === "rose" ? "rose" : "gold";
+          var stone = m[9] === "rose" ? "badge-rose" : m[9] === "gold" ? "badge-gold" : "badge-green";
+          return "<tr>" +
+            '<td class="tr-ledger__c1"><span class="tr-ledger__ref ' + (isIn ? "text-green" : "text-rose") + '">' + m[2] + "</span>" +
+            '<span class="tr-ledger__sep">·</span><span class="tr-ledger__d tabular">' + m[1] + "</span></td>" +
+            '<td class="tr-ledger__c2"><span class="tr-ledger__stmt">' + esc(m[3]) + "</span></td>" +
+            '<td class="tr-ledger__c3"><span class="tr-ledger__det">' + esc(m[4]) + "</span></td>" +
+            '<td class="tr-ledger__c4"><div class="tr-ledger__acct"><span class="badge-pill-custom ' + (isIn ? "badge-green" : "badge-neutral") + '">' + esc(m[5]) + "</span>" +
+            '<span class="tr-ledger__d">' + esc(m[7]) + "</span></div></td>" +
+            '<td class="text-start"><span class="tr-amt ' + (isIn ? "in" : "out") + '">' + sgn(m[6]) + ' <small class="text-soft">ج.م</small></span></td>' +
+            '<td class="text-center"><span class="badge-pill-custom ' + stone + '">' + esc(m[8]) + "</span></td>" +
+            '<td class="text-center"><div class="d-flex gap-1 justify-content-center">' +
+            '<button type="button" class="btn btn-ghost btn-sm icon-btn" data-act="view" data-ref="' + m[2] + '" title="عرض تفاصيل السند" aria-label="عرض تفاصيل السند ' + esc(m[2]) + '"><i class="fa-solid fa-eye"></i></button>' +
+            '<button type="button" class="btn btn-ghost btn-sm icon-btn" data-act="doc" data-ref="' + m[2] + '" title="' + acts[m[10]] + '" aria-label="' + acts[m[10]] + ' ' + esc(m[2]) + '"><i class="fa-solid ' + icons[m[10]] + '"></i></button>' +
+            "</div></td></tr>";
+        }).join(""));
+
+        var inSum = sum(rows.filter(function (m) { return m[6] > 0; }), function (m) { return m[6]; });
+        var outSum = Math.abs(sum(rows.filter(function (m) { return m[6] < 0; }), function (m) { return m[6]; }));
+        set("trTotals",
+          '<span class="text-soft">المعروض ' + rows.length + " من " + dayMoves(STATE.day).length + " سند</span>" +
+          '<span class="text-soft">وارد <strong class="text-green tabular">' + fmt(inSum) + "</strong></span>" +
+          '<span class="text-soft">صادر <strong class="text-rose tabular">' + fmt(outSum) + "</strong></span>" +
+          '<span class="text-soft">الصافي <strong class="tabular ' + (inSum - outSum < 0 ? "text-rose" : "text-green") + '">' + sgn(inSum - outSum) + "</strong></span>");
+
+        var pg = "";
+        pg += '<button type="button" data-pg="prev"' + (STATE.page === 0 ? " disabled" : "") + ' aria-label="السابق"><i class="fa-solid fa-angle-right"></i></button>';
+        for (var p = 0; p < pages; p++) pg += '<button type="button" data-pg="' + p + '" class="' + (p === STATE.page ? "on" : "") + '">' + (p + 1) + "</button>";
+        pg += '<button type="button" data-pg="next"' + (STATE.page >= pages - 1 ? " disabled" : "") + ' aria-label="التالي"><i class="fa-solid fa-angle-left"></i></button>';
+        set("trPager", pg);
+      }
+
+      function buildCatFilter() {
+        var cats = [];
+        MOVES.forEach(function (m) { if (cats.indexOf(m[7]) < 0) cats.push(m[7]); });
+        var sel = el("trFilter");
+        sel.innerHTML = '<option value="all">جميع الحركات</option>' +
+          cats.map(function (c) { return '<option value="' + esc(c) + '">' + esc(c) + "</option>"; }).join("");
+      }
+
+      /* ==========================================================
+         9. SIDEBAR
+         ========================================================== */
+      function renderPetty() {
+        set("trPetty", PETTY.map(function (p) {
+          var used = p[3] / p[2] * 100, left = p[2] - p[3];
+          var cls = left / p[2] < 0.25 ? "rose" : used > 60 ? "amber" : "green";
+          return '<div class="tr-petty"><div class="d-flex justify-content-between align-items-start gap-2">' +
+            '<div><strong class="small d-block">' + esc(p[0]) + '</strong><small class="text-soft">' + esc(p[1]) + "</small></div>" +
+            '<span class="badge-pill-custom badge-' + cls + ' tabular">متبقي ' + fmt(left) + "</span></div>" +
+            '<div class="tr-meter"><i class="tr-meter__fill ' + cls + '" style="width:' + used.toFixed(1) + '%"></i></div>' +
+            '<div class="tr-meter__scale"><span>مصروف ' + fmt(p[3]) + " من " + fmt(p[2]) + "</span><span>" + used.toFixed(0) + "%</span></div></div>";
+        }).join("") +
+          '<div class="tr-gap"><span class="text-soft">إجمالي العهد</span>' +
+          '<strong class="tabular">' + fmt(sum(PETTY, function (p) { return p[2]; })) + " ج.م · متبقٍ " +
+          fmt(sum(PETTY, function (p) { return p[2] - p[3]; })) + " ج.م</strong></div>");
+      }
+
+      function renderRecon() {
+        var d = cur(), sys = revenue(d);
+        var cash = d.cash;
+        var var_ = sys - sys;
+        set("trReconVar", sgn(var_).replace("+", "") + " ج.م");
+        set("trReconPct", "مطابقة نقدية " + (var_ === 0 ? "100%" : "—" ));
+        set("trReconNote", "مبيعات النظام للنقدية المتحصلة فعلياً في " + d.d + " أكتوبر مطابقة تماماً دون عجز أو زيادة مسجلة.");
+        set("trReconBadge", var_ === 0 ? "مطابق" : "فروقات");
+        set("trReconMini",
+          '<div><small>مبيعات النظام</small><b class="tabular">' + fmt(sys) + "</b></div>" +
+          '<div><small>النقدية المحصلة</small><b class="text-green tabular">' + fmt(cash) + "</b></div>" +
+          '<div><small>تحصيل البطاقات</small><b class="tabular">' + fmt(d.card) + "</b></div>" +
+          '<div><small>المحافظ الرقمية</small><b class="tabular">' + fmt(d.wallet) + "</b></div>");
+      }
+
+      function renderOblig() {
+        var d = cur();
+        set("trObligBadge", fmt(OBLIG.filter(function (o) { return o[4] === "critical"; }).length) + " التزامات حرجة");
+        set("trOblig", OBLIG.map(function (o) {
+          return '<div class="tr-ob ' + o[4] + '"><div><div class="tr-ob__t">' + esc(o[0]) + "</div>" +
+            '<div class="tr-ob__d">تستحق ' + esc(o[1]) + " · بعد " + o[2] + " يوم</div></div>" +
+            '<div class="tr-ob__a ' + (o[2] <= 2 ? "text-rose" : "") + '">' + fmt(o[3]) + "</div></div>";
+        }).join(""));
+        var liq = liquidity(), pay = payableTotal();
+        set("trCoverGap",
+          '<span class="text-soft">إجمالي الالتزامات ' + fmt(pay) + " ج.م</span>" +
+          '<strong class="tabular ' + (liq >= pay ? "text-green" : "text-rose") + '">' + (liq / pay).toFixed(2) + "× تغطية السيولة</strong>");
+      }
+
+      /* ==========================================================
+         10. RENDER ALL
+         ========================================================== */
+      function renderAll() {
+        renderDays();
+        renderKpis();
+        renderVessels();
+        renderChart();
+        renderStruct();
+        renderLedger();
+        renderPetty();
+        renderRecon();
+        renderOblig();
+      }
+
+      /* ==========================================================
+         11. VOUCHER VIEW / PRINT
+         ========================================================== */
+      function findMove(ref) {
+        var hit = null;
+        MOVES.forEach(function (m) { if (m[2] === ref) hit = m; });
+        return hit;
+      }
+
+      function showVoucher(m) {
+        var isIn = m[6] > 0;
+        var d = DAYS.filter(function (x) { return x.d === m[0]; })[0] || DAYS[DAYS.length - 1];
+        window.Swal.fire({
+          title: (isIn ? "سند قبض " : "سند صرف ") + m[2],
+          html: '<div style="text-align:start;font-size:.85rem;line-height:1.9">' +
+            '<div style="display:flex;justify-content:space-between;border-bottom:1px solid #8884;padding-bottom:.3rem"><span>التاريخ</span><b>' + m[0] + " أكتوبر 2024 — " + m[1] + "</b></div>" +
+            '<div style="display:flex;justify-content:space-between;border-bottom:1px solid #8884;padding-bottom:.3rem"><span>البيان</span><b>' + esc(m[3]) + "</b></div>" +
+            '<div style="display:flex;justify-content:space-between;border-bottom:1px solid #8884;padding-bottom:.3rem"><span>التفاصيل</span><span>' + esc(m[4]) + "</span></div>" +
+            '<div style="display:flex;justify-content:space-between;border-bottom:1px solid #8884;padding-bottom:.3rem"><span>الحساب</span><b>' + esc(m[5]) + "</b></div>" +
+            '<div style="display:flex;justify-content:space-between;border-bottom:1px solid #8884;padding-bottom:.3rem"><span>النوع</span><span>' + esc(m[7]) + "</span></div>" +
+            '<div style="display:flex;justify-content:space-between;border-bottom:1px solid #8884;padding-bottom:.3rem"><span>الحالة</span><span>' + esc(m[8]) + "</span></div>" +
+            '<div style="display:flex;justify-content:space-between;border-bottom:1px solid #8884;padding-bottom:.3rem"><span>المرجع</span><span class="tabular">' + esc(m[11]) + "</span></div>" +
+            '<div style="display:flex;justify-content:space-between;padding-top:.4rem"><span>المبلغ</span>' +
+            '<b style="font-size:1.15rem;color:' + (isIn ? "#0f8a5f" : "#b33a2b") + '">' + sgn(m[6]) + " ج.م</b></div>" +
+            '<div style="margin-top:.5rem;font-size:.75rem;opacity:.75">إيراد اليوم ' + d.d + " أكتوبر: " + fmt(revenue(d)) + " ج.م — صافي حركة الخزينة " + sgn(d.inflow - d.outflow) + " ج.م</div>" +
+            "</div>",
+          showCancelButton: true,
+          confirmButtonText: "طباعة السند",
+          cancelButtonText: "إغلاق",
+          confirmButtonColor: "#bf9636",
+          reverseButtons: true
+        }).then(function (r) { if (r.isConfirmed) printVoucher(m); });
+      }
+
+      function printVoucher(m) {
+        var isIn = m[6] > 0;
+        set("trPrint",
+          '<div style="font-family:Cairo,sans-serif;color:#000">' +
+          '<div style="display:flex;justify-content:space-between;border-bottom:2px solid #000;padding-bottom:8px">' +
+          '<div><div style="font-size:20px;font-weight:800">أليجريا كافيه ومطعم</div>' +
+          '<div style="font-size:12px">الإدارة المالية والخزينة</div></div>' +
+          '<div style="text-align:end"><div style="font-size:18px;font-weight:800">' + (isIn ? "سند قبض" : "سند صرف") + "</div>" +
+          '<div style="font-size:13px">' + esc(m[2]) + "</div></div></div>" +
+          '<table style="width:100%;border-collapse:collapse;margin-top:14px;font-size:13px">' +
+          "<tr><td style='padding:7px 0;border-bottom:1px solid #bbb;width:110px'>التاريخ</td><td style='padding:7px 0;border-bottom:1px solid #bbb'>" + m[0] + " أكتوبر 2024 — " + m[1] + "</td></tr>" +
+          "<tr><td style='padding:7px 0;border-bottom:1px solid #bbb'>البيان</td><td style='padding:7px 0;border-bottom:1px solid #bbb;font-weight:700'>" + esc(m[3]) + "</td></tr>" +
+          "<tr><td style='padding:7px 0;border-bottom:1px solid #bbb'>التفاصيل</td><td style='padding:7px 0;border-bottom:1px solid #bbb'>" + esc(m[4]) + "</td></tr>" +
+          "<tr><td style='padding:7px 0;border-bottom:1px solid #bbb'>الحساب</td><td style='padding:7px 0;border-bottom:1px solid #bbb'>" + esc(m[5]) + "</td></tr>" +
+          "<tr><td style='padding:7px 0;border-bottom:1px solid #bbb'>النوع / الحالة</td><td style='padding:7px 0;border-bottom:1px solid #bbb'>" + esc(m[7]) + " — " + esc(m[8]) + "</td></tr>" +
+          "<tr><td style='padding:7px 0;border-bottom:1px solid #bbb'>المرجع</td><td style='padding:7px 0;border-bottom:1px solid #bbb'>" + esc(m[11]) + "</td></tr>" +
+          '<tr><td style="padding:12px 0;font-weight:800">المبلغ</td><td style="padding:12px 0;font-size:18px;font-weight:800">' + sgn(m[6]) + " ج.م</td></tr>" +
+          "</table>" +
+          '<div style="display:flex;justify-content:space-between;margin-top:44px;font-size:12px">' +
+          "<div>المحاسب: ..............................</div>" +
+          "<div>المعتمد: ..............................</div>" +
+          "<div>المستفيد: ..............................</div></div>" +
+          '<div style="margin-top:6px;font-size:10px;opacity:.6">هذا مستخرج آلي من دفتر سندات الخزينة — أليجريا ERP</div>' +
+          "</div>");
+        window.print();
+      }
+
+      /* ==========================================================
+         12. CSV EXPORT
+         ========================================================== */
+      function exportCsv() {
+        var rows = visibleRows();
+        if (!rows.length) { window.Al.toast("لا توجد حركات للتصدير", "warning"); return; }
+        var head = ["السند", "التاريخ", "الوقت", "البيان", "التفاصيل", "الحساب", "النوع", "المبلغ", "الحالة", "المرجع"];
+        var body = rows.map(function (m) {
+          return [m[2], m[0] + " أكتوبر 2024", m[1], m[3], m[4], m[5], m[7], m[6], m[8], m[11]]
+            .map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(",");
+        });
+        var csv = "\uFEFF" + [head.map(function (c) { return '"' + c + '"'; }).join(",")].concat(body).join("\r\n");
+        var url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" }));
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "سندات-الخزينة-" + cur().d + "-أكتوبر-2024.csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        window.Al.toast("تم تصدير " + rows.length + " سند", "success");
+      }
+
+      /* ==========================================================
+         13. EVENTS
+         ========================================================== */
+      function tipShow(i, node) {
+        var d = DAYS[i];
+        var tip = el("trTip"), box = el("trChart");
+        var r = node.getBoundingClientRect(), b = box.getBoundingClientRect();
+        var rev = revenue(d);
+        tip.innerHTML = '<div class="tr-tip__t">' + d.day + " " + d.d + " أكتوبر</div>" +
+          '<div class="tr-tip__r"><span>الإيراد</span><b>' + fmt(rev) + "</b></div>" +
+          '<div class="tr-tip__r"><span>وارد</span><b class="text-green">' + fmt(d.inflow) + "</b></div>" +
+          '<div class="tr-tip__r"><span>صادر</span><b class="text-rose">' + fmt(d.outflow) + "</b></div>" +
+          '<div class="tr-tip__r"><span>الصافي</span><b>' + sgn(d.inflow - d.outflow) + "</b></div>" +
+          '<div class="tr-tip__r"><span>مصروف تشغيل</span><b>' + fmt(d.opex) + "</b></div>";
+        tip.classList.add("on");
+        var left = r.left - b.left + r.width / 2 - tip.offsetWidth / 2;
+        tip.style.left = Math.max(0, Math.min(left, b.width - tip.offsetWidth)) + "px";
+        tip.style.top = Math.max(0, r.top - b.top - tip.offsetHeight - 8) + "px";
+      }
+      function tipHide() { el("trTip").classList.remove("on"); }
+
+      function wire() {
+        $(document).on("click", "[data-confirm]", function () {
+          var msg = $(this).data("confirm");
+          window.Al.confirm("تأكيد", msg, function () { window.Al.toast("تم تنفيذ العملية", "success"); });
+        });
+
+        el("trDays").addEventListener("click", function (e) {
+          var b = e.target.closest("[data-day]");
+          if (!b) return;
+          STATE.day = +b.getAttribute("data-day");
+          STATE.page = 0;
+          renderAll();
+        });
+
+        var timer = null;
+        el("trSearch").addEventListener("input", function (e) {
+          var v = e.target.value;
+          clearTimeout(timer);
+          timer = setTimeout(function () { STATE.q = v; STATE.page = 0; renderLedger(); }, 180);
+        });
+        el("trFilter").addEventListener("change", function (e) { STATE.cat = e.target.value; STATE.page = 0; renderLedger(); });
+        el("trFlow").addEventListener("change", function (e) { STATE.flow = e.target.value; STATE.page = 0; renderLedger(); });
+
+        el("trRows").addEventListener("click", function (e) {
+          var b = e.target.closest("[data-act]");
+          if (!b) return;
+          var m = findMove(b.getAttribute("data-ref"));
+          if (!m) return;
+          if (b.getAttribute("data-act") === "view") showVoucher(m);
+          else if (m[10] === "print") printVoucher(m);
+          else showVoucher(m);
+        });
+
+        el("trPager").addEventListener("click", function (e) {
+          var b = e.target.closest("[data-pg]");
+          if (!b || b.disabled) return;
+          var v = b.getAttribute("data-pg");
+          STATE.page = v === "prev" ? Math.max(0, STATE.page - 1) : v === "next" ? STATE.page + 1 : +v;
+          renderLedger();
+        });
+
+        document.querySelectorAll(".tr-sort").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var k = btn.getAttribute("data-sort");
+            if (STATE.sort === k) STATE.dir *= -1;
+            else { STATE.sort = k; STATE.dir = k === "amt" ? -1 : -1; }
+            document.querySelectorAll(".tr-sort").forEach(function (o) { o.classList.toggle("on", o === btn); });
+            btn.querySelector("i").className = STATE.dir === 1 ? "fa-solid fa-sort-up" : "fa-solid fa-sort-down";
+            renderLedger();
+          });
+        });
+
+        var chart = el("trChart");
+        chart.addEventListener("mouseover", function (e) {
+          var h = e.target.closest(".hit");
+          if (h) tipShow(+h.getAttribute("data-i"), h);
+        });
+        chart.addEventListener("mouseout", function (e) { if (e.target.closest(".hit")) tipHide(); });
+        chart.addEventListener("click", function (e) {
+          var h = e.target.closest(".hit");
+          if (!h) return;
+          STATE.day = +h.getAttribute("data-i");
+          STATE.page = 0;
+          renderAll();
+        });
+
+        el("trExport").addEventListener("click", exportCsv);
+      }
+
+      /* ==========================================================
+         14. BOOT
+         ========================================================== */
+      function boot() {
+        buildCatFilter();
+        var s = document.querySelector('.tr-sort[data-sort="time"]');
+        if (s) { s.classList.add("on"); s.querySelector("i").className = "fa-solid fa-sort-down"; }
+        wire();
+        renderAll();
+      }
+
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+      else boot();
+    })();
+  </script>
+</body>
+</html>

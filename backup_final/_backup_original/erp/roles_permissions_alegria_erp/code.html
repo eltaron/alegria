@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed-variant":"#005236","primary-fixed-dim":"#ffb77d","inverse-surface":"#dae2fd","outline":"#a38c7c","error-container":"#93000a","secondary-fixed-dim":"#4edea3","surface-tint":"#ffb77d","on-secondary-fixed":"#002113","secondary-container":"#00a572","surface-container-highest":"#2d3449","on-tertiary-fixed":"#40000d","error":"#ffb4ab","on-surface":"#dae2fd","surface-bright":"#31394d","on-error-container":"#ffdad6","on-surface-variant":"#dbc2b0","inverse-on-surface":"#283044","secondary":"#4edea3","surface":"#0b1326","surface-container-low":"#131b2e","tertiary-fixed-dim":"#ffb2b7","on-primary":"#4d2600","on-primary-fixed-variant":"#6e3900","tertiary-fixed":"#ffdadb","primary-container":"#d97707","on-secondary-container":"#00311f","outline-variant":"#554336","surface-variant":"#2d3449","on-primary-fixed":"#2f1500","surface-container":"#171f33","on-tertiary-fixed-variant":"#92002a","tertiary-container":"#ff516a","tertiary":"#ffb2b7","secondary-fixed":"#6ffbbe","primary":"#ffb77d","primary-fixed":"#ffdcc3","on-tertiary-container":"#5b0017","on-error":"#690005","background":"#0b1326","on-tertiary":"#67001b","on-primary-container":"#432100","surface-container-lowest":"#060e20","surface-container-high":"#222a3d","on-background":"#dae2fd","on-secondary":"#003824","inverse-primary":"#904d00","surface-dim":"#0b1326"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin-lg":"2rem","space-xs":"0.25rem","gutter":"1rem","margin":"1rem","space-xl":"1.5rem","space-md":"0.75rem","space-sm":"0.5rem","space-lg":"1rem","gutter-lg":"1.5rem","space-2xl":"2.5rem"},"fontFamily":{"body-md":["Plus Jakarta Sans"],"label-compact":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-numeric":["JetBrains Mono"],"headline-xl-mobile":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"]},"fontSize":{"body-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"label-compact":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"label-numeric":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.02em","fontWeight":"500"}],"headline-xl-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-xl":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"display-lg":["3rem",{"lineHeight":"3.5rem","letterSpacing":"-0.02em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed right-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col h-full"><div class="p-space-lg flex items-center justify-between gap-space-sm bg-surface-container-lowest/60"><div class="flex items-center gap-space-sm"><img alt="Alegria Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wx0ZfsNijxRnPn-H6a3S2NxbcdoEETcHIAMY9aSUOFi3Um6r8cAfgbnfSuEL7sU3oruvO9TdZgTsClHhjP71pSeOdefJsmaEgLQxHdxEiiti-xMIdyuEA0zpwhuGi6iTNRo-0fr0AhYCwAGB4dJhA9iKJvhfEMdd6Rx48kxnKx96pFiyQK33LDacpvHnxZp_E4jqs3CDOEar0smBnJBPam2ZjQ_3ZTRhhGhkqjOlWHinwewXaK4DUze7iz8Dm2xypb2EPLaozB3i0"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary tracking-wide">أليجريا كافيه</span><span class="font-body-sm text-body-sm text-on-surface-variant">إدارة المطاعم الفاخرة</span></div></div></div><div class="px-space-md py-space-sm"><div class="bg-surface-container px-space-md py-space-sm rounded-lg flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-compact text-label-compact text-secondary">الفرع الرئيسي - مفتوح الآن</span></div><span class="font-label-numeric text-label-numeric text-on-surface-variant">وردية المساء</span></div></div><nav class="flex-1 overflow-y-auto px-space-sm py-space-xs space-y-1" data-active-classes="bg-primary-container text-on-primary font-headline-md"><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="dashboard" href="#">لوحة التحكم العامة</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="pos-terminal" href="#">نقطة البيع وإدارة الطاولات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="kds-kitchen" href="#">إدارة المطبخ والطلبات (KDS)</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="menu-catalog" href="#">المنيو والمنتجات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="inventory-stock" href="#">المخزون والمواد الخام</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="recipes-costing" href="#">الوصفات والتكاليف</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="purchases-suppliers" href="#">المشتريات والموردين</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="finance-treasury" href="#">الخزينة والماليات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="hr-shifts" href="#">شؤون الموظفين والورديات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="reports-analytics" href="#">التقارير والتحليلات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="staff-permissions" href="#">المستخدمين والصلاحيات</a><a class="flex items-center px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="system-settings" href="#">الإعدادات والنظام</a></nav><div class="p-space-md bg-surface-container-lowest/50"><div class="flex items-center justify-between text-on-surface-variant"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary">support_agent</span><span class="font-body-sm text-body-sm">الدعم الفني VIP</span></div><span class="font-label-numeric text-label-numeric text-primary">24/7</span></div></div></div></aside><div class="pr-72"><header class="fixed top-0 right-72 left-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-gutter shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-primary">schedule</span><span class="font-body-sm text-body-sm text-on-surface-variant">الوردية:</span><span class="font-headline-md text-body-md text-on-surface">وردية العشاء (2)</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-secondary">table_restaurant</span><span class="font-body-sm text-body-sm text-on-surface-variant">إشغال الصالة:</span><span class="font-label-numeric text-label-numeric text-secondary">82% (28/34 طاولة)</span></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-primary">point_of_sale</span><span class="font-body-sm text-body-sm text-on-surface-variant">درج النقدية:</span><span class="font-label-numeric text-label-numeric text-primary">4,850 ر.س</span></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs bg-surface-container-low p-space-xs rounded-lg"><button class="px-space-md py-1 rounded bg-primary-container text-on-primary font-headline-md text-body-sm flex items-center gap-space-xs transition-colors"><span class="material-symbols-outlined text-[16px]">add</span>طلب جديد</button><button class="px-space-md py-1 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs transition-colors"><span class="material-symbols-outlined text-[16px]">swap_horiz</span>نقل طاولة</button></div><div class="bg-surface-container-low px-space-md py-space-xs rounded-lg flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">calendar_today</span><span class="font-label-numeric text-label-numeric text-on-surface">اليوم، 24 أكتوبر 2024</span></div><div class="relative flex items-center justify-center p-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-tertiary-container"></span></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex flex-col text-left"><span class="font-headline-md text-body-sm text-on-surface">فهد السليمان</span><span class="font-label-compact text-label-compact text-on-surface-variant">مدير الصالة العام</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Dynamic Notification / Top Breadcrumb & Status Ambient Bar -->
+<div class="relative bg-surface-container-low px-gutter-lg py-space-md mb-space-lg flex flex-wrap items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">admin_panel_settings</span>
+<span>إدارة النظام</span>
+<span class="material-symbols-outlined text-[14px]">chevron_left</span>
+<span class="text-on-surface font-headline-md">المستخدمين والأدوار والسياسات الأمنية</span>
+</div>
+<div class="hidden sm:flex items-center gap-space-xs px-space-sm py-0.5 rounded-full bg-secondary/10 text-secondary font-label-compact text-label-compact">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+<span>مستوى الحماية: عالي جداً (AES-256)</span>
+</div>
+</div>
+<!-- Quick Environment & Backup Status Indicators -->
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-numeric text-label-numeric">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">cloud_done</span>
+<span>النسخ السحابي: <strong class="text-on-surface font-normal">منذ 18 دقيقة</strong></span>
+</div>
+<div class="hidden md:flex items-center gap-space-xs px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span>Enterprise v2.4</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-secondary font-label-compact text-label-compact">2FA مفعل إجبارياً</span>
+</div>
+</div>
+</div>
+<div class="px-gutter-lg space-y-space-xl">
+<!-- Master Header & Action Deck -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="space-y-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">إدارة المستخدمين والصلاحيات وإعدادات الأمان</h1>
+<span class="px-space-sm py-0.5 rounded bg-primary-container/20 text-primary font-label-compact text-label-compact">Alegria Haute ERP</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          التحكم الشامل في مستويات تفويض الكوادر التشغيلية، حوكمة مسارات النقدية ونقاط البيع، مصفوفة صلاحيات الفروع، وسجل الرقابة والتدقيق الجنائي الفوري.
+        </p>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">backup</span>
+<span>نسخة احتياطية فورية</span>
+</button>
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">assignment_turned_in</span>
+<span>تقرير التدقيق الأمني</span>
+</button>
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">badge</span>
+<span>+ دور وظيفي جديد</span>
+</button>
+<button class="px-space-lg py-space-sm rounded-lg bg-primary-container hover:bg-primary text-on-primary font-headline-md text-body-md flex items-center gap-space-xs transition-all shadow-md">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>+ إضافة مستخدم جديد</span>
+</button>
+</div>
+</div>
+<!-- Security & Operation KPI Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1: Active User Licenses -->
+<div class="bg-surface-container p-space-lg rounded-xl relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block mb-1">تراخيص المستخدمين النشطة</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-primary font-bold">24</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">/ 30 رخصة</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low/60 rounded px-space-sm py-space-xs flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>4 مدراء • 6 كاشير</span>
+<span class="text-secondary font-label-numeric text-label-numeric">80% تشغيل</span>
+</div>
+</div>
+<!-- Card 2: Connected Terminals (Live Sessions) -->
+<div class="bg-surface-container p-space-lg rounded-xl relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block mb-1">الجلسات المتصلة لحظياً</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-secondary font-bold">16</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">محطة طرفية</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">devices</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low/60 rounded px-space-sm py-space-xs flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            8 POS • 5 KDS • 3 لوحة تحكم
+          </span>
+<span class="text-primary font-label-compact text-label-compact">مستقر</span>
+</div>
+</div>
+<!-- Card 3: Role Definitions Matrix -->
+<div class="bg-surface-container p-space-lg rounded-xl relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block mb-1">الأدوار والمجموعات الصلاحية</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-on-surface font-bold">7</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">مجموعات مخصصة</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">policy</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low/60 rounded px-space-sm py-space-xs flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span>آخر تحديث للصلاحية: أمس</span>
+<span class="text-primary font-label-numeric text-label-numeric">100% موثقة</span>
+</div>
+</div>
+<!-- Card 4: Threat Intel & Blocked Attempts -->
+<div class="bg-surface-container p-space-lg rounded-xl relative overflow-hidden flex flex-col justify-between shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-compact text-label-compact text-on-surface-variant block mb-1">مؤشر التهديدات والتنبيهات</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-lg text-headline-xl text-tertiary font-bold">0</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">اختراقات نشطة</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">security</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low/60 rounded px-space-sm py-space-xs flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="text-tertiary">محاولة دخول خاطئة (تم حظرها)</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+</div>
+</div>
+<!-- Navigation Sub-tabs -->
+<div class="bg-surface-container-low p-space-xs rounded-xl flex items-center gap-space-xs overflow-x-auto shadow-inner">
+<button class="px-space-lg py-space-sm rounded-lg bg-surface-container-high text-primary font-headline-md text-body-md flex items-center gap-space-xs shadow-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">manage_accounts</span>
+<span>إدارة المستخدمين والحسابات (24)</span>
+</button>
+<button class="px-space-lg py-space-sm rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">lock_person</span>
+<span>مصفوفة الأدوار والصلاحيات (Roles Matrix)</span>
+</button>
+<button class="px-space-lg py-space-sm rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">history_toggle_off</span>
+<span>سجل الرقابة الجنائي والنشاط اللحظي (Audit Trail)</span>
+</button>
+<button class="px-space-lg py-space-sm rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">storefront</span>
+<span>نطاق الفروع والمحطات المصرح بها</span>
+</button>
+<button class="px-space-lg py-space-sm rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>السياسات الأمنية والنسخ التلقائي</span>
+</button>
+</div>
+<!-- Main Workspace Split: Users Directory & Security Command Rail -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Primary Column: High-Density Users Directory & Permissions Matrix Sneak-peek (8 cols) -->
+<div class="xl:col-span-8 space-y-space-lg">
+<!-- Filter and Search Toolbar -->
+<div class="bg-surface-container p-space-md rounded-xl space-y-space-md shadow-sm">
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 pr-10 pl-space-md py-space-xs rounded-lg text-body-md outline-none focus:bg-surface-container-lowest transition-colors" placeholder="بحث بالاسم، الكود، البريد، أو رقم الهاتف..." type="text"/>
+</div>
+<!-- Fast Filters -->
+<div class="flex items-center gap-space-xs w-full md:w-auto overflow-x-auto">
+<select class="bg-surface-container-low text-on-surface px-space-md py-space-xs rounded-lg text-body-sm outline-none cursor-pointer">
+<option>كافة الأدوار الوظيفية</option>
+<option>Super Admin (الإدارة العليا)</option>
+<option>مدير مالي وخزينة</option>
+<option>كاشير ومبيعات</option>
+<option>شيف تنفيذي ومطبخ</option>
+<option>كابتن ومضيف صالة VIP</option>
+</select>
+<select class="bg-surface-container-low text-on-surface px-space-md py-space-xs rounded-lg text-body-sm outline-none cursor-pointer">
+<option>كافة الفروع</option>
+<option>الفرع الرئيسي - الرياض (Centria)</option>
+<option>فرع الدرعية VIP Lounge</option>
+<option>المطبخ السحابي المركزي</option>
+</select>
+<select class="bg-surface-container-low text-on-surface px-space-md py-space-xs rounded-lg text-body-sm outline-none cursor-pointer">
+<option>حالة الحساب: الكل</option>
+<option>نشط (Active)</option>
+<option>موقوف مؤقتاً</option>
+<option>مغلق أمنياً</option>
+</select>
+<button class="p-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface" title="تفريغ التصفية">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Users Table -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-right">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-compact text-label-compact uppercase">
+<th class="py-space-md px-space-lg font-semibold">المستخدم والكود الوظيفي</th>
+<th class="py-space-md px-space-md font-semibold">الدور والمستوى</th>
+<th class="py-space-md px-space-md font-semibold">الفروع والمحطات المصرحة</th>
+<th class="py-space-md px-space-md font-semibold text-center">المصادقة (2FA)</th>
+<th class="py-space-md px-space-md font-semibold">آخر نشاط</th>
+<th class="py-space-md px-space-md font-semibold text-center">الحالة</th>
+<th class="py-space-md px-space-lg font-semibold text-left">إجراءات سريعة</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-body-sm">
+<!-- User 1: Super Admin -->
+<tr class="hover:bg-surface-container-high/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-primary/20 text-primary flex items-center justify-center font-headline-md text-body-md font-bold">
+                        ف
+                      </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-md text-on-surface">فهد السليمان</span>
+<div class="flex items-center gap-1 font-label-numeric text-label-compact text-on-surface-variant">
+<span class="text-primary font-medium">ALG-USR-001</span>
+<span>•</span>
+<span>fahad@alegriagroup.com</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-primary-container text-on-primary font-label-compact text-label-compact font-semibold">
+<span class="material-symbols-outlined text-[14px]">shield_person</span>
+                      Super Admin
+                    </span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant font-body-sm">
+<span class="text-on-surface">كافة الفروع</span> (كامل الصلاحيات)
+                  </td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center justify-center text-secondary" title="2FA مفعل بأمان عالي">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+</td>
+<td class="py-space-md px-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+<div class="flex flex-col">
+<span class="text-on-surface">الآن (نشط)</span>
+<span class="text-body-sm opacity-70">MacBook Pro • الرياض</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary/10 text-secondary font-label-compact text-label-compact">نشط</span>
+</td>
+<td class="py-space-md px-space-lg text-left">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors" title="تعديل الصلاحيات">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="إعادة تعيين PIN">
+<span class="material-symbols-outlined text-[18px]">password</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-tertiary transition-colors" title="قفل الجلسة فوراً">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User 2: Executive Chef Marcus -->
+<tr class="hover:bg-surface-container-high/50 transition-colors bg-surface-container-low/40">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-headline-md text-body-md font-bold">
+                        M
+                      </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-md text-on-surface">شيف ماركوس أنطوان</span>
+<div class="flex items-center gap-1 font-label-numeric text-label-compact text-on-surface-variant">
+<span class="text-primary font-medium">ALG-USR-007</span>
+<span>•</span>
+<span>marcus.chef@alegria.sa</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact font-semibold">
+<span class="material-symbols-outlined text-[14px]">skillet</span>
+                      شيف تنفيذي (Culinary Dir)
+                    </span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant font-body-sm">
+                    المطبخ المركزي • KDS الشواية • الوصفات
+                  </td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center justify-center text-secondary" title="2FA مفعل">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+</td>
+<td class="py-space-md px-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+<div class="flex flex-col">
+<span class="text-on-surface">قبل 12 دقيقة</span>
+<span class="text-body-sm opacity-70">iPad Pro #Kitchen-01</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary/10 text-secondary font-label-compact text-label-compact">نشط</span>
+</td>
+<td class="py-space-md px-space-lg text-left">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors" title="تعديل الصلاحيات">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="إعادة تعيين PIN">
+<span class="material-symbols-outlined text-[18px]">password</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-tertiary transition-colors" title="قفل الجلسة">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User 3: Chief Cashier & Treasury -->
+<tr class="hover:bg-surface-container-high/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-headline-md text-body-md font-bold">
+                        ك
+                      </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-md text-on-surface">كريم عادل</span>
+<div class="flex items-center gap-1 font-label-numeric text-label-compact text-on-surface-variant">
+<span class="text-primary font-medium">ALG-USR-014</span>
+<span>•</span>
+<span>kareem.pos@alegria.sa</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-highest text-secondary font-label-compact text-label-compact font-semibold">
+<span class="material-symbols-outlined text-[14px]">point_of_sale</span>
+                      كاشير أول وأمين خزينة
+                    </span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant font-body-sm">
+                    الفرع الرئيسي • POS صالة 1 • الخزينة 01
+                  </td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+</td>
+<td class="py-space-md px-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+<div class="flex flex-col">
+<span class="text-on-surface">الآن (POS-01)</span>
+<span class="text-body-sm opacity-70">محطة الكاشير الرئيسية</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary/10 text-secondary font-label-compact text-label-compact">نشط</span>
+</td>
+<td class="py-space-md px-space-lg text-left">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">password</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User 4: VIP Floor Captain -->
+<tr class="hover:bg-surface-container-high/50 transition-colors bg-surface-container-low/40">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-headline-md text-body-md font-bold">
+                        ح
+                      </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-md text-on-surface">حسام رضوان</span>
+<div class="flex items-center gap-1 font-label-numeric text-label-compact text-on-surface-variant">
+<span class="text-primary font-medium">ALG-USR-019</span>
+<span>•</span>
+<span>hossam.vip@alegria.sa</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-highest text-on-surface font-label-compact text-label-compact font-semibold">
+<span class="material-symbols-outlined text-[14px]">table_bar</span>
+                      مشرف صالة وكابتن VIP
+                    </span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant font-body-sm">
+                    فرع الدرعية VIP • جهاز نادل 04
+                  </td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+</td>
+<td class="py-space-md px-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+<div class="flex flex-col">
+<span class="text-on-surface">قبل 5 دقائق</span>
+<span class="text-body-sm opacity-70">Handheld Waiter Tab</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary/10 text-secondary font-label-compact text-label-compact">نشط</span>
+</td>
+<td class="py-space-md px-space-lg text-left">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">password</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User 5: Procurement Manager -->
+<tr class="hover:bg-surface-container-high/50 transition-colors">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-primary-container/30 text-primary flex items-center justify-center font-headline-md text-body-md font-bold">
+                        س
+                      </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-md text-on-surface">م. سارة كمال</span>
+<div class="flex items-center gap-1 font-label-numeric text-label-compact text-on-surface-variant">
+<span class="text-primary font-medium">ALG-USR-004</span>
+<span>•</span>
+<span>sara.proc@alegria.sa</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact font-semibold">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+                      مدير جودة ومشتريات
+                    </span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant font-body-sm">
+                    المشتريات • المستودعات المركزية
+                  </td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+</td>
+<td class="py-space-md px-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+<div class="flex flex-col">
+<span class="text-on-surface">قبل ساعة</span>
+<span class="text-body-sm opacity-70">Dell Precision • المكتب</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary/10 text-secondary font-label-compact text-label-compact">نشط</span>
+</td>
+<td class="py-space-md px-space-lg text-left">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">password</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- User 6: KDS Grill Cook -->
+<tr class="hover:bg-surface-container-high/50 transition-colors bg-surface-container-low/40">
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-headline-md text-body-md font-bold">
+                        إ
+                      </div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-md text-on-surface">إبراهيم حمدي</span>
+<div class="flex items-center gap-1 font-label-numeric text-label-compact text-on-surface-variant">
+<span class="text-primary font-medium">ALG-USR-022</span>
+<span>•</span>
+<span>ibrahim.kds@alegria.sa</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-label-compact text-label-compact font-semibold">
+<span class="material-symbols-outlined text-[14px]">outdoor_grill</span>
+                      طاهي محطة الشواية
+                    </span>
+</td>
+<td class="py-space-md px-space-md text-on-surface-variant font-body-sm">
+                    شاشة KDS الشواية فقط (Station #3)
+                  </td>
+<td class="py-space-md px-space-md text-center">
+<span class="inline-flex items-center justify-center text-on-surface-variant/40" title="تم الاكتفاء برمز PIN في المطبخ">
+<span class="material-symbols-outlined text-[18px]">pin</span>
+</span>
+</td>
+<td class="py-space-md px-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+<div class="flex flex-col">
+<span class="text-on-surface">الآن (KDS-03)</span>
+<span class="text-body-sm opacity-70">Kitchen Touchscreen</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary/10 text-secondary font-label-compact text-label-compact">نشط</span>
+</td>
+<td class="py-space-md px-space-lg text-left">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">password</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Bottom Bar & Pagination -->
+<div class="px-space-lg py-space-sm bg-surface-container-high flex flex-wrap items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-space-sm">
+<span>عرض <strong class="text-on-surface">1 إلى 6</strong> من إجمالي 24 مستخدم مسجل</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface text-on-surface-variant hover:text-on-surface disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[16px]">navigate_next</span>
+</button>
+<button class="w-7 h-7 rounded bg-primary-container text-on-primary font-label-numeric text-label-numeric font-bold">1</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container text-on-surface-variant font-label-numeric text-label-numeric">2</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container text-on-surface-variant font-label-numeric text-label-numeric">3</button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[16px]">navigate_before</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Role-Permission Matrix Sneak Peek -->
+<div class="bg-surface-container rounded-xl p-space-lg space-y-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">unfold_more_double</span>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">مصفوفة حوكمة وتفويض الصلاحيات (Role Permissions Grid)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">التحكم في العمليات الحساسة: الخصومات، إلغاء البنود بعد الإرسال، وفتح الدرج بدون فواتير</p>
+</div>
+</div>
+<button class="px-space-md py-space-xs rounded bg-surface-container-high hover:bg-surface-container text-primary font-body-sm text-body-sm">
+              تعديل مصفوفة القواعد
+            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right text-body-sm">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-compact text-label-compact">
+<th class="py-space-sm px-space-md">الوظيفة / الصلاحية الحساسة</th>
+<th class="py-space-sm px-space-sm text-center">Super Admin</th>
+<th class="py-space-sm px-space-sm text-center">مدير الفرع</th>
+<th class="py-space-sm px-space-sm text-center">كاشير رئيسي</th>
+<th class="py-space-sm px-space-sm text-center">كابتن صالة</th>
+<th class="py-space-sm px-space-sm text-center">طاهي المطبخ</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<tr class="hover:bg-surface-container-high/40">
+<td class="py-space-sm px-space-md text-on-surface font-medium">فتح درج النقدية يدويًا (No-Sale Drawer Kick)</td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-primary text-[18px]" title="مطلوب إدخال سبب معتمد">help</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+</tr>
+<tr class="hover:bg-surface-container-high/40 bg-surface-container-low/20">
+<td class="py-space-sm px-space-md text-on-surface font-medium">منح خصم ضيافة استثنائي (&gt; 15%)</td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-primary text-[18px]" title="حد أقصى 10% لـ VIP فقط">help</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+</tr>
+<tr class="hover:bg-surface-container-high/40">
+<td class="py-space-sm px-space-md text-on-surface font-medium">إلغاء بند من الطلب بعد بدء تجهيزه بالمطبخ (Void Item)</td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-primary text-[18px]">help</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+</tr>
+<tr class="hover:bg-surface-container-high/40 bg-surface-container-low/20">
+<td class="py-space-sm px-space-md text-on-surface font-medium">تعديل تكاليف ومكونات وصفات الأطباق (Recipe Costs)</td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-outline-variant text-[18px]">block</span></td>
+<td class="py-space-sm px-space-sm text-center"><span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Secondary Column: Security Command, Audit Stream & System Vault (4 cols) -->
+<div class="xl:col-span-4 space-y-space-lg">
+<!-- System License & Enterprise Identity Card with Alegria Chef Badge -->
+<div class="relative bg-surface-container rounded-xl p-space-lg overflow-hidden shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex flex-col">
+<span class="font-label-compact text-label-compact text-primary">رخصة المنظومة المؤسسية</span>
+<h4 class="font-headline-md text-headline-md text-on-surface">Alegria Haute ERP</h4>
+</div>
+<img alt="Alegria Luxury Seal" class="w-14 h-14 object-contain filter drop-shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDANgGkvcDic_25tEtSCixt_tCHi61jQsIQ_MtJGNNbDFp8fXjPDKW6xRy1Z6n5Wa9Xyl3NDmCakpsJPb2wt0zplQ26PTGXyX_w5rftoQBDoTFIRewoJta12_QgSbZd98ESXJ9q0r7PC8OMRHDbOvE3DSwg8_6mgU-32AZ7xZADoYctEcjmGBXYSoPmqTdTtqnUYLk2iSSUEMvA83jnQysIJBoSBoLncr_l-cusOERyMyHKfuNvas7Eh8HUf9jGcsLYprA"/>
+</div>
+<div class="space-y-space-xs text-body-sm font-label-numeric text-label-numeric text-on-surface-variant bg-surface-container-low p-space-md rounded-lg">
+<div class="flex justify-between">
+<span>رقم العقد والترخيص:</span>
+<span class="text-on-surface font-bold">ALG-ENT-2024-KSA-991</span>
+</div>
+<div class="flex justify-between">
+<span>خادم التشفير وقاعدة البيانات:</span>
+<span class="text-secondary font-medium">Dedicated Oracle RDS (Riyadh)</span>
+</div>
+<div class="flex justify-between">
+<span>حجم قاعدة البيانات الحالية:</span>
+<span class="text-primary font-bold">1.42 GB</span>
+</div>
+<div class="flex justify-between">
+<span>تاريخ التجديد السنوي:</span>
+<span class="text-on-surface">31 ديسمبر 2025</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between">
+<span class="flex items-center gap-1 text-secondary font-label-compact text-label-compact">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              مربوط مع هيئة الزكاة والضريبة والجمارك (ZATCA Phase 2)
+            </span>
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-sm text-body-sm">
+              أرشفة السجلات
+            </button>
+</div>
+</div>
+<!-- Security Policies & Enforcement Engine -->
+<div class="bg-surface-container rounded-xl p-space-lg space-y-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">gavel</span>
+<h4 class="font-headline-md text-headline-md text-on-surface">سياسات الأمان الإجبارية</h4>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-secondary/10 text-secondary font-label-compact text-label-compact">مفعلة</span>
+</div>
+<div class="space-y-space-sm text-body-sm">
+<!-- Policy Item 1 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">فرض المصادقة الثنائية (2FA)</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">إلزامي للمدراء، الكاشير، وشؤون المشتريات</span>
+</div>
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-3.5 h-3.5 bg-on-secondary rounded-full transform -translate-x-4"></div>
+</div>
+</div>
+<!-- Policy Item 2 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">حظر الحساب بعد محاولات خاطئة</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">قفل تلقائي فوري بعد 3 محاولات مرور خاطئة</span>
+</div>
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-3.5 h-3.5 bg-on-secondary rounded-full transform -translate-x-4"></div>
+</div>
+</div>
+<!-- Policy Item 3 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">تسجيل الخروج التلقائي عند الخمول</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">15 دقيقة لمحطات POS و 30 دقيقة للإدارة</span>
+</div>
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-3.5 h-3.5 bg-on-secondary rounded-full transform -translate-x-4"></div>
+</div>
+</div>
+<!-- Policy Item 4 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">ربط الجلسة بعنوان IP الفرع</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">منع دخول الكاشير من خارج الشبكة الداخلية</span>
+</div>
+<div class="w-10 h-5 bg-secondary-container rounded-full relative flex items-center px-1 cursor-pointer">
+<div class="w-3.5 h-3.5 bg-on-secondary rounded-full transform -translate-x-4"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Security Audit Stream (Real-Time Feed) -->
+<div class="bg-surface-container rounded-xl p-space-lg space-y-space-md shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container animate-pulse"></span>
+<h4 class="font-headline-md text-headline-md text-on-surface">سجل التدقيق الأمني اللحظي</h4>
+</div>
+<button class="font-label-compact text-label-compact text-primary hover:underline">
+              عرض السجل الكامل
+            </button>
+</div>
+<div class="space-y-space-sm">
+<!-- Event 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<div class="flex items-center justify-between">
+<span class="px-space-sm py-0.5 rounded bg-primary-container/20 text-primary font-label-compact text-label-compact">تطبيق خصم ضيافة</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">21:14</span>
+</div>
+<p class="text-on-surface font-body-sm text-body-sm">
+                اعتماد خصم 10% على طاولة VIP-4 بواسطة <strong class="text-primary font-medium">حسام رضوان</strong>.
+              </p>
+<div class="font-label-numeric text-label-compact text-on-surface-variant/70">
+                جهاز النادل المحمول • IP: 192.168.1.104
+              </div>
+</div>
+<!-- Event 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<div class="flex items-center justify-between">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-highest text-secondary font-label-compact text-label-compact">فتح درج نقدية يدوي</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">20:45</span>
+</div>
+<p class="text-on-surface font-body-sm text-body-sm">
+                فتح درج الصالة 1 لتسوية سلفة خضار طارئة بواسطة <strong class="text-secondary font-medium">كريم عادل</strong>.
+              </p>
+<div class="font-label-numeric text-label-compact text-on-surface-variant/70">
+                POS-Main • مستند صرف رقم #VCH-481
+              </div>
+</div>
+<!-- Event 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<div class="flex items-center justify-between">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-highest text-primary font-label-compact text-label-compact">تعديل تكلفة وصفة</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">18:30</span>
+</div>
+<p class="text-on-surface font-body-sm text-body-sm">
+                تحديث سعر تكلفة اللحم الضاني الأسترالي بواسطة <strong class="text-on-surface font-medium">شيف ماركوس</strong>.
+              </p>
+<div class="font-label-numeric text-label-compact text-on-surface-variant/70">
+                وحدة Recipe Engineering • السعر الجديد: 84.5 ر.س/كغ
+              </div>
+</div>
+<!-- Event 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<div class="flex items-center justify-between">
+<span class="px-space-sm py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-compact text-label-compact">جلسة إدارة جديدة</span>
+<span class="font-label-numeric text-label-numeric text-on-surface-variant">17:00</span>
+</div>
+<p class="text-on-surface font-body-sm text-body-sm">
+                تسجيل دخول موثق برمز 2FA لـ <strong class="text-primary font-medium">فهد السليمان</strong> (Super Admin).
+              </p>
+<div class="font-label-numeric text-label-compact text-on-surface-variant/70">
+                Safari 17.4 • مرمز عبر شبكة الإدارة الآمنة
+              </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Security Matrix Footer Stats and Operational Checklist -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm shadow-sm mb-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+<div>
+<span class="text-on-surface font-headline-md text-body-md block">منظومة الحماية الشاملة Alegria Vault Shield</span>
+<span>كافة العمليات الحساسة ومسارات الكاشير مشفرة بمفتاح فريد متوافق مع معايير PCI-DSS للمدفوعات.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-space-xs rounded bg-surface-container-high hover:bg-surface-container text-on-surface transition-colors">
+          سجل مفاتيح API والربط الخارجي
+        </button>
+<button class="px-space-md py-space-xs rounded bg-surface-container-high hover:bg-surface-container text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+          تصدير تقرير أمني PDF
+        </button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

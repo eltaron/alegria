@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>(function(){try{var t=localStorage.getItem('alegria-theme');if(t)document.documentElement.setAttribute('data-bs-theme',t);}catch(e){}})();</script>
+  <title>الدعم الفني VIP 24/7 | أليجريا للإدارة</title>
+  <meta name="description" content="مركز الدعم الفني VIP على مدار الساعة لنظام أليجريا الإداري: خطوط اتصال مباشرة، واتساب، تذاكر دعم، واتفاقيات مستوى خدمة."/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png"/>
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png"/>
+
+  <!-- Cairo Arabic Font (local) -->
+  <link rel="stylesheet" href="assets/fonts/cairo.css"/>
+  <!-- Bootstrap 5 RTL -->
+  <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets/css/all.min.css"/>
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    .support-hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--al-radius-lg);
+      background:
+        radial-gradient(620px 320px at 88% -10%, color-mix(in srgb, var(--al-gold) 20%, transparent), transparent 62%),
+        var(--al-surface);
+      border: 1px solid var(--al-line);
+      padding: 1.6rem 1.4rem;
+    }
+    .channel-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      height: 100%;
+      background: var(--al-surface);
+      border: 1px solid var(--al-line);
+      border-radius: var(--al-radius);
+      padding: 1.05rem 1.1rem;
+      color: inherit;
+      text-decoration: none;
+      transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.26s, box-shadow 0.26s;
+    }
+    .channel-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--al-gold) 46%, transparent);
+      box-shadow: var(--al-shadow);
+      color: inherit;
+    }
+    .channel-card .ch-title {
+      font-weight: 800;
+      color: var(--al-ink);
+      margin-bottom: 0.15rem;
+    }
+    .channel-card .ch-value {
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      color: var(--al-gold-strong);
+      direction: ltr;
+      text-align: right;
+    }
+    .channel-card .ch-note {
+      font-size: 0.78rem;
+      color: var(--al-ink-faint);
+    }
+    .sla-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 0.2rem 0.55rem;
+      border-radius: 99px;
+    }
+    .faq-item .accordion-button {
+      background: var(--al-surface);
+      color: var(--al-ink);
+      font-weight: 800;
+      box-shadow: none;
+    }
+    .faq-item .accordion-button:not(.collapsed) {
+      background: var(--al-surface-2);
+      color: var(--al-gold-strong);
+      box-shadow: none;
+    }
+    .faq-item .accordion-button:focus {
+      box-shadow: none;
+      border-color: var(--al-line);
+    }
+    .faq-item .accordion-button::after {
+      background-size: 0.85rem;
+    }
+    .faq-item .accordion-body {
+      background: var(--al-surface-2);
+      color: var(--al-ink-soft);
+      border-top: 1px solid var(--al-line);
+    }
+    @media (hover: hover) {
+      .channel-card:hover {
+        transform: translateY(-3px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-header"></div>
+
+  <main>
+    <section class="container py-4 py-lg-5">
+      <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+        <a href="login.html" class="btn btn-ghost btn-sm text-nowrap">
+          <i class="fa-solid fa-arrow-right text-gold"></i>
+          <span>العودة لصفحة الدخول</span>
+        </a>
+        <span class="badge-pill-custom" style="text-transform:none;">
+          <span class="live-dot" aria-hidden="true"></span> الفريق متصل الآن
+        </span>
+      </div>
+
+      <!-- ============ HERO ============ -->
+      <div class="support-hero mb-4">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="eyebrow mb-2"><i class="fa-solid fa-headset"></i> مركز الخدمات</span>
+            <h1 class="h2 fw-bold mb-2">الدعم الفني VIP على مدار الساعة</h1>
+            <p class="text-soft mb-3">
+              فريق دعم مخصّص لنظام أليجريا الإداري، جاهز للتعامل مع الأعطال الحرجة فوراً على مدار الساعة
+              وكل أيام الأسبوع، بما في ذلك العطلات الرسمية.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="tel:+966112345678" class="btn btn-gold">
+                <i class="fa-solid fa-phone me-1"></i> اتصال مباشر الآن
+              </a>
+              <a href="recover_secret_code.html" class="btn btn-ghost">
+                <i class="fa-solid fa-key me-1"></i> استعادة الرمز السري
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="stat-card h-100 text-center">
+                  <div class="stat-value">&lt; 15</div>
+                  <div class="stat-label">دقيقة للاستجابة</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-card h-100 text-center">
+                  <div class="stat-value">99.98%</div>
+                  <div class="stat-label">جاهزية المنظومة</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ CHANNELS ============ -->
+      <h2 class="h5 fw-bold mb-3"><i class="fa-solid fa-tower-broadcast text-gold me-2"></i> قنوات التواصل</h2>
+      <div class="row g-3 mb-4">
+        <div class="col-md-6 col-xl-3">
+          <a href="tel:+966112345678" class="channel-card">
+            <span class="icon-disc icon-disc--green"><i class="fa-solid fa-headset"></i></span>
+            <span>
+              <span class="ch-title d-block">الخط الساخن</span>
+              <span class="ch-value d-block">+966 11 234 5678</span>
+              <span class="ch-note d-block">استقبال فوري على مدار الساعة</span>
+            </span>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <a href="https://wa.me/966567823411" class="channel-card" target="_blank" rel="noopener">
+            <span class="icon-disc icon-disc--green"><i class="fa-brands fa-whatsapp"></i></span>
+            <span>
+              <span class="ch-title d-block">واتساب VIP</span>
+              <span class="ch-value d-block">+966 56 782 3411</span>
+              <span class="ch-note d-block">محادثات وتذاكر سريعة</span>
+            </span>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <a href="mailto:support@alegria.sa" class="channel-card">
+            <span class="icon-disc"><i class="fa-solid fa-envelope-open-text"></i></span>
+            <span>
+              <span class="ch-title d-block">البريد الإلكتروني</span>
+              <span class="ch-value d-block">support@alegria.sa</span>
+              <span class="ch-note d-block">للملاحظات والتقارير التفصيلية</span>
+            </span>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <a href="#support-ticket" class="channel-card">
+            <span class="icon-disc"><i class="fa-solid fa-ticket"></i></span>
+            <span>
+              <span class="ch-title d-block">نظام التذاكر</span>
+              <span class="ch-value d-block">بوابة الدعم</span>
+              <span class="ch-note d-block">متابعة تقنية بسجل زمني</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- ============ SLA ============ -->
+        <div class="col-lg-6">
+          <div class="panel-card p-4 h-100">
+            <h2 class="h5 fw-bold mb-3"><i class="fa-solid fa-stopwatch text-gold me-2"></i> اتفاقيات مستوى الخدمة</h2>
+            <div class="table-wrap">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>الأولوية</th>
+                    <th>الحالات</th>
+                    <th>زمن الاستجابة</th>
+                    <th>التصعيد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="sla-pill" style="background:var(--al-rose-soft);color:var(--al-rose);">حرجة</span></td>
+                    <td class="text-soft">تعطّل كامل للمنظومة</td>
+                    <td class="font-mono text-gold-strong">15 دقيقة</td>
+                    <td class="text-soft">فوري</td>
+                  </tr>
+                  <tr>
+                    <td><span class="sla-pill" style="background:var(--al-amber-soft);color:var(--al-amber);">عالية</span></td>
+                    <td class="text-soft">نقطة بيع أو مطبخ متوقفة</td>
+                    <td class="font-mono text-gold-strong">30 دقيقة</td>
+                    <td class="text-soft">خلال ساعة</td>
+                  </tr>
+                  <tr>
+                    <td><span class="sla-pill" style="background:var(--al-gold-soft);color:var(--al-gold-strong);">متوسطة</span></td>
+                    <td class="text-soft">خلل وظيفي دون توقف</td>
+                    <td class="font-mono text-gold-strong">4 ساعات</td>
+                    <td class="text-soft">خلال يوم</td>
+                  </tr>
+                  <tr>
+                    <td><span class="sla-pill" style="background:var(--al-surface-2);color:var(--al-ink-soft);">منخفضة</span></td>
+                    <td class="text-soft">استفسار أو طلب تحسين</td>
+                    <td class="font-mono text-gold-strong">يوم عمل</td>
+                    <td class="text-soft">حسب الجدولة</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="text-faint small mt-3 mb-0">
+              <i class="fa-solid fa-circle-info me-1"></i>
+              تُحتسب أوقات الاستجابة على مدار الساعة طوال أيام الأسبوع بما فيها العطلات.
+            </p>
+          </div>
+        </div>
+
+        <!-- ============ TICKET FORM ============ -->
+        <div class="col-lg-6" id="support-ticket">
+          <div class="panel-card p-4 h-100">
+            <h2 class="h5 fw-bold mb-3"><i class="fa-solid fa-ticket text-gold me-2"></i> فتح تذكرة دعم</h2>
+            <form id="ticket-form" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label-custom" for="tk-name">الاسم</label>
+                  <div class="input-icon">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" class="form-control" id="tk-name" placeholder="اسمك الكامل" required/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom" for="tk-branch">الفرع</label>
+                  <select class="form-select" id="tk-branch">
+                    <option value="hq">الإدارة العامة - الرياض</option>
+                    <option value="ryd">فرع الرياض - السليمانية</option>
+                    <option value="cairo">فرع القاهرة - التجمع الخامس</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom" for="tk-priority">الأولوية</label>
+                  <select class="form-select" id="tk-priority">
+                    <option value="low">منخفضة</option>
+                    <option value="normal">متوسطة</option>
+                    <option value="high">عالية</option>
+                    <option value="critical">حرجة</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label-custom" for="tk-contact">وسيلة التواصل</label>
+                  <input type="text" class="form-control" id="tk-contact" dir="ltr" placeholder="رقم الجوال أو البريد" required/>
+                </div>
+                <div class="col-12">
+                  <label class="form-label-custom" for="tk-details">وصف المشكلة</label>
+                  <textarea class="form-control" id="tk-details" rows="4" placeholder="اشرح المشكلة والخطوات التي لاحظتها" required></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-gold w-100 mt-3 d-flex align-items-center justify-content-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>إرسال التذكرة</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ FAQ ============ -->
+      <h2 class="h5 fw-bold mt-4 mb-3"><i class="fa-solid fa-circle-question text-gold me-2"></i> الأسئلة الشائعة</h2>
+      <div class="accordion faq-item" id="support-faq">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+              ماذا أفعل إذا تعذّر تسجيل الدخول إلى المنظومة؟
+            </button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#support-faq">
+            <div class="accordion-body">
+              أولاً تأكد من اتصال الشبكة ومن رمز الدخول السريع. إذا استمر العطل، افتح تذكرة حرجة أو اتصل بالخط الساخن مباشرة، وسيتولى الفريق التحقق من حالة حسابك فوراً.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+              هل يمكن استعادة الرمز السري بنفسي؟
+            </button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#support-faq">
+            <div class="accordion-body">
+              نعم، عبر صفحة <a href="recover_secret_code.html">استعادة الرمز السري</a>. يتولى فريق إدارة الهوية التحقق من هويتك هاتفياً قبل إصدار رمز بديل.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+              ماذا لو كان العطل أثناء ساعات الذروة في المطعم؟
+            </button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#support-faq">
+            <div class="accordion-body">
+              لا يوجد استثناء وقت الذروة؛ التصنيف الحرجة يُعالَج خلال 15 دقيقة على مدار الساعة، مع إشعار فوري لمدير الفرع وقائد العمليات.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+              هل الدعم متاح بالعربية والإنجليزية؟
+            </button>
+          </h3>
+          <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#support-faq">
+            <div class="accordion-body">
+              نعم، يتكون الفريق من مهندسين ناطقين بالعربية والإنجليزية، ويمكنك اختيار اللغة المفضلة عند فتح التذكرة.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER (موحد - يتم حقنه عبر layout.js) ============ -->
+  <div id="alegria-footer"></div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    window.ALEGRIA = { assets: "assets", section: "login", page: "vip-support" };
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/sweetalert2.all.min.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // ================= VIP support ticket =================
+    $(function () {
+      $('#ticket-form').on('submit', function (e) {
+        e.preventDefault();
+        var name = $.trim($('#tk-name').val());
+        var contact = $.trim($('#tk-contact').val());
+        var details = $.trim($('#tk-details').val());
+
+        if (!name) {
+          Swal.fire({ icon: 'warning', title: 'الاسم مطلوب', text: 'يرجى إدخال اسمك الكامل.', confirmButtonText: 'حسناً' });
+          return;
+        }
+        if (contact.length < 6) {
+          Swal.fire({ icon: 'warning', title: 'وسيلة التواصل مطلوبة', text: 'يرجى إدخال رقم جوال صحيح أو بريد إلكتروني.', confirmButtonText: 'حسناً' });
+          return;
+        }
+        if (details.length < 10) {
+          Swal.fire({ icon: 'warning', title: 'الوصف قصير جداً', text: 'يرجى وصف المشكلة في 10 أحرف على الأقل لتسريع المعالجة.', confirmButtonText: 'حسناً' });
+          return;
+        }
+
+        var btn = $(this).find('button[type="submit"]');
+        btn.prop('disabled', true);
+        btn.find('span').text('جارٍ إرسال التذكرة...');
+
+        window.setTimeout(function () {
+          btn.prop('disabled', false);
+          btn.find('span').text('إرسال التذكرة');
+
+          Swal.fire({
+            icon: 'success',
+            title: 'تم فتح التذكرة',
+            html: 'سيتواصل معك مهندس الدعم في أقرب وقت.<br><span class="text-soft small">رقم التذكرة: <b>TKT-' + Date.now().toString().slice(-6) + '</b></span>',
+            confirmButtonText: 'تم',
+            confirmButtonColor: '#bf9636'
+          });
+          this.reset();
+        }.bind(this), 1000);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!-- ================================================================
+     عمود الفاتورة — تصميم مميز ومختلف (الفاتورة الذهبية الفاخرة)
+     فاتورة عمودية بارتفاع ثابت لا تملأ الشاشة؛ كل فئة داخلية قابلة للتمرير
+     ================================================================ -->
+<aside class="col-lg-4 col-md-12 panel-column h-100">
+  <div class="panel-card d-flex flex-column overflow-hidden h-100" id="billingPanel">
+
+    <!-- ---- رأس الفاتورة الفاخر (توقيع بصري مميز) ---- -->
+    <div class="panel-head fatoura-head d-flex align-items-center justify-content-between gap-2 p-2 px-3">
+      <div class="d-flex align-items-center gap-2">
+        <span class="dot dot-gold"></span>
+        <div class="lh-sm">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fw-black small text-gold-strong">الفاتورة الذهبية</span>
+            <span class="badge-pill-custom badge-gold tabular">#A-4481</span>
+          </div>
+          <small class="text-softest d-block" style="font-size:.68rem;">أليجريا لاونج ـ صالة داخلية · 12 أيلول</small>
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-sm sw-action" data-title="طباعة الفاتورة، إرسال البون والتحويل"><i class="fa-solid fa-print text-gold"></i></button>
+    </div>
+
+    <!-- ---- غذاء فاخر: شريط مصور يردد معايير الجودة (لحوم، قشطة، بهارات) ---- -->
+    <div class="px-2 pt-2">
+      <div class="food-strip d-flex align-items-stretch gap-2">
+        <img alt="لحوم بلدية طازجة 100% فاخرة" class="rounded-3 object-fit-cover" style="width:64px;height:52px;flex:none;"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5p73iv8sVY6SXT1FHKGkrLCoBQVliPX5Sm8TK7lIhVZUFJYhsjiRsk1Given4vk4i2cYIGKRy3oZR-_HFHdBHDeiJBMQ7czM3f9jtX-e-Jm-WButw1AMlU8nci23s4t2yO0JAvFALYTv_5LwxFJ8ebeLhcRrz5FmxBi1sSVXU7fPBZkG0rTPlhF0NyChOzqq6T0gHXbRemwgPjJfXjr7phiIoNYZ2arSIGjJHpLJ1b3zAhTdNB6ZuNLuOWWh0k9vKqNuDu5t6lwMtqkT1ESquut4vM9Gy4PjCz1WDJi5-QvEYLt4b09Vu7jMwP2lJY6M2jRB56i_Zt5pCZvvE3ne6P');
+        <img alt="ألبان وقشطة ريفية بلدية" class="rounded-3 object-fit-cover" style="width:64px;height:52px;flex:none;"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4p7ZgKmkg1CelInpv6LR5bb0G36SdSm8TK7lIhVZUFJYhsjiRsk1Given4vk4i2cYIGKRy3oZR-_HFHdBHDeiJBMQ7czM3f9jtX-e-Jm-WButw1AMlU8nci23s4t2yO0JAvFALYTv_5LwxFJ8ebeLhcRrz5FmxBi1sSVXU7fPBZkG0rTPlhF0NyChOzqq6T0gHXbRemwgPjJfXjr7phiIoNYZ2arSIGjJHpLJ1b3zAhTdNB6ZuNLuOWWh0k9vKqNuDu5t6lwMtqkT1ESquut4vM9Gy4PjCz1WDJi5-QvEYLt4b09Vu7jMwP2lJY6M2jRB56i_Zt5pCZvvE3ne6P">
+        <img alt="توابل وبهارات ملكية فاخرة" class="rounded-3 object-fit-cover rounded-start-1" style="width:64px;height:52px;flex:none;"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6p83iv8sVY6SXT1FHKGkrLCoBQVliPX5Sm8TK7lIhVZUFJYhsjiRsk1Given4vk4i2cYIGKRy3oZR-_HFHdBHDeiJBMQ7czM3f9jtX-e-Jm-WButw1AMlU8nci23s4t2yO0JAvFALYTv_5LwxFJ8ebeLhcRrz5FmxBi1sSVXU7fPBZkG0rTPlhF0NyChOzqq6T0gHXbRemwgPjJfXjr7phiIoNYZ2arSIGjJHpLJ1b3zAhTdNB6ZuNLuOWWh0k9vKqNuDu5t6lwMtqkT1ESquut4vM9Gy4PjCz1WDJi5-QvEYLt4b09Vu7jMwP2lJY6M2jRB56i_Zt5pCZvvE3ne6P">
+        <div class="flex-grow-1 d-flex flex-column justify-content-center lh-sm pe-2">
+          <span class="fw-bold small text-gold-strong">صالحة حتى الآن</span>
+          <small class="text-softest" style="font-size:.68rem;">8 أصناف · 12 قطعة · الطلب مغطى بالكامل</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- بنود الفاتورة (مساحة قابلة للتمرير داخلياً) ---- -->
+    <div class="panel-scroll flex-grow-1 px-2 py-2" id="ticketItemsContainer" style="min-height:0;">
+      <!-- يحقن عبر JS — addToCart -->
+    </div>
+
+    <!-- ---- شريط الفواصل الذهبي المنقّط لنمط الفاتورة المميز ---- -->
+    <div class="divider-gold mx-3 mb-2"></div>
+
+    <!-- ---- ملخص الفاتورة (هاديء، لا يفيض) ---- -->
+    <div class="px-3 pb-2 d-flex flex-column gap-1" style="font-size:.78rem;">
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="text-softest small">الإجمالي</span><span class="tabular fw-bold" id="spnTotal">2,315 ج.م</span>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="text-softest small">الخصم المطبق</span><span class="text-green tabular">− 180 ج.م</span>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="text-softest small">الضريبة 14%</span><span class="tabular">+ 218.4 ج.م</span>
+      </div>
+      <div class="d-flex align-items-center justify-content-between pt-1 mt-1 border-top border-secondary-subtle">
+        <span class="fw-black small text-gold-strong">المستحق الدفع</span>
+        <span class="fw-black tabular text-gold-strong" style="font-size:1.05rem;">2,353 ج.م</span>
+      </div>
+    </div>
+
+    <!-- ---- أدوات الفاتورة: إرسال للمطبخ / طباعة / بون + زر الدفع الذهبي ---- -->
+    <div class="p-2 pt-1 d-flex flex-column gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <select class="form-select form-select-sm bg-al-2 border-secondary-subtle text-light" aria-label="طريقة الدفع">
+          <option>كاش نقداً</option><option>فيزا / POS</option><option>إنستاباي / فودافون كاش</option><option>دفع مقسم</option>
+        </select>
+        <button class="btn btn-ghost btn-sm sw-action" data-title="تقسيم الفاتورة على عدة طرق دفع"><i class="fa-solid fa-circle-half-stroke text-gold"></i></button>
+      </div>
+      <button id="checkoutBtn" class="btn btn-gold w-100 sw-action fw-black" data-title="إتمام الدفع وإغلاق الفاتورة">
+        <i class="fa-solid fa-crown me-1"></i>دفع وإغلاق الفاتورة
+      </button>
+    </div>
+  </div>
+</aside>

@@ -34,18 +34,30 @@
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
   <!-- DataTables -->
-  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
   <!-- Custom Design System -->
   <link rel="stylesheet" href="assets/css/style.css"/>
   <style>
-    .filter-tab { white-space: nowrap; font-weight: 700; }
-    .role-chip { margin-inline-end: .25rem; }
-    @keyframes alPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: .45; }
+    .rp-table { min-width: 880px; }
+    .rp-table > :not(caption) > * > * { border-bottom-color: var(--al-line); vertical-align: middle; }
+    .rp-table thead th { font-size: .76rem; white-space: nowrap; }
+    .rp-name { font-size: .82rem; font-weight: 700; line-height: 1.3; }
+    .rp-mail { font-family: var(--font-mono); font-size: .66rem; color: var(--al-ink-faint); direction: ltr; display: block; }
+    .rp-code { font-family: var(--font-mono); font-size: .66rem; color: var(--al-gold); font-weight: 700; direction: ltr; }
+    .rp-scope { font-size: .74rem; line-height: 1.35; }
+    .rp-stat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .rp-bar { height: 6px; border-radius: 999px; background: var(--al-line); overflow: hidden; }
+    .rp-bar > span { display: block; height: 100%; }
+    .rp-empty { padding: 2.5rem 1rem; text-align: center; }
+
+    .rp-modal {
+      position: fixed; inset: 0; z-index: 1080; display: none;
+      align-items: flex-start; justify-content: center; padding: 1.5rem 1rem; overflow-y: auto;
+      background: rgba(4, 8, 18, .72);
     }
-    .pulse-dot { animation: alPulse 1.6s ease-in-out infinite; }
+    .rp-modal.is-open { display: flex; }
+    .rp-modal__box { width: 100%; max-width: 560px; }
   </style>
+
 </head>
 <body>
 
@@ -54,473 +66,145 @@
 
   <main class="container py-4">
 
-    <!-- ============================================================
-         1. TOP META ACTION HEADER (breadcrumb + badges + quick actions)
-         ============================================================ -->
-    <section class="panel-card p-3 p-lg-4 mb-4">
-      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3 flex-wrap">
-        <div class="d-flex flex-column gap-2" style="max-width:50rem;">
-          <nav aria-label="breadcrumb" class="breadcrumb-custom small">
-            <span><i class="fa-solid fa-shield-halved text-gold me-1"></i>إدارة النظام</span>
-            <i class="fa-solid fa-angle-left mx-1"></i>
-            <span class="text-gold-strong fw-bold">المستخدمون والصلاحيات</span>
-          </nav>
+    <!-- ============ HEAD ============ -->
+    <section class="panel-card p-3 p-lg-4 mb-3">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3">
+        <div class="d-flex flex-column gap-2" style="max-width:44rem;">
           <div class="d-flex align-items-center gap-2 flex-wrap">
-            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> مستوى الحماية: عالي جداً (AES-256)</span>
-            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-cloud"></i> النسخ السحابي: <strong>منذ 18 دقيقة</strong></span>
-            <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-circle-check text-gold"></i> Enterprise v2.4</span>
-            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> 2FA مفعل إجبارياً</span>
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-user-shield"></i> إدارة الحسابات</span>
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> <span id="rpHeadCount">8 مستخدمين</span></span>
           </div>
-          <h1 class="h2 fw-black m-0">إدارة المستخدمين والصلاحيات الفردية</h1>
-          <p class="mb-0">التحكم الشامل في مستويات تفويض الكوادر التشغيلية، حوكمة مسارات النقدية ونقاط البيع، ومصفوفة صلاحيات الفروع والأدوار الوظيفية في كافيه أليجريا.</p>
+          <h1 class="h2 fw-bolder m-0">إدارة المستخدمين والصلاحيات الفردية</h1>
+          <p class="mb-0 small">دليل الحسابات الفردية مع أذونات التشغيل والفروع المصرحة لكل مستخدم.</p>
         </div>
         <div class="d-flex align-items-center gap-2 flex-wrap">
-          <button type="button" class="btn btn-gold add-user">
-            <i class="fa-solid fa-user-plus me-2"></i> + إضافة مستخدم
-          </button>
-          <button type="button" class="btn btn-ghost" id="triggerSync"><i class="fa-solid fa-rotate text-gold me-1"></i> مزامنة الدليل</button>
-          <button type="button" class="btn btn-ghost" id="triggerExport"><i class="fa-solid fa-file-export text-green me-1"></i> تصدير التقارير</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="rpExport"><i class="fa-solid fa-file-export text-green ms-1"></i> تصدير CSV</button>
+          <button type="button" class="btn btn-gold" id="rpAdd"><i class="fa-solid fa-user-plus ms-2"></i> إضافة مستخدم</button>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         2. SECURITY & OPERATION KPI CARDS (4)
-         ============================================================ -->
-    <section class="row g-3 mb-4">
-      <!-- Card 1: Active User Licenses -->
-      <div class="col-sm-6 col-xl-3">
-        <div class="stat-card">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <span class="stat-label d-block">تراخيص المستخدمين النشطة</span>
-              <div class="stat-value mt-1">24 <small class="fs-6 text-soft">/ 30 رخصة</small></div>
-            </div>
-            <span class="badge-pill-custom badge-green tabular">80% تشغيل</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-4">
-            <small class="text-soft">4 مدراء • 6 كاشير</small>
-            <span class="stat-icon" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-users"></i></span>
+    <!-- ============ KPIs ============ -->
+    <section class="row g-3 mb-3" id="rpKpis"></section>
+
+    <!-- ============ TOOLBAR ============ -->
+    <section class="panel-card p-3 mb-3">
+      <div class="row g-2 align-items-end">
+        <div class="col-lg-4">
+          <label class="form-label-custom" for="rpSearch">بحث سريع</label>
+          <div class="input-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="form-control" id="rpSearch" placeholder="بحث بالاسم أو الكود الوظيفي أو البريد..."/>
           </div>
         </div>
-      </div>
-      <!-- Card 2: Connected Terminals (Live Sessions) -->
-      <div class="col-sm-6 col-xl-3">
-        <div class="stat-card">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <span class="stat-label d-block">الجلسات المتصلة لحظياً</span>
-              <div class="stat-value mt-1 text-green">16 <small class="fs-6 text-soft">محطة طرفية</small></div>
-            </div>
-            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مستقر</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-4">
-            <small class="text-soft pulse-dot"><span class="dot dot-green me-1"></span>8 POS • 5 KDS • 3 لوحة تحكم</small>
-            <span class="stat-icon green" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-tower-broadcast"></i></span>
-          </div>
+        <div class="col-6 col-lg-2">
+          <label class="form-label-custom" for="rpRole">الدور الوظيفي</label>
+          <select id="rpRole" class="form-select"></select>
         </div>
-      </div>
-      <!-- Card 3: Role Definitions Matrix -->
-      <div class="col-sm-6 col-xl-3">
-        <div class="stat-card">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <span class="stat-label d-block">الأدوار والمجموعات الصلاحية</span>
-              <div class="stat-value mt-1">7 <small class="fs-6 text-soft">مجموعات مخصصة</small></div>
-            </div>
-            <span class="badge-pill-custom badge-gold">100% موثقة</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-4">
-            <small class="text-soft">آخر تحديث للصلاحية: أمس</small>
-            <span class="stat-icon amber" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-scale-balanced"></i></span>
-          </div>
+        <div class="col-6 col-lg-2">
+          <label class="form-label-custom" for="rpBranch">الفرع</label>
+          <select id="rpBranch" class="form-select"></select>
         </div>
-      </div>
-      <!-- Card 4: Threat Intel & Blocked Attempts -->
-      <div class="col-sm-6 col-xl-3">
-        <div class="stat-card">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <span class="stat-label d-block">مؤشر التهديدات والتنبيهات</span>
-              <div class="stat-value mt-1">0 <small class="fs-6 text-soft">اختراقات نشطة</small></div>
-            </div>
-            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مراقبة</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mt-4">
-            <small class="text-rose">محاولة دخول خاطئة (تم حظرها)</small>
-            <span class="stat-icon rose" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-shield-virus"></i></span>
-          </div>
+        <div class="col-6 col-lg-2">
+          <label class="form-label-custom" for="rpStatus">حالة الحساب</label>
+          <select id="rpStatus" class="form-select"></select>
+        </div>
+        <div class="col-6 col-lg-2 d-flex gap-2">
+          <button type="button" class="btn btn-ghost flex-grow-1" id="rpReset"><i class="fa-solid fa-filter-circle-xmark ms-1"></i> تفريغ</button>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         3. NAVIGATION SUB-TABS
-         ============================================================ -->
-    <ul class="nav nav-pills gap-2 mb-4 overflow-x-auto flex-nowrap pb-1" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link filter-tab active" href="#usersTable"><i class="fa-solid fa-user-gear text-gold me-1"></i> إدارة المستخدمين والحسابات <span class="badge-pill-custom badge-gold ms-1 tabular">24</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link filter-tab" href="#permMatrix"><i class="fa-solid fa-shield-halved text-gold me-1"></i> مصفوفة الأدوار والصلاحيات (Roles Matrix)</a>
-      </li>
-    </ul>
-
-    <!-- ============================================================
-         4. MAIN WORKSPACE: USERS DIRECTORY + PERMISSION MATRIX
-         ============================================================ -->
-    <section class="row g-3 align-items-start">
-
-      <div class="col-12 d-flex flex-column gap-3">
-
-        <!-- Filter and Search Toolbar -->
-        <div class="panel-card p-3">
-          <div class="row g-2 align-items-end">
-            <div class="col-lg-4">
-              <label class="form-label-custom" for="filterSearch">بحث سريع في الدليل</label>
-              <div class="input-icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" class="form-control" id="filterSearch" placeholder="بحث بالاسم، الكود، البريد، أو رقم الهاتف..."/>
-              </div>
-            </div>
-            <div class="col-6 col-lg-2">
-              <label class="form-label-custom" for="filterRole">الدور الوظيفي</label>
-              <select id="filterRole" class="form-select">
-                <option value="">كافة الأدوار الوظيفية</option>
-                <option value="super">Super Admin (الإدارة العليا)</option>
-                <option value="finance">مدير مالي وخزينة</option>
-                <option value="cashier">كاشير ومبيعات</option>
-                <option value="chef">شيف تنفيذي ومطبخ</option>
-                <option value="captain">كابتن ومضيف صالة VIP</option>
-                <option value="procurement">مشتريات ومستودعات</option>
-                <option value="cook">طاهي المطبخ (KDS)</option>
-              </select>
-            </div>
-            <div class="col-6 col-lg-2">
-              <label class="form-label-custom" for="filterBranch">الفرع</label>
-              <select id="filterBranch" class="form-select">
-                <option value="">كافة الفروع</option>
-                <option value="main">الفرع الرئيسي - الرياض (Centria)</option>
-                <option value="diriya">فرع الدرعية VIP Lounge</option>
-                <option value="cloud">المطبخ السحابي المركزي</option>
-                <option value="proc">المشتريات والمستودعات المركزية</option>
-                <option value="all">كافة الفروع والمحطات</option>
-              </select>
-            </div>
-            <div class="col-6 col-lg-2">
-              <label class="form-label-custom" for="filterStatus">حالة الحساب</label>
-              <select id="filterStatus" class="form-select">
-                <option value="">حالة الحساب: الكل</option>
-                <option value="active">نشط (Active)</option>
-                <option value="suspended">موقوف مؤقتاً</option>
-                <option value="locked">مغلق أمنياً</option>
-              </select>
-            </div>
-            <div class="col-6 col-lg-2 d-flex gap-2">
-              <button type="button" class="btn btn-ghost flex-grow-1" id="filterReset" title="تفريغ التصفية">
-                <i class="fa-solid fa-filter-circle-xmark me-1"></i> تفريغ
-              </button>
-              <button type="button" class="btn btn-gold add-user text-nowrap"><i class="fa-solid fa-user-plus me-1"></i> إضافة مستخدم</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Users DataTable -->
-        <div class="panel-card overflow-hidden" id="usersTable">
-          <div class="panel-head">
-            <h2><i class="fa-solid fa-user-gear"></i> دليل المستخدمين والحسابات الفردية <span class="badge-pill-custom badge-gold ms-1 tabular">24</span></h2>
-            <span class="small text-soft">رخصة <strong class="text-gold-strong tabular">24 / 30</strong> • المصادقة الثنائية مفعلة لجميع الحسابات</span>
-          </div>
-          <div class="panel-body flush table-wrap">
-            <table class="table table-alegria table-hover align-middle m-0 w-100" data-datatable>
-              <thead>
-                <tr>
-                  <th>المستخدم والكود الوظيفي</th>
-                  <th>الدور والمستوى</th>
-                  <th>الفروع والمحطات المصرحة</th>
-                  <th class="text-center">المصادقة (2FA)</th>
-                  <th>آخر نشاط</th>
-                  <th class="text-center">الحالة</th>
-                  <th class="text-end">إجراءات سريعة</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- User 1: Super Admin -->
-                <tr data-name="فهد السليمان" data-role="super" data-branch="all" data-status="active">
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <span class="avatar-sm"><i class="fa-solid fa-shield-halved"></i></span>
-                      <div class="lh-sm">
-                        <strong class="small d-block">فهد السليمان</strong>
-                        <div class="text-soft font-mono" style="font-size:.72rem;">
-                          <span class="text-gold fw-bold">ALG-USR-001</span>
-                          <span>•</span>
-                          <span>fahad@alegriagroup.com</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> Super Admin</span></td>
-                  <td><span class="fw-semibold small">كافة الفروع</span> <span class="text-soft small">(كامل الصلاحيات)</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل بأمان عالي"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
-                  <td>
-                    <div class="lh-sm">
-                      <strong class="small"><span class="dot dot-green me-1"></span>الآن (نشط)</strong>
-                      <div class="text-soft" style="font-size:.72rem;">MacBook Pro • الرياض</div>
-                    </div>
-                  </td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
-                  <td class="text-end">
-                    <div class="d-flex justify-content-end gap-1">
-                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <!-- User 2: Executive Chef Marcus -->
-                <tr data-name="شيف ماركوس أنطوان" data-role="chef" data-branch="cloud" data-status="active">
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <span class="avatar-sm" style="background:var(--al-amber-soft);color:var(--al-amber);">M</span>
-                      <div class="lh-sm">
-                        <strong class="small d-block">شيف ماركوس أنطوان</strong>
-                        <div class="text-soft font-mono" style="font-size:.72rem;">
-                          <span class="text-gold fw-bold">ALG-USR-007</span>
-                          <span>•</span>
-                          <span>marcus.chef@alegria.sa</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge-pill-custom badge-amber"><i class="fa-solid fa-utensils"></i> شيف تنفيذي <small>(Culinary Dir)</small></span></td>
-                  <td><span class="small">المطبخ المركزي • KDS الشواية • الوصفات</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
-                  <td>
-                    <div class="lh-sm">
-                      <strong class="small">قبل 12 دقيقة</strong>
-                      <div class="text-soft" style="font-size:.72rem;">iPad Pro #Kitchen-01</div>
-                    </div>
-                  </td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
-                  <td class="text-end">
-                    <div class="d-flex justify-content-end gap-1">
-                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <!-- User 3: Chief Cashier & Treasury -->
-                <tr data-name="كريم عادل" data-role="cashier" data-branch="main" data-status="active">
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);">ك</span>
-                      <div class="lh-sm">
-                        <strong class="small d-block">كريم عادل</strong>
-                        <div class="text-soft font-mono" style="font-size:.72rem;">
-                          <span class="text-gold fw-bold">ALG-USR-014</span>
-                          <span>•</span>
-                          <span>kareem.pos@alegria.sa</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge-pill-custom badge-green"><i class="fa-solid fa-cash-register"></i> كاشير أول وأمين خزينة</span></td>
-                  <td><span class="small">الفرع الرئيسي • POS صالة 1 • الخزينة 01</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
-                  <td>
-                    <div class="lh-sm">
-                      <strong class="small"><span class="dot dot-green me-1"></span>الآن (POS-01)</strong>
-                      <div class="text-soft" style="font-size:.72rem;">محطة الكاشير الرئيسية</div>
-                    </div>
-                  </td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
-                  <td class="text-end">
-                    <div class="d-flex justify-content-end gap-1">
-                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <!-- User 4: VIP Floor Captain -->
-                <tr data-name="حسام رضوان" data-role="captain" data-branch="diriya" data-status="active">
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <span class="avatar-sm">ح</span>
-                      <div class="lh-sm">
-                        <strong class="small d-block">حسام رضوان</strong>
-                        <div class="text-soft font-mono" style="font-size:.72rem;">
-                          <span class="text-gold fw-bold">ALG-USR-019</span>
-                          <span>•</span>
-                          <span>hossam.vip@alegria.sa</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-bell-concierge"></i> مشرف صالة وكابتن VIP</span></td>
-                  <td><span class="small">فرع الدرعية VIP • جهاز نادل 04</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
-                  <td>
-                    <div class="lh-sm">
-                      <strong class="small">قبل 5 دقائق</strong>
-                      <div class="text-soft" style="font-size:.72rem;">Handheld Waiter Tab</div>
-                    </div>
-                  </td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
-                  <td class="text-end">
-                    <div class="d-flex justify-content-end gap-1">
-                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <!-- User 5: Procurement Manager -->
-                <tr data-name="م. سارة كمال" data-role="procurement" data-branch="proc" data-status="active">
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <span class="avatar-sm" style="background:var(--al-rose-soft);color:var(--al-rose);">س</span>
-                      <div class="lh-sm">
-                        <strong class="small d-block">م. سارة كمال</strong>
-                        <div class="text-soft font-mono" style="font-size:.72rem;">
-                          <span class="text-gold fw-bold">ALG-USR-004</span>
-                          <span>•</span>
-                          <span>sara.proc@alegria.sa</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-truck-field"></i> مدير جودة ومشتريات</span></td>
-                  <td><span class="small">المشتريات • المستودعات المركزية</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green" title="2FA مفعل"><i class="fa-solid fa-circle-check"></i> 2FA</span></td>
-                  <td>
-                    <div class="lh-sm">
-                      <strong class="small">قبل ساعة</strong>
-                      <div class="text-soft" style="font-size:.72rem;">Dell Precision • المكتب</div>
-                    </div>
-                  </td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
-                  <td class="text-end">
-                    <div class="d-flex justify-content-end gap-1">
-                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <!-- User 6: KDS Grill Cook -->
-                <tr data-name="إبراهيم حمدي" data-role="cook" data-branch="cloud" data-status="active">
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <span class="avatar-sm" style="background:var(--al-surface-2);color:var(--al-ink-soft);border:1px solid var(--al-line-strong);">إ</span>
-                      <div class="lh-sm">
-                        <strong class="small d-block">إبراهيم حمدي</strong>
-                        <div class="text-soft font-mono" style="font-size:.72rem;">
-                          <span class="text-gold fw-bold">ALG-USR-022</span>
-                          <span>•</span>
-                          <span>ibrahim.kds@alegria.sa</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-kitchen-set"></i> طاهي محطة الشواية</span></td>
-                  <td><span class="small">شاشة KDS الشواية فقط <span class="text-faint">(Station #3)</span></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-neutral" title="تم الاكتفاء برمز PIN في المطبخ"><i class="fa-solid fa-lock"></i> PIN</span></td>
-                  <td>
-                    <div class="lh-sm">
-                      <strong class="small"><span class="dot dot-green me-1"></span>الآن (KDS-03)</strong>
-                      <div class="text-soft" style="font-size:.72rem;">Kitchen Touchscreen</div>
-                    </div>
-                  </td>
-                  <td class="text-center"><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> نشط</span></td>
-                  <td class="text-end">
-                    <div class="d-flex justify-content-end gap-1">
-                      <button type="button" class="btn btn-ghost btn-sm row-edit" title="تعديل بيانات المستخدم"><i class="fa-solid fa-pen text-gold"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-suspend" title="تعليق الحساب مؤقتاً"><i class="fa-solid fa-pause text-amber"></i></button>
-                      <button type="button" class="btn btn-ghost btn-sm row-delete" title="حذف الحساب نهائياً"><i class="fa-solid fa-trash-can text-rose"></i></button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="px-3 py-2 d-flex flex-wrap align-items-center justify-content-between gap-2 small text-soft" style="border-top:1px solid var(--al-line);">
-            <span>عرض <strong class="text-gold tabular">1 إلى 6</strong> من إجمالي <strong class="tabular">24</strong> مستخدم مسجل</span>
-            <span class="d-flex align-items-center gap-2 flex-wrap">
-              <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-signal text-green me-1"></i> 3 جلسات نشطة لحظياً</span>
-              <button type="button" class="btn btn-ghost btn-sm add-user"><i class="fa-solid fa-user-plus text-gold me-1"></i> إضافة مستخدم</button>
-            </span>
-          </div>
-        </div>
-
-        <!-- Interactive Role-Permission Matrix Sneak Peek -->
-        <div class="panel-card overflow-hidden" id="permMatrix">
-          <div class="panel-head">
-            <div>
-              <h2><i class="fa-solid fa-shield-halved"></i> مصفوفة حوكمة وتفويض الصلاحيات (Role Permissions Grid)</h2>
-              <p class="text-soft small mb-0">التحكم في العمليات الحساسة: الخصومات، إلغاء البنود بعد الإرسال، وفتح الدرج بدون فواتير</p>
-            </div>
-            <button type="button" class="btn btn-ghost btn-sm" id="btnEditMatrix"><i class="fa-solid fa-sliders text-gold me-1"></i> تعديل مصفوفة القواعد</button>
-          </div>
-          <div class="panel-body flush table-wrap">
-            <table class="table table-alegria align-middle m-0 w-100">
-              <thead>
-                <tr>
-                  <th style="min-width:280px;">الوظيفة / الصلاحية الحساسة</th>
-                  <th class="text-center text-gold">Super Admin</th>
-                  <th class="text-center text-green">مدير الفرع</th>
-                  <th class="text-center text-amber">كاشير رئيسي</th>
-                  <th class="text-center">كابتن صالة</th>
-                  <th class="text-center text-soft">طاهي المطبخ</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="fw-bold small">فتح درج النقدية يدويًا</span> <span class="text-faint d-block" style="font-size:.72rem;">No-Sale Drawer Kick</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-amber" title="مطلوب إدخال سبب معتمد"><i class="fa-solid fa-key"></i> PIN</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                </tr>
-                <tr>
-                  <td><span class="fw-bold small">منح خصم ضيافة استثنائي (&gt; 15%)</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-amber" title="حد أقصى 10% لـ VIP فقط"><i class="fa-solid fa-key"></i> PIN</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                </tr>
-                <tr>
-                  <td><span class="fw-bold small">إلغاء بند من الطلب بعد بدء تجهيزه بالمطبخ</span> <span class="text-faint d-block" style="font-size:.72rem;">Void Item</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-amber" title="مطلوب إدخال سبب معتمد"><i class="fa-solid fa-key"></i> PIN</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                </tr>
-                <tr>
-                  <td><span class="fw-bold small">تعديل تكاليف ومكونات وصفات الأطباق</span> <span class="text-faint d-block" style="font-size:.72rem;">Recipe Costs</span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span></td>
-                  <td class="text-center"><span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="px-3 py-2 d-flex flex-wrap align-items-center gap-3 small text-soft" style="border-top:1px solid var(--al-line);">
-            <span><i class="fa-solid fa-circle-info text-gold me-1"></i>دليل دلالات الصلاحيات:</span>
-            <span><span class="badge-pill-custom badge-gold me-1"><i class="fa-solid fa-circle-check"></i></span>مفوض بالكامل</span>
-            <span><span class="badge-pill-custom badge-amber me-1"><i class="fa-solid fa-key"></i> PIN</span>بموافقة مشرف</span>
-            <span><span class="badge-pill-custom badge-rose me-1"><i class="fa-solid fa-ban"></i></span>محظور</span>
-          </div>
-        </div>
+    <!-- ============ USERS TABLE ============ -->
+    <section class="panel-card overflow-hidden mb-3">
+      <div class="panel-head">
+        <h2><i class="fa-solid fa-users"></i> دليل المستخدمين <span class="badge-pill-custom badge-gold ms-1 rp-stat" id="rpTableCount">8</span></h2>
+        <span class="small text-soft" id="rpLicenseNote"></span>
+      </div>
+      <div class="panel-body flush table-wrap">
+        <table class="table table-alegria table-hover rp-table align-middle m-0 w-100">
+          <thead>
+            <tr>
+              <th>المستخدم والكود الوظيفي</th>
+              <th>الدور</th>
+              <th>الفروع والمحطات المصرحة</th>
+              <th class="text-center">المصادقة</th>
+              <th>آخر نشاط</th>
+              <th class="text-center">الحالة</th>
+              <th class="text-end">إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="rpRows"></tbody>
+        </table>
+      </div>
+      <div class="px-3 py-2 d-flex flex-wrap align-items-center justify-content-between gap-2 small text-soft" style="border-top:1px solid var(--al-line);">
+        <span id="rpFoot"></span>
+        <span id="rpDist" class="d-flex flex-wrap align-items-center gap-3"></span>
       </div>
     </section>
+
+    <!-- ============ ROLES REFERRAL ============ -->
+    <section class="panel-card p-3 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+      <div class="d-flex align-items-start gap-2" style="min-width:0;">
+        <i class="fa-solid fa-shield-halved text-gold mt-1"></i>
+        <div>
+          <div class="fw-bold">مصفوفة الأدوار والصلاحيات</div>
+          <div class="small text-soft">التفويض التفصيلي لكل دور (7 أدوار × 25 صلاحية) موجود في صفحة مصفوفة الأدوار المستقلة.</div>
+        </div>
+      </div>
+      <a class="btn btn-ghost text-nowrap" href="roles_matrix_alegria_erp.html">
+        فتح مصفوفة الأدوار <i class="fa-solid fa-arrow-left"></i>
+      </a>
+    </section>
+
+    <!-- ============ EDITOR OVERLAY ============ -->
+    <div class="rp-modal" id="rpModal" role="dialog" aria-modal="true" aria-labelledby="rpModalTitle">
+      <div class="rp-modal__box panel-card p-0">
+        <div class="panel-head">
+          <h2 id="rpModalTitle"><i class="fa-solid fa-user-pen text-gold"></i> بيانات المستخدم</h2>
+          <button type="button" class="btn btn-ghost btn-sm" id="rpModalX" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="p-3">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label-custom" for="rpFName">الاسم الكامل</label>
+              <input type="text" class="form-control" id="rpFName"/>
+            </div>
+            <div class="col-12">
+              <label class="form-label-custom" for="rpFEmail">البريد الإلكتروني</label>
+              <input type="email" class="form-control" id="rpFEmail" dir="ltr"/>
+            </div>
+            <div class="col-6">
+              <label class="form-label-custom" for="rpFRole">الدور الوظيفي</label>
+              <select id="rpFRole" class="form-select"></select>
+            </div>
+            <div class="col-6">
+              <label class="form-label-custom" for="rpFBranch">الفرع</label>
+              <select id="rpFBranch" class="form-select"></select>
+            </div>
+            <div class="col-6">
+              <label class="form-label-custom" for="rpFStatus">حالة الحساب</label>
+              <select id="rpFStatus" class="form-select"></select>
+            </div>
+            <div class="col-6">
+              <label class="form-label-custom" for="rpFAuth">المصادقة</label>
+              <select id="rpFAuth" class="form-select">
+                <option value="2fa">2FA (رمز متغير)</option>
+                <option value="pin">PIN فقط</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label-custom" for="rpFScope">الفروع والمحطات المصرحة</label>
+              <input type="text" class="form-control" id="rpFScope"/>
+            </div>
+          </div>
+        </div>
+        <div class="p-3 d-flex justify-content-end gap-2" style="border-top:1px solid var(--al-line);">
+          <button type="button" class="btn btn-ghost" id="rpModalCancel">إلغاء</button>
+          <button type="button" class="btn btn-gold" id="rpModalSave"><i class="fa-solid fa-check ms-1"></i> حفظ</button>
+        </div>
+      </div>
+    </div>
 
   </main>
 
@@ -534,82 +218,363 @@
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/sweetalert2.all.min.js"></script>
-  <script src="assets/js/dataTables.min.js"></script>
-  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
   <script src="assets/js/layout.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    (function ($) {
+    (function () {
       'use strict';
 
-      // ---- Filter toolbar wired to the users DataTable ----
-      $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        var tr = settings.aoData[dataIndex].nTr;
-        var role = $('#filterRole').val();
-        var branch = $('#filterBranch').val();
-        var status = $('#filterStatus').val();
-        if (role && tr.getAttribute('data-role') !== role) return false;
-        if (branch && tr.getAttribute('data-branch') !== branch) return false;
-        if (status && tr.getAttribute('data-status') !== status) return false;
-        return true;
+    var RP_LICENSES = 30;
+
+    var RP_ROLES = [
+      { k: 'super',       ar: 'مدير النظام العام',      en: 'Super Admin',      icon: 'shield-halved',  tone: 'gold' },
+      { k: 'manager',     ar: 'مدير الفرع والتشغيل',    en: 'General Manager',  icon: 'user-gear',      tone: 'green' },
+      { k: 'chef',        ar: 'الشيف التنفيذي',         en: 'Executive Chef',   icon: 'utensils',       tone: 'amber' },
+      { k: 'cashier',     ar: 'كاشير وأمين الخزينة',    en: 'POS Cashier',      icon: 'cash-register',  tone: 'green' },
+      { k: 'captain',     ar: 'مشرف صالة VIP',          en: 'Head Waiter',      icon: 'bell-concierge', tone: 'neutral' },
+      { k: 'procurement', ar: 'مسؤول المشتريات والمخزن', en: 'Stock Controller', icon: 'warehouse',      tone: 'gold' },
+      { k: 'cook',        ar: 'طاهي ومساعد مطبخ',      en: 'Line Cook',        icon: 'kitchen-set',    tone: 'neutral' }
+    ];
+
+    var RP_BRANCHES = [
+      { k: 'all',    ar: 'كافة الفروع',            short: 'كافة الفروع' },
+      { k: 'main',   ar: 'الفرع الرئيسي - الرياض',  short: 'الفرع الرئيسي' },
+      { k: 'diriya', ar: 'فرع الدرعية VIP',        short: 'الدرعية VIP' },
+      { k: 'cloud',  ar: 'المطبخ السحابي المركزي', short: 'المطبخ السحابي' },
+      { k: 'proc',   ar: 'المشتريات والمستودعات',   short: 'المستودعات' }
+    ];
+
+    var RP_STATUS = {
+      active:    { ar: 'نشط',          tone: 'green',   icon: 'circle-check' },
+      suspended: { ar: 'موقوف مؤقتاً', tone: 'amber',   icon: 'circle-pause' },
+      locked:    { ar: 'مغلق أمنياً',  tone: 'rose',    icon: 'lock' }
+    };
+
+    var RP_USERS = [
+      { id: 'ALG-USR-001', name: 'فهد السليمان', email: 'fahad@alegriagroup.com', role: 'super', branch: 'all',
+        scope: 'كافة الفروع والمحطات', auth: '2fa', last: 'الآن', device: 'MacBook Pro • الرياض', status: 'active' },
+      { id: 'ALG-USR-007', name: 'شيف ماركوس أنطوان', email: 'marcus.chef@alegria.sa', role: 'chef', branch: 'cloud',
+        scope: 'المطبخ المركزي • KDS الشواية', auth: '2fa', last: 'قبل 12 دقيقة', device: 'iPad Pro • Kitchen-01', status: 'active' },
+      { id: 'ALG-USR-014', name: 'كريم عادل', email: 'kareem.pos@alegria.sa', role: 'cashier', branch: 'main',
+        scope: 'الفرع الرئيسي • POS صالة 1 • الخزينة 01', auth: '2fa', last: 'الآن', device: 'محطة الكاشير الرئيسية', status: 'active' },
+      { id: 'ALG-USR-019', name: 'حسام رضوان', email: 'hossam.vip@alegria.sa', role: 'captain', branch: 'diriya',
+        scope: 'فرع الدرعية VIP • جهاز نادل 04', auth: '2fa', last: 'قبل 5 دقائق', device: 'Handheld Waiter Tab', status: 'active' },
+      { id: 'ALG-USR-004', name: 'م. سارة كمال', email: 'sara.proc@alegria.sa', role: 'procurement', branch: 'proc',
+        scope: 'المشتريات • المستودعات المركزية', auth: '2fa', last: 'قبل ساعة', device: 'Dell Precision • المكتب', status: 'active' },
+      { id: 'ALG-USR-022', name: 'إبراهيم حمدي', email: 'ibrahim.kds@alegria.sa', role: 'cook', branch: 'cloud',
+        scope: 'شاشة KDS الشواية فقط • Station #3', auth: 'pin', last: 'الآن', device: 'Kitchen Touchscreen', status: 'active' },
+      { id: 'ALG-USR-036', name: 'ريم القحطاني', email: 'reem.branch@alegria.sa', role: 'manager', branch: 'main',
+        scope: 'الفرع الرئيسي • الإدارة التشغيلية', auth: '2fa', last: 'أمس، 14:20', device: 'Surface Laptop • المكتب', status: 'suspended' },
+      { id: 'ALG-USR-042', name: 'عمر الشمري', email: 'omar.pos@alegria.sa', role: 'cashier', branch: 'main',
+        scope: 'الفرع الرئيسي • وردية مسائية', auth: 'pin', last: 'منذ 3 أيام', device: 'POS-02 • مسائي', status: 'locked' }
+    ];
+
+      var RP_TONE = { gold: '--al-gold', green: '--al-green', amber: '--al-amber', rose: '--al-rose', neutral: '--al-ink-faint' };
+      var STATUS_KEYS = ['active', 'suspended', 'locked'];
+      var editing = -1;
+
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function roleMeta(k) {
+        for (var i = 0; i < RP_ROLES.length; i++) if (RP_ROLES[i].k === k) return RP_ROLES[i];
+        return { k: k, ar: k, en: '', icon: 'user', tone: 'neutral' };
+      }
+
+      function branchMeta(k) {
+        for (var i = 0; i < RP_BRANCHES.length; i++) if (RP_BRANCHES[i].k === k) return RP_BRANCHES[i];
+        return { k: k, short: k };
+      }
+
+      function byId(id) { return document.getElementById(id); }
+
+      function nextId() {
+        var max = 0;
+        for (var i = 0; i < RP_USERS.length; i++) {
+          var n = parseInt(RP_USERS[i].id.replace(/\D/g, ''), 10);
+          if (n > max) max = n;
+        }
+        return 'ALG-USR-' + String(max + 1).padStart(3, '0');
+      }
+
+      function initial(name) {
+        return name.trim().charAt(0) || '?';
+      }
+
+      function visible() {
+        var q = byId('rpSearch').value.trim().toLowerCase();
+        var r = byId('rpRole').value;
+        var b = byId('rpBranch').value;
+        var s = byId('rpStatus').value;
+        return RP_USERS.filter(function (u) {
+          if (q && (u.name + ' ' + u.id + ' ' + u.email).toLowerCase().indexOf(q) === -1) return false;
+          if (r && u.role !== r) return false;
+          if (b && u.branch !== b) return false;
+          if (s && u.status !== s) return false;
+          return true;
+        });
+      }
+
+      function actions(u, i) {
+        var suspendIc = u.status === 'active' ? 'pause' : 'play';
+        var suspendTip = u.status === 'active' ? 'تعليق الحساب' : 'إعادة التفعيل';
+        var suspendCls = u.status === 'active' ? 'text-amber' : 'text-green';
+        return '<div class="d-flex justify-content-end gap-1">' +
+          '<button type="button" class="btn btn-ghost btn-sm rp-act" data-act="edit" data-i="' + i + '" title="تعديل"><i class="fa-solid fa-pen text-gold"></i></button>' +
+          '<button type="button" class="btn btn-ghost btn-sm rp-act" data-act="toggle" data-i="' + i + '" title="' + suspendTip + '"><i class="fa-solid fa-' + suspendIc + ' ' + suspendCls + '"></i></button>' +
+          '<button type="button" class="btn btn-ghost btn-sm rp-act" data-act="del" data-i="' + i + '" title="حذف"><i class="fa-solid fa-trash-can text-rose"></i></button>' +
+          '</div>';
+      }
+
+      function rowHtml(u, i) {
+        var r = roleMeta(u.role);
+        var st = RP_STATUS[u.status];
+        var auth = u.auth === '2fa'
+          ? '<span class="badge-pill-custom badge-green" title="مصادقة ثنائية"><i class="fa-solid fa-shield-halved"></i> 2FA</span>'
+          : '<span class="badge-pill-custom badge-neutral" title="رمز PIN فقط"><i class="fa-solid fa-key"></i> PIN</span>';
+        return '<tr data-i="' + i + '">' +
+          '<td><div class="d-flex align-items-center gap-2">' +
+          '<span class="avatar-sm">' + esc(initial(u.name)) + '</span>' +
+          '<div style="min-width:0;"><span class="rp-name d-block">' + esc(u.name) + '</span>' +
+          '<span class="rp-mail"><span class="rp-code">' + esc(u.id) + '</span> • ' + esc(u.email) + '</span>' +
+          '</div></div></td>' +
+          '<td><span class="badge-pill-custom badge-' + r.tone + '"><i class="fa-solid fa-' + r.icon + '"></i> ' + esc(r.ar) + '</span></td>' +
+          '<td><span class="rp-scope">' + esc(u.scope) + '</span></td>' +
+          '<td class="text-center">' + auth + '</td>' +
+          '<td><div><span class="small d-block">' + esc(u.last) + '</span>' +
+          '<span class="rp-mail">' + esc(u.device) + '</span></div></td>' +
+          '<td class="text-center"><span class="badge-pill-custom badge-' + st.tone + '"><i class="fa-solid fa-' + st.icon + '"></i> ' + esc(st.ar) + '</span></td>' +
+          '<td class="text-end">' + actions(u, i) + '</td>' +
+          '</tr>';
+      }
+
+      function renderRows() {
+        var list = visible();
+        if (!list.length) {
+          byId('rpRows').innerHTML = '<tr><td colspan="7" class="rp-empty">' +
+            '<i class="fa-solid fa-magnifying-glass text-soft" style="font-size:1.6rem;"></i>' +
+            '<div class="mt-2">لا توجد نتائج مطابقة للفلاتر الحالية</div>' +
+            '<button type="button" class="btn btn-ghost btn-sm mt-2" id="rpEmptyReset">تفريغ التصفية</button></td></tr>';
+        } else {
+          byId('rpRows').innerHTML = list.map(function (u) {
+            return rowHtml(u, RP_USERS.indexOf(u));
+          }).join('');
+        }
+        byId('rpFoot').textContent = 'عرض ' + list.length + ' من ' + RP_USERS.length + ' مستخدم';
+        byId('rpTableCount').textContent = RP_USERS.length;
+        byId('rpHeadCount').textContent = RP_USERS.length + ' مستخدمين • ' + RP_USERS.length + ' رخصة';
+      }
+
+      function kpi(label, value, unit, badge, tone, sub) {
+        return '<div class="col-sm-6 col-xl-3"><div class="stat-card h-100">' +
+          '<div class="d-flex justify-content-between align-items-start gap-2">' +
+          '<div style="min-width:0;"><span class="stat-label d-block">' + esc(label) + '</span>' +
+          '<div class="stat-value mt-1">' + value + ' <small class="fs-6 text-soft">' + esc(unit) + '</small></div></div>' +
+          '<span class="badge-pill-custom badge-' + tone + ' rp-stat">' + esc(badge) + '</span></div>' +
+          '<div class="mt-3 small text-soft">' + sub + '</div>' +
+          '</div></div>';
+      }
+
+      function renderKpis() {
+        var n = RP_USERS.length;
+        var active = RP_USERS.filter(function (u) { return u.status === 'active'; }).length;
+        var susp = RP_USERS.filter(function (u) { return u.status === 'suspended'; }).length;
+        var lock = RP_USERS.filter(function (u) { return u.status === 'locked'; }).length;
+        var twofa = RP_USERS.filter(function (u) { return u.auth === '2fa'; }).length;
+        var pin = n - twofa;
+        var usedRoles = {};
+        RP_USERS.forEach(function (u) { usedRoles[u.role] = 1; });
+        var roleN = Object.keys(usedRoles).length;
+        var pctUsed = Math.round(n / RP_LICENSES * 100);
+
+        var h = '';
+        h += kpi('تراخيص المستخدمين', n, '/ ' + RP_LICENSES + ' رخصة', pctUsed + '% مستخدم', 'green',
+          '<div class="rp-bar"><span style="width:' + (n / RP_LICENSES * 100) + '%;background:var(--al-green)"></span></div>' +
+          '<div class="mt-1 rp-stat">' + (RP_LICENSES - n) + ' رخصة متاحة</div>');
+        h += kpi('الحسابات النشطة', active, 'من ' + n, (n ? Math.round(active / n * 100) : 0) + '%', active ? 'green' : 'rose',
+          '<span class="rp-stat">' + susp + ' موقوف</span> • <span class="rp-stat">' + lock + ' مغلق</span>');
+        h += kpi('المصادقة الثنائية', twofa, 'من ' + n, (n ? Math.round(twofa / n * 100) : 0) + '%', twofa === n ? 'green' : 'amber',
+          '<span class="rp-stat">' + pin + ' حساب PIN فقط</span>');
+        h += kpi('الأدوار المستخدمة', roleN, 'من ' + RP_ROLES.length, 'RBAC', 'gold',
+          '<a class="text-gold fw-bold" href="roles_matrix_alegria_erp.html">مصفوفة الأدوار والصلاحيات <i class="fa-solid fa-arrow-left"></i></a>');
+        byId('rpKpis').innerHTML = h;
+        byId('rpLicenseNote').innerHTML = 'رخصة <strong class="text-gold rp-stat">' + n + ' / ' + RP_LICENSES + '</strong> • ' +
+          '<span class="rp-stat">' + (RP_LICENSES - n) + '</span> متاحة';
+      }
+
+      function renderDist() {
+        var n = RP_USERS.length || 1;
+        var h = '';
+        for (var i = 0; i < STATUS_KEYS.length; i++) {
+          var k = STATUS_KEYS[i];
+          var c = RP_USERS.filter(function (u) { return u.status === k; }).length;
+          if (!c) continue;
+          h += '<span class="d-inline-flex align-items-center gap-1"><span class="dot" style="background:var(' +
+            RP_TONE[RP_STATUS[k].tone] + ')"></span>' + esc(RP_STATUS[k].ar) +
+            ' <strong class="rp-stat">' + c + '</strong></span>';
+        }
+        byId('rpDist').innerHTML = h;
+      }
+
+      function renderSelects() {
+        var roleH = '<option value="">كافة الأدوار</option>';
+        for (var i = 0; i < RP_ROLES.length; i++) {
+          var c = RP_USERS.filter(function (u) { return u.role === RP_ROLES[i].k; }).length;
+          roleH += '<option value="' + RP_ROLES[i].k + '">' + esc(RP_ROLES[i].ar) + ' (' + c + ')</option>';
+        }
+        byId('rpRole').innerHTML = roleH;
+        byId('rpFRole').innerHTML = roleH;
+
+        var brH = '<option value="">كافة الفروع</option>';
+        for (var j = 0; j < RP_BRANCHES.length; j++) {
+          var b = RP_USERS.filter(function (u) { return u.branch === RP_BRANCHES[j].k; }).length;
+          brH += '<option value="' + RP_BRANCHES[j].k + '">' + esc(RP_BRANCHES[j].ar) + ' (' + b + ')</option>';
+        }
+        byId('rpBranch').innerHTML = brH;
+        byId('rpFBranch').innerHTML = brH;
+
+        var stH = '<option value="">كل الحالات</option>';
+        for (var s = 0; s < STATUS_KEYS.length; s++) {
+          var k = STATUS_KEYS[s];
+          var n = RP_USERS.filter(function (u) { return u.status === k; }).length;
+          stH += '<option value="' + k + '">' + esc(RP_STATUS[k].ar) + ' (' + n + ')</option>';
+        }
+        byId('rpStatus').innerHTML = stH;
+        byId('rpFStatus').innerHTML = '<option value="active">نشط</option><option value="suspended">موقوف مؤقتاً</option><option value="locked">مغلق أمنياً</option>';
+      }
+
+      function refresh() { renderRows(); renderKpis(); renderDist(); renderSelects(); }
+
+      function openModal(i) {
+        editing = i;
+        var u = i < 0 ? null : RP_USERS[i];
+        byId('rpModalTitle').innerHTML = '<i class="fa-solid fa-' + (u ? 'pen' : 'user-plus') + ' text-gold"></i> ' + (u ? 'تعديل بيانات المستخدم' : 'إضافة مستخدم جديد');
+        byId('rpFName').value = u ? u.name : '';
+        byId('rpFEmail').value = u ? u.email : '';
+        byId('rpFRole').value = u ? u.role : RP_ROLES[0].k;
+        byId('rpFBranch').value = u ? u.branch : RP_BRANCHES[0].k;
+        byId('rpFStatus').value = u ? u.status : 'active';
+        byId('rpFAuth').value = u ? u.auth : '2fa';
+        byId('rpFScope').value = u ? u.scope : '';
+        byId('rpModal').classList.add('is-open');
+      }
+
+      function closeModal() {
+        byId('rpModal').classList.remove('is-open');
+        editing = -1;
+      }
+
+      function commitModal() {
+        var name = byId('rpFName').value.trim();
+        var email = byId('rpFEmail').value.trim();
+        if (!name) { window.Al.toast('الاسم الكامل مطلوب', 'warning'); return; }
+        if (email && email.indexOf('@') === -1) { window.Al.toast('البريد الإلكتروني غير صالح', 'warning'); return; }
+        var rec = {
+          id: editing < 0 ? nextId() : RP_USERS[editing].id,
+          name: name,
+          email: email || '—',
+          role: byId('rpFRole').value,
+          branch: byId('rpFBranch').value,
+          scope: byId('rpFScope').value.trim() || branchMeta(byId('rpFBranch').value).short,
+          auth: byId('rpFAuth').value,
+          last: editing < 0 ? 'لم يسجل دخول' : RP_USERS[editing].last,
+          device: editing < 0 ? 'لم يُسجَّل بعد' : RP_USERS[editing].device,
+          status: byId('rpFStatus').value
+        };
+        if (editing < 0) {
+          RP_USERS.push(rec);
+          window.Al.toast('تمت إضافة المستخدم: ' + name, 'success');
+        } else {
+          RP_USERS[editing] = rec;
+          window.Al.toast('تم حفظ بيانات: ' + name, 'success');
+        }
+        closeModal();
+        refresh();
+      }
+
+      function superCount() {
+        return RP_USERS.filter(function (u) { return u.role === 'super' && u.status === 'active'; }).length;
+      }
+
+      byId('rpRows').addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('.rp-act') : null;
+        if (b) {
+          var i = +b.getAttribute('data-i');
+          var act = b.getAttribute('data-act');
+          var u = RP_USERS[i];
+          if (!u) return;
+          if (act === 'edit') { openModal(i); return; }
+          if (act === 'toggle') {
+            var to = u.status === 'active' ? 'suspended' : 'active';
+            u.status = to;
+            refresh();
+            window.Al.toast('تم ' + (to === 'active' ? 'إعادة تفعيل' : 'تعليق') + ' الحساب: ' + u.name, 'success');
+            return;
+          }
+          if (act === 'del') {
+            if (u.role === 'super' && superCount() === 1) {
+              window.Al.toast('لا يمكن حذف آخر مدير نظام نشط', 'error');
+              return;
+            }
+            var nm = u.name;
+            window.Al.confirm('حذف المستخدم', 'سيتم حذف حساب "' + nm + '" نهائياً مع أرشفة سجل نشاطه الأمني.', function () {
+              RP_USERS.splice(i, 1);
+              refresh();
+              window.Al.toast('تم حذف المستخدم: ' + nm, 'success');
+            }, { confirmText: 'نعم، احذف نهائياً', icon: 'warning' });
+            return;
+          }
+        }
+        if (e.target && e.target.id === 'rpEmptyReset') doReset();
       });
 
-      $(function () {
-        var dt = $('table[data-datatable]').DataTable();
+      byId('rpSearch').addEventListener('input', renderRows);
+      byId('rpRole').addEventListener('change', renderRows);
+      byId('rpBranch').addEventListener('change', renderRows);
+      byId('rpStatus').addEventListener('change', renderRows);
+      byId('rpReset').addEventListener('click', doReset);
+      byId('rpAdd').addEventListener('click', function () { openModal(-1); });
+      byId('rpModalX').addEventListener('click', closeModal);
+      byId('rpModalCancel').addEventListener('click', closeModal);
+      byId('rpModalSave').addEventListener('click', commitModal);
+      byId('rpModal').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
 
-        $('#filterSearch').on('keyup change input', function () {
-          dt.search(this.value).draw();
-        });
-        $('#filterRole, #filterBranch, #filterStatus').on('change', function () {
-          dt.draw();
-        });
-        $('#filterReset').on('click', function () {
-          $('#filterSearch').val('');
-          $('#filterRole').val('');
-          $('#filterBranch').val('');
-          $('#filterStatus').val('');
-          dt.search('').draw();
-          window.Al.toast('تم تفريغ التصفية', 'info');
-        });
+      function doReset() {
+        byId('rpSearch').value = '';
+        byId('rpRole').value = '';
+        byId('rpBranch').value = '';
+        byId('rpStatus').value = '';
+        renderRows();
+        window.Al.toast('تم تفريغ التصفية', 'info');
+      }
 
-        // ---- Row actions ----
-        $('.row-edit').on('click', function () {
-          window.Al.toast('تم فتح بيانات المستخدم', 'success');
+      byId('rpExport').addEventListener('click', function () {
+        var list = visible();
+        if (!list.length) { window.Al.toast('لا توجد بيانات للتصدير', 'warning'); return; }
+        var head = ['الكود', 'الاسم', 'البريد', 'الدور', 'الفرع', 'النطاق', 'المصادقة', 'آخر نشاط', 'الحالة'];
+        var body = list.map(function (u) {
+          return [u.id, u.name, u.email, roleMeta(u.role).ar, branchMeta(u.branch).ar, u.scope,
+            u.auth === '2fa' ? '2FA' : 'PIN', u.last, RP_STATUS[u.status].ar];
         });
-        $('.row-suspend').on('click', function () {
-          var name = $(this).closest('tr').data('name') || 'المستخدم';
-          window.Al.confirm('تعليق المستخدم', 'سيتم تعليق حساب "' + name + '" مؤقتاً ومنع تسجيل الدخول حتى إعادة التفعيل.', function () {
-            window.Al.toast('تم تعليق المستخدم: ' + name, 'success');
-          }, { confirmText: 'نعم، علّق الحساب', color: '#d97707' });
-        });
-        $('.row-delete').on('click', function () {
-          var name = $(this).closest('tr').data('name') || 'المستخدم';
-          window.Al.confirm('حذف المستخدم', 'سيتم حذف حساب "' + name + '" نهائياً مع أرشفة سجل النشاط الأمني الخاص به.', function () {
-            window.Al.toast('تم حذف المستخدم: ' + name, 'success');
-          }, { confirmText: 'نعم، احذف نهائياً', color: '#c0392b' });
-        });
-
-        // ---- Add user (prompt) ----
-        $('.add-user').on('click', function () {
-          window.Al.prompt('إضافة مستخدم', 'الاسم الكامل للمستخدم', function (val) {
-            window.Al.toast('تمت إضافة المستخدم: ' + (val || 'بدون اسم'), 'success');
-          });
-        });
-
-        // ---- Top actions: sync / export ----
-        $('#triggerSync').on('click', function () {
-          window.Al.toast('تمت مزامنة الدليل مع جميع الفروع', 'success');
-        });
-        $('#triggerExport').on('click', function () {
-          window.Al.toast('تم تجهيز تصدير تقارير المستخدمين', 'success');
-        });
-
-        // ---- Matrix helpers ----
-        $('#btnEditMatrix').on('click', function () {
-          window.Al.toast('تم فتح محرر مصفوفة القواعد', 'success');
-        });
+        var csv = '\uFEFF' + [head].concat(body)
+          .map(function (r) { return r.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); })
+          .join('\r\n');
+        var url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'alegria-users.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        window.Al.toast('تم تصدير ' + list.length + ' مستخدم', 'success');
       });
-    })(jQuery);
+
+      refresh();
+    })();
   </script>
+
 </body>
 </html>

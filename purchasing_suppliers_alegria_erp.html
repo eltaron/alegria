@@ -33,10 +33,112 @@
   <link rel="stylesheet" href="assets/css/all.min.css"/>
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
-  <!-- DataTables -->
-  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
   <!-- Custom Design System -->
   <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    /* ============ سجل فواتير التوريد — page-local design ============ */
+    .ps-panel .panel-head { gap: 0.75rem; }
+    .ps-panel h2 { margin: 0; font-size: 1.05rem; font-weight: 900; }
+
+    .ps-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--al-line);
+      background: var(--al-surface-2);
+    }
+    .ps-toolbar .input-icon { flex: 1 1 15rem; min-width: 12rem; }
+    .ps-toolbar .ps-f { display: flex; align-items: center; gap: 0.35rem; }
+    .ps-toolbar .ps-f > i { color: var(--al-ink-soft); font-size: 0.8rem; }
+    .ps-toolbar .form-select { width: auto; min-width: 8.5rem; }
+
+    .ps-ledger { width: 100%; margin: 0; min-width: 1080px; }
+    .ps-ledger thead th {
+      font-size: 0.74rem;
+      color: var(--al-ink-soft);
+      font-weight: 700;
+      white-space: nowrap;
+      background: var(--al-surface-2);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .ps-ledger tbody td {
+      font-size: 0.78rem;
+      vertical-align: middle;
+      white-space: nowrap;
+      padding-top: 0.55rem;
+      padding-bottom: 0.55rem;
+    }
+    .ps-ledger tbody tr:hover { background: var(--al-surface-2); }
+
+    .ps-inv { font-family: var(--font-mono); font-weight: 800; font-size: 0.78rem; color: var(--al-gold); }
+    .ps-sep { color: var(--al-ink-faint); margin: 0 0.45em; }
+    .ps-dim { font-size: 0.7rem; color: var(--al-ink-soft); }
+
+    .ps-sup { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+    .ps-sup > span:not(.avatar-sm) { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-weight: 700; font-size: 0.78rem; }
+
+    .ps-date { font-size: 0.78rem; font-weight: 700; }
+    .ps-amt { font-family: var(--font-mono); font-weight: 800; font-size: 0.85rem; white-space: nowrap; }
+    .ps-bar { height: 4px; border-radius: 99px; background: var(--al-line); overflow: hidden; min-width: 3.5rem; }
+    .ps-bar > i { display: block; height: 100%; border-radius: 99px; background: currentColor; }
+
+    .ps-nowrap { white-space: nowrap; flex: 0 0 auto; line-height: 1.45; }
+
+    .ps-sort {
+      background: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      gap: 0.3rem;
+      align-items: center;
+    }
+    .ps-sort:hover { color: var(--al-gold); }
+    .ps-sort.on { color: var(--al-gold); }
+
+    .ps-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .ps-pager { display: flex; align-items: center; gap: 0.25rem; }
+    .ps-pager button {
+      min-width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--al-line);
+      background: var(--al-surface-2);
+      color: var(--al-ink-soft);
+      border-radius: var(--al-radius-sm);
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .ps-pager button:hover:not(:disabled) { border-color: var(--al-gold); color: var(--al-gold); }
+    .ps-pager button.on { background: var(--al-gold); border-color: var(--al-gold); color: #0b1326; font-weight: 800; }
+    .ps-pager button:disabled { opacity: 0.4; cursor: default; }
+
+    .ps-kpis { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .ps-kpis > span { font-size: 0.76rem; color: var(--al-ink-soft); white-space: nowrap; }
+
+    .ps-empty { padding: 2.5rem 1rem; text-align: center; color: var(--al-ink-soft); }
+
+    .ps-print { display: none; }
+    .ps-print table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .ps-print th, .ps-print td { border: 1px solid #999; padding: 0.4rem 0.6rem; font-size: 0.8rem; text-align: start; }
+    .ps-print th { background: #eee; width: 30%; }
+    .ps-sig { margin-top: 2.5rem; font-size: 0.8rem; }
+
+    @media print {
+      .ps-toolbar,
+      .ps-foot,
+      #alegria-header,
+      #alegria-footer { display: none !important; }
+      .ps-ledger { min-width: 0; font-size: 0.7rem; }
+      .ps-print { display: block !important; }
+      body > main { display: none !important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -160,302 +262,90 @@
     </section>
 
     <!-- ============================================================
-         4. SMART FILTER & SEARCH BAR
+         4. سجل فواتير التوريد الأخيرة — بحث وفلاتر وتصدير
          ============================================================ -->
-    <section class="panel-card p-3 mb-4">
-      <div class="d-flex flex-column flex-xl-row align-items-stretch xl-items-center justify-content-between gap-3">
-        <!-- Search Input -->
-        <div class="input-icon flex-grow-1" style="min-width:280px;">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" class="form-control" placeholder="البحث برقم الفاتورة، اسم المورد، الصنف المورّد، أو كود GRN..."/>
+    <section class="panel-card ps-panel" id="psPanel">
+      <div class="panel-head">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <h2><i class="fa-solid fa-file-invoice text-gold"></i> سجل فواتير التوريد الأخيرة</h2>
+          <span class="badge-pill-custom badge-neutral tabular ps-nowrap" id="psCount"></span>
         </div>
-        <!-- Filters Row -->
-        <div class="d-flex flex-wrap align-items-center gap-2">
-          <!-- Supplier Select -->
-          <div class="d-flex align-items-center gap-1">
-            <i class="fa-solid fa-building text-soft"></i>
-            <select class="form-select form-select-sm" aria-label="المورد">
-              <option value="all">كافة الموردين (14)</option>
-              <option value="amana">شركة الأمانة للحوم</option>
-              <option value="sharq">مطاحن الشرق للدقيق والأرز</option>
-              <option value="reef">مزارع الريف للألبان</option>
-              <option value="baraka">زيوت وثلاجات البركة</option>
-              <option value="nokhba">بهارات وتغليف النخبة</option>
-            </select>
-          </div>
-          <!-- Payment Status Select -->
-          <div class="d-flex align-items-center gap-1">
-            <i class="fa-solid fa-money-check-dollar text-soft"></i>
-            <select class="form-select form-select-sm" aria-label="حالة السداد">
-              <option value="all">حالة السداد: الكل</option>
-              <option value="paid">مدفوعة بالكامل</option>
-              <option value="partial">مدفوعة جزئياً</option>
-              <option value="unpaid">آجلة غير مدفوعة</option>
-              <option value="overdue">متأخرة السداد</option>
-            </select>
-          </div>
-          <!-- Warehouse Receiving Status -->
-          <div class="d-flex align-items-center gap-1">
-            <i class="fa-solid fa-warehouse text-soft"></i>
-            <select class="form-select form-select-sm" aria-label="الاستلام المخزني">
-              <option value="all">الاستلام المخزني: الكل</option>
-              <option value="received">تم الاستلام والإضافة 100%</option>
-              <option value="inspecting">قيد الفحص والوزن</option>
-              <option value="partial">استلام جزئي</option>
-            </select>
-          </div>
-          <!-- Date Range -->
-          <div class="d-flex align-items-center gap-1">
-            <i class="fa-solid fa-calendar-days text-soft"></i>
-            <select class="form-select form-select-sm" aria-label="النطاق الزمني">
-              <option value="oct">شهر أكتوبر 2024</option>
-              <option value="today">اليوم</option>
-              <option value="week">هذا الأسبوع</option>
-              <option value="custom">نطاق مخصص...</option>
-            </select>
-          </div>
-          <button type="button" class="btn btn-ghost btn-sm px-2 quick-action" data-title="تصفير الفلاتر" title="تصفير الفلاتر"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span class="small text-soft d-none d-xl-inline" id="psShare"></span>
+          <button type="button" class="btn btn-ghost btn-sm" id="psExport" title="تصدير الفواتير المعروضة إلى ملف CSV"><i class="fa-solid fa-file-arrow-down me-1"></i> تصدير CSV</button>
+        </div>
+      </div>
+
+      <div class="ps-toolbar">
+        <div class="input-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" id="psSearch" class="form-control form-control-sm" placeholder="رقم الفاتورة، أمر الشراء، المورد، أو رقم GRN..." aria-label="بحث في سجل فواتير التوريد"/>
+        </div>
+        <div class="ps-f">
+          <i class="fa-solid fa-building"></i>
+          <select id="psSupplier" class="form-select form-select-sm" aria-label="تصفية المورد"></select>
+        </div>
+        <div class="ps-f">
+          <i class="fa-solid fa-money-check-dollar"></i>
+          <select id="psPay" class="form-select form-select-sm" aria-label="تصفية حالة السداد">
+            <option value="all">حالة السداد: الكل</option>
+            <option value="paid">مدفوعة بالكامل</option>
+            <option value="partial">سداد جزئي</option>
+            <option value="unpaid">آجلة غير مسددة</option>
+          </select>
+        </div>
+        <div class="ps-f">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <select id="psGrn" class="form-select form-select-sm" aria-label="تصفية حالة الاستلام المخزني">
+            <option value="all">الاستلام المخزني: الكل</option>
+            <option value="done">مكتمل 100%</option>
+            <option value="hold">قيد الفحص</option>
+          </select>
+        </div>
+        <div class="ps-f">
+          <i class="fa-solid fa-calendar-days"></i>
+          <select id="psRange" class="form-select form-select-sm" aria-label="تصفية النطاق الزمني">
+            <option value="all">شهر أكتوبر 2024</option>
+            <option value="d3">آخر 3 أيام</option>
+            <option value="d7">آخر 7 أيام</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" id="psReset" title="تصفير كل الفلاتر والبحث"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+      </div>
+
+      <div class="panel-body flush table-wrap">
+        <div class="table-responsive">
+          <table class="table table-alegria ps-ledger">
+            <thead>
+              <tr>
+                <th><button type="button" class="ps-sort on" data-sort="day" aria-label="ترتيب حسب التاريخ">الفاتورة / أمر الشراء <i class="fa-solid fa-arrow-down"></i></button></th>
+                <th>المورد</th>
+                <th>التاريخ / الاستحقاق</th>
+                <th>المستودع المستلم</th>
+                <th><button type="button" class="ps-sort" data-sort="total" aria-label="ترتيب حسب الإجمالي">الإجمالي <i class="fa-solid fa-sort"></i></button></th>
+                <th class="text-center">حالة السداد</th>
+                <th>الربط المخزني</th>
+                <th class="text-center">الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="psRows"></tbody>
+          </table>
+        </div>
+        <div class="ps-empty" id="psEmpty" hidden>
+          <i class="fa-solid fa-inbox d-block fs-3 mb-2"></i>
+          لا توجد فواتير مطابقة للفلاتر الحالية
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="ps-foot">
+          <div class="ps-pager" id="psPager"></div>
+          <div class="ps-kpis" id="psTotals"></div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         5. PURCHASES MASTER TABLE (سجل فواتير التوريد الأخيرة)
-         ============================================================ -->
-    <section class="panel-card">
-      <!-- Table Header & Counter -->
-      <div class="panel-head">
-        <div class="d-flex align-items-center gap-2 flex-wrap">
-          <h2><i class="fa-solid fa-file-invoice"></i> سجل فواتير التوريد الأخيرة</h2>
-          <span class="badge-pill-custom badge-neutral tabular">34 فاتورة</span>
-        </div>
-        <div class="d-flex align-items-center gap-2 small text-soft">
-          <i class="fa-solid fa-sliders"></i>
-          <span>عرض: 10 من أصل 34</span>
-        </div>
-      </div>
-      <!-- Table Container -->
-      <div class="panel-body flush table-wrap">
-        <table class="table table-alegria table-hover m-0" data-datatable>
-          <thead>
-            <tr>
-              <th>رقم الفاتورة والمرجع</th>
-              <th>المورد والتصنيف</th>
-              <th>التاريخ والاستحقاق</th>
-              <th>المستودع المستلم</th>
-              <th>الإجمالي مع الضريبة</th>
-              <th>حالة الدفع</th>
-              <th>الربط المخزني</th>
-              <th class="text-center">الإجراءات</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Row 1: Al-Amana Meat -->
-            <tr>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block text-gold tabular">#INV-2024-1082</strong>
-                  <small class="text-soft tabular">PO-8841 (عقد أسبوعي)</small>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center gap-2">
-                  <span class="avatar-sm"><i class="fa-solid fa-drumstick-bite"></i></span>
-                  <div class="lh-sm">
-                    <strong class="d-block small">شركة الأمانة للحوم</strong>
-                    <small class="text-soft">لحوم ضاني وبتلو بلدي معتمدة</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular small">24 أكتوبر 2024</strong>
-                  <small class="text-gold tabular">استحقاق: 26 أكتوبر (خلال يومين)</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-snowflake text-gold"></i> ثلاجة اللحوم المركزية</span></td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular">42,600 <small class="text-soft fw-normal">ج.م</small></strong>
-                  <small class="text-soft tabular">شامل VAT (5,231 ج.م)</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> آجل (متبقي كامل)</span></td>
-              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-391 (مكتمل 100%)</small></td>
-              <td class="text-center">
-                <div class="d-inline-flex gap-1">
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="تسجيل سداد" data-confirm="هل تريد تسجيل سداد الفاتورة #INV-2024-1082 بقيمة 42,600 ج.م؟"><i class="fa-solid fa-money-bill-wave text-gold"></i></button>
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1082" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1082 للمورد شركة الأمانة للحوم؟"><i class="fa-solid fa-eye"></i></button>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 2: Reef Farms Dairy -->
-            <tr>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block text-gold tabular">#INV-2024-1079</strong>
-                  <small class="text-soft tabular">PO-8835 (توريد يومي)</small>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center gap-2">
-                  <span class="avatar-sm" style="background:var(--al-green-soft);color:var(--al-green);"><i class="fa-solid fa-droplet"></i></span>
-                  <div class="lh-sm">
-                    <strong class="d-block small">مزارع الريف للألبان</strong>
-                    <small class="text-soft">قشطة طازجة، جبن، وسمن فلاحي</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular small">23 أكتوبر 2024</strong>
-                  <small class="text-green">تم السداد بالخزينة</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-kitchen-set text-green"></i> مخزن تحضير الحلويات</span></td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular">18,200 <small class="text-soft fw-normal">ج.م</small></strong>
-                  <small class="text-soft tabular">شامل VAT (2,235 ج.م)</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مدفوعة بالكامل</span></td>
-              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-388 (مكتمل 100%)</small></td>
-              <td class="text-center">
-                <div class="d-inline-flex gap-1">
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1079" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1079 للمورد مزارع الريف للألبان؟"><i class="fa-solid fa-eye"></i></button>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 3: Sharq Mills (Rice & Flour) -->
-            <tr>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block text-gold tabular">#INV-2024-1075</strong>
-                  <small class="text-soft tabular">PO-8820 (دفعة شهرية)</small>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center gap-2">
-                  <span class="avatar-sm"><i class="fa-solid fa-wheat-awn"></i></span>
-                  <div class="lh-sm">
-                    <strong class="d-block small">مطاحن الشرق الكبرى</strong>
-                    <small class="text-soft">أرز بسمتي هندي ودقيق فاخر</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular small">21 أكتوبر 2024</strong>
-                  <small class="text-soft tabular">استحقاق: 10 نوفمبر</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-boxes-stacked text-soft"></i> المستودع الرئيسي (الجاف)</span></td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular">29,000 <small class="text-soft fw-normal">ج.م</small></strong>
-                  <small class="text-soft tabular">مسدد: 14,500 ج.م</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> سداد جزئي (50%)</span></td>
-              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-382 (مكتمل 100%)</small></td>
-              <td class="text-center">
-                <div class="d-inline-flex gap-1">
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="تسجيل دفعة" data-confirm="هل تريد تسجيل دفعة متبقية بقيمة 14,500 ج.م لفاتورة #INV-2024-1075؟"><i class="fa-solid fa-money-bill-wave text-gold"></i></button>
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1075" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1075 للمورد مطاحن الشرق الكبرى؟"><i class="fa-solid fa-eye"></i></button>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 4: Baraka Poultry & Frozen -->
-            <tr>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block text-gold tabular">#INV-2024-1068</strong>
-                  <small class="text-soft tabular">PO-8812 (استثنائي)</small>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center gap-2">
-                  <span class="avatar-sm"><i class="fa-solid fa-egg"></i></span>
-                  <div class="lh-sm">
-                    <strong class="d-block small">ثلاجات وزيوت البركة</strong>
-                    <small class="text-soft">دواجن طازجة، بط، وزيوت ذرة</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular small">19 أكتوبر 2024</strong>
-                  <small class="text-green">تم السداد بشيك بنكي</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-snowflake text-gold"></i> ثلاجة التجميد العميقة</span></td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular">15,750 <small class="text-soft fw-normal">ج.م</small></strong>
-                  <small class="text-soft tabular">شامل الضريبة 14%</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> مدفوعة بالكامل</span></td>
-              <td><small class="text-green tabular"><i class="fa-solid fa-circle-check me-1"></i>GRN-376 (مكتمل 100%)</small></td>
-              <td class="text-center">
-                <div class="d-inline-flex gap-1">
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1068" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1068 للمورد ثلاجات وزيوت البركة؟"><i class="fa-solid fa-eye"></i></button>
-                </div>
-              </td>
-            </tr>
-            <!-- Row 5: Nokhba Spices & Packaging (Under inspection) -->
-            <tr>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block text-gold tabular">#INV-2024-1062</strong>
-                  <small class="text-soft tabular">PO-8799 (تجهيز سفرة)</small>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center gap-2">
-                  <span class="avatar-sm"><i class="fa-solid fa-box"></i></span>
-                  <div class="lh-sm">
-                    <strong class="d-block small">بهارات وتغليف النخبة</strong>
-                    <small class="text-soft">خلطات توابل خاصة وعلب فاخرة</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular small">17 أكتوبر 2024</strong>
-                  <small class="text-soft tabular">استحقاق: 17 نوفمبر</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-boxes-stacked text-soft"></i> مخزن التعبئة والمطبخ</span></td>
-              <td>
-                <div class="lh-sm">
-                  <strong class="d-block tabular">8,900 <small class="text-soft fw-normal">ج.م</small></strong>
-                  <small class="text-soft">صافي مع الخصم</small>
-                </div>
-              </td>
-              <td><span class="badge-pill-custom badge-gold"><span class="dot dot-gold"></span> آجل (30 يوم)</span></td>
-              <td><small class="text-amber tabular"><i class="fa-solid fa-rotate me-1"></i>GRN-369 (قيد الفحص)</small></td>
-              <td class="text-center">
-                <div class="d-inline-flex gap-1">
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0 quick-action" data-title="طباعة الفاتورة #INV-2024-1062" title="طباعة الفاتورة"><i class="fa-solid fa-print"></i></button>
-                  <button type="button" class="btn btn-ghost btn-sm px-2 py-0" title="عرض التفاصيل" data-confirm="عرض تفاصيل الفاتورة #INV-2024-1062 للمورد بهارات وتغليف النخبة؟"><i class="fa-solid fa-eye"></i></button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- Table Footer Summary (pagination handled by DataTables) -->
-      <div class="panel-head border-top border-bottom-0">
-        <span class="small text-soft">عرض <strong class="text-gold tabular">1 - 5</strong> من إجمالي <strong class="text-gold tabular">34</strong> فاتورة مسجلة لشهر أكتوبر</span>
-        <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-circle-info"></i> البحث والصفحة القادمة عبر شريط DataTables</span>
-      </div>
-    </section>
+  <div class="ps-print" id="psPrint"></div>
 
   </main>
 
@@ -469,8 +359,6 @@
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/sweetalert2.all.min.js"></script>
-  <script src="assets/js/dataTables.min.js"></script>
-  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
   <script src="assets/js/layout.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
@@ -487,6 +375,379 @@
       var title = $(this).data('title');
       window.Al.toast('تم تنفيذ: ' + title, 'success');
     });
+  </script>
+  <script>
+const PS_VAT_RATE = 14;
+const PS_VAT_DIV = 100 + PS_VAT_RATE;
+
+function psVat(total) {
+  return Math.round(total * PS_VAT_RATE / PS_VAT_DIV);
+}
+
+const PS_INV = [
+  {
+    inv: "INV-2024-1082", po: "PO-8841", poNote: "عقد أسبوعي",
+    supplier: "شركة الأمانة للحوم",
+    supplierSub: "لحوم ضاني وبتلو بلدي معتمدة",
+    sIcon: "fa-drumstick-bite", sTone: "gold",
+    day: 24, dateLabel: "24 أكتوبر 2024",
+    dueLabel: "استحقاق 26 أكتوبر", dueSub: "خلال يومين", dueTone: "gold",
+    wh: "ثلاجة اللحوم المركزية", whIcon: "fa-snowflake", whTone: "gold",
+    total: 42600, vat: true, paid: 0,
+    pay: "آجل — متبقي كامل", payTone: "gold",
+    grn: "GRN-391", grnPct: 100, grnTone: "green", grnIcon: "fa-circle-check",
+    doc: "طباعة الفاتورة", docIcon: "fa-print"
+  },
+  {
+    inv: "INV-2024-1079", po: "PO-8835", poNote: "توريد يومي",
+    supplier: "مزارع الريف للألبان",
+    supplierSub: "قشطة طازجة، جبن، وسمن فلاحي",
+    sIcon: "fa-droplet", sTone: "green",
+    day: 23, dateLabel: "23 أكتوبر 2024",
+    dueLabel: "مسدَّدة بالكامل", dueSub: "", dueTone: "green",
+    wh: "مخزن تحضير الحلويات", whIcon: "fa-kitchen-set", whTone: "green",
+    total: 18200, vat: true, paid: 18200,
+    pay: "مدفوعة بالكامل", payTone: "green",
+    grn: "GRN-388", grnPct: 100, grnTone: "green", grnIcon: "fa-circle-check",
+    doc: "طباعة الفاتورة", docIcon: "fa-print"
+  },
+  {
+    inv: "INV-2024-1075", po: "PO-8820", poNote: "دفعة شهرية",
+    supplier: "مطاحن الشرق الكبرى",
+    supplierSub: "أرز بسمتي هندي ودقيق فاخر",
+    sIcon: "fa-wheat-awn", sTone: "gold",
+    day: 21, dateLabel: "21 أكتوبر 2024",
+    dueLabel: "استحقاق 10 نوفمبر", dueSub: "", dueTone: "soft",
+    wh: "المستودع الرئيسي — الجاف", whIcon: "fa-boxes-stacked", whTone: "soft",
+    total: 29000, vat: true, paid: 14500,
+    pay: "سداد جزئي — 50%", payTone: "gold",
+    grn: "GRN-382", grnPct: 100, grnTone: "green", grnIcon: "fa-circle-check",
+    doc: "طباعة الفاتورة", docIcon: "fa-print"
+  },
+  {
+    inv: "INV-2024-1068", po: "PO-8812", poNote: "استثنائي",
+    supplier: "ثلاجات وزيوت البركة",
+    supplierSub: "دواجن طازجة، بط، وزيوت ذرة",
+    sIcon: "fa-egg", sTone: "gold",
+    day: 19, dateLabel: "19 أكتوبر 2024",
+    dueLabel: "مسدَّدة بشيك بنكي", dueSub: "", dueTone: "green",
+    wh: "ثلاجة التجميد العميقة", whIcon: "fa-snowflake", whTone: "gold",
+    total: 15750, vat: true, paid: 15750,
+    pay: "مدفوعة بالكامل", payTone: "green",
+    grn: "GRN-376", grnPct: 100, grnTone: "green", grnIcon: "fa-circle-check",
+    doc: "طباعة الفاتورة", docIcon: "fa-print"
+  },
+  {
+    inv: "INV-2024-1062", po: "PO-8799", poNote: "تجهيز سفرة",
+    supplier: "بهارات وتغليف النخبة",
+    supplierSub: "خلطات توابل خاصة وعلب فاخرة",
+    sIcon: "fa-box", sTone: "soft",
+    day: 17, dateLabel: "17 أكتوبر 2024",
+    dueLabel: "استحقاق 17 نوفمبر", dueSub: "", dueTone: "soft",
+    wh: "مخزن التعبئة والمطبخ", whIcon: "fa-boxes-stacked", whTone: "soft",
+    total: 8900, vat: false, paid: 0,
+    pay: "آجل — 30 يوم", payTone: "gold",
+    grn: "GRN-369", grnPct: 60, grnTone: "amber", grnIcon: "fa-spinner",
+    doc: "عرض إذن الاستلام", docIcon: "fa-receipt"
+  }
+];
+
+const PS_MONTH_TOTAL = 348250;
+const PS_MONTH_COUNT = 42;
+  </script>
+  <script>
+  (function () {
+    'use strict';
+
+    var PAGE_SIZE = 4;
+    var state = { q: '', supplier: 'all', pay: 'all', grn: 'all', range: 'all', sort: 'day', dir: -1, page: 0 };
+
+    function el(id) { return document.getElementById(id); }
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function fmt(n) {
+      var v = Math.round(Number(n) || 0);
+      var s = String(Math.abs(v)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return (v < 0 ? '-' : '') + s;
+    }
+    function toneClass(t) { return t === 'soft' ? 'text-soft' : 'text-' + t; }
+
+    function payState(r) { return r.paid >= r.total ? 'paid' : (r.paid > 0 ? 'partial' : 'unpaid'); }
+    function remaining(r) { return r.total - r.paid; }
+
+    function arCount(n) {
+      if (n === 0) return 'لا فواتير';
+      if (n === 1) return 'فاتورة واحدة';
+      if (n === 2) return 'فاتورتان';
+      if (n <= 10) return n + ' فواتير';
+      return n + ' فاتورة';
+    }
+
+    function vatOf(r) { return r.vat ? psVat(r.total) : 0; }
+
+    function visible() {
+      var q = state.q.trim().toLowerCase();
+      return PS_INV.filter(function (r) {
+        if (state.supplier !== 'all' && r.supplier !== state.supplier) return false;
+        if (state.pay !== 'all' && payState(r) !== state.pay) return false;
+        if (state.grn === 'done' && r.grnPct !== 100) return false;
+        if (state.grn === 'hold' && r.grnPct === 100) return false;
+        if (state.range === 'd3' && r.day < 22) return false;
+        if (state.range === 'd7' && r.day < 18) return false;
+        if (q) {
+          var hay = [r.inv, r.po, r.supplier, r.supplierSub, r.grn, r.pay, r.wh].join(' ').toLowerCase();
+          if (hay.indexOf(q) === -1) return false;
+        }
+        return true;
+      }).sort(function (a, b) {
+        var d = state.sort === 'total' ? a.total - b.total : a.day - b.day;
+        return state.dir * d;
+      });
+    }
+
+    function rowHtml(r) {
+      var st = payState(r);
+      var left = remaining(r);
+      var vat = vatOf(r);
+      var taxLine = r.vat
+        ? 'شامل ضريبة ' + fmt(vat) + ' ج.م'
+        : 'صافي مع الخصم — بلا ضريبة';
+      var subLine = r.paid > 0 && left > 0
+        ? 'مسدد ' + fmt(r.paid) + ' · متبقي ' + fmt(left) + ' ج.م'
+        : (r.paid > 0 ? 'مسدد بالكامل' : 'لم يُسدد بعد');
+      var dueSub = r.dueSub ? ' · ' + r.dueSub : '';
+      var grnText = r.grnPct === 100 ? r.grn + ' — مكتمل 100%' : r.grn + ' — قيد الفحص ' + r.grnPct + '%';
+      var payBtn = st === 'paid' ? '' :
+        '<button type="button" class="btn btn-ghost btn-sm icon-btn" data-act="pay" data-inv="' + esc(r.inv) + '" title="تسجيل سداد ' + esc(r.inv) + '" aria-label="تسجيل سداد ' + esc(r.inv) + '"><i class="fa-solid fa-money-bill-wave ' + (st === 'unpaid' ? 'text-gold' : '') + '"></i></button>';
+
+      return '<tr>' +
+        '<td><span class="ps-inv">#' + esc(r.inv) + '</span><span class="ps-sep">·</span>' +
+        '<span class="ps-dim tabular">' + esc(r.po) + ' — ' + esc(r.poNote) + '</span></td>' +
+        '<td><div class="ps-sup"><span class="avatar-sm"><i class="fa-solid ' + esc(r.sIcon) + '"></i></span>' +
+        '<span>' + esc(r.supplier) + '</span></div></td>' +
+        '<td><span class="ps-date">' + esc(r.dateLabel) + '</span><span class="ps-sep">·</span>' +
+        '<span class="ps-dim ' + toneClass(r.dueTone) + '">' + esc(r.dueLabel) + dueSub + '</span></td>' +
+        '<td><span class="badge-pill-custom badge-neutral"><i class="fa-solid ' + esc(r.whIcon) + ' ' + toneClass(r.whTone) + '"></i> ' + esc(r.wh) + '</span></td>' +
+        '<td><span class="ps-amt">' + fmt(r.total) + ' <small class="text-soft fw-normal">ج.م</small></span><span class="ps-sep">·</span>' +
+        '<span class="ps-dim">' + esc(taxLine) + '</span></td>' +
+        '<td class="text-center"><span class="badge-pill-custom badge-' + r.payTone + '"><span class="dot dot-' + r.payTone + '"></span> ' + esc(r.pay) + '</span></td>' +
+        '<td><div class="d-flex align-items-center gap-2 ' + toneClass(r.grnTone) + '">' +
+        '<i class="fa-solid ' + esc(r.grnIcon) + '"></i><span class="ps-dim tabular">' + esc(grnText) + '</span>' +
+        '<span class="ps-bar"><i style="width:' + r.grnPct + '%"></i></span></div></td>' +
+        '<td class="text-center"><div class="d-inline-flex gap-1">' + payBtn +
+        '<button type="button" class="btn btn-ghost btn-sm icon-btn" data-act="view" data-inv="' + esc(r.inv) + '" title="عرض تفاصيل ' + esc(r.inv) + '" aria-label="عرض تفاصيل ' + esc(r.inv) + '"><i class="fa-solid fa-eye"></i></button>' +
+        '<button type="button" class="btn btn-ghost btn-sm icon-btn" data-act="doc" data-inv="' + esc(r.inv) + '" title="' + esc(r.doc) + '" aria-label="' + esc(r.doc) + ' ' + esc(r.inv) + '"><i class="fa-solid ' + esc(r.docIcon) + '"></i></button>' +
+        '</div></td></tr>';
+    }
+
+    function render() {
+      var rows = visible();
+      var pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+      if (state.page > pages - 1) state.page = pages - 1;
+      if (state.page < 0) state.page = 0;
+      var slice = rows.slice(state.page * PAGE_SIZE, state.page * PAGE_SIZE + PAGE_SIZE);
+
+      el('psRows').innerHTML = slice.map(rowHtml).join('');
+      el('psEmpty').hidden = rows.length > 0;
+      el('psEmpty').style.display = rows.length ? 'none' : '';
+
+      var totalShown = rows.reduce(function (a, r) { return a + r.total; }, 0);
+      var paid = rows.reduce(function (a, r) { return a + r.paid; }, 0);
+      var vat = rows.reduce(function (a, r) { return a + vatOf(r); }, 0);
+
+      var shownValue = rows.reduce(function (a, r) { return a + r.total; }, 0);
+      var share = PS_MONTH_TOTAL > 0 ? ' (' + Math.round(shownValue * 100 / PS_MONTH_TOTAL) + '% من قيمة الشهر)' : '';
+      el('psCount').textContent = arCount(rows.length) + (rows.length === PS_INV.length ? '' : ' من ' + PS_INV.length);
+      el('psShare').textContent = arCount(rows.length) + ' معروضة من أصل ' + PS_MONTH_COUNT +
+        ' فاتورة مسجلة لشهر أكتوبر' + share;
+
+      el('psTotals').innerHTML =
+        '<span>المعروض <strong class="text-gold tabular">' + fmt(rows.length) + '</strong> من ' + fmt(PS_INV.length) + '</span>' +
+        '<span>إجمالي المعروض <strong class="tabular">' + fmt(totalShown) + '</strong> ج.م</span>' +
+        '<span>مدفوع <strong class="text-green tabular">' + fmt(paid) + '</strong> ج.م</span>' +
+        '<span>متبقي <strong class="text-gold tabular">' + fmt(totalShown - paid) + '</strong> ج.م</span>' +
+        '<span>ضريبة القيمة المضافة <strong class="tabular">' + fmt(vat) + '</strong> ج.م</span>';
+
+      var pager = '';
+      pager += '<button type="button" data-pg="prev"' + (state.page === 0 ? ' disabled' : '') + ' aria-label="السابق"><i class="fa-solid fa-angle-right"></i></button>';
+      for (var i = 0; i < pages; i++) {
+        pager += '<button type="button" data-pg="' + i + '"' + (i === state.page ? ' class="on"' : '') + '>' + (i + 1) + '</button>';
+      }
+      pager += '<button type="button" data-pg="next"' + (state.page >= pages - 1 ? ' disabled' : '') + ' aria-label="التالي"><i class="fa-solid fa-angle-left"></i></button>';
+      el('psPager').innerHTML = pager;
+
+      Array.prototype.forEach.call(document.querySelectorAll('.ps-sort'), function (b) {
+        var on = b.getAttribute('data-sort') === state.sort;
+        b.classList.toggle('on', on);
+        var i = b.querySelector('i');
+        if (i) i.className = 'fa-solid ' + (on ? (state.dir === 1 ? 'fa-arrow-up' : 'fa-arrow-down') : 'fa-sort');
+      });
+    }
+
+    function find(inv) {
+      for (var i = 0; i < PS_INV.length; i++) if (PS_INV[i].inv === inv) return PS_INV[i];
+      return null;
+    }
+
+    function exportCsv() {
+      var rows = visible();
+      if (!rows.length) {
+        if (window.Al && window.Al.toast) window.Al.toast('لا توجد فواتير للتصدير بالفلاتر الحالية', 'warning');
+        return;
+      }
+      var head = ['رقم الفاتورة', 'أمر الشراء', 'المورد', 'التاريخ', 'الاستحقاق', 'المستودع',
+        'الإجمالي', 'الضريبة', 'المدفوع', 'المتبقي', 'حالة السداد', 'الاستلام', 'رقم GRN', 'نسبة الاستلام'];
+      var body = rows.map(function (r) {
+        return [r.inv, r.po, r.supplier, r.dateLabel, r.dueLabel, r.wh, r.total,
+          r.vat ? vatOf(r) : 0, r.paid, remaining(r), r.pay, r.grn, r.grn, r.grnPct + '%'];
+      });
+      var q = function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; };
+      var csv = '﻿' + [head.map(q).join(',')].concat(body.map(function (row) {
+        return row.map(q).join(',');
+      })).join('\r\n');
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'سجل-فواتير-التوريد-' + (state.range === 'all' ? 'أكتوبر-2024' : state.range) + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      if (window.Al && window.Al.toast) window.Al.toast('تم تصدير ' + arCount(rows.length) + ' إلى CSV', 'success');
+    }
+
+    function viewInvoice(r) {
+      var st = payState(r);
+      var line = function (k, v) { return '<div class="d-flex justify-content-between gap-3 py-1" style="border-bottom:1px solid var(--al-line)"><span class="text-soft small">' + k + '</span><strong class="small">' + v + '</strong></div>'; };
+      var html =
+        '<div class="text-start" style="min-width:20rem">' +
+        line('رقم الفاتورة', '<span class="tabular">' + esc(r.inv) + '</span>') +
+        line('أمر الشراء', '<span class="tabular">' + esc(r.po) + ' — ' + esc(r.poNote) + '</span>') +
+        line('المورد', esc(r.supplier)) +
+        line('التصنيف', esc(r.supplierSub)) +
+        line('التاريخ', esc(r.dateLabel)) +
+        line('الاستحقاق', esc(r.dueLabel)) +
+        line('المستودع المستلم', esc(r.wh)) +
+        line('الإجمالي', '<span class="tabular">' + fmt(r.total) + ' ج.م</span>') +
+        line('ضريبة القيمة المضافة', r.vat ? '<span class="tabular">' + fmt(vatOf(r)) + ' ج.م (' + PS_VAT_RATE + '% على صافي)</span>' : 'بلا ضريبة — صافي مع الخصم') +
+        line('المدفوع', '<span class="tabular text-green">' + fmt(r.paid) + ' ج.م</span>') +
+        line('المتبقي', '<span class="tabular text-gold">' + fmt(remaining(r)) + ' ج.م</span>') +
+        line('حالة السداد', esc(r.pay)) +
+        line('الربط المخزني', '<span class="tabular">' + esc(r.grn) + ' — ' + (r.grnPct === 100 ? 'مكتمل 100%' : 'قيد الفحص ' + r.grnPct + '%') + '</span>') +
+        '</div>';
+      if (window.Swal) {
+        window.Swal.fire({
+          title: 'فاتورة توريد ' + r.inv,
+          html: html,
+          showCloseButton: true,
+          confirmButtonText: 'إغلاق',
+          customClass: { popup: 'al-swal' }
+        });
+      } else {
+        window.Al && window.Al.toast && window.Al.toast(r.supplier + ' — ' + fmt(r.total) + ' ج.م', 'info');
+      }
+      return st;
+    }
+
+    function docInvoice(r) {
+      var sheet = el('psPrint');
+      if (!sheet) return;
+      var vat = r.vat ? fmt(vatOf(r)) : '—';
+      sheet.innerHTML =
+        '<h1>فاتورة توريد — ' + esc(r.inv) + '</h1>' +
+        '<table><tbody>' +
+        '<tr><th>المورد</th><td>' + esc(r.supplier) + '</td></tr>' +
+        '<tr><th>أمر الشراء</th><td>' + esc(r.po) + ' — ' + esc(r.poNote) + '</td></tr>' +
+        '<tr><th>التاريخ</th><td>' + esc(r.dateLabel) + '</td></tr>' +
+        '<tr><th>الاستحقاق</th><td>' + esc(r.dueLabel) + '</td></tr>' +
+        '<tr><th>المستودع</th><td>' + esc(r.wh) + '</td></tr>' +
+        '<tr><th>الإجمالي</th><td>' + fmt(r.total) + ' ج.م</td></tr>' +
+        '<tr><th>الضريبة</th><td>' + vat + ' ج.م</td></tr>' +
+        '<tr><th>المدفوع</th><td>' + fmt(r.paid) + ' ج.م</td></tr>' +
+        '<tr><th>المتبقي</th><td>' + fmt(remaining(r)) + ' ج.م</td></tr>' +
+        '<tr><th>إذن الاستلام</th><td>' + esc(r.grn) + ' — ' + r.grnPct + '%</td></tr>' +
+        '</tbody></table>' +
+        '<p class="ps-sig">توقيع المستلم: ...................... &nbsp;&nbsp;&nbsp; توقيعأمين المخزن: ......................</p>';
+      window.print();
+    }
+
+    function payInvoice(r) {
+      var left = remaining(r);
+      window.Al.confirm('تسجيل سداد', 'هل تريد تسجيل سداد بقيمة ' + fmt(left) + ' ج.م لفاتورة ' + r.inv + ' من ' + r.supplier + '؟', function () {
+        r.paid = r.total;
+        r.pay = 'مدفوعة بالكامل';
+        r.payTone = 'green';
+        r.dueLabel = 'مسدَّدة بالكامل';
+        r.dueTone = 'green';
+        render();
+        window.Al.toast('تم تسجيل سداد ' + r.inv + ' بالكامل', 'success');
+      });
+    }
+
+    function reset() {
+      state.q = ''; state.supplier = 'all'; state.pay = 'all';
+      state.grn = 'all'; state.range = 'all'; state.page = 0;
+      el('psSearch').value = '';
+      el('psSupplier').value = 'all';
+      el('psPay').value = 'all';
+      el('psGrn').value = 'all';
+      el('psRange').value = 'all';
+      render();
+    }
+
+    function boot() {
+      var sup = el('psSupplier');
+      var names = [];
+      PS_INV.forEach(function (r) { if (names.indexOf(r.supplier) === -1) names.push(r.supplier); });
+      sup.innerHTML = '<option value="all">كافة الموردين (' + names.length + ')</option>' +
+        names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
+
+      el('psSearch').addEventListener('input', function (e) { state.q = e.target.value; state.page = 0; render(); });
+      sup.addEventListener('change', function (e) { state.supplier = e.target.value; state.page = 0; render(); });
+      el('psPay').addEventListener('change', function (e) { state.pay = e.target.value; state.page = 0; render(); });
+      el('psGrn').addEventListener('change', function (e) { state.grn = e.target.value; state.page = 0; render(); });
+      el('psRange').addEventListener('change', function (e) { state.range = e.target.value; state.page = 0; render(); });
+      el('psReset').addEventListener('click', reset);
+      el('psExport').addEventListener('click', exportCsv);
+
+      el('psPager').addEventListener('click', function (e) {
+        var b = e.target.closest('button[data-pg]');
+        if (!b || b.disabled) return;
+        var v = b.getAttribute('data-pg');
+        if (v === 'prev') state.page--;
+        else if (v === 'next') state.page++;
+        else state.page = parseInt(v, 10);
+        render();
+      });
+
+      Array.prototype.forEach.call(document.querySelectorAll('.ps-sort'), function (b) {
+        b.addEventListener('click', function () {
+          var k = b.getAttribute('data-sort');
+          if (state.sort === k) state.dir = -state.dir;
+          else { state.sort = k; state.dir = k === 'total' ? -1 : -1; }
+          render();
+        });
+      });
+
+      el('psPanel').addEventListener('click', function (e) {
+        var b = e.target.closest('button[data-act]');
+        if (!b) return;
+        var r = find(b.getAttribute('data-inv'));
+        if (!r) return;
+        var a = b.getAttribute('data-act');
+        if (a === 'view') viewInvoice(r);
+        else if (a === 'doc') docInvoice(r);
+        else if (a === 'pay') payInvoice(r);
+      });
+
+      render();
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+    else boot();
+  })();
   </script>
 </body>
 </html>

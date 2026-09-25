@@ -34,31 +34,57 @@
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
   <!-- DataTables -->
-  <link rel="stylesheet" href="assets/css/dataTables.bootstrap5.min.css"/>
   <!-- Custom Design System -->
   <link rel="stylesheet" href="assets/css/style.css"/>
   <style>
-    .perm-badge {
-      min-width: 2.3rem;
-      height: 2.1rem;
-      padding: .15rem .5rem;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: .15s ease-in-out;
+    .rm-matrix { min-width: 940px; }
+    .rm-matrix > :not(caption) > * > * { border-bottom-color: var(--al-line); vertical-align: middle; }
+    .rm-matrix thead th { position: sticky; top: 0; z-index: 3; background: var(--al-surface-2); }
+    .rm-matrix th.rm-sticky, .rm-matrix td.rm-sticky {
+      position: sticky; inset-inline-start: 0; z-index: 2;
+      background: var(--al-surface); min-width: 250px; max-width: 250px;
     }
-    .perm-badge:hover { transform: scale(1.1); }
-    .perm-badge .pin-sub {
-      font-size: .55rem;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      line-height: 1;
+    .rm-matrix thead th.rm-sticky { z-index: 4; }
+    .rm-matrix tbody tr:hover td { background: var(--al-surface-2); }
+    .rm-matrix tbody tr:hover td.rm-sticky { background: var(--al-surface-2); }
+    .rm-matrix .rm-grp td { background: var(--al-surface-2); }
+    .rm-matrix .rm-grp:hover td { background: var(--al-surface-2); }
+
+    .rm-lbl { font-size: .82rem; font-weight: 700; line-height: 1.35; }
+    .rm-code { font-family: var(--font-mono); font-size: .66rem; color: var(--al-ink-faint); direction: ltr; display: block; }
+
+    .rm-perm {
+      min-width: 2.2rem; height: 1.85rem; padding: .1rem .45rem;
+      cursor: pointer; border: 1px solid transparent;
+      transition: transform .12s ease-in-out, box-shadow .12s ease-in-out;
     }
-    .group-toggle { border: 0; background: transparent; }
-    .group-toggle .fa-chevron-down { transition: transform .2s; }
-    .group-toggle.collapsed .fa-chevron-down { transform: rotate(180deg); }
-    .filter-tab { white-space: nowrap; font-weight: 700; }
-    .matrix-table > :not(caption) > * > * { border-bottom-color: var(--al-line); vertical-align: middle; }
+    .rm-perm:hover { transform: scale(1.12); box-shadow: 0 0 0 2px var(--al-gold-soft); }
+    .rm-perm .rm-pin { font-size: .52rem; font-family: var(--font-mono); font-weight: 700; line-height: 1; }
+    .rm-perm.rm-dirty { border-color: var(--al-gold); }
+    .rm-perm:focus-visible { outline: 2px solid var(--al-gold); outline-offset: 2px; }
+
+    .rm-tab { white-space: nowrap; font-weight: 700; }
+    .rm-role {
+      display: flex; align-items: center; gap: .55rem; padding: .5rem .7rem;
+      border: 1px solid var(--al-line); border-radius: var(--al-radius-sm);
+      background: var(--al-surface-2); min-width: 0;
+    }
+    .rm-role__ic {
+      width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%;
+      display: grid; place-items: center; font-size: .78rem;
+      background: var(--al-gold-soft); color: var(--al-gold);
+    }
+    .rm-role__ar { font-size: .74rem; font-weight: 700; line-height: 1.2; }
+    .rm-role__en { font-family: var(--font-mono); font-size: .6rem; color: var(--al-ink-faint); direction: ltr; }
+    .rm-role__n { font-family: var(--font-mono); font-size: .68rem; color: var(--al-gold); font-weight: 700; }
+
+    .rm-legend { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .9rem; }
+    .rm-legend__i { display: flex; align-items: center; gap: .35rem; font-size: .72rem; color: var(--al-ink-soft); }
+    .rm-stat { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .rm-bar { height: 6px; border-radius: 999px; background: var(--al-line); overflow: hidden; }
+    .rm-bar > span { display: block; height: 100%; background: var(--al-gold); }
   </style>
+
 </head>
 <body>
 
@@ -67,682 +93,81 @@
 
   <main class="container py-4">
 
-    <!-- ============================================================
-         1. TOP META ACTION HEADER
-         ============================================================ -->
-    <section class="panel-card p-3 p-lg-4 mb-4">
-      <div class="d-flex flex-column flex-xl-row align-items-xl-start align-items-xl-center justify-content-between gap-3 flex-wrap">
-        <div class="d-flex flex-column gap-2" style="max-width:48rem;">
+    <!-- ============ HEAD ============ -->
+    <section class="panel-card p-3 p-lg-4 mb-3">
+      <div class="d-flex flex-column flex-xl-row align-items-xl-center justify-content-between gap-3">
+        <div class="d-flex flex-column gap-2" style="max-width:44rem;">
           <div class="d-flex align-items-center gap-2 flex-wrap">
-            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> نظام الحوكمة المؤسسية RBAC v4.2</span>
-            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> 7 أدوار معتمدة • 68 صلاحية نشطة</span>
-            <span class="badge-pill-custom badge-neutral font-mono">فرع العليا التخصصي #01</span>
+            <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-shield-halved"></i> نظام الحوكمة RBAC</span>
+            <span class="badge-pill-custom badge-green"><span class="dot dot-green"></span> <span id="rmHeadCount">7 أدوار · 25 صلاحية · 25 مستخدم</span></span>
           </div>
-          <h1 class="h2 fw-black m-0">مصفوفة الصلاحيات والحوكمة الموسعة</h1>
-          <p class="mb-0">الإدارة الدقيقة لأذونات التشغيل، مستويات الاعتماد المالي، صلاحيات الإلغاء والخصومات، وقيود محطات نقاط البيع والمطابخ لجميع الأدوار الوظيفية في كافيه أليجريا.</p>
+          <h1 class="h2 fw-bolder m-0">مصفوفة الصلاحيات</h1>
+          <p class="mb-0 small">اضغط أي خانة لتدوير الصلاحية: مف ← موافقة ← عرض ← محظور. تُحفظ التغييرات على كل المحطات بعد المزامنة.</p>
         </div>
         <div class="d-flex align-items-center gap-2 flex-wrap">
-          <button type="button" class="btn btn-gold" onclick="triggerSync()">
-            <i class="fa-solid fa-rotate ms-2"></i> حفظ ومزامنة الصلاحيات لجميع المحطات
-            <span class="dot dot-green ms-2"></span>
-          </button>
-          <button type="button" class="btn btn-ghost"><i class="fa-solid fa-user-shield text-gold ms-1"></i> + إضافة دور وظيفي مخصص</button>
-          <button type="button" class="btn btn-ghost"><i class="fa-solid fa-file-arrow-down text-green ms-1"></i> استيراد قالب أمان</button>
-          <button type="button" class="btn btn-ghost btn-sm" title="سجل التدقيق"><i class="fa-solid fa-clock-rotate-left"></i></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="rmReset" disabled><i class="fa-solid fa-arrow-rotate-left ms-1"></i> تراجع</button>
+          <button type="button" class="btn btn-gold" id="rmSave" disabled><i class="fa-solid fa-rotate ms-2"></i> حفظ ومزامنة</button>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         2. GROUP FILTER TABS
-         ============================================================ -->
-    <ul class="nav nav-pills gap-2 mb-4 overflow-x-auto flex-nowrap pb-1" role="tablist">
-      <li class="nav-item">
-        <button type="button" class="nav-link filter-tab active" data-cat="all"><i class="fa-solid fa-layer-group text-gold me-1"></i> كافة الصلاحيات <span class="badge-pill-custom badge-gold ms-1">68</span></button>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="nav-link filter-tab" data-cat="pos"><i class="fa-solid fa-cash-register text-gold me-1"></i> نقطة البيع والصالة (POS) <span class="badge-pill-custom badge-neutral ms-1">18</span></button>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="nav-link filter-tab" data-cat="kitchen"><i class="fa-solid fa-fire-burner text-amber me-1"></i> المطبخ والطلبات (KDS) <span class="badge-pill-custom badge-neutral ms-1">14</span></button>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="nav-link filter-tab" data-cat="stock"><i class="fa-solid fa-boxes-stacked text-green me-1"></i> المخازن والمشتريات <span class="badge-pill-custom badge-neutral ms-1">12</span></button>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="nav-link filter-tab" data-cat="finance"><i class="fa-solid fa-wallet text-gold me-1"></i> الخزينة والماليات <span class="badge-pill-custom badge-neutral ms-1">11</span></button>
-      </li>
-      <li class="nav-item">
-        <button type="button" class="nav-link filter-tab" data-cat="hr"><i class="fa-solid fa-user-shield text-soft me-1"></i> الأمان والموظفين <span class="badge-pill-custom badge-neutral ms-1">13</span></button>
-      </li>
-    </ul>
+    <!-- ============ ROLES ============ -->
+    <section class="panel-card p-3 mb-3">
+      <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+        <h2 class="h6 m-0"><i class="fa-solid fa-users text-gold ms-1"></i> الأدوار المعتمدة</h2>
+        <span class="small text-soft rm-stat" id="rmRolesTotal"></span>
+      </div>
+      <div class="d-flex flex-wrap gap-2" id="rmRoles"></div>
+    </section>
 
-    <!-- ============================================================
-         3. QUICK ROLE MANAGEMENT CARDS (7 roles)
-         ============================================================ -->
-    <section class="d-flex flex-wrap gap-3 mb-4">
-      <!-- Role 1: Super Admin -->
-      <div class="stat-card p-3 flex-grow-1" style="min-width:180px;max-width:250px;">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <span class="stat-icon" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-shield-halved"></i></span>
-          <span class="badge-pill-custom badge-green">مفعل كلياً</span>
-        </div>
-        <div class="fw-bold small">مدير النظام العام</div>
-        <div class="text-gold font-mono" style="font-size:.72rem;">Super Admin</div>
-        <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-2 px-2 py-1 mt-2 small">
-          <span class="text-soft">المستخدمين:</span>
-          <strong class="text-gold tabular">1 مستخدم</strong>
-        </div>
+    <!-- ============ TABS ============ -->
+    <ul class="nav nav-pills gap-2 mb-3 overflow-x-auto flex-nowrap pb-1" role="tablist" id="rmTabs"></ul>
+
+    <!-- ============ MATRIX ============ -->
+    <section class="panel-card overflow-hidden mb-3">
+      <div class="p-3 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-2" style="border-bottom:1px solid var(--al-line);">
+        <h2 class="h6 m-0"><i class="fa-solid fa-table-list text-gold ms-1"></i> خريطة الصلاحيات</h2>
+        <div class="rm-legend" id="rmLegend"></div>
       </div>
-      <!-- Role 2: General Manager -->
-      <div class="stat-card p-3 flex-grow-1" style="min-width:180px;max-width:250px;">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <span class="stat-icon green" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-user-gear"></i></span>
-          <span class="badge-pill-custom badge-green">نشط</span>
-        </div>
-        <div class="fw-bold small">مدير الفرع والتشغيل</div>
-        <div class="text-green font-mono" style="font-size:.72rem;">General Manager</div>
-        <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-2 px-2 py-1 mt-2 small">
-          <span class="text-soft">المستخدمين:</span>
-          <strong class="text-green tabular">2 مدراء</strong>
-        </div>
+      <div class="table-wrap">
+        <table class="table table-alegria rm-matrix align-middle m-0 w-100">
+          <thead><tr id="rmHead"></tr></thead>
+          <tbody id="rmBody"></tbody>
+        </table>
       </div>
-      <!-- Role 3: Executive Chef -->
-      <div class="stat-card p-3 flex-grow-1" style="min-width:180px;max-width:250px;">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <span class="stat-icon amber" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-utensils"></i></span>
-          <span class="badge-pill-custom badge-green">نشط</span>
-        </div>
-        <div class="fw-bold small">الشيف التنفيذي</div>
-        <div class="text-amber font-mono" style="font-size:.72rem;">Executive Chef</div>
-        <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-2 px-2 py-1 mt-2 small">
-          <span class="text-soft">المستخدمين:</span>
-          <strong class="text-amber tabular">2 شيف</strong>
-        </div>
-      </div>
-      <!-- Role 4: Cashier -->
-      <div class="stat-card p-3 flex-grow-1" style="min-width:180px;max-width:250px;">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <span class="stat-icon" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-cash-register"></i></span>
-          <span class="badge-pill-custom badge-green">نشط</span>
-        </div>
-        <div class="fw-bold small">كاشير وأمين الخزينة</div>
-        <div class="text-gold font-mono" style="font-size:.72rem;">POS Cashier</div>
-        <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-2 px-2 py-1 mt-2 small">
-          <span class="text-soft">المستخدمين:</span>
-          <strong class="text-gold tabular">4 موظفين</strong>
-        </div>
-      </div>
-      <!-- Role 5: Head Waiter -->
-      <div class="stat-card p-3 flex-grow-1" style="min-width:180px;max-width:250px;">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <span class="stat-icon rose" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-bell-concierge"></i></span>
-          <span class="badge-pill-custom badge-green">نشط</span>
-        </div>
-        <div class="fw-bold small">مشرف وكابتن صالة VIP</div>
-        <div class="text-soft font-mono" style="font-size:.72rem;">Head Waiter</div>
-        <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-2 px-2 py-1 mt-2 small">
-          <span class="text-soft">المستخدمين:</span>
-          <strong class="tabular">6 كباتن</strong>
-        </div>
-      </div>
-      <!-- Role 6: Stock Officer -->
-      <div class="stat-card p-3 flex-grow-1" style="min-width:180px;max-width:250px;">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <span class="stat-icon green" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-warehouse"></i></span>
-          <span class="badge-pill-custom badge-green">نشط</span>
-        </div>
-        <div class="fw-bold small">مسؤول المشتريات والمخزن</div>
-        <div class="text-green font-mono" style="font-size:.72rem;">Stock Controller</div>
-        <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-2 px-2 py-1 mt-2 small">
-          <span class="text-soft">المستخدمين:</span>
-          <strong class="tabular">2 موظفين</strong>
-        </div>
-      </div>
-      <!-- Role 7: Line Cook -->
-      <div class="stat-card p-3 flex-grow-1" style="min-width:180px;max-width:250px;">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-          <span class="stat-icon amber" style="width:40px;height:40px;font-size:1rem;"><i class="fa-solid fa-kitchen-set"></i></span>
-          <span class="badge-pill-custom badge-neutral">مقيد KDS</span>
-        </div>
-        <div class="fw-bold small">طاهي ومساعد مطبخ</div>
-        <div class="text-soft font-mono" style="font-size:.72rem;">Line Cook</div>
-        <div class="d-flex justify-content-between align-items-center bg-al-2 border rounded-2 px-2 py-1 mt-2 small">
-          <span class="text-soft">المستخدمين:</span>
-          <strong class="tabular">8 طهاة</strong>
-        </div>
+      <div class="p-3 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-2" style="border-top:1px solid var(--al-line);">
+        <span class="small text-soft rm-stat" id="rmFoot"></span>
+        <span class="small text-soft rm-stat" id="rmDirty"></span>
       </div>
     </section>
 
-    <!-- ============================================================
-         4. WORKSPACE: MATRIX (9) + GOVERNANCE SIDEBAR (3)
-         ============================================================ -->
-    <section class="row g-3 align-items-start">
-
-      <!-- ============ A. ROLES & PERMISSIONS MATRIX ============ -->
-      <div class="col-xl-9 d-flex flex-column gap-3">
-
-        <!-- Legend Ribbon -->
-        <div class="panel-card p-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
-          <div class="d-flex align-items-center gap-2 text-soft small">
-            <i class="fa-solid fa-circle-info text-gold"></i>
-            <span>دليل دلالات الصلاحيات المباشرة:</span>
-          </div>
-          <div class="d-flex flex-wrap align-items-center gap-3">
-            <div class="d-flex align-items-center gap-2">
-              <span class="badge-pill-custom badge-gold"><i class="fa-solid fa-circle-check"></i></span>
-              <span class="small">مفوض ومتاح كلياً (Granted)</span>
-            </div>
-            <div class="d-flex align-items-center gap-2">
-              <span class="badge-pill-custom badge-neutral"><i class="fa-solid fa-key"></i></span>
-              <span class="small">يتطلب موافقة مدير (PIN Override)</span>
-            </div>
-            <div class="d-flex align-items-center gap-2">
-              <span class="badge-pill-custom badge-green"><i class="fa-solid fa-eye"></i></span>
-              <span class="small">عرض وقراءة فقط (View Only)</span>
-            </div>
-            <div class="d-flex align-items-center gap-2">
-              <span class="badge-pill-custom badge-rose"><i class="fa-solid fa-ban"></i></span>
-              <span class="small text-rose">محظور ومقفل (Denied)</span>
-            </div>
-          </div>
+    <!-- ============ DISTRIBUTION + SECURITY ============ -->
+    <section class="row g-3">
+      <div class="col-lg-7">
+        <div class="panel-card p-3 h-100">
+          <h2 class="h6 mb-3"><i class="fa-solid fa-chart-simple text-gold ms-1"></i> توزيع الصلاحيات</h2>
+          <div class="d-flex flex-column gap-2" id="rmDist"></div>
         </div>
-
-        <!-- The Grand Matrix Table -->
-        <div class="panel-card overflow-hidden">
-          <div class="table-wrap">
-            <table class="table table-alegria matrix-table align-middle m-0 w-100">
-              <thead>
-                <tr>
-                  <th style="min-width:280px;">مجموعة الصلاحية والعملية التشغيلية</th>
-                  <th class="text-center text-gold">المدير العام<br/><small class="text-soft fw-normal">Super</small></th>
-                  <th class="text-center text-green">مدير الفرع<br/><small class="text-soft fw-normal">GM</small></th>
-                  <th class="text-center text-amber">رئيس الطهاة<br/><small class="text-soft fw-normal">Chef</small></th>
-                  <th class="text-center text-gold">الكاشير<br/><small class="text-soft fw-normal">Cashier</small></th>
-                  <th class="text-center">مشرف الصالة<br/><small class="text-soft fw-normal">Captain</small></th>
-                  <th class="text-center text-gold">المشتريات<br/><small class="text-soft fw-normal">Stock</small></th>
-                  <th class="text-center text-soft">المطبخ<br/><small class="text-soft fw-normal">Cook</small></th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <!-- ======== CATEGORY 1: POS & FRONT OF HOUSE ======== -->
-                <tr data-cat-section="pos">
-                  <td colspan="8" class="bg-al-2 p-0">
-                    <button type="button" class="group-toggle w-100 text-start d-flex align-items-center justify-content-between gap-2 px-3 py-3 collapsed" data-group-toggle="pos-group">
-                      <span class="d-flex align-items-center gap-2 text-gold">
-                        <i class="fa-solid fa-cash-register"></i>
-                        <span class="fw-bold">أ. عمليات الصالة ونقاط البيع وإدارة الطاولات (POS Operations)</span>
-                        <span class="badge-pill-custom badge-gold">7 صلاحيات أساسية</span>
-                      </span>
-                      <i class="fa-solid fa-chevron-down text-soft"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="collapse show pos-group" data-cat-section="pos">
-                  <td><div class="fw-bold">فتح درج النقدية يدوياً بدون بيع</div><code class="d-block text-soft">pos.drawer.open_no_sale</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show pos-group" data-cat-section="pos">
-                  <td><div class="fw-bold">تطبيق خصم ضيافة أو عرض ترويجي &gt; 15%</div><code class="d-block text-soft">pos.discount.high_tier</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show pos-group" data-cat-section="pos">
-                  <td><div class="fw-bold">إلغاء بند (Void Item) بعد الإرسال للمطبخ</div><code class="d-block text-soft">pos.order.void_sent_item</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show pos-group" data-cat-section="pos">
-                  <td><div class="fw-bold">إعادة فتح فاتورة مسددة ومغلقة</div><code class="d-block text-soft">pos.invoice.reopen_closed</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show pos-group" data-cat-section="pos">
-                  <td><div class="fw-bold">نقل أو دمج طاولات صالة الـ VIP</div><code class="d-block text-soft">pos.table.transfer_merge_vip</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show pos-group" data-cat-section="pos">
-                  <td><div class="fw-bold">تقسيم الشيكات والفواتير على عدة عملاء</div><code class="d-block text-soft">pos.check.split_equal_custom</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show pos-group" data-cat-section="pos">
-                  <td><div class="fw-bold">تجاوز سقف المديونية والدفع الآجل لعملاء VIP</div><code class="d-block text-soft">pos.credit.tab_limit_override</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-
-                <!-- ======== CATEGORY 2: KITCHEN & RECIPES ======== -->
-                <tr data-cat-section="kitchen">
-                  <td colspan="8" class="bg-al-2 p-0">
-                    <button type="button" class="group-toggle w-100 text-start d-flex align-items-center justify-content-between gap-2 px-3 py-3 collapsed" data-group-toggle="kitchen-group">
-                      <span class="d-flex align-items-center gap-2 text-amber">
-                        <i class="fa-solid fa-fire-burner"></i>
-                        <span class="fw-bold">ب. المطبخ وإدارة الوصفات والإنتاج (Kitchen &amp; KDS Operations)</span>
-                        <span class="badge-pill-custom badge-amber">5 صلاحيات رئيسية</span>
-                      </span>
-                      <i class="fa-solid fa-chevron-down text-soft"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="collapse show kitchen-group" data-cat-section="kitchen">
-                  <td><div class="fw-bold">تعديل مكونات وتكاليف الوصفات (Recipe Costing)</div><code class="d-block text-soft">kitchen.recipe.manage_bom</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-green active-view" title="عرض فقط"><i class="fa-solid fa-eye"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-green active-view" title="عرض فقط"><i class="fa-solid fa-eye"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show kitchen-group" data-cat-section="kitchen">
-                  <td><div class="fw-bold">تسجيل هدر مواد خام وتوالف استثنائية (Log Waste)</div><code class="d-block text-soft">kitchen.waste.register_spoilage</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                </tr>
-                <tr class="collapse show kitchen-group" data-cat-section="kitchen">
-                  <td><div class="fw-bold">تعطيل صنف فوراً / نفاد الكمية (86'd Out of Stock)</div><code class="d-block text-soft">menu.item.mark_86</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show kitchen-group" data-cat-section="kitchen">
-                  <td><div class="fw-bold">تسريع تذاكر المطبخ وإعادة ترتيب الطهي (Rush Ticket)</div><code class="d-block text-soft">kds.ticket.prioritize_rush</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                </tr>
-                <tr class="collapse show kitchen-group" data-cat-section="kitchen">
-                  <td><div class="fw-bold">ترحيل وجبات تجريبية وعينات التذوق (Tasting / Staff Meals)</div><code class="d-block text-soft">kitchen.meals.tasting_allowance</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-
-                <!-- ======== CATEGORY 3: INVENTORY & STOCK ======== -->
-                <tr data-cat-section="stock">
-                  <td colspan="8" class="bg-al-2 p-0">
-                    <button type="button" class="group-toggle w-100 text-start d-flex align-items-center justify-content-between gap-2 px-3 py-3 collapsed" data-group-toggle="stock-group">
-                      <span class="d-flex align-items-center gap-2 text-green">
-                        <i class="fa-solid fa-warehouse"></i>
-                        <span class="fw-bold">ج. المخازن والمستودعات والمشتريات (Inventory &amp; Supply Chain)</span>
-                        <span class="badge-pill-custom badge-green">5 صلاحيات أساسية</span>
-                      </span>
-                      <i class="fa-solid fa-chevron-down text-soft"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="collapse show stock-group" data-cat-section="stock">
-                  <td><div class="fw-bold">اعتماد ومطابقة فواتير الشراء للموردين (Vendor Bills)</div><code class="d-block text-soft">inv.purchase.approve_bills</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-green active-view" title="عرض فقط"><i class="fa-solid fa-eye"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show stock-group" data-cat-section="stock">
-                  <td><div class="fw-bold">تعديل رصيد الجرد الفعلي يدوياً وتسوية الفروقات</div><code class="d-block text-soft">inv.audit.manual_discrepancy_fix</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show stock-group" data-cat-section="stock">
-                  <td><div class="fw-bold">إنشاء أوامر شراء عاجلة ومباشرة (Generate POs)</div><code class="d-block text-soft">inv.po.create_emergency</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show stock-group" data-cat-section="stock">
-                  <td><div class="fw-bold">استلام شحنات اللحوم والأغذية الطازجة (QC &amp; GRN)</div><code class="d-block text-soft">inv.receipt.quality_signoff</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show stock-group" data-cat-section="stock">
-                  <td><div class="fw-bold">التحويل المخزني بين الفروع ومخزن التبريد</div><code class="d-block text-soft">inv.transfer.inter_branch</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-
-                <!-- ======== CATEGORY 4: FINANCE & TREASURY ======== -->
-                <tr data-cat-section="finance">
-                  <td colspan="8" class="bg-al-2 p-0">
-                    <button type="button" class="group-toggle w-100 text-start d-flex align-items-center justify-content-between gap-2 px-3 py-3 collapsed" data-group-toggle="finance-group">
-                      <span class="d-flex align-items-center gap-2 text-gold">
-                        <i class="fa-solid fa-money-bill-transfer"></i>
-                        <span class="fw-bold">د. الخزينة والماليات وحسابات اليومية (Treasury &amp; Financials)</span>
-                        <span class="badge-pill-custom badge-gold">4 صلاحيات رئيسية</span>
-                      </span>
-                      <i class="fa-solid fa-chevron-down text-soft"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="collapse show finance-group" data-cat-section="finance">
-                  <td><div class="fw-bold">استخراج وإقفال تقرير الوردية واليومية (Z-Report)</div><code class="d-block text-soft">finance.report.shift_z_close</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show finance-group" data-cat-section="finance">
-                  <td><div class="fw-bold">تحرير سندات صرف نقدية من العهدة النثرية (Petty Cash)</div><code class="d-block text-soft">finance.pettycash.disbursement</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show finance-group" data-cat-section="finance">
-                  <td><div class="fw-bold">استعراض هوامش الأرباح وصافي الدخل المالي (P&amp;L)</div><code class="d-block text-soft">finance.pl.view_net_margins</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-green active-view" title="عرض فقط"><i class="fa-solid fa-eye"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show finance-group" data-cat-section="finance">
-                  <td><div class="fw-bold">تعديل تسويات بوابات الدفع الإلكتروني وعمليات مدى</div><code class="d-block text-soft">finance.gateway.reconcile_card</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-green active-view" title="عرض فقط"><i class="fa-solid fa-eye"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-
-                <!-- ======== CATEGORY 5: HR & SECURITY ======== -->
-                <tr data-cat-section="hr">
-                  <td colspan="8" class="bg-al-2 p-0">
-                    <button type="button" class="group-toggle w-100 text-start d-flex align-items-center justify-content-between gap-2 px-3 py-3 collapsed" data-group-toggle="hr-group">
-                      <span class="d-flex align-items-center gap-2">
-                        <i class="fa-solid fa-user-shield"></i>
-                        <span class="fw-bold">هـ. شؤون الموظفين والأمان وإعدادات النظام (HR &amp; System Security)</span>
-                        <span class="badge-pill-custom badge-neutral">4 صلاحيات أمنية</span>
-                      </span>
-                      <i class="fa-solid fa-chevron-down text-soft"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="collapse show hr-group" data-cat-section="hr">
-                  <td><div class="fw-bold">تعديل سجلات وبصمة حضور وانصراف الموظفين</div><code class="d-block text-soft">hr.attendance.manual_punch_fix</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-green active-view" title="عرض فقط"><i class="fa-solid fa-eye"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show hr-group" data-cat-section="hr">
-                  <td><div class="fw-bold">إنشاء حسابات مستخدمين جديدة وتعيين الصلاحيات</div><code class="d-block text-soft">sec.users.provision_credentials</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-neutral active-pin" title="يتطلب PIN"><i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show hr-group" data-cat-section="hr">
-                  <td><div class="fw-bold">استعراض سجل الأنشطة والتدقيق الجنائي للأمان (Audit Log)</div><code class="d-block text-soft">sec.audit.view_system_trail</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-green active-view" title="عرض فقط"><i class="fa-solid fa-eye"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-                <tr class="collapse show hr-group" data-cat-section="hr">
-                  <td><div class="fw-bold">توليد نسخة احتياطية سحابية / محلية فورية</div><code class="d-block text-soft">sec.backup.trigger_snapshot</code></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-gold active-full" title="مفوض كلياً"><i class="fa-solid fa-circle-check"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                  <td class="text-center"><button type="button" class="perm-badge badge-pill-custom badge-rose active-denied" title="محظور"><i class="fa-solid fa-ban"></i></button></td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Custom Role Banner / Quick Help -->
-        <div class="panel-card p-3 d-flex flex-md-row align-items-center justify-content-between gap-3">
-          <div class="d-flex align-items-center gap-3">
-            <span class="stat-icon" style="width:48px;height:48px;"><i class="fa-solid fa-user-shield"></i></span>
-            <div>
-              <div class="fw-bold">هل ترغب في عزل صلاحيات موظف معين في الفرع؟</div>
-              <div class="text-soft small">يمكنك إنشاء دور مخصص (Custom Role) مثل "كابتن صالة رئيسي VIP" أو "مشرف بار القهوة المختصة" مع حصر الصلاحيات حسب المحطة المادية.</div>
-            </div>
-          </div>
-          <button type="button" class="btn btn-ghost text-nowrap">تخصيص سياسة فرعية <i class="fa-solid fa-arrow-left ms-1"></i></button>
-        </div>
-
       </div>
-
-      <!-- ============ B. GOVERNANCE & SECURITY SIDEBAR ============ -->
-      <aside class="col-xl-3 d-flex flex-column gap-3">
-
-        <!-- Live Governance Rules Panel -->
-        <div class="panel-card p-3">
-          <div class="d-flex align-items-center justify-content-between mb-3">
-            <div class="d-flex align-items-center gap-2 text-gold fw-bold">
-              <i class="fa-solid fa-scale-balanced"></i>
-              <span>سياسات الحوكمة والتفويض</span>
+      <div class="col-lg-5">
+        <div class="panel-card p-3 h-100">
+          <h2 class="h6 mb-3"><i class="fa-solid fa-lock text-gold ms-1"></i> الحماية والقيود</h2>
+          <div class="d-flex align-items-center justify-content-between gap-2 pb-2 mb-2" style="border-bottom:1px dashed var(--al-line);">
+            <div class="d-flex align-items-center gap-2">
+              <i class="fa-solid fa-shield text-rose"></i>
+              <div>
+                <div class="small fw-bold">وضع الطوارئ</div>
+                <div class="text-soft" style="font-size:.7rem;">تجميد الخصم والإلغاء للمدير فقط</div>
+              </div>
             </div>
-            <span class="dot dot-green"></span>
+            <div class="form-check form-switch m-0">
+              <input class="form-check-input" type="checkbox" role="switch" id="rmPanic"/>
+              <label class="visually-hidden" for="rmPanic">وضع الطوارئ</label>
+            </div>
           </div>
-          <div class="d-flex flex-column gap-3">
-
-            <!-- Dual Auth Rule -->
-            <div class="bg-al-2 border rounded-3 p-3">
-              <div class="d-flex align-items-center justify-content-between gap-2">
-                <span class="small fw-bold">الموافقة الثنائية (Dual Authorization)</span>
-                <div class="form-check form-switch m-0">
-                  <input class="form-check-input" type="checkbox" role="switch" id="govDualAuth" checked/>
-                  <label class="visually-hidden" for="govDualAuth">الموافقة الثنائية</label>
-                </div>
-              </div>
-              <p class="small mb-0 mt-2">اشتراط موافقة شخصين (مدير + شيف/كاشير) لأي إلغاء طلب أو استرداد يتجاوز <strong class="text-gold tabular">1,000 ر.س</strong>.</p>
-            </div>
-
-            <!-- PIN Timeout Rule -->
-            <div class="bg-al-2 border rounded-3 p-3">
-              <div class="d-flex align-items-center justify-content-between gap-2">
-                <span class="small fw-bold">انتهاء تفويض المشرف (PIN Timeout)</span>
-                <div class="d-flex align-items-center gap-2">
-                  <span class="badge-pill-custom badge-gold tabular">60 ثانية</span>
-                  <div class="form-check form-switch m-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="govPinTimeout" checked/>
-                    <label class="visually-hidden" for="govPinTimeout">انتهاء تفويض المشرف</label>
-                  </div>
-                </div>
-              </div>
-              <p class="small mb-0 mt-2">الإغلاق الآلي الفوري للشاشة وتجريد الصلاحية بعد إدخال كود المدير المؤقت لمنع الاستغلال غير المصرح.</p>
-              <div class="progress mt-2" style="height:6px;"><div class="progress-bar progress-gold" style="width:75%"></div></div>
-            </div>
-
-            <!-- Geofencing & IP Binding -->
-            <div class="bg-al-2 border rounded-3 p-3">
-              <div class="d-flex align-items-center justify-content-between gap-2">
-                <span class="small fw-bold">قفل المحطات الجغرافي (Terminal Lock)</span>
-                <div class="d-flex align-items-center gap-2">
-                  <span class="badge-pill-custom badge-green">محصورة بالماك</span>
-                  <div class="form-check form-switch m-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="govTerminalLock" checked/>
-                    <label class="visually-hidden" for="govTerminalLock">قفل المحطات الجغرافي</label>
-                  </div>
-                </div>
-              </div>
-              <p class="small mb-0 mt-2">منع فتح واجهة البيع والشيكات خارج نطاق عناوين MAC المعتمدة وشبكة Wi-Fi المخصصة للمطعم.</p>
-              <div class="d-flex align-items-center gap-2 text-soft font-mono pt-2" style="font-size:.7rem;">
-                <i class="fa-solid fa-wifi text-green"></i>
-                <span>SSID: Alegria_POS_Secure_VLAN4</span>
-              </div>
-            </div>
-
-            <!-- Emergency Panic Override -->
-            <div class="border rounded-3 p-3" style="background:var(--al-rose-soft);border-color:var(--al-rose) !important;">
-              <div class="d-flex align-items-center justify-content-between gap-2">
-                <span class="small fw-bold text-rose d-flex align-items-center gap-1">
-                  <i class="fa-solid fa-lock"></i> وضع الطوارئ والحظر الشامل
-                </span>
-                <div class="form-check form-switch m-0">
-                  <input class="form-check-input" type="checkbox" role="switch" id="govPanicOverride"/>
-                  <label class="visually-hidden" for="govPanicOverride">وضع الطوارئ</label>
-                </div>
-              </div>
-              <p class="small mb-2 mt-2 text-rose">تجريد جميع الكاشيرات والمشرفين من صلاحيات الخصم والإلغاء وحصرها فقط بجهاز المدير التنفيذي أثناء الجرد الفجائي.</p>
-              <button type="button" class="btn btn-sm w-100" style="background:var(--al-rose);color:#2b1a12;font-weight:700;" onclick="window.Al.toast('تم تفعيل قفل الطوارئ الشامل','success')">قفل فوري</button>
-            </div>
-
-          </div>
+          <div class="d-flex flex-column gap-2" id="rmAudit"></div>
         </div>
-
-        <!-- Audit Activity Trail Widget -->
-        <div class="panel-card p-3">
-          <div class="panel-head p-0 pb-2 mb-3" style="border-bottom:1px dashed var(--al-line-strong);">
-            <h2 class="h6 m-0"><i class="fa-solid fa-clock-rotate-left text-gold"></i> سجل آخر التعديلات الأمنية</h2>
-            <a href="#" class="small text-gold-strong fw-bold">عرض الكل</a>
-          </div>
-          <div class="d-flex flex-column gap-2">
-            <!-- Log item 1 -->
-            <div class="bg-al-2 border rounded-3 p-2 d-flex gap-2">
-              <span class="avatar-sm" style="width:32px;height:32px;font-size:.75rem;"><i class="fa-solid fa-pen"></i></span>
-              <div class="flex-grow-1">
-                <div class="small fw-bold">تعديل حد الخصم للكاشير</div>
-                <div class="text-soft" style="font-size:.75rem;">رفع الحد التلقائي من 5% إلى 10% بموافقة الإدارة</div>
-                <div class="d-flex align-items-center gap-2 text-soft font-mono pt-1" style="font-size:.68rem;">
-                  <span class="text-gold">فهد السليمان</span><span>•</span><span>منذ 34 دقيقة</span>
-                </div>
-              </div>
-            </div>
-            <!-- Log item 2 -->
-            <div class="bg-al-2 border rounded-3 p-2 d-flex gap-2">
-              <span class="avatar-sm" style="width:32px;height:32px;font-size:.75rem;background:var(--al-green-soft);color:var(--al-green);"><i class="fa-solid fa-user-plus"></i></span>
-              <div class="flex-grow-1">
-                <div class="small fw-bold">إضافة صلاحية تسريع المطبخ</div>
-                <div class="text-soft" style="font-size:.75rem;">منح كابتن الصالة صلاحية Rush Orders لصالة VIP</div>
-                <div class="d-flex align-items-center gap-2 text-soft font-mono pt-1" style="font-size:.68rem;">
-                  <span class="text-green">خالد المطيري</span><span>•</span><span>قبل ساعتين</span>
-                </div>
-              </div>
-            </div>
-            <!-- Log item 3 -->
-            <div class="bg-al-2 border rounded-3 p-2 d-flex gap-2">
-              <span class="avatar-sm" style="width:32px;height:32px;font-size:.75rem;background:var(--al-rose-soft);color:var(--al-rose);"><i class="fa-solid fa-ban"></i></span>
-              <div class="flex-grow-1">
-                <div class="small fw-bold">حظر إعادة فتح الفواتير</div>
-                <div class="text-soft" style="font-size:.75rem;">إلغاء الصلاحية المباشرة واشتراط موافقة PIN ثنائية</div>
-                <div class="d-flex align-items-center gap-2 text-soft font-mono pt-1" style="font-size:.68rem;">
-                  <span class="text-rose">النظام التلقائي</span><span>•</span><span>أمس، 23:45</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Security Compliance Gauge -->
-        <div class="panel-card p-3">
-          <div class="text-gold font-mono text-uppercase" style="font-size:.7rem;letter-spacing:.08em;">مؤشر الامتثال الأمني</div>
-          <div class="d-flex align-items-baseline gap-2 mt-1 mb-2">
-            <span class="fs-2 fw-black tabular">96.4%</span>
-            <span class="text-green small d-flex align-items-center gap-1"><i class="fa-solid fa-circle-check"></i> متوافق مع معايير ZATCA &amp; PCI-DSS</span>
-          </div>
-          <div class="d-flex justify-content-between small text-soft mb-1"><span>الامتثال الأمني العام</span><span class="text-gold-strong fw-bold tabular">96.4%</span></div>
-          <div class="progress mb-2" style="height:8px;"><div class="progress-bar progress-gold" style="width:96.4%"></div></div>
-          <div class="d-flex justify-content-between small text-soft mb-1"><span>الفوترة الإلكترونية ZATCA</span><span class="text-green fw-bold tabular">98%</span></div>
-          <div class="progress mb-2" style="height:6px;"><div class="progress-bar bg-success" style="width:98%"></div></div>
-          <div class="d-flex justify-content-between small text-soft mb-1"><span>حماية بيانات البطاقات PCI-DSS</span><span class="text-gold-strong fw-bold tabular">93%</span></div>
-          <div class="progress" style="height:6px;"><div class="progress-bar progress-gold" style="width:93%"></div></div>
-        </div>
-
-      </aside>
+      </div>
     </section>
 
   </main>
@@ -757,56 +182,319 @@
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/sweetalert2.all.min.js"></script>
-  <script src="assets/js/dataTables.min.js"></script>
-  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
   <script src="assets/js/layout.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    // ---- Collapsible matrix categories (custom collapse on rows) ----
-    document.querySelectorAll('[data-group-toggle]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var group = this.getAttribute('data-group-toggle');
-        document.querySelectorAll('.' + group).forEach(function (row) {
-          row.classList.toggle('show');
-        });
-        this.classList.toggle('collapsed');
-      });
-    });
+    (function () {
+      'use strict';
 
-    // ---- Interactive perm badge cycler (full -> pin -> view -> denied -> full) ----
-    var STATE_META = {
-      'active-full':  { cls: 'perm-badge badge-pill-custom badge-gold active-full',  html: '<i class="fa-solid fa-circle-check"></i>' },
-      'active-pin':   { cls: 'perm-badge badge-pill-custom badge-neutral active-pin', html: '<i class="fa-solid fa-key"></i><span class="pin-sub">PIN</span>' },
-      'active-view':  { cls: 'perm-badge badge-pill-custom badge-green active-view', html: '<i class="fa-solid fa-eye"></i>' },
-      'active-denied':{ cls: 'perm-badge badge-pill-custom badge-rose active-denied', html: '<i class="fa-solid fa-ban"></i>' }
+      var RM_STATES = {
+      f: { label: 'مفوض', tone: 'gold', icon: 'circle-check' },
+      p: { label: 'يتطلب موافقة', tone: 'neutral', icon: 'key' },
+      v: { label: 'عرض فقط', tone: 'green', icon: 'eye' },
+      d: { label: 'محظور', tone: 'rose', icon: 'ban' }
     };
-    var STATE_ORDER = ['active-full', 'active-pin', 'active-view', 'active-denied'];
+    var RM_CYCLE = ['f', 'p', 'v', 'd'];
 
-    document.querySelectorAll('.perm-badge').forEach(function (badge) {
-      badge.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var current = STATE_ORDER.find(function (s) { return this.classList.contains(s); }, this);
-        var next = STATE_ORDER[(STATE_ORDER.indexOf(current) + 1) % STATE_ORDER.length];
-        this.className = STATE_META[next].cls;
-        this.innerHTML = STATE_META[next].html;
-        window.Al.toast('تم تحديث الصلاحية', 'success');
+    var RM_ROLES = [
+      { ar: 'مدير النظام العام', en: 'Super Admin', users: 1, icon: 'shield-halved' },
+      { ar: 'مدير الفرع والتشغيل', en: 'General Manager', users: 2, icon: 'user-gear' },
+      { ar: 'الشيف التنفيذي', en: 'Executive Chef', users: 2, icon: 'utensils' },
+      { ar: 'كاشير وأمين الخزينة', en: 'POS Cashier', users: 4, icon: 'cash-register' },
+      { ar: 'مشرف صالة VIP', en: 'Head Waiter', users: 6, icon: 'bell-concierge' },
+      { ar: 'مسؤول المشتريات والمخزن', en: 'Stock Controller', users: 2, icon: 'warehouse' },
+      { ar: 'طاهي ومساعد مطبخ', en: 'Line Cook', users: 8, icon: 'kitchen-set' }
+    ];
+
+    var RM_COLS = ['المدير العام', 'مدير الفرع', 'رئيس الطهاة', 'الكاشير', 'مشرف الصالة', 'المشتريات', 'المطبخ'];
+
+    var RM_CATS = [
+      { key: 'pos', ar: 'نقطة البيع والصالة', icon: 'cash-register' },
+      { key: 'kitchen', ar: 'المطبخ والطلبات', icon: 'fire-burner' },
+      { key: 'stock', ar: 'المخازن والمشتريات', icon: 'boxes-stacked' },
+      { key: 'finance', ar: 'الخزينة والماليات', icon: 'wallet' },
+      { key: 'hr', ar: 'الأمان والموظفين', icon: 'user-shield' }
+    ];
+
+    var RM_PERMS = [
+      { c: 'pos', l: 'فتح درج النقدية يدوياً بدون بيع', k: 'pos.drawer.open_no_sale', s: 'ffdppdd' },
+      { c: 'pos', l: 'تطبيق خصم ضيافة أو عرض ترويجي > 15%', k: 'pos.discount.high_tier', s: 'ffdppdd' },
+      { c: 'pos', l: 'إلغاء بند (Void Item) بعد الإرسال للمطبخ', k: 'pos.order.void_sent_item', s: 'fffppdd' },
+      { c: 'pos', l: 'إعادة فتح فاتورة مسددة ومغلقة', k: 'pos.invoice.reopen_closed', s: 'fpddddd' },
+      { c: 'pos', l: 'نقل أو دمج طاولات صالة الـ VIP', k: 'pos.table.transfer_merge_vip', s: 'ffdffdd' },
+      { c: 'pos', l: 'تقسيم الشيكات والفواتير على عدة عملاء', k: 'pos.check.split_equal_custom', s: 'ffdffdd' },
+      { c: 'pos', l: 'تجاوز سقف المديونية والدفع الآجل لعملاء VIP', k: 'pos.credit.tab_limit_override', s: 'ffdpddd' },
+
+      { c: 'kitchen', l: 'تعديل مكونات وتكاليف الوصفات (Recipe Costing)', k: 'kitchen.recipe.manage_bom', s: 'fvfddvd' },
+      { c: 'kitchen', l: 'تسجيل هدر مواد خام وتوالف استثنائية (Log Waste)', k: 'kitchen.waste.register_spoilage', s: 'fffddfp' },
+      { c: 'kitchen', l: 'تعطيل صنف فوراً / نفاد الكمية (86 Out of Stock)', k: 'menu.item.mark_86', s: 'ffffffd' },
+      { c: 'kitchen', l: 'تسريع تذاكر المطبخ وإعادة ترتيب الطهي (Rush Ticket)', k: 'kds.ticket.prioritize_rush', s: 'fffdfdf' },
+      { c: 'kitchen', l: 'ترحيل وجبات تجريبية وعينات التذوق (Staff Meals)', k: 'kitchen.meals.tasting_allowance', s: 'fffdpdd' },
+
+      { c: 'stock', l: 'اعتماد ومطابقة فواتير الشراء للموردين (Vendor Bills)', k: 'inv.purchase.approve_bills', s: 'ffvddfd' },
+      { c: 'stock', l: 'تعديل رصيد الجرد الفعلي يدوياً وتسوية الفروقات', k: 'inv.audit.manual_discrepancy_fix', s: 'ffpddpd' },
+      { c: 'stock', l: 'إنشاء أوامر شراء عاجلة ومباشرة (Generate POs)', k: 'inv.po.create_emergency', s: 'fffddfd' },
+      { c: 'stock', l: 'استلام شحنات اللحوم والأغذية الطازجة (QC & GRN)', k: 'inv.receipt.quality_signoff', s: 'fffddfd' },
+      { c: 'stock', l: 'التحويل المخزني بين الفروع ومخزن التبريد', k: 'inv.transfer.inter_branch', s: 'ffpddfd' },
+
+      { c: 'finance', l: 'استخراج وإقفال تقرير الوردية واليومية (Z-Report)', k: 'finance.report.shift_z_close', s: 'ffdfddd' },
+      { c: 'finance', l: 'تحرير سندات صرف نقدية من العهدة النثرية (Petty Cash)', k: 'finance.pettycash.disbursement', s: 'ffppdpd' },
+      { c: 'finance', l: 'استعراض هوامش الأرباح وصافي الدخل المالي (P&L)', k: 'finance.pl.view_net_margins', s: 'fvddddd' },
+      { c: 'finance', l: 'تعديل تسويات بوابات الدفع الإلكتروني وعمليات مدى', k: 'finance.gateway.reconcile_card', s: 'ffdvddd' },
+
+      { c: 'hr', l: 'تعديل سجلات وبصمة حضور وانصراف الموظفين', k: 'hr.attendance.manual_punch_fix', s: 'ffvdddd' },
+      { c: 'hr', l: 'إنشاء حسابات مستخدمين جديدة وتعيين الصلاحيات', k: 'sec.users.provision_credentials', s: 'fpddddd' },
+      { c: 'hr', l: 'استعراض سجل الأنشطة والتدقيق الجنائي للأمان (Audit Log)', k: 'sec.audit.view_system_trail', s: 'fvddddd' },
+      { c: 'hr', l: 'توليد نسخة احتياطية سحابية / محلية فورية', k: 'sec.backup.trigger_snapshot', s: 'fdddddd' }
+    ];
+
+    var RM_TONE = { f: '--al-gold', p: '--al-ink-faint', v: '--al-green', d: '--al-rose' };
+
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function catMeta(key) {
+        for (var i = 0; i < RM_CATS.length; i++) if (RM_CATS[i].key === key) return RM_CATS[i];
+        return { key: key, ar: key, icon: 'circle' };
+      }
+
+      function catCount(key) {
+        var n = 0;
+        for (var i = 0; i < RM_PERMS.length; i++) if (RM_PERMS[i].c === key) n++;
+        return n;
+      }
+
+      function totalUsers() {
+        var n = 0;
+        for (var i = 0; i < RM_ROLES.length; i++) n += RM_ROLES[i].users;
+        return n;
+      }
+
+      function cellBtn(pi, ri, st) {
+        var m = RM_STATES[st];
+        var p = RM_PERMS[pi];
+        var inner = '<i class="fa-solid fa-' + m.icon + '"></i>' + (st === 'p' ? '<span class="rm-pin">PIN</span>' : '');
+        var cls = 'rm-perm badge-pill-custom badge-' + m.tone + (p.s[ri] === RM_ORIG[pi][ri] ? '' : ' rm-dirty');
+        var tip = RM_COLS[ri] + ' — ' + m.label + ' · ' + p.k;
+        return '<button type="button" class="' + cls + '" data-i="' + pi + '" data-r="' + ri + '" title="' + esc(tip) + '" aria-label="' + esc(tip) + '">' + inner + '</button>';
+      }
+
+      function rowHtml(pi) {
+        var p = RM_PERMS[pi];
+        var tds = '';
+        for (var ri = 0; ri < RM_COLS.length; ri++) {
+          tds += '<td class="text-center">' + cellBtn(pi, ri, p.s[ri]) + '</td>';
+        }
+        return '<tr data-cat="' + p.c + '"><td class="rm-sticky">' +
+          '<span class="rm-lbl">' + esc(p.l) + '</span>' +
+          '<code class="rm-code">' + esc(p.k) + '</code></td>' + tds + '</tr>';
+      }
+
+      function grpHtml(key) {
+        var m = catMeta(key);
+        return '<tr class="rm-grp" data-cat="' + key + '"><td colspan="' + (RM_COLS.length + 1) + '" class="rm-sticky" style="max-width:none;">' +
+          '<div class="d-flex align-items-center gap-2">' +
+          '<i class="fa-solid fa-' + m.icon + ' text-gold"></i>' +
+          '<span class="fw-bold small">' + esc(m.ar) + '</span>' +
+          '<span class="badge-pill-custom badge-neutral rm-stat">' + catCount(key) + '</span>' +
+          '</div></td></tr>';
+      }
+
+      function renderHead() {
+        var h = '<th class="rm-sticky" style="min-width:250px;">الصلاحية</th>';
+        for (var i = 0; i < RM_COLS.length; i++) {
+          h += '<th class="text-center text-soft" style="min-width:82px;">' + esc(RM_COLS[i]) + '</th>';
+        }
+        document.getElementById('rmHead').innerHTML = h;
+      }
+
+      function renderBody() {
+        var out = '';
+        for (var i = 0; i < RM_CATS.length; i++) {
+          var key = RM_CATS[i].key;
+          if (!catCount(key)) continue;
+          out += grpHtml(key);
+          for (var j = 0; j < RM_PERMS.length; j++) {
+            if (RM_PERMS[j].c === key) out += rowHtml(j);
+          }
+        }
+        document.getElementById('rmBody').innerHTML = out;
+      }
+
+      function renderTabs() {
+        var h = '<li class="nav-item"><button type="button" class="nav-link rm-tab active" data-cat="all">' +
+          '<i class="fa-solid fa-layer-group text-gold ms-1"></i> كافة الصلاحيات ' +
+          '<span class="badge-pill-custom badge-gold ms-1 rm-stat">' + RM_PERMS.length + '</span></button></li>';
+        for (var i = 0; i < RM_CATS.length; i++) {
+          var c = RM_CATS[i];
+          var n = catCount(c.key);
+          if (!n) continue;
+          h += '<li class="nav-item"><button type="button" class="nav-link rm-tab" data-cat="' + c.key + '">' +
+            '<i class="fa-solid fa-' + c.icon + ' text-gold ms-1"></i> ' + esc(c.ar) +
+            ' <span class="badge-pill-custom badge-neutral ms-1 rm-stat">' + n + '</span></button></li>';
+        }
+        document.getElementById('rmTabs').innerHTML = h;
+      }
+
+      function renderRoles() {
+        var h = '';
+        for (var i = 0; i < RM_ROLES.length; i++) {
+          var r = RM_ROLES[i];
+          h += '<div class="rm-role">' +
+            '<span class="rm-role__ic"><i class="fa-solid fa-' + r.icon + '"></i></span>' +
+            '<div class="flex-grow-1" style="min-width:0;">' +
+            '<div class="rm-role__ar">' + esc(r.ar) + '</div>' +
+            '<div class="rm-role__en">' + esc(r.en) + '</div>' +
+            '</div>' +
+            '<span class="rm-role__n">' + r.users + ' <i class="fa-solid fa-user text-soft"></i></span>' +
+            '</div>';
+        }
+        document.getElementById('rmRoles').innerHTML = h;
+        document.getElementById('rmRolesTotal').textContent =
+          RM_ROLES.length + ' أدوار · ' + totalUsers() + ' مستخدم';
+        document.getElementById('rmHeadCount').textContent =
+          RM_ROLES.length + ' أدوار · ' + RM_PERMS.length + ' صلاحية · ' + totalUsers() + ' مستخدم';
+      }
+
+      function renderLegend() {
+        var h = '';
+        for (var i = 0; i < RM_CYCLE.length; i++) {
+          var k = RM_CYCLE[i];
+          h += '<span class="rm-legend__i"><span class="badge-pill-custom badge-' + RM_STATES[k].tone + '">' +
+            '<i class="fa-solid fa-' + RM_STATES[k].icon + '"></i></span>' + esc(RM_STATES[k].label) + '</span>';
+        }
+        document.getElementById('rmLegend').innerHTML = h;
+      }
+
+      function renderDist() {
+        var t = { f: 0, p: 0, v: 0, d: 0 };
+        for (var i = 0; i < RM_PERMS.length; i++) {
+          for (var j = 0; j < RM_PERMS[i].s.length; j++) t[RM_PERMS[i].s[j]]++;
+        }
+        var total = RM_PERMS.length * RM_COLS.length;
+        var h = '';
+        for (var n = 0; n < RM_CYCLE.length; n++) {
+          var k = RM_CYCLE[n];
+          var pct = total ? Math.round(t[k] / total * 1000) / 10 : 0;
+          h += '<div><div class="d-flex justify-content-between small mb-1">' +
+            '<span class="text-soft">' + esc(RM_STATES[k].label) + '</span>' +
+            '<span class="rm-stat fw-bold">' + t[k] + ' · ' + pct + '%</span></div>' +
+            '<div class="rm-bar"><span style="width:' + pct + '%;background:var(' + RM_TONE[k] + ')"></span></div></div>';
+        }
+        document.getElementById('rmDist').innerHTML = h;
+      }
+
+      function renderAudit() {
+        var items = [
+          { ic: 'pen', st: '', t: 'تعديل حد الخصم للكاشير', d: 'رفع الحد من 5% إلى 10% بموافقة الإدارة', who: 'فهد السليمان', when: 'منذ 34 دقيقة' },
+          { ic: 'ban', st: 'background:var(--al-rose-soft);color:var(--al-rose);', t: 'حظر إعادة فتح الفواتير', d: 'إلغاء الصلاحية المباشرة واشتراط موافقة PIN ثنائية', who: 'النظام التلقائي', when: 'أمس، 23:45' }
+        ];
+        var h = '';
+        for (var i = 0; i < items.length; i++) {
+          var a = items[i];
+          h += '<div class="d-flex gap-2 align-items-start">' +
+            '<span class="avatar-sm" style="width:28px;height:28px;font-size:.7rem;' + a.st + '"><i class="fa-solid fa-' + a.ic + '"></i></span>' +
+            '<div class="flex-grow-1" style="min-width:0;">' +
+            '<div class="small fw-bold">' + esc(a.t) + '</div>' +
+            '<div class="text-soft" style="font-size:.7rem;">' + esc(a.d) + '</div>' +
+            '<div class="rm-stat text-soft" style="font-size:.65rem;">' + esc(a.who) + ' · ' + esc(a.when) + '</div>' +
+            '</div></div>';
+        }
+        document.getElementById('rmAudit').innerHTML = h;
+      }
+
+      function dirtyN() {
+        var n = 0;
+        for (var i = 0; i < RM_PERMS.length; i++) {
+          for (var j = 0; j < RM_PERMS[i].s.length; j++) {
+            if (RM_PERMS[i].s[j] !== RM_ORIG[i][j]) n++;
+          }
+        }
+        return n;
+      }
+
+      function refresh() {
+        var d = dirtyN();
+        document.getElementById('rmSave').disabled = d === 0;
+        document.getElementById('rmReset').disabled = d === 0;
+        document.getElementById('rmDirty').textContent = d === 0
+          ? 'لا توجد تغييرات غير محفوظة'
+          : d + ' تغيير غير محفوظ';
+        renderDist();
+      }
+
+      function setFilter(cat) {
+        var shown = 0;
+        var rows = document.querySelectorAll('#rmBody tr');
+        for (var i = 0; i < rows.length; i++) {
+          var hit = (cat === 'all' || rows[i].getAttribute('data-cat') === cat);
+          rows[i].style.display = hit ? '' : 'none';
+          if (hit && !rows[i].classList.contains('rm-grp')) shown++;
+        }
+        document.getElementById('rmFoot').textContent =
+          (cat === 'all' ? 'عرض ' + RM_PERMS.length + ' صلاحية' : 'عرض ' + shown + ' من ' + RM_PERMS.length + ' صلاحية') +
+          ' · ' + (RM_PERMS.length * RM_COLS.length) + ' خانة صلاحية';
+        var tabs = document.querySelectorAll('#rmTabs .rm-tab');
+        for (var j = 0; j < tabs.length; j++) {
+          tabs[j].classList.toggle('active', tabs[j].getAttribute('data-cat') === cat);
+        }
+      }
+
+      document.getElementById('rmBody').addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('.rm-perm') : null;
+        if (!b) return;
+        var pi = +b.getAttribute('data-i');
+        var ri = +b.getAttribute('data-r');
+        var p = RM_PERMS[pi];
+        var next = RM_CYCLE[(RM_CYCLE.indexOf(p.s[ri]) + 1) % RM_CYCLE.length];
+        p.s = p.s.slice(0, ri) + next + p.s.slice(ri + 1);
+        b.outerHTML = cellBtn(pi, ri, next);
+        refresh();
       });
-    });
 
-    // ---- Sync deployment ----
-    function triggerSync() {
-      window.Al.toast('تمت مزامنة الصلاحيات مع الفروع', 'success');
-    }
-
-    // ---- Group filter tabs ----
-    $('.filter-tab').on('click', function () {
-      $('.filter-tab').removeClass('active');
-      $(this).addClass('active');
-      var cat = this.getAttribute('data-cat');
-      document.querySelectorAll('[data-cat-section]').forEach(function (row) {
-        row.style.display = (cat === 'all' || row.getAttribute('data-cat-section') === cat) ? '' : 'none';
+      document.getElementById('rmTabs').addEventListener('click', function (e) {
+        var t = e.target.closest ? e.target.closest('.rm-tab') : null;
+        if (!t) return;
+        setFilter(t.getAttribute('data-cat'));
       });
-    });
+
+      document.getElementById('rmReset').addEventListener('click', function () {
+        for (var i = 0; i < RM_PERMS.length; i++) RM_PERMS[i].s = RM_ORIG[i];
+        renderBody();
+        setFilter(document.querySelector('#rmTabs .rm-tab.active').getAttribute('data-cat'));
+        refresh();
+        window.Al.toast('تمت استعادة الصلاحيات الأصلية', 'success');
+      });
+
+      document.getElementById('rmSave').addEventListener('click', function () {
+        if (!dirtyN()) return;
+        for (var i = 0; i < RM_PERMS.length; i++) RM_ORIG[i] = RM_PERMS[i].s;
+        refresh();
+        window.Al.toast('تمت مزامنة الصلاحيات مع جميع المحطات', 'success');
+      });
+
+      document.getElementById('rmPanic').addEventListener('change', function (ev) {
+        var on = ev && ev.target ? ev.target.checked : this.checked;
+        window.Al.toast(on
+          ? 'تم تفعيل وضع الطوارئ وتجميد الخصم والإلغاء'
+          : 'تم إلغاء وضع الطوارئ', on ? 'warning' : 'success');
+      });
+
+      var RM_ORIG = [];
+      for (var o = 0; o < RM_PERMS.length; o++) RM_ORIG.push(RM_PERMS[o].s);
+
+      renderHead();
+      renderBody();
+      renderTabs();
+      renderRoles();
+      renderLegend();
+      renderAudit();
+      setFilter('all');
+      refresh();
+    })();
   </script>
+
 </body>
 </html>
